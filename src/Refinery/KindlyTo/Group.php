@@ -16,7 +16,7 @@ use ILIAS\Refinery\Transformation;
  *
  * They don't try to mimic PHPs type cast, but instead follow more sophisticated
  * rules devised in a series of workshops with interested developers from the
- * community. Thanks Michael Jansen, Fabian Schmid, Alex Killing, Stephan Winicker,
+ * community. Thanks Michael Jansen, Fabian Schmid, Alex Killing, Stephan Winiker,
  * Timon Amstutz and Nils Haagen.
  */
 class Group
@@ -133,7 +133,7 @@ class Group
      * Get a kind transformation to a `DateTimeImmutable`.
      *
      * This supports:
-     *   - all formats mentioned in DateTimeInterface, which are proped in a
+     *   - all formats mentioned in DateTimeInterface, which are probed in a
      *     sensible order
      *   - integers, which will be interpreted as Unix timestamps.
      *
@@ -178,7 +178,7 @@ class Group
     }
 
     /**
-     * Get a kind transformation to a tuple.
+     * Get a kind transformation to a record.
      *
      * This supports all data represented as PHP array. Non-arrays will be wrapped
      * in one.
