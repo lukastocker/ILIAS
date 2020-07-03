@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace ILIAS\Refinery\KindlyTo;
 
+use ILIAS\Refinery\Transformation\StringTransformation;
 use ILIAS\Refinery\Transformation;
 
 /**
@@ -92,12 +93,13 @@ class Group
      * lossy transformation most of the time anyway, if we don't talk about e.g.
      * serialization formats. So we don't loose much if we, e.g., transform an
      * array to "Array".
+     *
+     * @return StringTransformation
      */
-    public function string() : Transformation
+    public function string() : StringTransformation
     {
-        throw new \LogicException("Not implemented yet.");
+        return new StringTransformation();
     }
-
 
     /**
      * Get a kind transformation to a `bool`.
