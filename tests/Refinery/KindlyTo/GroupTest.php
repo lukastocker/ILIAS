@@ -7,7 +7,6 @@
 
 namespace ILIAS\Tests\Refinery\KindlyTo;
 
-use ILIAS\Data\Alphanumeric;
 use ILIAS\Refinery\KindlyTo\Group;
 use ILIAS\Refinery\KindlyTo\Transformation\StringTransformation;
 use ILIAS\Tests\Refinery\TestCase;
