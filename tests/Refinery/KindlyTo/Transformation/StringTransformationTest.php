@@ -9,7 +9,6 @@ namespace ILIAS\Tests\Refinery\KindlyTo\Transformation;
 
 require_once('./libs/composer/vendor/autoload.php');
 
-use ILIAS\Data\Result;
 use ILIAS\Refinery\KindlyTo\Transformation\StringTransformation;
 use ILIAS\Tests\Refinery\TestCase;
 
@@ -30,7 +29,7 @@ const FloatValTransformed = '20.5';
 /**
  * Test transformations in this Group
  */
-class KindlyToStringTransformationTest extends TestCase
+class StringTransformationTest extends TestCase
 {
     /**
      * @var StringTransformation
