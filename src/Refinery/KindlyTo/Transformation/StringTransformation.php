@@ -14,14 +14,44 @@ use ILIAS\Refinery\ConstraintViolationException;
 
 class StringTransformation implements Transformation
 {
+    use DeriveApplyToFromTransform;
+
     public function transform($from)
     {
-        return (string) $from;
+        if(true === is_int($from) || true === is_float($from) || true === is_double($from))
+        {
+            $from = strval($from);
+            return $from;
+        }
+        elseif (true === is_string($from))
+        {
+            return $from;
+        }
+        elseif (true === is_bool($from))
+        {
+            $from = (boolval($from) ? 'true' : 'false');
+            $from = strval($from);
+            return $from;
+        }
+        else
+        {
+            if (false === is_string($from)) {
+                throw new ConstraintViolationException(
+                    'The value could not be transformed into a string',
+                    'not_string'
+                );
+            }
+        }
+    }
+
+    public $from;
+    public function __toString()
+    {
+        return "{$this->from}";
     }
 
     public function applyTo(Result $data): Result
     {
-        // TODO: Implement applyTo() method.
     }
 
     public function __invoke($from)
