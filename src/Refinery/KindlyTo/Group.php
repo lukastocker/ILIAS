@@ -9,6 +9,7 @@ namespace ILIAS\Refinery\KindlyTo;
 use ILIAS\Refinery\KindlyTo\Transformation\BooleanTransformation;
 /**use ILIAS\Refinery\KindlyTo\Transformation\DictionaryTransformation;*/
 use ILIAS\Refinery\KindlyTo\Transformation\StringTransformation;
+use ILIAS\Refinery\KindlyTo\Transformation\DateTimeTransformation;
 use ILIAS\Refinery\Transformation;
 use SimpleSAML\TwigConfigurableI18n\Twig\Extensions\Node\Trans;
 
@@ -154,13 +155,14 @@ class Group
      * This supports:
      *   - all formats mentioned in DateTimeInterface, which are probed in a
      *     sensible order
-     *   - integers, which will be interpreted as Unix timestamps.
+     *   - integers, which will be interpreted as Unix timestamps
+     *   - floats, which will be interpreted as Unix timestamps.
      *
      * All other data will be discarded.
      */
     public function dateTime() : DateTimeTransformation
     {
-        throw new \LogicException("Not implemented yet.");
+        return new DateTimeTransformation();
     }
 
     /**
