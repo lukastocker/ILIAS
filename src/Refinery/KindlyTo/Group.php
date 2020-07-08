@@ -6,10 +6,11 @@ declare(strict_types=1);
 
 namespace ILIAS\Refinery\KindlyTo;
 
-use ILIAS\Refinery\KindlyTo\Transformation\BooleanTransformation;
-/**use ILIAS\Refinery\KindlyTo\Transformation\DictionaryTransformation;*/
 use ILIAS\Refinery\KindlyTo\Transformation\StringTransformation;
+use ILIAS\Refinery\KindlyTo\Transformation\BooleanTransformation;
 use ILIAS\Refinery\KindlyTo\Transformation\DateTimeTransformation;
+use ILIAS\Refinery\KindlyTo\Transformation\IntegerTransformation;
+/**use ILIAS\Refinery\KindlyTo\Transformation\DictionaryTransformation;*/
 use ILIAS\Refinery\Transformation;
 use SimpleSAML\TwigConfigurableI18n\Twig\Extensions\Node\Trans;
 
@@ -60,9 +61,9 @@ class Group
      * All other data will be discarded.
      */
 
-    public function int() : Transformation
+    public function int() : IntegerTransformation
     {
-        throw new \LogicException("Not implemented yet.");
+        return new IntegerTransformation();
     }
 
     /**
