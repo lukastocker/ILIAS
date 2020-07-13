@@ -17,15 +17,6 @@ use ILIAS\Tests\Refinery\TestCase;
 */
 class BooleanTransformationTest extends TestCase
 {
-    const Pos_Boolean = 'true';
-    const Neg_Boolean = 'false';
-    const Pos_Boolean_Number = 1;
-    const Neg_Boolean_Number = 0;
-    const Pos_Boolean_Number_String = '1';
-    const Neg_Boolean_Number_String = '0';
-    const Transformed_Pos_Boolean = true;
-    const Transformed_Neg_Boolean = false;
-
     /**
      * @var BooleanTransformation
      */
@@ -36,27 +27,26 @@ class BooleanTransformationTest extends TestCase
         $this->transformation = new BooleanTransformation();
     }
 
-    public function testPosBooleanTransformation()
+    /**
+     * @dataProvider BooleanTestDataProvider
+     * @param $originVal
+     * @param $expectedVal
+     */
+    public function testBooleanTransformation($originVal, $expectedVal)
     {
-            $transformedValue = $this->transformation->transform(self::Pos_Boolean);
-            $this->assertEquals(self::Transformed_Pos_Boolean, $transformedValue);
-
-            $transformedValue = $this->transformation->transform(self::Pos_Boolean_Number);
-            $this->assertEquals(self::Transformed_Pos_Boolean, $transformedValue);
-
-            $transformedValue = $this->transformation->transform(self::Pos_Boolean_Number_String);
-            $this->assertEquals(self::Transformed_Pos_Boolean, $transformedValue);
+            $transformedValue = $this->transformation->transform($originVal);
+            $this->assertSame($expectedVal, $transformedValue);
     }
 
-    public function testNegBooleanTransformation()
+    public function BooleanTestDataProvider()
     {
-            $transformedValue = $this->transformation->transform(self::Neg_Boolean);
-            $this->assertEquals(self::Transformed_Neg_Boolean, $transformedValue);
-
-            $transformedValue = $this->transformation->transform(self::Neg_Boolean_Number);
-            $this->assertEquals(self::Transformed_Neg_Boolean, $transformedValue);
-
-            $transformedValue = $this->transformation->transform(self::Neg_Boolean_Number_String);
-            $this->assertEquals(self::Transformed_Neg_Boolean, $transformedValue);
+        return [
+            'pos_boolean' => ['true', true],
+            'pos_boolean_number' => [1, true],
+            'pos_boolean_number_string' => ['1', true],
+            'neg_boolean' => ['false', false],
+            'neg_boolean_number' => [0, false],
+            'neg_boolean_number_string' => ['0', false]
+        ];
     }
 }
