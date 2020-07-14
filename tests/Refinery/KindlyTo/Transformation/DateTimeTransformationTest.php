@@ -9,8 +9,9 @@ namespace ILIAS\Tests\Refinery\KindlyTo\Transformation;
 
 require_once('./libs/composer/vendor/autoload.php');
 
+use ILIAS\Refinery\ConstraintViolationException;
 use ILIAS\Refinery\KindlyTo\Transformation\DateTimeTransformation;
-use PHPUnit\Framework\TestCase;
+use ILIAS\Tests\Refinery\TestCase;
 
 /**
  * Tests for DateTimeImmutable and Unix Timetable transformation
@@ -36,20 +37,25 @@ class DateTimeTransformationTest extends TestCase
     public function testDateTimeISOTransformation($originVal, $expectedVal)
     {
         $transformedValue = $this->transformation->transform($originVal);
-        $this->assertIsObject($transformedValue,'');
+        $this->assertIsObject($transformedValue);
+        $this->assertInstanceOf(\DateTimeImmutable::class, $transformedValue);
         $this->assertEquals($expectedVal, $transformedValue);
     }
 
     /**
-     * @dataProvider UnixTimestampTransformationDataProvider
-     * @param $originValue
-     * @param $expectedValue
+     * @dataProvider TransformationFailureDataProvider
+     * @param $failingValue
      */
-    public function testDateTimeToUnixTimestampTransformation($originValue, $expectedValue)
+    public function testTransformIsInvalid($failingValue)
     {
-        $transformedValue = $this->transformation->transform($originValue);
-        $this->assertIsNumeric($transformedValue,'');
-        $this->assertEquals($expectedValue, $transformedValue);
+        $this->expectNotToPerformAssertions();
+        try {
+            $transformedValue = $this->transformation->transform($failingValue);
+        }catch(ConstraintViolationException $exception)
+        {
+            return;
+        }
+        $this->fail();
     }
 
     public function DateTimeTransformationDataProvider()
@@ -60,14 +66,15 @@ class DateTimeTransformationTest extends TestCase
             'rfc3339_ext' => ['2020-07-06T12:23:05.000+00:00',\DateTimeImmutable::createFromFormat(\DateTimeImmutable::RFC3339_EXTENDED,'2020-07-06T12:23:05.000+00:00')],
             'cookie' => ['Monday, 06-Jul-2020 12:23:05 GMT+0000',\DateTimeImmutable::createFromFormat(\DateTimeImmutable::COOKIE,'Monday, 06-Jul-2020 12:23:05 GMT+0000')],
             'rfc822' => ['Mon, 06 Jul 20 12:23:05 +0000',\DateTimeImmutable::createFromFormat(\DateTimeImmutable::RFC822,'Mon, 06 Jul 20 12:23:05 +0000')],
-            'rfc7231' => ['Mon, 06 Jul 2020 12:23:05 GMT',\DateTimeImmutable::createFromFormat(\DateTimeImmutable::RFC7231,'Mon, 06 Jul 2020 12:23:05 GMT')]
+            'rfc7231' => ['Mon, 06 Jul 2020 12:23:05 GMT',\DateTimeImmutable::createFromFormat(\DateTimeImmutable::RFC7231,'Mon, 06 Jul 2020 12:23:05 GMT')],
+            'unix_timestamp' => [20200706122305, \DateTimeImmutable::createFromFormat(\DateTimeImmutable::ISO8601,'2020-07-06T12:23:05+0000')]
         ];
     }
 
-    public function UnixTimestampTransformationDataProvider()
+    public function TransformationFailureDataProvider()
     {
         return [
-            [20200706122305, strtotime(20200706122305)]
+            'no_matching_string_format' => ['hello']
         ];
     }
 }

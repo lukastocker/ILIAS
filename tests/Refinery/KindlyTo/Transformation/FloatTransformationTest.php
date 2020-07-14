@@ -9,6 +9,7 @@ namespace ILIAS\Tests\Refinery\KindlyTo\Transformation;
 
 require_once('./libs/composer/vendor/autoload.php');
 
+use ILIAS\Refinery\ConstraintViolationException;
 use ILIAS\Refinery\KindlyTo\Transformation\FloatTransformation;
 use ILIAS\Tests\Refinery\TestCase;
 
@@ -39,6 +40,36 @@ class FloatTransformationTest extends TestCase
         $this->assertEquals($expectedVal, $transformedValue);
     }
 
+    /**
+     * @dataProvider FailingTransformationDataProvider
+     * @param $failingVal
+     */
+    public function testFailingTransformations($failingVal)
+    {
+        $this->expectNotToPerformAssertions();
+        try {
+            $transformedValue = $this->transformation->transform($failingVal);
+        }catch(ConstraintViolationException $exception)
+        {
+            return;
+        }
+        $this->fail();
+    }
+
+    public function FailingTransformationDataProvider()
+    {
+        return [
+            'null' => [null],
+            'empty' => [""],
+            'written_false' => ['false'],
+            'written_null' => ['null'],
+            'NaN' => [NAN],
+            'written_NaN' => ['NaN'],
+            'INF' => [INF],
+            'written_INF' => ['INF']
+        ];
+    }
+
     public function FloatTestDataProvider()
     {
         return [
@@ -46,7 +77,9 @@ class FloatTransformationTest extends TestCase
             'neg_bool' => [false, 0.0],
             'string_comma' => ['234,23', 234.23],
             'string_floating_point' => ['7E10', 70000000000],
-            'int_val' => [23, 23.0]
+            'int_val' => [23, 23.0],
+            'neg_int_val' => [-2, -2.0],
+            'zero_int' => [0, 0.0]
         ];
     }
 }

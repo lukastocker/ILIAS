@@ -7,6 +7,8 @@
 
 namespace ILIAS\Refinery\KindlyTo\Transformation;
 
+use ILIAS\Data\Result;
+use ILIAS\Refinery\ConstraintViolationException;
 use ILIAS\Refinery\DeriveApplyToFromTransform;
 use ILIAS\Refinery\Transformation;
 
@@ -59,14 +61,26 @@ class DateTimeTransformation implements Transformation
             {
                 return $DateImmutable = \DateTimeImmutable::createFromFormat(\DateTimeImmutable::RFC3339_EXTENDED, $from);
             }
+            else
+            {
+                throw new ConstraintViolationException(
+                    'No transformation possible',
+                    'no_transform_possible'
+                );
+            }
         }
         elseif(true === is_int($from) || true === is_float($from))
         {
-            return $UnixTimestamp = strtotime($from);
+            $UnixTimestamp = strtotime($from);
+            $date = date(DATE_ISO8601, $UnixTimestamp);
+            return $DateImmutable = \DateTimeImmutable::createFromFormat(\DateTimeImmutable::ISO8601, $date);
         }
         else
         {
-            throw new \InvalidArgumentException("$from can not be transformed into DateTimeImmutable or Unix timestamp.", 1);
+            throw new ConstraintViolationException(
+                'No transformation possible',
+                'no_transform_possible'
+            );
         }
     }
 

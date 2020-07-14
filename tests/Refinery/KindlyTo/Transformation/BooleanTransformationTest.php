@@ -11,8 +11,7 @@ require_once('./libs/composer/vendor/autoload.php');
 
 use ILIAS\Refinery\KindlyTo\Transformation\BooleanTransformation;
 use ILIAS\Tests\Refinery\TestCase;
-use Sabre\VObject\Property\Boolean;
-
+use ILIAS\Refinery\ConstraintViolationException;
 
 /**
 * Test transformations in this Group
@@ -38,7 +37,7 @@ class BooleanTransformationTest extends TestCase
     public function testBooleanTransformation($originVal, bool $expectedVal)
     {
             $transformedValue = $this->transformation->transform($originVal);
-            $this->assertIsBool($transformedValue, '');
+            $this->assertIsBool($transformedValue);
             $this->assertSame($expectedVal, $transformedValue);
     }
 
