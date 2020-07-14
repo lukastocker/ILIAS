@@ -10,19 +10,21 @@ namespace ILIAS\Tests\Refinery\KindlyTo\Transformation;
 use ILIAS\Refinery\KindlyTo\Transformation\IntegerTransformation;
 use ILIAS\Refinery\KindlyTo\Transformation\RecordTransformation;
 use ILIAS\Refinery\KindlyTo\Transformation\StringTransformation;
-use ILIAS\Refinery\Transformation;
 use ILIAS\Tests\Refinery\TestCase;
 
 require_once('./libs/composer/vendor/autoload.php');
 
 class RecordTransformationTest extends TestCase
 {
-    const arr_String_Input = 'hello';
-    const arr_Int_Input = 1;
+
     const string_key = 'stringKey';
     const int_key = 'integerKey';
-
-    public function testRecordTransformation()
+    /**
+     * @dataProvider RecordTransformationDataProvider
+     * @param $originVal
+     * @param $expectedVal
+     */
+    public function testRecordTransformation($originVal, $expectedVal)
     {
         $recTransform = new RecordTransformation(
             array(
@@ -30,8 +32,16 @@ class RecordTransformationTest extends TestCase
                 self::int_key => new IntegerTransformation()
             )
         );
-        $transformedValue = $recTransform->transform(array(self::string_key => self::arr_String_Input, self::int_key => self::arr_Int_Input));
+        $transformedValue = $recTransform->transform(array('string_key' => 'hello', 'int_key' => 1));
         $this->assertIsArray($transformedValue, '');
-        $this->assertEquals(array(self::string_key => self::arr_String_Input, self::int_key => self::arr_Int_Input), $transformedValue);
+        $this->assertEquals(array('string_key' => 'hello', 'int_key' => 1), $transformedValue);
     }
+
+    public function RecordTransformationDataProvider()
+    {
+        return [
+            [array('string_key' => 'hello', 'int_key' => 1), array('string_key' => 'hello', 'int_key' => 1)]
+        ];
+    }
+
 }
