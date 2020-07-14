@@ -19,10 +19,25 @@ class DictionaryTransformationTest extends TestCase
 {
     const String_key = 'hello';
     const String_val = 'world';
-    public function testDictionaryTransformation()
+
+    /**
+     * @dataProvider DictionaryTransformationDataProvider
+     * @param $originVal
+     * @param $expectedVal
+     */
+    public function testDictionaryTransformation($originVal, $expectedVal)
     {
         $transformation = new DictionaryTransformation(new StringTransformation());
-        $transformedValue = $transformation->transform(array(self::String_key => self::String_val));
-        $this->assertEquals(array(self::String_key => self::String_val), $transformedValue);
+        $transformedValue = $transformation->transform($originVal);
+        $this->assertIsArray($transformedValue, '');
+        $this->assertEquals($expectedVal, $transformedValue);
+    }
+
+    public function DictionaryTransformationDataProvider()
+    {
+        return [
+            'first_arr' => [array('hello' => 'world'), ['hello' => 'world'] ],
+            'second_arr' => [array('hi' => 'earth', 'goodbye' => 'world'),['hi' => 'earth', 'goodbye' => 'world']]
+        ];
     }
 }

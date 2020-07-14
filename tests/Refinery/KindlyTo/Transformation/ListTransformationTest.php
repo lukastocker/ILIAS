@@ -13,28 +13,50 @@ use ILIAS\Refinery\KindlyTo\Transformation\ListTransformation;
 use ILIAS\Refinery\To\Transformation\StringTransformation;
 use ILIAS\Tests\Refinery\TestCase;
 
+
 /**
  * Test transformations in this Group
  */
 class ListTransformationTest extends TestCase
 {
-    const first_arr = 'hello';
-    const second_arr = 'world';
-    const string_val = 'hello world';
-
-
-    public function testListTransformation()
+    /**
+     * @dataProvider ArrayToListTransformation
+     * @param $originValue
+     * @param $expectedValue
+     */
+    public function testListTransformation($originValue, $expectedValue)
     {
         $transformList = new ListTransformation(new StringTransformation());
-        $transformedValue = $transformList->transform(array(self::first_arr, self::second_arr));
+        $transformedValue = $transformList->transform($originValue);
         $this->assertIsArray($transformedValue,'');
-        $this->assertEquals(array(self::first_arr, self::second_arr), $transformedValue);
+        $this->assertEquals($expectedValue, $transformedValue);
     }
 
-    public function testNonArrayToArrayTransformation()
+    /**
+     * @dataProvider StringToListTransformationDataProvider
+     * @param $originVal
+     * @param $expectedVal
+     */
+    public function testNonArrayToArrayTransformation($originVal,$expectedVal)
     {
         $transformList = new ListTransformation(new StringTransformation());
-        $transformedValue = $transformList->transform(self::string_val);
-        $this->assertEquals(array(self::string_val), $transformedValue);
+        $transformedValue = $transformList->transform($originVal);
+        $this->assertIsArray($transformedValue,'');
+        $this->assertEquals($expectedVal, $transformedValue);
+    }
+
+    public function StringToListTransformationDataProvider()
+    {
+        return [
+            'string_val' => ['hello world',['hello world']],
+        ];
+    }
+
+    public function ArrayToListTransformation()
+    {
+        return [
+            'first_arr' => [array('hello', 'world'), ['hello', 'world']],
+            'second_arr' => [array('hello2','world2'), ['hello2', 'world2']]
+        ];
     }
 }
