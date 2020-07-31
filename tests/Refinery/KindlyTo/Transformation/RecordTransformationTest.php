@@ -1,9 +1,5 @@
 <?php
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author  Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Tests\Refinery\KindlyTo\Transformation;
 
@@ -16,24 +12,22 @@ use Symfony\Component\DependencyInjection\Tests\Compiler\I;
 
 require_once('./libs/composer/vendor/autoload.php');
 
-class RecordTransformationTest extends TestCase
-{
-    const string_key = 'stringKey';
-    const int_key = 'integerKey';
-    const second_int_key = 'integerKey2';
+class RecordTransformationTest extends TestCase {
+    const STRING_KEY = 'stringKey';
+    const INT_KEY = 'integerKey';
+    const SECOND_INT_KEY = 'integerKey2';
 
     /**
      * @dataProvider RecordTransformationDataProvider
      * @param $originVal
      * @param $expectedVal
      */
-    public function testRecordTransformationIsValid($originVal, $expectedVal)
-    {
+    public function testRecordTransformationIsValid($originVal, $expectedVal) {
         $recTransform = new RecordTransformation(
-            array(
-                self::string_key => new StringTransformation(),
-                self::int_key => new IntegerTransformation()
-            )
+            [
+                self::STRING_KEY => new StringTransformation(),
+                self::INT_KEY => new IntegerTransformation()
+            ]
         );
         $transformedValue = $recTransform->transform($originVal);
         $this->assertIsArray($transformedValue);
@@ -44,37 +38,33 @@ class RecordTransformationTest extends TestCase
      * @dataProvider RecordFailureDataProvider
      * @param $origVal
      */
-    public function testRecordTransformationFailures($origVal)
-    {
+    public function testRecordTransformationFailures($origVal) {
         $this->expectNotToPerformAssertions();
         $recTransformation = new RecordTransformation(
             array(
-                self::string_key => new StringTransformation(),
-                self::int_key => new IntegerTransformation()
+                self::STRING_KEY => new StringTransformation(),
+                self::INT_KEY => new IntegerTransformation()
             )
         );
 
         try {
             $result = $recTransformation->transform($origVal);
-        }catch (ConstraintViolationException $exception)
-        {
+        } catch (ConstraintViolationException $exception) {
             return;
         }
         $this->fail();
     }
 
-    public function testInvalidArray()
-    {
+    public function testInvalidArray() {
         $this->expectNotToPerformAssertions();
         try {
             $recTransformation = new RecordTransformation(
-                array(
+                [
                     new StringTransformation(),
                     new IntegerTransformation()
-                )
+                ]
             );
-        }catch(ConstraintViolationException $exception)
-        {
+        } catch(ConstraintViolationException $exception) {
             return;
         }
         $this->fail();
@@ -84,34 +74,30 @@ class RecordTransformationTest extends TestCase
      * @dataProvider RecordValueInvalidDataProvider
      * @param $originalValue
      */
-    public function testInvalidValueDoesNotMatch($originalValue)
-    {
+    public function testInvalidValueDoesNotMatch($originalValue) {
         $this->expectNotToPerformAssertions();
         $recTransformation = new RecordTransformation(
-            array(
-                self::int_key => new IntegerTransformation(),
-                self::second_int_key => new IntegerTransformation()
-            )
+            [
+                self::INT_KEY => new IntegerTransformation(),
+                self::SECOND_INT_KEY => new IntegerTransformation()
+            ]
         );
 
         try {
             $result = $recTransformation->transform($originalValue);
-        }catch(ConstraintViolationException $exception)
-        {
+        } catch(ConstraintViolationException $exception) {
             return;
         }
         $this->fail();
     }
 
-    public function RecordTransformationDataProvider()
-    {
+    public function RecordTransformationDataProvider() {
         return [
           [array('stringKey' => 'hello', 'integerKey' => 1), array('stringKey' => 'hello', 'integerKey' => 1)]
         ];
     }
 
-    public function RecordFailureDataProvider()
-    {
+    public function RecordFailureDataProvider() {
         return [
             'too_many_values' => [array('stringKey' => 'hello', 'integerKey' => 1, 'secondIntKey' => 1)],
             'key_is_not_a_string' => [array('testKey' => 'hello', 1)],
@@ -119,8 +105,7 @@ class RecordTransformationTest extends TestCase
         ];
     }
 
-    public function RecordValueInvalidDataProvider()
-    {
+    public function RecordValueInvalidDataProvider() {
         return [
           'invalid_value' => [array('stringKey' => 'hello', 'integerKey2' => 1)]
         ];

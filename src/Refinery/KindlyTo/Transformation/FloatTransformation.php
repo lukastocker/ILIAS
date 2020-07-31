@@ -1,9 +1,5 @@
 <?php
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Refinery\KindlyTo\Transformation;
 
@@ -11,53 +7,50 @@ use ILIAS\Refinery\DeriveApplyToFromTransform;
 use ILIAS\Refinery\Transformation;
 use ILIAS\Refinery\ConstraintViolationException;
 
-class FloatTransformation implements Transformation
-{
-    const Reg_String = '/\s*(0|(-?[1-9]\d*([.,]\d+)?))\s*/';
-    const Reg_String_Floating = '/\s*-?\d+[eE]-?\d+\s*/';
+class FloatTransformation implements Transformation {
+    const REG_STRING = '/^\s*(0|(-?[1-9]\d*([.,]\d+)?))\s*$/';
+    const REG_STRING_FLOATING = '/^\s*-?\d+[eE]-?\d+\s*$/';
 
     use DeriveApplyToFromTransform;
 
     /**
      * @inheritdoc
      */
-    public function transform($from)
-    {
-        if(true === is_int($from))
-        {
-            $from = (float)$from;
-            return $from;
+    public function transform($from) {
+        if(is_int($from)) {
+            return (float)$from;
         }
-        elseif(true === is_bool($from))
-        {
+
+        if(is_bool($from)) {
             return floatval($from);
         }
-        elseif(true === is_string($from))
-        {
-            if(preg_match(self::Reg_String, $from, $RegMatch))
-            {
-                $from = str_replace(',','.', $from);
-                return floatval($from);
 
+        if(is_string($from)) {
+
+            $preg_match_string = preg_match(self::REG_STRING, $from, $RegMatch);
+            $preg_match_floating_string = preg_match(self::REG_STRING_FLOATING, $from, $RegMatch);
+
+            if($preg_match_string) {
+                return floatval(str_replace(',','.', $from));
             }
-            elseif(preg_match(self::Reg_String_Floating, $from, $RegMatch))
-            {
-                $from = floatval($from);
-                return $from;
+
+            if($preg_match_floating_string) {
+                return floatval($from);
             }
-            else
-            {
+
+            if (!$preg_match_string && !$preg_match_floating_string){
                 throw new ConstraintViolationException(
-                    'The value could not be transformed into an float',
-                    'not_float'
+                    sprintf('The value "%s" could not be transformed into an float',$from),
+                    'not_float',
+                    $from
                 );
             }
         }
-        else
-        {
+        if (!is_string($from)) {
             throw new ConstraintViolationException(
-                'The value could not be transformed into an float',
-                'not_float'
+                sprintf('The value "%s" is no string and could not be transformed into an float',$from),
+                'not_float',
+                $from
             );
         }
     }
@@ -65,8 +58,7 @@ class FloatTransformation implements Transformation
     /**
      * @inheritdoc
      */
-    public function __invoke($from)
-    {
+    public function __invoke($from) {
         return $this->transform($from);
     }
 }

@@ -1,9 +1,5 @@
 <?php
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Refinery\KindlyTo\Transformation;
 
@@ -13,20 +9,13 @@ use ILIAS\Refinery\DeriveApplyToFromTransform;
 use ILIAS\Refinery\Transformation;
 
 /**
- * Set date format and RegEx constants.
- * Constants with the same date formats are not set more then once:
- * - RFC3339 & W3C same as Atom
- * - RFC850 same as Cookie
- * - RFC1036, RFC1123, RFC2822same & RSS same as RFC822
+ * Transform date format to DateTimeImmutable
+ * Please note:
+ * - RFC3339 & W3C format output on screen is the same as Atom
+ * - RFC850 format output on screen is the same as Cookie
+ * - RFC1036, RFC1123, RFC2822 & RSS format output on screen is the same as RFC822
  */
-class DateTimeTransformation implements Transformation
-{
-    const Reg_Atom = '/^([0-9]{4})([-])([0-9]{2})([-])([0-9]{2})([T])([0-9]{2})([:])([0-9]{2})([:])([0-9]{2})([\)([+])([0-9]{2})([:])([0-9]{2})$/';
-    const Reg_Cookie = '/^([A-Za-z]+)([,])([\])([ ])([0-9]{2})([-])([A-Z][a-z]+)([-])([0-9]{4})([\])([ ])([0-9]{2})([:])([0-9]{2})([:])([0-9]{2})([\])([ ])([A-Za-z]+)([\])([+])([0-9]{4})$/';
-    const Reg_ISO8601 = '/^([0-9]{4})([-])([0-9]{2})([-])([0-9]{2})([T])([0-9]{2})([:])([0-9]{2})([:])([0-9]{2})([+])([0-9]{4})$/';
-    const Reg_RFC822 = '/^([A-Za-z]+)([,])([\])([ ])([0-9]{2})([\])([ ])([A-Z][a-z]+)([\])([ ])([0-9]{2})([\])([ ])([0-9]{2}):([0-9]{2})([:])([0-9]{2})([\])([ ])([\])([+])([0-9]{4})$/';
-    const Reg_RFC7231 = '/^([A-Za-z]+)([,])([\])([ ])([0-9]{2})([\])([ ])([A-Za-z]+)([\])([ ])([0-9]{4})([\])([ ])([0-9]{2})([:])([0-9]{2})([:])([0-9]{2})([\])([ ])([A-Za-z]+)$/';
-    const Reg_RFC3339_ext = '/^([0-9]{4})([-])([0-9]{2})([-])([0-9]{2})([T])([0-9]{2})([:])([0-9]{2})([:])([0-9]{2})([\])([.])([0-9]{3})([\])([+])([0-9]{2})([:])([0-9]{2})$/';
+class DateTimeTransformation implements Transformation {
 
     use DeriveApplyToFromTransform;
 
@@ -35,51 +24,35 @@ class DateTimeTransformation implements Transformation
      */
     public function transform($from)
     {
-        if(true === is_string($from))
-        {
-            if(preg_match(self::Reg_Atom, $from, $RegMatch))
-            {
-                return $DateImmutable = \DateTimeImmutable::createFromFormat(\DateTimeImmutable::ATOM, $from);
-            }
-            elseif(preg_match(self::Reg_Cookie, $from, $RegMatch))
-            {
-                return $DateImmutable = \DateTimeImmutable::createFromFormat(\DateTimeImmutable::COOKIE, $from);
-            }
-            elseif(preg_match(self::Reg_ISO8601,$from,$RegMatch))
-            {
-                return $DateImmutable = \DateTimeImmutable::createFromFormat(\DateTimeImmutable::ISO8601, $from);
-            }
-            elseif(preg_match(self::Reg_RFC822,$from,$RegMatch))
-            {
-                return $DateImmutable = \DateTimeImmutable::createFromFormat(\DateTimeImmutable::RFC822, $from);
-            }
-            elseif(preg_match(self::Reg_RFC7231,$from,$RegMatch))
-            {
-                return $DateImmutable = \DateTimeImmutable::createFromFormat(\DateTimeImmutable::RFC7231, $from);
-            }
-            elseif(preg_match(self::Reg_RFC3339_ext,$from,$RegMatch))
-            {
-                return $DateImmutable = \DateTimeImmutable::createFromFormat(\DateTimeImmutable::RFC3339_EXTENDED, $from);
-            }
-            else
-            {
-                throw new ConstraintViolationException(
-                    'No transformation possible',
-                    'no_transform_possible'
-                );
+        $formats = [
+            \DateTimeImmutable::ATOM,
+            \DateTimeImmutable::COOKIE,
+            \DateTimeImmutable::ISO8601,
+            \DateTimeImmutable::RFC822,
+            \DateTimeImmutable::RFC7231,
+            \DateTimeImmutable::RFC3339_EXTENDED
+            ];
+
+        if(is_string($from)) {
+            foreach ($formats as $format) {
+                $res = \DateTimeImmutable::createFromFormat($format, $from);
+                if ($res instanceof \DateTimeImmutable) {
+                    return $res;
+                }
             }
         }
-        elseif(true === is_int($from) || true === is_float($from))
-        {
+
+        if(is_int($from) || is_float($from)) {
             $UnixTimestamp = strtotime($from);
             $date = date(DATE_ISO8601, $UnixTimestamp);
-            return $DateImmutable = \DateTimeImmutable::createFromFormat(\DateTimeImmutable::ISO8601, $date);
+            return \DateTimeImmutable::createFromFormat(\DateTimeImmutable::ISO8601, $date);
         }
-        else
-        {
+
+        if(!is_string($from) || !is_int($from) || !is_float($from)) {
             throw new ConstraintViolationException(
-                'No transformation possible',
-                'no_transform_possible'
+                sprintf('Value "%s" could not be transformed.', $from),
+                'no_string',
+                $from
             );
         }
     }

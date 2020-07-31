@@ -1,9 +1,5 @@
 <?php
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Tests\Refinery\KindlyTo\Transformation;
 
@@ -15,15 +11,11 @@ use ILIAS\Tests\Refinery\TestCase;
 /**
  * Test transformations in this Group
  */
-class IntegerTransformationTest extends TestCase
-{
-    /**
-     * @var IntegerTransformation
-     */
+class IntegerTransformationTest extends TestCase {
+
     private $transformation;
 
-    public function setUp(): void
-    {
+    public function setUp(): void {
         $this->transformation = new IntegerTransformation();
     }
 
@@ -32,20 +24,18 @@ class IntegerTransformationTest extends TestCase
      * @param $originVal
      * @param $expectedVal
      */
-    public function testIntegerTransformation($originVal, $expectedVal)
-    {
+    public function testIntegerTransformation($originVal, $expectedVal) {
         $transformedValue = $this->transformation->transform($originVal);
         $this->assertIsInt($transformedValue);
         $this->assertEquals($expectedVal, $transformedValue);
     }
 
-    public function IntegerTestDataProvider()
-    {
+    public function IntegerTestDataProvider() {
         return [
             'pos_bool' => [true, (int)1],
             'neg_bool' => [false, (int)0],
             'float_val' => [20.5, 21],
-            'string_val' => ['4947642.4234Hello', '4947642']
+            'string_val' => ['4947642', '4947642']
         ];
     }
 

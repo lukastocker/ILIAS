@@ -1,9 +1,5 @@
 <?php
-/* Copyright (c) 1998-2019 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Refinery\KindlyTo\Transformation;
 
@@ -11,46 +7,47 @@ use ILIAS\Data\Result;
 use ILIAS\Refinery\DeriveApplyToFromTransform;
 use ILIAS\Refinery\Transformation;
 use ILIAS\Refinery\ConstraintViolationException;
+use phpDocumentor\Reflection\Types\Self_;
 
-class BooleanTransformation implements Transformation
-{
-    const Bool_True_String = 'true';
-    const Bool_False_String = 'false';
-    const Bool_True_Number = 1;
-    const Bool_False_Number = 0;
-    const Bool_True_Number_String = '1';
-    const Bool_False_Number_String = '0';
+class BooleanTransformation implements Transformation {
+    const BOOL_TRUE_STRING = 'true';
+    const BOOL_FALSE_STRING = 'false';
+    const BOOL_TRUE_NUMBER = 1;
+    const BOOL_FALSE_NUMBER = 0;
+    const BOOL_TRUE_NUMBER_STRING = '1';
+    const BOOL_FALSE_NUMBER_STRING = '0';
 
     use DeriveApplyToFromTransform;
 
     /**
      * @inheritdoc
      */
-    public function transform($from)
-    {
-        if($from === self::Bool_True_Number || $from === self::Bool_True_Number_String || mb_strtolower($from) === self::Bool_True_String)
-        {
-            $from = boolval(true);
-            return $from;
-        }
-        elseif($from === self::Bool_False_Number || $from === self::Bool_False_Number_String || mb_strtolower($from) === self::Bool_False_String)
-        {
-            $from = boolval(false);
-            return $from;
-        }
-        else {
+    public function transform($from) {
+
+        if($from != (self::BOOL_FALSE_NUMBER || self::BOOL_FALSE_NUMBER_STRING) &&
+            $from != (self::BOOL_TRUE_NUMBER || self::BOOL_TRUE_NUMBER_STRING) &&
+            mb_strtolower($from) != (self::BOOL_TRUE_STRING || self::BOOL_FALSE_STRING)
+        ) {
             throw new ConstraintViolationException(
-                'The value could not be transformed into boolean.',
-                'not_boolean'
+                sprintf('The value "%s" could not be transformed into boolean.', $from),
+                'not_boolean',
+                $from
             );
+        }
+
+        if($from === self::BOOL_TRUE_NUMBER || $from === self::BOOL_TRUE_NUMBER_STRING || mb_strtolower($from) === self::BOOL_TRUE_STRING) {
+            return true;
+        }
+
+        if($from === self::BOOL_FALSE_NUMBER || $from === self::BOOL_FALSE_NUMBER_STRING || mb_strtolower($from) === self::BOOL_FALSE_STRING) {
+            return false;
         }
     }
 
     /**
      * @inheritdoc
      */
-    public function __invoke($from)
-    {
+    public function __invoke($from) {
         return $this->transform($from);
     }
 }

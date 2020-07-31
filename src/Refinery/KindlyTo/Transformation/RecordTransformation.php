@@ -1,10 +1,6 @@
 <?php
 declare(strict_types=1);
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Refinery\KindlyTo\Transformation;
 
@@ -12,38 +8,31 @@ use ILIAS\Refinery\DeriveApplyToFromTransform;
 use ILIAS\Refinery\Transformation;
 use ILIAS\Refinery\ConstraintViolationException;
 
-class RecordTransformation implements Transformation
-{
+class RecordTransformation implements Transformation {
     use DeriveApplyToFromTransform;
 
-    /**
-     *@var Transformation[]
-     */
     private $transformations;
 
     /**
      *@param Transformation[] $transformations
      */
-
-    public function __construct(array $transformations)
-    {
-        foreach($transformations as $key => $transformation)
-        {
+    public function __construct($transformations) {
+        foreach($transformations as $key => $transformation)  {
             if (!$transformation instanceof Transformation) {
                 $transformationClassName = Transformation::class;
 
                 throw new ConstraintViolationException(
-                    sprintf('The array MUST contain only "%s" instances', $transformationClassName),
+                    sprintf('The array must contain only "%s" instances', $transformationClassName),
                     'not_a_transformation',
                     $transformationClassName
                 );
             }
 
-            if(false === is_string($key))
-            {
+            if(!is_string($key)) {
                 throw new ConstraintViolationException(
-                    'The array key must be a string',
-                    'key_is_not_a_string'
+                    sprintf('The array key "%s" must be a string', $key),
+                    'key_is_not_a_string',
+                    $key
                 );
             }
         }
@@ -53,36 +42,28 @@ class RecordTransformation implements Transformation
     /**
      * @inheritDoc
      */
-    public function transform($from)
-    {
-        if(false == is_array($from))
+    public function transform($from) {
+        if(!is_array($from))
         {
-            $from = array($from);
-            if(array() === $from)
-            {
-                throw new ConstraintViolationException(
-                    'The array ist empty',
-                    'value_array_is_empty'
-                ) ;
-            }
+            $from = [$from];
         }
 
-        $result = array();
+        $result = [];
         foreach($from as $key => $value)
         {
-            if (false === is_string($key))
-            {
+            if (!is_string($key)) {
                 throw new ConstraintViolationException(
-                    'Array key must be a string',
-                    'key_is_not_a_string'
+                    sprintf('The array key "%s" must be a string', $key),
+                    'key_is_not_a_string',
+                    $key
                 );
             }
 
-            if(false === isset($this->transformations[$key]))
-            {
+            if(!isset($this->transformations[$key])) {
                 throw new ConstraintViolationException(
                     sprintf('Could not find transformation for key "%s"', $key),
-                    'no_array_key_existing'
+                    'no_array_key_existing',
+                    $key
                 );
             }
 
@@ -96,8 +77,7 @@ class RecordTransformation implements Transformation
      /**
      * @inheritDoc
      */
-    public function __invoke($from)
-    {
+    public function __invoke($from) {
         return $this->transform($from);
     }
 }

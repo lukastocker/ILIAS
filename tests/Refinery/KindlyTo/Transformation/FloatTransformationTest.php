@@ -1,9 +1,5 @@
 <?php
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Tests\Refinery\KindlyTo\Transformation;
 
@@ -16,15 +12,11 @@ use ILIAS\Tests\Refinery\TestCase;
 /**
  * Test transformations in this Group
  */
-class FloatTransformationTest extends TestCase
-{
-    /**
-     * @var FloatTransformation
-     */
+class FloatTransformationTest extends TestCase {
+
     private $transformation;
 
-    public function setUp(): void
-    {
+    public function setUp(): void {
         $this->transformation = new FloatTransformation();
     }
 
@@ -33,8 +25,7 @@ class FloatTransformationTest extends TestCase
      * @param $originVal
      * @param $expectedVal
      */
-    public function testFloatTransformation($originVal, $expectedVal)
-    {
+    public function testFloatTransformation($originVal, $expectedVal) {
         $transformedValue = $this->transformation->transform($originVal);
         $this->assertIsFloat($transformedValue);
         $this->assertEquals($expectedVal, $transformedValue);
@@ -44,20 +35,17 @@ class FloatTransformationTest extends TestCase
      * @dataProvider FailingTransformationDataProvider
      * @param $failingVal
      */
-    public function testFailingTransformations($failingVal)
-    {
+    public function testFailingTransformations($failingVal) {
         $this->expectNotToPerformAssertions();
         try {
             $transformedValue = $this->transformation->transform($failingVal);
-        }catch(ConstraintViolationException $exception)
-        {
+        } catch (ConstraintViolationException $exception) {
             return;
         }
         $this->fail();
     }
 
-    public function FailingTransformationDataProvider()
-    {
+    public function FailingTransformationDataProvider() {
         return [
             'null' => [null],
             'empty' => [""],
@@ -70,8 +58,7 @@ class FloatTransformationTest extends TestCase
         ];
     }
 
-    public function FloatTestDataProvider()
-    {
+    public function FloatTestDataProvider() {
         return [
             'pos_bool' => [true, 1.0],
             'neg_bool' => [false, 0.0],

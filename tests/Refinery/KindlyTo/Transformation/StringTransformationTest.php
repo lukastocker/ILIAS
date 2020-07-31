@@ -1,9 +1,5 @@
 <?php
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Tests\Refinery\KindlyTo\Transformation;
 
@@ -16,15 +12,11 @@ use ILIAS\Tests\Refinery\TestCase;
 /**
  * Test transformations in this Group
  */
-class StringTransformationTest extends TestCase
-{
-    /**
-     * @var StringTransformation
-     */
+class StringTransformationTest extends TestCase {
+
     private $transformation;
 
-    public function setUp(): void
-    {
+    public function setUp(): void {
         $this->transformation = new StringTransformation();
     }
 
@@ -33,15 +25,13 @@ class StringTransformationTest extends TestCase
      * @param $originVal
      * @param string $expectedVal
      */
-    public function testStringTransformation($originVal, $expectedVal)
-    {
+    public function testStringTransformation($originVal, $expectedVal) {
         $transformedValue = $this->transformation->transform($originVal);
         $this->assertIsString($transformedValue);
         $this->assertEquals($expectedVal, $transformedValue);
     }
 
-    public function StringTestDataProvider()
-    {
+    public function StringTestDataProvider() {
         return [
             'string_val' => ['hello', 'hello'],
             'int_val' => [300, '300'],

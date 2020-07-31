@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /* Copyright (c) 2020 Richard Klees, Extended GPL, see docs/LICENSE */
-/* Copyright (c) 2020 Luka Stocker, Extended GPL, see docs/LICENSE */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Refinery\KindlyTo;
 
@@ -16,7 +16,6 @@ use ILIAS\Refinery\KindlyTo\Transformation\RecordTransformation;
 use ILIAS\Refinery\KindlyTo\Transformation\TupleTransformation;
 use ILIAS\Refinery\KindlyTo\Transformation\DictionaryTransformation;
 use ILIAS\Refinery\Transformation;
-use SimpleSAML\TwigConfigurableI18n\Twig\Extensions\Node\Trans;
 
 /**
  * Transformations in this group transform data to primitive types to establish
@@ -36,11 +35,7 @@ class Group
      */
     private $dataFactory;
 
-    /**
-     * @param \ILIAS\Data\Factory $dataFactory
-     */
-    public function __construct(\ILIAS\Data\Factory $dataFactory)
-    {
+    public function __construct(\ILIAS\Data\Factory $dataFactory) {
         $this->dataFactory = $dataFactory;
     }
 
@@ -64,11 +59,9 @@ class Group
      *
      * All other data will be discarded.
      *
-     * @return IntegerTransformation
      */
 
-    public function int() : IntegerTransformation
-    {
+    public function int() : Transformation {
         return new IntegerTransformation();
     }
 
@@ -93,10 +86,8 @@ class Group
      *
      * All other data will be discarded.
      *
-     * @return FloatTransformation
      */
-    public function float() : FloatTransformation
-    {
+    public function float() : Transformation {
         return new FloatTransformation();
     }
 
@@ -121,10 +112,8 @@ class Group
      * serialization formats. So we don't loose much if we, e.g., transform an
      * array to "Array".
      *
-     * @return StringTransformation
      */
-    public function string() : StringTransformation
-    {
+    public function string() : Transformation {
         return new StringTransformation();
     }
 
@@ -153,10 +142,8 @@ class Group
      * seem to introduce more problems than they solve, so we decided to not be
      * very liberal here.
      *
-     * @return BooleanTransformation
      */
-    public function bool() : BooleanTransformation
-    {
+    public function bool() : Transformation {
         return new BooleanTransformation();
     }
 
@@ -171,10 +158,8 @@ class Group
      *
      * All other data will be discarded.
      *
-     * @return DateTimeTransformation
      */
-    public function dateTime() : DateTimeTransformation
-    {
+    public function dateTime() : Transformation {
         return new DateTimeTransformation();
     }
 
@@ -186,8 +171,7 @@ class Group
      * @param Transformation $transformation
      * @return Transformation
      */
-    public function listOf(Transformation $transformation) : Transformation
-    {
+    public function listOf($transformation) : Transformation {
         return new ListTransformation($transformation);
     }
 
@@ -200,22 +184,19 @@ class Group
      * @param Transformation $transformation
      * @return Transformation
      */
-    public function dictOf(Transformation $transformation) : Transformation
-    {
+    public function dictOf($transformation) : Transformation {
         return new DictionaryTransformation($transformation);
     }
 
     /**
      * Get a kind transformation to a tuple.
-     *
      * This supports all data represented as PHP array, which will be used via
      * array_values($V). Non-arrays will be wrapped in one.
      *
-     * @param array $transformation
+     * @param $transformation[] $transformation
      * @return Transformation
      */
-    public function tupleOf(array $transformation) : Transformation
-    {
+    public function tupleOf($transformation) : Transformation {
         return new TupleTransformation($transformation);
     }
 
@@ -225,11 +206,10 @@ class Group
      * This supports all data represented as PHP array. Non-arrays will be wrapped
      * in one.
      *
-     * @param array $transformations
+     * @param $transformations[] $transformations
      * @return Transformation
      */
-    public function recordOf(array $transformations) : Transformation
-    {
+    public function recordOf($transformations) : Transformation {
         return new RecordTransformation($transformations);
     }
 }

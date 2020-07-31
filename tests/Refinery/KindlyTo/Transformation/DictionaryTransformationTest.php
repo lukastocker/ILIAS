@@ -1,9 +1,5 @@
 <?php
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Tests\Refinery\KindlyTo\Transformation;
 
@@ -14,18 +10,13 @@ use ILIAS\Tests\Refinery\TestCase;
 
 require_once ('./libs/composer/vendor/autoload.php');
 
-class DictionaryTransformationTest extends TestCase
-{
-    const String_key = 'hello';
-    const String_val = 'world';
-
+class DictionaryTransformationTest extends TestCase {
     /**
      * @dataProvider DictionaryTransformationDataProvider
      * @param $originVal
      * @param $expectedVal
      */
-    public function testDictionaryTransformation($originVal, $expectedVal)
-    {
+    public function testDictionaryTransformation($originVal, $expectedVal) {
         $transformation = new DictionaryTransformation(new StringTransformation());
         $transformedValue = $transformation->transform($originVal);
         $this->assertIsArray($transformedValue);
@@ -36,21 +27,18 @@ class DictionaryTransformationTest extends TestCase
      * @dataProvider TransformationFailingDataProvider
      * @param $failingVal
      */
-    public function testTransformationFailures($failingVal)
-    {
+    public function testTransformationFailures($failingVal) {
         $this->expectNotToPerformAssertions();
         $transformation = new DictionaryTransformation(new StringTransformation());
         try {
             $result = $transformation->transform($failingVal);
-        }catch(ConstraintViolationException $exception)
-        {
+        } catch (ConstraintViolationException $exception) {
             return;
         }
         $this->fail();
     }
 
-    public function TransformationFailingDataProvider()
-    {
+    public function TransformationFailingDataProvider() {
         return [
             'key_not_a_string' => ['hello'],
             'value_not_a_string' => ['hello' => 1],
@@ -58,8 +46,7 @@ class DictionaryTransformationTest extends TestCase
         ];
     }
 
-    public function DictionaryTransformationDataProvider()
-    {
+    public function DictionaryTransformationDataProvider() {
         return [
             'first_arr' => [array('hello' => 'world'), ['hello' => 'world'] ],
             'second_arr' => [array('hi' => 'earth', 'goodbye' => 'world'),['hi' => 'earth', 'goodbye' => 'world']]

@@ -1,9 +1,5 @@
 <?php
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Tests\Refinery\KindlyTo\Transformation;
 
@@ -17,15 +13,11 @@ use ILIAS\Refinery\ConstraintViolationException;
 * Test transformations in this Group
 */
 
-class BooleanTransformationTest extends TestCase
-{
-    /**
-     * @var BooleanTransformation
-     */
+class BooleanTransformationTest extends TestCase {
+
     private $transformation;
 
-    public function setUp(): void
-    {
+    public function setUp(): void {
         $this->transformation = new BooleanTransformation();
     }
 
@@ -34,15 +26,13 @@ class BooleanTransformationTest extends TestCase
      * @param $originVal
      * @param bool $expectedVal
      */
-    public function testBooleanTransformation($originVal, bool $expectedVal)
-    {
+    public function testBooleanTransformation($originVal, $expectedVal) {
             $transformedValue = $this->transformation->transform($originVal);
             $this->assertIsBool($transformedValue);
             $this->assertSame($expectedVal, $transformedValue);
     }
 
-    public function BooleanTestDataProvider()
-    {
+    public function BooleanTestDataProvider() {
         return [
             'pos_boolean' => ['true', true],
             'pos_boolean_number' => [1, true],

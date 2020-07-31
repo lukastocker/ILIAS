@@ -1,9 +1,5 @@
 <?php
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Tests\Refinery\KindlyTo\Transformation;
 
@@ -17,15 +13,11 @@ use ILIAS\Tests\Refinery\TestCase;
  * Tests for DateTimeImmutable and Unix Timetable transformation
  */
 
-class DateTimeTransformationTest extends TestCase
-{
-    /**
-     * @var DateTimeTransformation
-     */
+class DateTimeTransformationTest extends TestCase {
+
     private $transformation;
 
-    public function setUp(): void
-    {
+    public function setUp(): void {
         $this->transformation = new DateTimeTransformation();
     }
 
@@ -34,8 +26,7 @@ class DateTimeTransformationTest extends TestCase
      * @param $originVal
      * @param $expectedVal
      */
-    public function testDateTimeISOTransformation($originVal, $expectedVal)
-    {
+    public function testDateTimeISOTransformation($originVal, $expectedVal) {
         $transformedValue = $this->transformation->transform($originVal);
         $this->assertIsObject($transformedValue);
         $this->assertInstanceOf(\DateTimeImmutable::class, $transformedValue);
@@ -46,20 +37,17 @@ class DateTimeTransformationTest extends TestCase
      * @dataProvider TransformationFailureDataProvider
      * @param $failingValue
      */
-    public function testTransformIsInvalid($failingValue)
-    {
+    public function testTransformIsInvalid($failingValue) {
         $this->expectNotToPerformAssertions();
         try {
             $transformedValue = $this->transformation->transform($failingValue);
-        }catch(ConstraintViolationException $exception)
-        {
+        } catch(ConstraintViolationException $exception) {
             return;
         }
         $this->fail();
     }
 
-    public function DateTimeTransformationDataProvider()
-    {
+    public function DateTimeTransformationDataProvider() {
         return [
             'iso8601' => ['2020-07-06T12:23:05+0000',\DateTimeImmutable::createFromFormat(\DateTimeImmutable::ISO8601,'2020-07-06T12:23:05+0000')],
             'atom' => ['2020-07-06T12:23:05+00:00',\DateTimeImmutable::createFromFormat(\DateTimeImmutable::ATOM,'2020-07-06T12:23:05+00:00')],
@@ -71,8 +59,7 @@ class DateTimeTransformationTest extends TestCase
         ];
     }
 
-    public function TransformationFailureDataProvider()
-    {
+    public function TransformationFailureDataProvider() {
         return [
             'no_matching_string_format' => ['hello']
         ];

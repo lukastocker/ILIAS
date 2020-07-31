@@ -1,10 +1,6 @@
 <?php
 declare(strict_types=1);
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Refinery\KindlyTo\Transformation;
 
@@ -12,26 +8,21 @@ use ILIAS\Refinery\DeriveApplyToFromTransform;
 use ILIAS\Refinery\Transformation;
 use ILIAS\Refinery\ConstraintViolationException;
 
-class TupleTransformation implements Transformation
-{
+class TupleTransformation implements Transformation {
     use DeriveApplyToFromTransform;
 
-    /**
-     * @var Transformation[]
-     */
     private $transformations;
 
     /**
-     * @param array $transformations;
+     * @param Transformation[] $transformations;
      */
-    public function __construct(array $transformations)
-    {
+    public function __construct($transformations) {
         foreach ($transformations as $transformation) {
             if (!$transformation instanceof Transformation) {
                 $transformationClassName = Transformation::class;
 
                 throw new ConstraintViolationException(
-                    sprintf('The array MUST contain only "%s" instances', $transformationClassName),
+                    sprintf('The array must contain only "%s" instances', $transformationClassName),
                     'not_a_transformation',
                     $transformationClassName
                 );
@@ -43,58 +34,46 @@ class TupleTransformation implements Transformation
     /**
      * @inheritDoc
      */
-    public function transform($from)
-    {
+    public function transform($from) {
         $this->ValueLength($from);
 
-        if(false == is_array($from))
-        {
-            $from = array($from);
-            if(array() === $from)
-            {
-                throw new ConstraintViolationException(
-                    'The array ist empty',
-                    'value_array_is_empty'
-                ) ;
-            }
+        if(!is_array($from)) {
+            $from = [$from];
         }
-        elseif(array() === $from)
-        {
+
+        if([] === $from) {
             throw new ConstraintViolationException(
-                'The array ist empty',
-                'value_array_is_empty'
+                sprintf('The array "%s" ist empty', $from),
+                'value_array_is_empty',
+                $from
             ) ;
         }
 
-        $result = array();
+        $result = [];
         foreach($from as $key => $value)
         {
-            if(false === array_key_exists($key, $this->transformations))
-            {
+            if(!array_key_exists($key, $this->transformations)) {
                 throw new ConstraintViolationException(
-                    'Matching values not found',
-                    'matching_values_not_found'
+                    sprintf('Matching value "%s" not found', $value),
+                    'matching_values_not_found',
+                    $value
                 );
             }
             $transformedValue = $this->transformations[$key]->transform($value);
             $result[] = $transformedValue;
         }
         return $result;
-
     }
 
-    /**
-     * @param $values
-     */
-    private function ValueLength($values)
-    {
+    private function ValueLength($values) {
         $countOfValues = count($values);
         $countOfTransformations = count($this->transformations);
 
         if ($countOfValues !== $countOfTransformations) {
             throw new ConstraintViolationException(
-                'The given value does not match with the given transformations',
-                'given_values_'
+                sprintf('The length of given value "%s" does not match with the given transformations', $countOfValues),
+                'given_values_',
+                $countOfValues
             );
         }
     }
@@ -102,8 +81,7 @@ class TupleTransformation implements Transformation
     /**
      * @inheritDoc
      */
-    public function __invoke($from)
-    {
+    public function __invoke($from) {
         return $this->transform($from);
     }
 }

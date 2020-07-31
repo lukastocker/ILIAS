@@ -1,10 +1,6 @@
 <?php
 declare(strict_types=1);
-/* Copyright (c) 1998-2019 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Refinery\KindlyTo\Transformation;
 
@@ -12,52 +8,33 @@ use ILIAS\Refinery\DeriveApplyToFromTransform;
 use ILIAS\Refinery\Transformation;
 use ILIAS\Refinery\ConstraintViolationException;
 
-class DictionaryTransformation implements Transformation
-{
+class DictionaryTransformation implements Transformation {
     use DeriveApplyToFromTransform;
 
-    /**
-     * @var Transformation
-     */
     private $transformation;
 
-    /**
-     * @param Transformation $transformation
-     */
-    public function __construct(Transformation $transformation)
-    {
+    public function __construct(Transformation $transformation) {
         $this->transformation = $transformation;
     }
 
     /**
      * @inheritdoc
      */
-    public function transform($from)
-    {
-        if(false == is_array($from))
-        {
-            $from = array($from);
-            if(array() === $from)
-            {
-                throw new ConstraintViolationException(
-                    'The array ist empty',
-                    'value_array_is_empty'
-                ) ;
-            }
+    public function transform($from) {
+        if(!is_array($from)) {
+            $from = [$from];
         }
-        elseif(array() === $from)
-        {
+
+        if([] === $from) {
             throw new ConstraintViolationException(
                 'The array ist empty',
                 'value_array_is_empty'
             ) ;
         }
 
-        $result = array();
-        foreach($from as $key => $value)
-        {
-            if(false === is_string($key))
-            {
+        $result = [];
+        foreach($from as $key => $value) {
+            if(!is_string($key)) {
                 throw new ConstraintViolationException(
                     'Key is not a string',
                     'key_is_no_string'

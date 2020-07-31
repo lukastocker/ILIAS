@@ -1,9 +1,5 @@
 <?php
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 2020 Luka K. A. Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Tests\Refinery\KindlyTo;
 
@@ -20,62 +16,50 @@ use ILIAS\Tests\Refinery\TestCase;
 
 require_once('./libs/composer/vendor/autoload.php');
 
-class GroupTest extends TestCase
-{
-    /**
-     * @var Group
-     */
+class GroupTest extends TestCase {
+
     private $basicGroup;
 
-    public function setUp(): void
-    {
+    public function setUp(): void {
         $this->basicGroup = new Group(new \ILIAS\Data\Factory());
     }
 
-    public function testIsStringTransformationInstance()
-    {
+    public function testIsStringTransformationInstance() {
         $transformation = $this->basicGroup->string();
         $this->assertInstanceOf(StringTransformation::class, $transformation);
     }
 
-    public function testIsBooleanTransformationInstance()
-    {
+    public function testIsBooleanTransformationInstance() {
         $transformation = $this->basicGroup->bool();
         $this->assertInstanceOf(BooleanTransformation::class, $transformation);
     }
 
-    public function testIsDateTimeTransformationInterface()
-    {
+    public function testIsDateTimeTransformationInterface() {
         $transformation = $this->basicGroup->dateTime();
         $this->assertInstanceOf(DateTimeTransformation::class, $transformation);
     }
 
-    public function testIsIntegerTransformationInterface()
-    {
+    public function testIsIntegerTransformationInterface() {
         $transformation = $this->basicGroup->int();
         $this->assertInstanceOf(IntegerTransformation::class, $transformation);
     }
 
-    public function testIsFloatTransformationInterface()
-    {
+    public function testIsFloatTransformationInterface() {
         $transformation = $this->basicGroup->float();
         $this->assertInstanceOf(FloatTransformation::class, $transformation);
     }
 
-    public function testIsRecordTransformationInterface()
-    {
+    public function testIsRecordTransformationInterface() {
         $transformation = $this->basicGroup->recordOf(array('tostring' => new StringTransformation()));
         $this->assertInstanceOf(RecordTransformation::class, $transformation);
     }
 
-    public function testIsTupleTransformationInterface()
-    {
+    public function testIsTupleTransformationInterface() {
         $transformation = $this->basicGroup->tupleOf(array(new StringTransformation()));
         $this->assertInstanceOf(TupleTransformation::class, $transformation);
     }
 
-    public function testNewDictionaryTransformation()
-    {
+    public function testNewDictionaryTransformation() {
         $transformation = $this->basicGroup->dictOf(new StringTransformation());
         $this->assertInstanceOf(DictionaryTransformation::class, $transformation);
     }

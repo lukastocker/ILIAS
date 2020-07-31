@@ -1,10 +1,6 @@
 <?php
 declare(strict_types=1);
-/* Copyright (c) 1998-2020 ILIAS open source, Extended GPL, see docs/LICENSE */
-
-/**
- * @author  Luka Stocker <lstocker@concepts-and-training.de>
- */
+/* Copyright (c) 1998-2020 Luka Kai Alexander Stocker, Extended GPL, see docs/LICENSE */
 
 namespace ILIAS\Refinery\KindlyTo\Transformation;
 
@@ -12,49 +8,33 @@ use ILIAS\Refinery\ConstraintViolationException;
 use ILIAS\Refinery\DeriveApplyToFromTransform;
 use ILIAS\Refinery\Transformation;
 
-class ListTransformation implements Transformation
-{
+class ListTransformation implements Transformation {
     use DeriveApplyToFromTransform;
-    /**
-     * @var Transformation
-     */
+
     private $transformation;
 
-    /**
-     * @param Transformation $transformation
-     */
-    public function __construct(Transformation $transformation)
-    {
+    public function __construct(Transformation $transformation) {
         $this->transformation = $transformation;
     }
 
     /**
      * @inheritdoc
      */
-    public function transform($from)
-    {
-        if(false == is_array($from))
-        {
-            $from = array($from);
-            if(array() === $from)
-            {
-               throw new ConstraintViolationException(
-                   'The array ist empty',
-                   'value_array_is_empty'
-               ) ;
-            }
-        }
-        elseif(array() === $from)
-        {
-            throw new ConstraintViolationException(
-                'The array ist empty',
-                'value_array_is_empty'
-            ) ;
+    public function transform($from) {
+        if(!is_array($from)) {
+            $from = [$from];
         }
 
-        $result = array();
-        foreach($from as $val)
-        {
+        if([] === $from) {
+            throw new ConstraintViolationException(
+                sprintf('The array "%s" ist empty',$from),
+                'value_array_is_empty',
+                $from
+            );
+        }
+
+        $result = [];
+        foreach($from as $val) {
             $transformedVal = $this->transformation->transform($val);
             $result[] = $transformedVal;
         }
@@ -64,8 +44,7 @@ class ListTransformation implements Transformation
     /**
      * @inheritdoc
      */
-    public function __invoke($from)
-    {
+    public function __invoke($from) {
         return $this->transform($from);
     }
 }
