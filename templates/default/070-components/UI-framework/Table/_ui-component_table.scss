@@ -344,3 +344,21 @@ td.c-table-data__cell--highlighted {
 .c-table-data__row:hover td.c-table-data__cell--highlighted {
     background-color: darken($il-main-darker-bg, 7%);
 }
+
+// DataTable mobile view
+
+@media screen and (max-width: $il-grid-float-breakpoint-max) {
+    table.c-table-data__table,
+    .c-table-data__table thead,
+    .c-table-data__table tbody,
+    .c-table-data__table tr,
+    .c-table-data__table .c-table-data__cell {
+        width: 100%;
+        display: block;
+        border: none;
+    }
+    
+    .c-table-data__table .c-table-data__header__resize-wrapper {
+        resize: none;
+    }
+}
