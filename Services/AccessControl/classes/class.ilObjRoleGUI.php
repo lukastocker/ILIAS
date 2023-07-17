@@ -20,6 +20,8 @@ declare(strict_types=1);
 
 use ILIAS\HTTP\GlobalHttpState;
 use ILIAS\Refinery\Factory;
+use ILIAS\UI\Factory as UIFactory;
+use ILIAS\UI\Renderer;
 
 /**
  * Class ilObjRoleGUI
@@ -46,6 +48,8 @@ class ilObjRoleGUI extends ilObjectGUI
     private ilLogger $logger;
     private GlobalHttpState $http;
     protected Factory $refinery;
+    protected UIFactory $ui_factory;
+    protected Renderer $ui_renderer;
 
     public function __construct(
         $a_data,
@@ -53,15 +57,18 @@ class ilObjRoleGUI extends ilObjectGUI
         bool $a_call_by_reference = false,
         bool $a_prepare_output = true
     ) {
+        /** @var ILIAS\DI\Container $DIC */
         global $DIC;
 
-        $this->rbacadmin = $DIC->rbac()->admin();
-        $this->help = $DIC->help();
+        $this->rbacadmin = $DIC['rbacadmin'];
+        $this->help = $DIC['ilHelp'];
         $this->logger = $DIC->logger()->ac();
 
         $this->role_id = $a_id;
-        $this->http = $DIC->http();
-        $this->refinery = $DIC->refinery();
+        $this->http = $DIC['http'];
+        $this->refinery = $DIC['refinery'];
+        $this->ui_factory = $DIC['ui.factory'];
+        $this->ui_renderer = $DIC['ui.renderer'];
 
         // Add ref_id of object that contains role
         $this->initParentRefId();
@@ -87,10 +94,10 @@ class ilObjRoleGUI extends ilObjectGUI
         switch ($next_class) {
             case 'ilrepositorysearchgui':
 
-                if (!$GLOBALS['DIC']['ilAccess']->checkAccess('edit_permission', '', $this->obj_ref_id)) {
-                    $GLOBALS['DIC']['ilErr']->raiseError(
-                        $GLOBALS['DIC']['lng']->txt('permission_denied'),
-                        $GLOBALS['DIC']['ilErr']->WARNING
+                if (!$this->access->checkAccess('edit_permission', '', $this->obj_ref_id)) {
+                    $this->error->raiseError(
+                        $this->lng->txt('permission_denied'),
+                        $this->error->WARNING
                     );
                 }
                 $rep_search = new ilRepositorySearchGUI();
@@ -322,7 +329,7 @@ class ilObjRoleGUI extends ilObjectGUI
 
         $rbacreview = $DIC['rbacreview'];
 
-        $data['title'] = ilObjRole::_getTranslation($role->getTitle());
+        $data['title'] = $role->getPresentationTitle();
         $data['desc'] = $role->getDescription();
         $data['ilias_id'] = 'il_' . IL_INST_ID . '_' . ilObject::_lookupType($role->getId()) . '_' . $role->getId();
         $data['reg'] = $role->getAllowRegister();
@@ -356,9 +363,11 @@ class ilObjRoleGUI extends ilObjectGUI
         if ($this->object->getId() != SYSTEM_ROLE_ID) {
             $this->toolbar->setFormAction($this->ctrl->getFormAction($this));
             if ($this->rbac_review->isDeleteable($this->object->getId(), $this->obj_ref_id)) {
-                $this->toolbar->addButton(
-                    $this->lng->txt('rbac_delete_role'),
-                    $this->ctrl->getLinkTarget($this, 'confirmDeleteRole')
+                $this->toolbar->addComponent(
+                    $this->ui_factory->link()->standard(
+                        $this->lng->txt('rbac_delete_role'),
+                        $this->ctrl->getLinkTarget($this, 'confirmDeleteRole')
+                    )
                 );
             }
         }
@@ -438,14 +447,18 @@ class ilObjRoleGUI extends ilObjectGUI
         // Show copy role button
         if ($this->object->getId() != SYSTEM_ROLE_ID) {
             $this->toolbar->setFormAction($this->ctrl->getFormAction($this));
-            $this->toolbar->addButton(
-                $this->lng->txt("adopt_perm_from_template"),
-                $this->ctrl->getLinkTarget($this, 'adoptPerm')
+            $this->toolbar->addComponent(
+                $this->ui_factory->link()->standard(
+                    $this->lng->txt("adopt_perm_from_template"),
+                    $this->ctrl->getLinkTarget($this, 'adoptPerm')
+                )
             );
             if ($this->rbac_review->isDeleteable($this->object->getId(), $this->obj_ref_id)) {
-                $this->toolbar->addButton(
-                    $this->lng->txt('rbac_delete_role'),
-                    $this->ctrl->getLinkTarget($this, 'confirmDeleteRole')
+                $this->toolbar->addComponent(
+                    $this->ui_factory->link()->standard(
+                        $this->lng->txt('rbac_delete_role'),
+                        $this->ctrl->getLinkTarget($this, 'confirmDeleteRole')
+                    )
                 );
             }
         }
@@ -800,7 +813,7 @@ class ilObjRoleGUI extends ilObjectGUI
             return;
         }
         if ($a_user_ids === []) {
-            $GLOBALS['DIC']['lng']->loadLanguageModule('search');
+            $this->lng->loadLanguageModule('search');
             $this->tpl->setOnScreenMessage('failure', $this->lng->txt('search_err_user_not_exist'), true);
             return;
         }
@@ -876,7 +889,7 @@ class ilObjRoleGUI extends ilObjectGUI
                 $this->object->getId(),
                 $assigned_global_roles
             )) {
-                $userObj = $this->ilias->obj_factory->getInstanceByObjId($user);
+                $userObj = ilObjectFactory::getInstanceByObjId($user);
                 $last_role[$user] = $userObj->getFullName();
                 unset($userObj);
             }
@@ -912,10 +925,10 @@ class ilObjRoleGUI extends ilObjectGUI
         $ilUser = $DIC['ilUser'];
 
         if (!$this->checkAccess('edit_userassignment', 'edit_permission')) {
-            $this->ilias->raiseError(
+            $this->tpl->setOnScreenMessage(
                 $this->lng->txt("msg_no_perm_assign_user_to_role"),
-                $this->ilias->error_obj->MESSAGE
             );
+            return;
         }
 
         $this->tabs_gui->setTabActive('user_assignment');
@@ -925,13 +938,9 @@ class ilObjRoleGUI extends ilObjectGUI
         $tb = new ilToolbarGUI();
 
         // protected admin role
-        if (
-            $this->object->getId() != SYSTEM_ROLE_ID ||
-            (
-                !$this->rbac_review->isAssigned($ilUser->getId(), SYSTEM_ROLE_ID) or
-                !ilSecuritySettings::_getInstance()->isAdminRoleProtected()
-            )
-        ) {
+        if ($this->object->getId() != SYSTEM_ROLE_ID
+            || (!$this->rbac_review->isAssigned($ilUser->getId(), SYSTEM_ROLE_ID)
+                || !ilSecuritySettings::_getInstance()->isAdminRoleProtected())) {
             // add member
             ilRepositorySearchGUI::fillAutoCompleteToolbar(
                 $this,
@@ -944,16 +953,20 @@ class ilObjRoleGUI extends ilObjectGUI
 
             $tb->addSpacer();
 
-            $tb->addButton(
-                $this->lng->txt('search_user'),
-                $this->ctrl->getLinkTargetByClass('ilRepositorySearchGUI', 'start')
+            $tb->addComponent(
+                $this->ui_factory->link()->standard(
+                    $this->lng->txt('search_user'),
+                    $this->ctrl->getLinkTargetByClass('ilRepositorySearchGUI', 'start')
+                )
             );
             $tb->addSpacer();
         }
 
-        $tb->addButton(
-            $this->lng->txt('role_mailto'),
-            $this->ctrl->getLinkTarget($this, 'mailToRole')
+        $tb->addComponent(
+            $this->ui_factory->link()->standard(
+                $this->lng->txt('role_mailto'),
+                $this->ctrl->getLinkTarget($this, 'mailToRole')
+            )
         );
         $this->tpl->setVariable('BUTTONS_UA', $tb->getHTML());
 
@@ -966,6 +979,8 @@ class ilObjRoleGUI extends ilObjectGUI
         $ut = new ilAssignedUsersTableGUI(
             $this,
             'userassignment',
+            $this->ui_factory,
+            $this->ui_renderer,
             $this->object->getId(),
             $role_assignment_editable,
             $this->getAdminMode() === self::ADMIN_MODE_SETTINGS
@@ -1250,7 +1265,7 @@ class ilObjRoleGUI extends ilObjectGUI
             $this->tpl->setOnScreenMessage('failure', $this->lng->txt('select_one'), true);
             $this->ctrl->redirect($this, 'userassignment');
         }
-        $clip = ilUserClipboard::getInstance($GLOBALS['DIC']['ilUser']->getId());
+        $clip = ilUserClipboard::getInstance($this->user->getId());
         $clip->add($users);
         $clip->save();
 

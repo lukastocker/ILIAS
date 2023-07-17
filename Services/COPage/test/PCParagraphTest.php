@@ -161,6 +161,14 @@ class PCParagraphTest extends COPageTestBase
             => 'xx <ExtLink Href="http://ilias.php?x=1&y=2">www</ExtLink> xxxx',
             'xx [xln url="http://ilias.de/my+document.pdf"]doc[/xln] xxxx'
             => 'xx <ExtLink Href="http://ilias.de/my+document.pdf">doc</ExtLink> xxxx',
+            'xx [xln url="http://ilias.de/my(document.pdf"]doc[/xln] xxxx'
+            => 'xx <ExtLink Href="http://ilias.de/my(document.pdf">doc</ExtLink> xxxx',
+            'xx [xln url="http://ilias.de/my)document.pdf"]doc[/xln] xxxx'
+            => 'xx <ExtLink Href="http://ilias.de/my)document.pdf">doc</ExtLink> xxxx',
+            'xx [xln url="http://ilias.de/my$document.pdf"]doc[/xln] xxxx'
+            => 'xx <ExtLink Href="http://ilias.de/my$document.pdf">doc</ExtLink> xxxx',
+            'xx [xln url="http://ilias.de/my*document.pdf"]doc[/xln] xxxx'
+            => 'xx <ExtLink Href="http://ilias.de/my*document.pdf">doc</ExtLink> xxxx',
 
             // anchor
             'xx [anc name="test"]test[/anc] xxxx'
@@ -174,11 +182,13 @@ class PCParagraphTest extends COPageTestBase
             "xx \n \xa0 xxxx"
             => "xx <br /> \xa0 xxxx",
 
+            'xx [xln url="http://ilias.de/my+document.pdf\xa0"]doc[/xln] xxxx'
+            => 'xx [error: xln url="http://ilias.de/my+document.pdf\xa0"]doc</ExtLink> xxxx',
 
-        /*'xx [iln cat="106"] xx'
-            => 'xx [iln cat="106"] xx',
-        'xx [/iln] xx'
-            => 'xx [/iln] xx'*/
+            /*'xx [iln cat="106"] xx'
+                => 'xx [iln cat="106"] xx',
+            'xx [/iln] xx'
+                => 'xx [/iln] xx'*/
         ];
 
         foreach ($cases as $in => $expected) {
@@ -245,6 +255,20 @@ class PCParagraphTest extends COPageTestBase
             ],
             // Standard, Sub
             '<div id="1:1238" class="ilc_text_block_Standard">xxx a<sub class="ilc_sub_Sub">2</sub> xxx</div>'
+            => [
+                "text" => 'xxx a[sub]2[/sub] xxx',
+                "id" => '1:1238',
+                "class" => 'Standard'
+            ],
+            // Standard, Sup (without class, e.g. coming from word)
+            '<div id="1:1237" class="ilc_text_block_Standard">xxx a<sup>b*c</sup> xxx</div>'
+            => [
+                "text" => 'xxx a[sup]b*c[/sup] xxx',
+                "id" => '1:1237',
+                "class" => 'Standard'
+            ],
+            // Standard, Sub (without class, e.g. coming from word)
+            '<div id="1:1238" class="ilc_text_block_Standard">xxx a<sub>2</sub> xxx</div>'
             => [
                 "text" => 'xxx a[sub]2[/sub] xxx',
                 "id" => '1:1238',

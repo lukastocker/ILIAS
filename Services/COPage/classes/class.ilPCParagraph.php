@@ -107,7 +107,7 @@ class ilPCParagraph extends ilPageContent
             $node = $succ_node->parentNode->insertBefore($node, $succ_node);
         } else {
             $parent_node = $node->parentNode;
-            $node = $parent_node->appendChild($this->node);
+            $node = $parent_node->appendChild($node);
         }
         $par_node = $this->dom_doc->createElement("Paragraph");
         $par_node = $node->appendChild($par_node);
@@ -216,7 +216,7 @@ class ilPCParagraph extends ilPageContent
                         $next_par->setCharacteristic($orig_characteristic);
                     }
                     $ok = $next_par->setText($text[$i]["text"], false);
-                    $c_node = $next_par->node;
+                    $c_node = $next_par->getDomNode();
                 }
             }
 
@@ -442,6 +442,7 @@ class ilPCParagraph extends ilPageContent
         }
         // external links
         while (preg_match("~\[(xln$ws(url$ws=$ws\"([^\"])*\")$ws(target$ws=$ws(\"(Glossary|FAQ|Media)\"))?$ws)\]~i", $a_text, $found)) {
+            $old_text = $a_text;
             $attribs = self::attribsToArray($found[2]);
             if (isset($attribs["url"])) {
                 $a_text = self::replaceBBTagByMatching(
@@ -453,8 +454,9 @@ class ilPCParagraph extends ilPageContent
                         "Href" => $attribs["url"]
                     ]
                 );
-            } else {
-                $a_text = str_replace("[" . $found[1] . "]", "[error: xln" . $found[1] . "]", $a_text);
+            }
+            if ($old_text === $a_text) {
+                $a_text = str_replace("[" . $found[1] . "]", "[error: " . $found[1] . "]", $a_text);
             }
         }
 
@@ -556,7 +558,7 @@ class ilPCParagraph extends ilPageContent
             ? "/"
             : "";
 
-        $slash_chars = '/[]?';
+        $slash_chars = '/[]?()$*';
 
         if ($ok) {
             $replace_str = addcslashes($start_tag, $slash_chars);
@@ -1526,13 +1528,13 @@ class ilPCParagraph extends ilPageContent
                     $text
                 );
                 $text = str_replace(
-                    array('<sup class="ilc_sup_Sup">', "</sup>"),
-                    array("[sup]", "[/sup]"),
+                    array('<sup class="ilc_sup_Sup">', '<sup>', "</sup>"),
+                    array("[sup]", "[sup]", "[/sup]"),
                     $text
                 );
                 $text = str_replace(
-                    array('<sub class="ilc_sub_Sub">', "</sub>"),
-                    array("[sub]", "[/sub]"),
+                    array('<sub class="ilc_sub_Sub">', '<sub>', "</sub>"),
+                    array("[sub]", "[sub]", "[/sub]"),
                     $text
                 );
 
@@ -1678,6 +1680,10 @@ class ilPCParagraph extends ilPageContent
         array $a_terms,
         DOMNode $a_par_node = null
     ): void {
+        global $DIC;
+
+        $domutil = $DIC->copage()->internal()->domain()->domUtil();
+
         $par_node = null;
         // sort terms by their length (shortes first)
         // to prevent that nested tags are builded

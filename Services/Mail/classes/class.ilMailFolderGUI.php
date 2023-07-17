@@ -46,8 +46,8 @@ class ilMailFolderGUI
     private readonly Refinery $refinery;
     private int $currentFolderId = 0;
     private readonly ilErrorHandling $error;
-    protected Factory $uiFactory;
-    protected Renderer $uiRenderer;
+    protected readonly Factory $ui_factory;
+    protected readonly Renderer $ui_renderer;
 
     public function __construct()
     {
@@ -62,8 +62,8 @@ class ilMailFolderGUI
         $this->http = $DIC->http();
         $this->refinery = $DIC->refinery();
         $this->error = $DIC['ilErr'];
-        $this->uiFactory = $DIC->ui()->factory();
-        $this->uiRenderer = $DIC->ui()->renderer();
+        $this->ui_factory = $DIC->ui()->factory();
+        $this->ui_renderer = $DIC->ui()->renderer();
 
         $this->umail = new ilMail($this->user->getId());
         $this->mbox = new ilMailbox($this->user->getId());
@@ -633,7 +633,7 @@ class ilMailFolderGUI
             );
             $this->ctrl->setParameterByClass(ilMailFormGUI::class, 'mail_id', $mailId);
             $this->ctrl->setParameterByClass(ilMailFormGUI::class, 'type', ilMailFormGUI::MAIL_FORM_TYPE_REPLY);
-            $replyBtn = $this->uiFactory->button()->primary(
+            $replyBtn = $this->ui_factory->button()->primary(
                 $this->lng->txt('reply'),
                 $this->ctrl->getLinkTargetByClass(ilMailFormGUI::class)
             );
@@ -645,13 +645,13 @@ class ilMailFolderGUI
         $this->ctrl->setParameterByClass(ilMailFormGUI::class, 'mail_id', $mailId);
         $this->ctrl->setParameterByClass(ilMailFormGUI::class, 'type', ilMailFormGUI::MAIL_FORM_TYPE_FORWARD);
         if ($replyBtn === null) {
-            $fwdBtn = $this->uiFactory->button()->primary(
+            $fwdBtn = $this->ui_factory->button()->primary(
                 $this->lng->txt('forward'),
                 $this->ctrl->getLinkTargetByClass(ilMailFormGUI::class)
             );
             $this->toolbar->addStickyItem($fwdBtn);
         } else {
-            $fwdBtn = $this->uiFactory->button()->standard(
+            $fwdBtn = $this->ui_factory->button()->standard(
                 $this->lng->txt('forward'),
                 $this->ctrl->getLinkTargetByClass(ilMailFormGUI::class)
             );
@@ -659,19 +659,49 @@ class ilMailFolderGUI
         }
         $this->ctrl->clearParametersByClass(ilMailFormGUI::class);
 
-        $printBtn = ilLinkButton::getInstance();
-        $printBtn->setCaption('print');
+
         $this->ctrl->setParameter($this, 'mail_id', $mailId);
         $this->ctrl->setParameter($this, 'mobj_id', $mailData['folder_id']);
-        $printBtn->setUrl($this->ctrl->getLinkTarget($this, 'printMail'));
+        $print_url = $this->ctrl->getLinkTarget($this, 'printMail');
         $this->ctrl->clearParameters($this);
-        $printBtn->setTarget('_blank');
-        $this->toolbar->addButtonInstance($printBtn);
+        $print_btn = $this->ui_factory->button()
+                                      ->standard($this->lng->txt('print'), '#')
+                                      ->withOnLoadCode(static fn($id): string => "
+                document.getElementById('$id').addEventListener('click', function() {
+                    const frm = this.closest('form'),
+                        action = frm.action;
 
-        $deleteBtn = ilSubmitButton::getInstance();
-        $deleteBtn->setCaption('delete');
-        $deleteBtn->setCommand('deleteMails');
-        $this->toolbar->addButtonInstance($deleteBtn);
+                    frm.action = '$print_url';
+                    frm.target = '_blank';
+                    frm.submit();
+
+                    frm.action = action;
+                    frm.removeAttribute('target');
+
+                    return false;
+                });
+            ");
+        $this->toolbar->addComponent($print_btn);
+
+        $deleteBtn = $this->ui_factory->button()
+                                      ->standard($this->lng->txt('delete'), '#')
+                                      ->withOnLoadCode(static fn($id): string => "
+                document.getElementById('$id').addEventListener('click', function() {
+                    const frm = this.closest('form'),
+                        action = new URL(frm.action),
+                        action_params = new URLSearchParams(action.search);
+
+                    action_params.delete('cmd');
+                    action_params.append('cmd', 'deleteMails');
+
+                    action.search = action_params.toString();
+
+                    frm.action = action.href;
+                    frm.submit();
+                    return false;
+                });
+            ");
+        $this->toolbar->addComponent($deleteBtn);
 
         if ($sender && $sender->getId() && !$sender->isAnonymous()) {
             $linked_fullname = $sender->getPublicName();
@@ -814,10 +844,25 @@ class ilMailFolderGUI
             $actions->setOptions($selectOptions);
             $this->toolbar->addInputItem($actions);
 
-            $moveBtn = ilSubmitButton::getInstance();
-            $moveBtn->setCaption('execute');
-            $moveBtn->setCommand('moveSingleMail');
-            $this->toolbar->addButtonInstance($moveBtn);
+            $moveBtn = $this->ui_factory->button()
+                                        ->standard($this->lng->txt('execute'), '#')
+                                        ->withOnLoadCode(static fn($id): string => "
+                document.getElementById('$id').addEventListener('click', function() {
+                    const frm = this.closest('form'),
+                        action = new URL(frm.action),
+                        action_params = new URLSearchParams(action.search);
+
+                    action_params.delete('cmd');
+                    action_params.append('cmd', 'moveSingleMail');
+
+                    action.search = action_params.toString();
+
+                    frm.action = action.href;
+                    frm.submit();
+                    return false;
+                });
+            ");
+            $this->toolbar->addComponent($moveBtn);
         }
 
         $prevMail = $this->umail->getPreviousMail($mailId);
@@ -826,23 +871,27 @@ class ilMailFolderGUI
             $this->toolbar->addSeparator();
 
             if ($prevMail && $prevMail['mail_id']) {
-                $prevBtn = ilLinkButton::getInstance();
-                $prevBtn->setCaption('previous');
                 $this->ctrl->setParameter($this, 'mail_id', $prevMail['mail_id']);
                 $this->ctrl->setParameter($this, 'mobj_id', $this->currentFolderId);
-                $prevBtn->setUrl($this->ctrl->getLinkTarget($this, 'showMail'));
+                $prevBtn = $this->ui_factory->button()
+                                            ->standard(
+                                                $this->lng->txt('previous'),
+                                                $this->ctrl->getLinkTarget($this, 'showMail')
+                                            );
+                $this->toolbar->addComponent($prevBtn);
                 $this->ctrl->clearParameters($this);
-                $this->toolbar->addButtonInstance($prevBtn);
             }
 
             if ($nextMail && $nextMail['mail_id']) {
-                $nextBtn = ilLinkButton::getInstance();
-                $nextBtn->setCaption('next');
                 $this->ctrl->setParameter($this, 'mail_id', $nextMail['mail_id']);
                 $this->ctrl->setParameter($this, 'mobj_id', $this->currentFolderId);
-                $nextBtn->setUrl($this->ctrl->getLinkTarget($this, 'showMail'));
+                $nextBtn = $this->ui_factory->button()
+                                            ->standard(
+                                                $this->lng->txt('next'),
+                                                $this->ctrl->getLinkTarget($this, 'showMail')
+                                            );
+                $this->toolbar->addComponent($nextBtn);
                 $this->ctrl->clearParameters($this);
-                $this->toolbar->addButtonInstance($nextBtn);
             }
         }
 

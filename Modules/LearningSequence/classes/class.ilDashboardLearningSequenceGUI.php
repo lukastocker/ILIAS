@@ -23,6 +23,7 @@ use ILIAS\UI\Implementation\DefaultRenderer;
 use ILIAS\UI\Implementation\Component\Symbol\Icon;
 use ILIAS\UI\Implementation\Component\Item;
 use ILIAS\UI\Component\Button;
+use ILIAS\UI\Renderer;
 
 /**
  * Personal Desktop-Presentation for the LearningSequence
@@ -33,7 +34,7 @@ class ilDashboardLearningSequenceGUI
     protected ilObjUser $user;
     protected ilAccessHandler $access;
     protected Factory $factory;
-    protected DefaultRenderer $renderer;
+    protected Renderer $renderer;
 
     /**
      * @var array Object-Ids where user is assigned
@@ -115,11 +116,6 @@ class ilDashboardLearningSequenceGUI
         $link = $this->getLinkedTitle($ref_id, $title);
 
         return $this->factory->item()->standard($link)
-            ->withProperties(
-                [
-                    $this->lng->txt('status') => $this->getOnlineStatus($ref_id)
-                ]
-            )
             ->withLeadIcon($this->getIcon($title))
         ;
     }
@@ -146,17 +142,6 @@ class ilDashboardLearningSequenceGUI
     {
         $link = ilLink::_getLink($ref_id, 'lso');
         return $this->factory->button()->shy($title, $link);
-    }
-
-    protected function getOnlineStatus(int $ref_id): string
-    {
-        $status = ilObjLearningSequenceAccess::isOffline($ref_id);
-
-        if ($status) {
-            return 'Offline';
-        }
-
-        return 'Online';
     }
 
     protected function getIcon(string $title): Icon\Standard

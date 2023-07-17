@@ -117,12 +117,12 @@ administration#:#adm_pub_section_domain_filter_info#:#Domänen-Filter für anony
 administration#:#adm_rep_shorten_description#:#Maximale Länge für Beschreibungen
 administration#:#adm_rep_shorten_description_info#:#Wenn aktiviert, werden alle Beschreibungen in Objektlisten nur bis zu einer definierten Länge angezeigt.
 administration#:#adm_rep_shorten_description_length#:#Maximale Anzahl an Zeichen
-administration#:#adm_rep_tree_all_types#:#Alle Objekte
-administration#:#adm_rep_tree_all_types_info#:#Alle Objekttypen werden im Baum dargestellt.
-administration#:#adm_rep_tree_limit_grp_crs#:#Alle Objekte auf Anzeige in Kursen und Gruppen beschränken
-administration#:#adm_rep_tree_limit_grp_crs_info#:#Diese Ansicht beruht und aktiviert automatisch die synchronisierte Baumansicht.
-administration#:#adm_rep_tree_only_cntr#:#Nur Container
-administration#:#adm_rep_tree_only_cntr_info#:#Es werden nur Kategorien, Kurse und Gruppen aufgeführt.
+administration#:#adm_rep_tree_all_types#:#Alle Objekttypen
+administration#:#adm_rep_tree_all_types_info#:#In der Baumansicht werden alle Objekttypen angezeigt.
+administration#:#adm_rep_tree_limit_grp_crs#:#Auf Kurse und Gruppen beschränken
+administration#:#adm_rep_tree_limit_grp_crs_info#:#Nur in Kursen und Gruppen werden alle Objekttypen in der Baumansicht angezeigt. Außerhalb zeigt die Baumansicht nur Container-Objekte.
+administration#:#adm_rep_tree_only_cntr#:#Nur Container-Objekte
+administration#:#adm_rep_tree_only_cntr_info#:#Die Baumansicht zeigt nur Studienprogramme, Kategorien, Kurse, Gruppen und Lernsequenzen an.
 administration#:#adm_rep_tree_presentation#:#Präsentation der Baumansicht
 administration#:#adm_repository_and_objects#:#Magazin und Objekte
 administration#:#adm_search_and_find#:#Suchen und finden
@@ -399,7 +399,6 @@ adve#:#adve_autosave#:#Intervall automatisches Speichern
 adve#:#adve_autosave_info#:#Textinhalte werden in diesem Intervall automatisch gespeichert. Kürzere Intervalle führen zu höherer Serverlast und geringerer Systemperformanz.
 adve#:#adve_autosave_info_min_10#:#Bitte setzen sie den Wert auf mindestens 10 Sekunden, falls sie Funktion nutzen.
 adve#:#adve_blocking_mode#:#Bearbeitungssperre
-adve#:#adve_char_selector_settings#:#Zeichenauswahl
 adve#:#adve_excass_settings#:#Übungseinheiten
 adve#:#adve_grp_copa#:#Inhaltsseiten
 adve#:#adve_grp_frm#:#Foren
@@ -418,45 +417,6 @@ adve#:#adve_text_content_features#:#Text Content Menü
 adve#:#adve_use_physical#:#str|emp|imp durch <b>B</b>|<i>I</i>|<u>U</u> ersetzen
 adve#:#adve_use_physical_info#:#Die Einstellung ersetzt die Buttons der semantischen Styleklassen für strong, emphatic und important durch die fest definierten Auszeichnungen <b>B</b> (bold), <i>I</i> (italic) und <u>U</u> (underline). Achtung: hierbei kann es zu Inkonsistenzen kommen, wenn über den Styleeditor den Styleklassen für strong, emphatic und important andere Auszeichnungen zugeordnet wurden.
 adve#:#adve_use_tiny_mce#:#TinyMCE für WYSIWYG-Editieren aktivieren
-adve#:#char_selector_admin#:#Auswahlmenü mit Sonderzeichen (Unicode) für Tests und Fragenpools
-adve#:#char_selector_blocks#:#Verfügbare Sonderzeichen (Unicode)
-adve#:#char_selector_blocks_info#:#Alle Zeichen der ausgewählten Blöcke werden gelistet, auch wenn die Browserschrift nicht alle unterstützt.
-adve#:#char_selector_custom_items#:#Spezielle Auswahl
-adve#:#char_selector_custom_items_info1#:#Die Spezielle Auswahl wird vor den Unicode-Blöcken gelistet. Fügen Sie hier die Zeichen im folgenden Format ein:
-adve#:#char_selector_custom_items_info2a#:#A B C
-adve#:#char_selector_custom_items_info2b#:#Einzelne Zeichen werden durch Leerzeichen getrennt und bekommen so separate Auswahlschalter
-adve#:#char_selector_custom_items_info3a#:#A BC D
-adve#:#char_selector_custom_items_info3b#:#Zusammenhängende Zeichen landen gemeinsam auf einem Auswahlschalter
-adve#:#char_selector_custom_items_info4a#:#A-Z
-adve#:#char_selector_custom_items_info4b#:#Zeichenbereiche können mit einem "-" definiert werden
-adve#:#char_selector_custom_items_info5a#:#U+00C0
-adve#:#char_selector_custom_items_info5b#:#Ein Zeichen kann auch in Unicode-Notation angegeben werden (Groß-/Kleinschreibung beliebig).
-adve#:#char_selector_custom_items_info6a#:#U+00C0-U+00CF
-adve#:#char_selector_custom_items_info6b#:#Auch Zeichenbereiche können in Unicode-Notation angegeben werden
-adve#:#char_selector_disabled_admin#:#Ω-Button zur Aktivierung des Auswahlmenü für Sonderzeichen muss extra angeschaltet werden
-adve#:#char_selector_disabled_info_admin#:#Das Auswahlmenü für Sonderzeichen (Unicode) ist  für Tests und Fragenpools aktiviert, allerdings müssen Benutzer in den persönlichen Einstellungen entsprechende Einstellungen vornehmen oder der Test  bzw. Fragenpool können im Reiter 'Einstellungen' so konfiguriert werden, dass  das Auswahlmenü zur Verfügung steht. Test-Einstellungen setzen sich gegenüber Benutzer-Einstellungen durch.
-adve#:#char_selector_disabled_info_test#:#Unabhängig von den Einstellungen eines Benutzers ist das Menü zu Auswahl der Sonderzeichen (Unicode) bei der Testdurchführung ausgeschaltet, Zeichen können nur über die Tastatur eingegeben werden.
-adve#:#char_selector_disabled_info_user#:#In Tests wird normalerweise kein Auswahlmenü für Sonderzeichen eingeblendet. Allerdings können einzelne Tests die Anzeige dieses Menüs trotz dieser Einstellung erzwingen.
-adve#:#char_selector_disabled_test#:#Sonderzeichenauswahl nicht anzeigen
-adve#:#char_selector_disabled_user#:#Kein Auswahlmenü für Sonderzeichen in Tests anzeigen
-adve#:#char_selector_enabled_admin#:#Ω-Button zur Aktivierung des Auswahlmenü für Sonderzeichen wird standardmäßig angezeigt
-adve#:#char_selector_enabled_info_admin#:#Das Auswahlmenü für Sonderzeichen (Unicode) ist aktiviert. Es enthält die Unicode Blöcke, die in dieser Einstellung ausgewählt werden. Benutzer können aber individuelle Einstellungen in den persönlichen Einstellungen vornehmen oder Test können im Reiter 'Einstellungen' so konfiguriert werden, dass  das Auswahlmenü zur Verfügung steht.
-adve#:#char_selector_enabled_info_test#:#Unabhängig von den Einstellungen eines Benutzers wird das Menü zu Auswahl der Sonderzeichen (Unicode) bei der Testdurchführung eingeblendet, Sonderzeichen können über das Menü eingegeben werden.
-adve#:#char_selector_enabled_info_user#:#In Tests wird ein Auswahlmenü für Sonderzeichen eingeblendet. Allerdings können einzelne Tests die Anzeige dieses Menüs trotz dieser Einstellung unterdrücken.
-adve#:#char_selector_enabled_test#:#Sonderzeichenauswahl anzeigen
-adve#:#char_selector_enabled_user#:#Auswahlmenü für Sonderzeichen aktivieren
-adve#:#char_selector_inactive_admin#:#Auswahlmenü für Sonderzeichen global deaktivieren
-adve#:#char_selector_inactive_info_admin#:#Das Auswahlmenü für Sonderzeichen ist für die gesamte Plattform deaktiviert. Auch die Möglichkeit individuelle Einstellungen in den persönlichen Einstellungen oder im Reiter 'Einstellungen' in Tests  vorzunehmen ist ausgeblendet.
-adve#:#char_selector_inherit_info_test#:#Je nach den Einstellungen in der Administration und den individuellen Einstellungen, die ein Benutzer in den persönlichen Einstellungen getroffen hat, wird das Auswahlmenü für Sonderzeichen (Unicode) im Testdurchlauf angezeigt oder auch nicht.
-adve#:#char_selector_inherit_info_user#:#Es werden die Einstellungen übernommen, wie sie vom Administrator für die ganze Plattform  global aktiviert wurden.
-adve#:#char_selector_inherit_test#:#Plattform und individuelle Benutzereinstellungen übernehmen
-adve#:#char_selector_inherit_user#:#Standard-Einstellungen übernehmen
-adve#:#char_selector_menu_close#:#Sonderzeichen-Auswahl verbergen
-adve#:#char_selector_menu_open#:#Sonderzeichen-Auswahl anzeigen
-adve#:#char_selector_msg_blocks_or_custom_needed#:#Wenn Sie die Auswahl aktivieren, wählen Sie bitte einen Zeichenblock oder geben Sie eine eigene Auswahl von Zeichen ein!
-adve#:#char_selector_test#:#Auswahlmenü mit Sonderzeichen
-adve#:#char_selector_unicode_all#:#Alle Unicode-Blöcke
-adve#:#char_selector_user#:#Auswahlmenü mit Sonderzeichen (Unicode) für Tests
 assessment#:#action#:#Aktion
 assessment#:#addSuggestedSolution#:#Inhalte zur Wiederholung
 assessment#:#add_answers#:#Antworten hinzufügen
@@ -599,7 +559,6 @@ assessment#:#categories#:#Kategorien
 assessment#:#category#:#Kategorie
 assessment#:#changeSuggestedSolution#:#Art der Inhalte zur Wiederholung auswählen
 assessment#:#change_adm_categories_not_allowed#:#An dieser Stelle haben Sie keine Schreibberechtigung an der Kategorie.
-assessment#:#char_selector_btn_label#:#&nbsp;Ω&nbsp;
 assessment#:#checkbox_checked#:#Ausgewählt
 assessment#:#checkbox_unchecked#:#Nicht ausgewählt
 assessment#:#circle#:#Kreis
@@ -886,6 +845,7 @@ assessment#:#log_user_not_entered_values#:#Der Benutzer hat keine Werte eingetra
 assessment#:#log_user_solution_willingly_deleted#:#Der Benutzer hat seine Antwort entfernt.
 assessment#:#log_wrong_test_password_entered#:#Teilnehmer hat falsches Testpasswort eingegeben.
 assessment#:#longmenu#:#Longmenu
+assessment#:#longmenu_answeroptions_differ#:#Diese Frage funktioniert nicht richtig, denn sie hat nicht die gleiche Anzahl Lücken im Text wie in den Antwortoptionen.
 assessment#:#longmenu_text#:#‘Long Menu’-Text
 assessment#:#mailnottype#:#Ein Versand findet auch beim Beenden einzelner Testdurchläufe statt
 assessment#:#mailnottype_desc#:#Der Besitzer des Tests wird auch dann benachrichtigt, wenn die Anzahl Durchläufe nicht beschränkt ist.
@@ -1087,6 +1047,7 @@ assessment#:#qpl_skl_sub_tab_quest_assign#:#Fragen-Kompetenz-Zuordnung
 assessment#:#qpl_skl_sub_tab_usages#:#Vergabehäufigkeit
 assessment#:#qpl_sync_quest_skl_assigns_confirmation#:#Die Frage wurde aus einem anderen Magazinobjekt eingefügt. Soll die aktuelle Konfiguration von Kompetenzzuweisungen auf das Original der Frage übertragen werden?
 assessment#:#qpl_tab_competences#:#Kompetenzen
+assessment#:#qst_error_text_too_long#:#Einer oder mehrere der als fehlerhaft markierten Textelemente ist zu lang. Die maximale Länge für ein als fehlerhaft markiertes Textelement ist 150 Zeichen.
 assessment#:#qst_essay_allready_written_words#:#Bereits geschriebene Wörter:
 assessment#:#qst_essay_chars_remaining#:#Noch übrige Zeichen:
 assessment#:#qst_essay_wordcounter_enabled#:#Wörter zählen
@@ -2017,6 +1978,8 @@ auth#:#auth_allow_local_info#:#Wenn aktiviert, ist die lokale Authentifizierung 
 auth#:#auth_auth_settings#:#Einstellungen
 auth#:#auth_cas_ldap#:#Synchronisierung über LDAP-Einstellungen
 auth#:#auth_cas_ldap_info#:#Wenn aktiviert, wird die Synchronisierung der Benutzerdaten und Rollenzuordnungen, gemäß der LDAP-Einstellungen vorgenommen.
+auth#:#auth_cron_destroy_expired_sessions#:#Löschen abgelaufener Benutzer-Sitzungen
+auth#:#auth_cron_destroy_expired_sessions_desc#:#Dieser Cron-Job löscht bereits abgelaufene Benutzer-Sitzungen
 auth#:#auth_err_expired#:#Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.
 auth#:#auth_err_invalid_user_account#:#Die Authentifizierung konnte wegen eines internen Fehlers nicht durchgeführt werden.
 auth#:#auth_err_ldap_exception#:#Die Authentifizierung konnte wegen eines Fehlers im Anmeldungsverfahren (LDAP) nicht durchgeführt werden.
@@ -2575,7 +2538,7 @@ book#:#book_reservation_failed_overbooked#:#Die Buchung ist fehlgeschlagen, da d
 book#:#book_reservation_filter_period#:#Voreinstellung für den Filter „Datumsbereich“
 book#:#book_reservation_filter_period_info#:#Im Reiter Reservierungen wird der Filter „Datumsbereich“ auf diesen Wert ab dem aktuellen Datum voreingestellt.
 book#:#book_reservation_fix_info#:#Die Reservierung kann nur für festgelegte Zeiten durchgeführt werden.
-book#:#book_reservation_overview#:#Reservierungen anderer Benutzer
+book#:#book_reservation_overview#:#Reservierungen aller Benutzer
 book#:#book_reservation_status_5#:#Storniert
 book#:#book_reservation_title#:#Buchungsanfrage für
 book#:#book_reservations_list#:#Reservierungen
@@ -2768,6 +2731,7 @@ certificate#:#certificate_settings#:#Einstellungen für Zertifikate
 certificate#:#certificate_short_name#:#Kurztitel für die Dateibenennung
 certificate#:#certificate_short_name_description#:#Bitte geben Sie einen Kurztitel für die Dateibenennung ein. Der Kurztitel wird als Teil des Zertifikat-Dateinamens verwendet: JJMMTT_[Nachname]_[SHORT_TITLE]_Zertifikat.pdf.
 certificate#:#certificate_text#:#Text des Zertifikats
+certificate#:#certificate_text_info#:#Bitte geben Sie hier den Text des Zertifikats ein. Falls der WYSIWYG-Edtior in der ILIAS-Administration deaktiviert wurde, können Sie hier dennoch gültiges XHTML zur Formatierung nutzen.
 certificate#:#certificate_unit_description#:#Geben Sie Maße immer in der Form WERT[cm|mm|in|pt|pc|px|em] an, d.h. 10mm oder 3in
 certificate#:#certificate_usage#:#Bitte beachten Sie, dass die Verwendung und Erstellung von Zertifikaten nur möglich ist, wenn Sie den Java-Server von ILIAS verwenden. Der Java-Server wird in der Hauptseite der Administration in der Kategorie Web-Services konfiguriert und ist unter anderem für die Generierung von PDF-Dateien erforderlich.
 certificate#:#certificate_var_max_points#:#46
@@ -2876,7 +2840,6 @@ chatroom#:#chat_osc_conversations#:#Chat
 chatroom#:#chat_osc_doesnt_accept_msg#:#Chatten nicht möglich
 chatroom#:#chat_osc_dont_accept_msg#:#Sie können aktuell von anderen Personen nicht zu einem Chat eingeladen werden. Dies können Sie bei Bedarf in Ihren %s ändern.
 chatroom#:#chat_osc_dont_accept_msg_link_txt#:#'Persönlichen Einstellungen'
-chatroom#:#chat_osc_emoticons#:#Emoticons
 chatroom#:#chat_osc_head_grp_x_persons#:#%s Benutzer
 chatroom#:#chat_osc_invite_to_conversation#:#Zu Chat hinzufügen
 chatroom#:#chat_osc_leave_grp_conv#:#Chat verlassen
@@ -2919,7 +2882,6 @@ chatroom#:#chatroom_client_name_info#:#Geben Sie hier einen global eindeutigen N
 chatroom#:#chatroom_enable_osc#:#On-Screen-Chat aktivieren
 chatroom#:#chatroom_enable_osc_info#:#Der On-Screen-Chat steht allen auf der Plattform zur Verfügung. Jede Person kann jedoch individuell entscheiden, ob er oder sie von anderen Personen angesprochen werden möchte. Chats können über das „Who is online?“-Tool gestartet werden.
 chatroom#:#chatroom_log#:#Chatserver Log-File
-chatroom#:#chatroom_smiley_keyword#:#Schlagwort
 chatroom#:#chatserver_address#:#IP-Adresse/FQN des Chat-Servers
 chatroom#:#chatserver_port#:#Port des Chat-Servers
 chatroom#:#chtr_activation_limited_visibility_info#:#Außerhalb des angegebenen Zeitraums wird der Chatraumtitel angezeigt, die Inhalte aber nicht.
@@ -2942,12 +2904,10 @@ chatroom#:#display_past_msgs#:#Chat-Rückblick
 chatroom#:#display_past_msgs_suffix#:#Beiträge
 chatroom#:#duration_from#:#Von
 chatroom#:#duration_to#:#Bis
-chatroom#:#enable_smilies#:#Smilies aktivieren
 chatroom#:#end_whisper#:#Beenden
 chatroom#:#enter#:#Chat beitreten
 chatroom#:#error_log#:#Chatserver Error-Log-File
 chatroom#:#hint_display_past_msgs#:#Anzahl vergangener Beiträge, die beim Betreten des Chatraums angezeigt werden. Durch die Eingabe von „0“ wird die Anzeige deaktiviert.
-chatroom#:#hint_enable_smilies#:#Wenn aktiviert, werden konfigurierte Textbausteine durch ein Bild ersetzt. Die Konfiguration kann im Reiter Smilies vorgenommen werden.
 chatroom#:#history_by_day#:#Tagesverlauf
 chatroom#:#history_by_session#:#Sitzungverlauf
 chatroom#:#history_byday_title#:#Zeitraum auswählen
@@ -3003,21 +2963,6 @@ chatroom#:#welcome_to_chat#:#Willkommen im Chatraum
 chatroom#:#whisper_to#:#<b>#user#</b> anflüstern
 chatroom_adm#:#chat_cannot_connect_to_server#:#ILIAS kann keine Socket-Verbindung zum Chat-Server aufbauen.
 chatroom_adm#:#chat_enabled#:#Chat aktivieren
-chatroom_adm#:#chat_smilies_dir_not_exists#:#Smilies-Verzeichnis existiert nicht.
-chatroom_adm#:#chat_smilies_initialized#:#Chat Smilies wurden initialisiert
-chatroom_adm#:#chatroom_add_smiley#:#Smiley hinzufügen
-chatroom_adm#:#chatroom_available_smilies#:#Verfügbare Smilies
-chatroom_adm#:#chatroom_confirm_delete_smiley#:#Sind Sie sicher, dass Sie den ausgewählten Smiley löschen möchten?
-chatroom_adm#:#chatroom_current_smiley_image#:#Aktueller Smiley
-chatroom_adm#:#chatroom_current_smiley_image_path#:#Aktueller Smiley
-chatroom_adm#:#chatroom_delete_selected#:#Ausgewählte Smilies löschen
-chatroom_adm#:#chatroom_edit_smiley#:#Smiley bearbeiten
-chatroom_adm#:#chatroom_image_path#:#Pfad zu Smiley
-chatroom_adm#:#chatroom_smiley_image#:#Smiley
-chatroom_adm#:#chatroom_smiley_image_only_if_changed#:#Bitte nur einen neuen Smiley auswählen, wenn der aktuelle Smiley durch einen neuen ersetzt werden soll.
-chatroom_adm#:#chatroom_smiley_keywords#:#Platzhalter
-chatroom_adm#:#chatroom_smiley_keywords_one_per_line_note#:#Ein Platzhalter pro Zeile
-chatroom_adm#:#chatroom_upload_smiley#:#Smiley hochladen
 chatroom_adm#:#chatserver_settings_title#:#Chat-Server
 chatroom_adm#:#client_settings#:#Allgemeine Einstellungen
 chatroom_adm#:#general_settings_title#:#Allgemeine Chat-Einstellungen
@@ -3032,7 +2977,6 @@ chatroom_adm#:#public_chat_permissions#:#Öffentlicher Chatraum : Rechte
 chatroom_adm#:#public_chat_settings#:#Öffentlicher Chatraum : Einstellungen
 chatroom_adm#:#server_settings#:#Chat-Server-Einstellungen
 chatroom_adm#:#settings_has_been_saved#:#Einstellungen wurden gespeichert.
-chatroom_adm#:#smiley#:#Smilies
 classification#:#clsfct_back_to_cat#:#Zurück zur Kategorie
 classification#:#clsfct_block_info#:#Ihre Auswahl filtert die Objekte.
 classification#:#clsfct_block_title#:#Auswahl nach Themen
@@ -3382,7 +3326,7 @@ cntr#:#cntr_view_info_sessions#:#Sitzungen werden in einer eigenen Liste angezei
 cntr#:#cntr_view_info_simple#:#Alle Objekte werden in einer einzigen Liste dargestellt.
 cntr#:#cntr_view_sessions#:#Sitzungsansicht
 cntr#:#cntr_view_simple#:#Einfache Liste
-cntr#:#container_import_zip_file_invalid#:#Die hochgeladene Datei ist kein gültiger ILIAS Export. Um Verzeichnisstrukturen hochzuladen benutzen Sie bitte ein Datei-Objekt.
+cntr#:#container_import_zip_file_invalid#:#Die hochgeladene Datei ist keine gültige ILIAS-Exportdatei. Um Verzeichnisstrukturen hochzuladen, benutzen Sie bitte ein Datei-Objekt.
 cntr#:#edit_questions#:#Fragen bearbeiten
 cntr#:#exc_next_deadline_single#:#Abgabefrist
 cntr#:#msg_no_downloadable_objects#:#Keine herunterladbaren Objekte gefunden.
@@ -3390,9 +3334,9 @@ cntr#:#objects_duplicated#:#Die Objekte wurden kopiert.
 cntr#:#prtf_create_portfolio_from_template#:#Portfolio aus Vorlage erstellen
 cntr#:#sorting_new_items_at_bottom#:#Unten
 cntr#:#sorting_new_items_at_top#:#Oben
-cntr#:#sorting_new_items_direction#:#Sortierungsrichtung neuer Objekte
-cntr#:#sorting_new_items_order#:#Reihenfolge neuer Objekte
-cntr#:#sorting_new_items_position#:#Position neuer Objekte
+cntr#:#sorting_new_items_direction#:#Ausrichtung
+cntr#:#sorting_new_items_order#:#Reihenfolge
+cntr#:#sorting_new_items_position#:#Einfügen neuer Objekte
 cntr#:#tab_back_to_repository#:#Zurück zum Magazin
 common#:#HH#:#SS:MM
 common#:#absolute_path#:#Absoluter Pfad
@@ -3962,7 +3906,7 @@ common#:#enable_sahs_protocol_data#:#Protokolldaten aktivieren
 common#:#enable_sahs_protocol_data_desc#:#Anzeige der Protokolldaten (SCORM)
 common#:#enable_search_engine#:#Öffentlichen Bereich für Suchmaschinen (z.B. Google) freigeben.<br />Bitte beachten Sie, dass für diese Einstellung das Apache-Modul "rewrite" benötigt wird, und dass .htaccess-Konfigurationen genutzt werden müssen.
 common#:#enable_trash#:#Papierkorb verwenden
-common#:#enable_trash_info#:#Wenn aktiviert, werden gelöschte Objekte in den Papierkorb verschoben und können später wieder hergestellt werden. Ist der Papierkorb deaktiviert, werden gelöschte Objekte unwiderruflich aus dem System entfernt!
+common#:#enable_trash_info#:#Gelöschte Objekte werden in den Papierkorb verschoben und können später wieder hergestellt werden. Ist der Papierkorb deaktiviert, werden Objekte beim Löschen direkt und unwiderruflich aus dem System entfernt!
 common#:#enable_webdav#:#WebDAV Zugriff aktivieren
 common#:#enable_webdav_info#:#Erlaubt WebDAV Clients den Zugriff auf das Magazin über einen Webordner. Benutzer können Webordner öffnen, indem Sie im Magazin die Aktion "Als Webordner öffnen" ausführen, oder in einem WebDAV Client folgende Adresse eingeben: <a href="%1$s" folder="%1$s">%1$s</a>
 common#:#enabled#:#Eingeschaltet
@@ -4342,7 +4286,7 @@ common#:#info_available_roles#:#Verfügbare Rollen
 common#:#info_change_user_view#:#Rechte dieses Benutzers anzeigen
 common#:#info_deactivate_sure#:#Sind Sie sicher, dass Sie die folgenden Benutzer deaktivieren wollen?
 common#:#info_delete_sure#:#Sind Sie sicher, dass folgende Objekte gelöscht werden sollen?
-common#:#info_delete_warning_no_trash#:#(WARNUNG: Die ausgewählten Objekte werden unwiderruflich aus dem System entfernt und können nicht wiederhergestellt werden!)
+common#:#info_delete_warning_no_trash#:#<b>Achtung</b>: Die ausgewählten Objekte werden direkt und unwiderruflich aus dem System entfernt! Sie können nicht wiederhergestellt werden!
 common#:#info_deleted#:#Objekt(e) gelöscht
 common#:#info_err_user_not_exist#:#Es wurde keine Person mit diesem Anmeldenamen gefunden.###Modified as part of gender mainstreaming activities for ILIAS 8
 common#:#info_from_role#:#Gewährt durch Rollenmitgliedschaft/Besitz
@@ -4628,7 +4572,7 @@ common#:#mm_repo_tree_view_act#:#Baumansicht an
 common#:#mm_repo_tree_view_deact#:#Baumansicht aus
 common#:#mm_repository#:#Magazin
 common#:#mm_skills#:#Kompetenzen
-common#:#mm_staff_list#:#Mitarbeiter
+common#:#mm_staff_list#:#Mitarbeiterliste
 common#:#mm_tags#:#Tags
 common#:#mm_task_derived_tasks#:#To-Dos
 common#:#mme_lost_item_reason#:#Eintrag wird nicht mehr angeboten.
@@ -5383,7 +5327,7 @@ common#:#report_accessibility_issue#:#Barriere melden
 common#:#report_accessibility_link#:#Gemeldeter Link:
 common#:#report_accessibility_link_mailto#:#Gemeldeter%20Link:
 common#:#repository#:#Magazin
-common#:#repository_admin#:#Magazin, Papierkorb und Rechte
+common#:#repository_admin#:#Magazin und Papierkorb
 common#:#repository_admin_desc#:#Rechteeinstellungen für Magazinobjekte festlegen, Entfernen oder Wiederherstellen von Objekten im Papierkorb
 common#:#require_email#:#Pflichteingabe E-Mail
 common#:#require_gender#:#Pflichteingabe Anrede
@@ -5628,7 +5572,7 @@ common#:#sorting_desc#:#Absteigend
 common#:#sorting_direction#:#Sortierungsrichtung
 common#:#sorting_header#:#Sortierung
 common#:#sorting_info_inherit#:#Wird die Sortierung des übergeordneten Kurses bzw. der Gruppe geändert, ändert sich auch diese Sortierung.
-common#:#sorting_info_manual#:#Die enthaltenen Objekte können in einer gewünschten Reihenfolge angeordnet werden. Bitte legen Sie zusätzlich fest, wie neue Objekte in eine vorhandene manuelle Reihenfolge einsortiert werden sollen.
+common#:#sorting_info_manual#:#Bestehende Objekte können in eine gewünschte Reihenfolge gebracht werden. Legen Sie zusätzlich fest, an welcher Stelle neue Objekte eingefügt und in welcher Reihenfolge und Ausrichtung diese angeordnet werden.
 common#:#sorting_info_title#:#Die enthaltenen Objekte werden automatisch nach ihrem Titel sortiert.
 common#:#sorting_manual_header#:#Manuell
 common#:#sorting_save#:#Sortierung speichern
@@ -6021,6 +5965,7 @@ cont#:#cont_really_remove_skill_from_course#:#Sollen die Kompetenzen wirklich au
 cont#:#cont_select_fields#:#Felder auswählen
 cont#:#cont_show_more#:#Mehr anzeigen
 cont#:#cont_skill#:#Kompetenz
+cont#:#cont_skill_ass_profiles#:#Profile der Mitglieder
 cont#:#cont_skill_assigned_comp#:#Kompetenzauswahl
 cont#:#cont_skill_assigned_profiles#:#Profilauswahl
 cont#:#cont_skill_deletion_not_possible#:#Das Löschen von globalen Kompetenzprofilen ist nicht möglich. Bitte wählen Sie ausschließlich lokale Kompetenzprofile aus.
@@ -6030,7 +5975,7 @@ cont#:#cont_skill_no_profile_selected#:#Bitte wählen Sie ein Profil aus.
 cont#:#cont_skill_no_skill#:#Kein Wert (zurücksetzen)
 cont#:#cont_skill_no_skills_selected#:#Es wurden noch keine Kompetenzen ausgewählt. Bitte fügen Sie zunächst mindestens eine Kompetenz hinzu unter "Kompetenzauswahl".
 cont#:#cont_skill_profile#:#Profil
-cont#:#cont_skill_profiles#:#Profile der Mitglieder
+cont#:#cont_skill_profiles#:#Kompetenzprofile
 cont#:#cont_skill_publish#:#Veröffentlichung
 cont#:#cont_skill_publish_auto#:#Automatisch
 cont#:#cont_skill_publish_auto_info#:#Zuweisungen von Kompetenzstufen zu Mitgliedern werden für diese sofort sichtbar.
@@ -6040,6 +5985,7 @@ cont#:#cont_skill_really_delete_profile_from_list#:#Soll das Profil wirklich gel
 cont#:#cont_skill_really_delete_profiles_from_list#:#Sollen die Profile wirklich gelöscht werden?
 cont#:#cont_skill_really_remove_profile_from_list#:#Soll das Profil wirklich aus der Liste entfernt werden?
 cont#:#cont_skill_really_remove_profiles_from_list#:#Sollen die Profile wirklich aus der Liste entfernt werden?
+cont#:#cont_skill_records#:#Kompetenzeinträge
 cont#:#cont_skill_removal_not_possible#:#Das Entfernen von lokalen Kompetenzprofilen ist nicht möglich. Bitte wählen Sie ausschließlich globale Kompetenzprofile aus.
 cont#:#cont_skill_show#:#Anzeigen
 cont#:#cont_std_filter_title_1#:#Titel
@@ -6182,7 +6128,7 @@ content#:#cont_cach_mode_manual_info#:#Es werden nur die Sprechstundentermine ve
 content#:#cont_cant_copy_folders#:#Ordner können nicht in die Zwischenablage kopiert werden
 content#:#cont_cant_del_full#:#Löschen der Datei für die Vollansicht nicht möglich.
 content#:#cont_cant_del_std#:#Löschen der Datei für die Standardansicht nicht möglich.
-content#:#cont_caption#:#Bildunterschrift
+content#:#cont_caption#:#Beschriftung
 content#:#cont_caption_style#:#Caption Style
 content#:#cont_cc_emp#:#Betont
 content#:#cont_cc_imp#:#Wichtig
@@ -6303,7 +6249,7 @@ content#:#cont_dir_deleted#:#Das Verzeichnis wurde gelöscht.
 content#:#cont_dir_file#:#Verzeichnis/Datei
 content#:#cont_dir_renamed#:#Das Verzeichnis wurde umbenannt.
 content#:#cont_disable_def_feedback#:#Standard-Feedback deaktivieren
-content#:#cont_disable_def_feedback_info#:#Deaktiviert das Standard-Feedback nach der Beantwortung von Fragen.
+content#:#cont_disable_def_feedback_info#:#Das Standard-Feedback zu einer Frage wird nach Beantwortung einer Frage nicht angezeigt.
 content#:#cont_download#:#Download
 content#:#cont_download_no_download#:#Die Download-Funktion ist zur Zeit deaktiviert. Daher wird die Datei den Lernenden nicht angeboten.
 content#:#cont_download_no_menu#:#Das Lernmodulmenü ist zur Zeit deaktiviert. Daher wird die Datei den Lernenden nicht angeboten.
@@ -6540,7 +6486,7 @@ content#:#cont_insert_mob#:#Medienobjekt
 content#:#cont_insert_my_courses#:#Meine Kurse einfügen
 content#:#cont_insert_page#:#Seite einfügen
 content#:#cont_insert_page_from_clip#:#Seite aus Zwischenablage einfügen
-content#:#cont_insert_pagelayout#:#Seitenvorlage einfügen
+content#:#cont_insert_pagelayout#:#Seite aus Vorlage einfügen
 content#:#cont_insert_par#:#Text einfügen
 content#:#cont_insert_profile#:#Persönliche Daten veröffentlichen
 content#:#cont_insert_resources#:#Materialienliste einfügen
@@ -6621,7 +6567,7 @@ content#:#cont_lk_page_faq#:#Seite in FAQ Tool
 content#:#cont_lk_page_new#:#Seite in neuem Tab
 content#:#cont_lk_term#:#Glossarbegriff
 content#:#cont_lk_term_new#:#Glossarbegriff in neuem Tab
-content#:#cont_lm_comments_desc#:#Erlaubt es Benutzern öffentliche Kommentare auf allen Lernmodulseiten hinzuzufügen.
+content#:#cont_lm_comments_desc#:#Erlaubt es Benutzern, öffentliche Kommentare auf allen Lernmodulseiten hinzuzufügen.
 content#:#cont_lm_default_layout#:#Standardlayout des Lernmoduls
 content#:#cont_lm_mail_permanent_link#:#Klicken Sie auf den folgenden Link um das Lernmodul aufzurufen:
 content#:#cont_lm_menu#:#Menü
@@ -6832,7 +6778,7 @@ content#:#cont_profile_mode_manual#:#Manuell
 content#:#cont_profile_mode_manual_info#:#Verwendet die folgenden Daten:
 content#:#cont_profile_mode_template_inherit_info#:#Verwendet die Daten des Profils
 content#:#cont_progress_icons#:#Fortschritts-Icons
-content#:#cont_progress_icons_info#:#Zeigt Fortschritts-Icons anstatt der Kapitel- und Seiten-Icons im Inhaltsverzeichnis an.
+content#:#cont_progress_icons_info#:#Im Inhaltsverzeichnis werden Fortschritt-Icons anstelle der Kapitel- und Seiten-Icons angezeigt.
 content#:#cont_prtf_page#:#Portfolioseite
 content#:#cont_prtt_page#:#Portfoliovorlagenseite
 content#:#cont_public_access#:#Öffentlicher Zugriff
@@ -6869,7 +6815,7 @@ content#:#cont_resource_type#:#Typ
 content#:#cont_resources#:#Ressourcen
 content#:#cont_resources_of_type#:#Inhalte vom Typ
 content#:#cont_restrict_forw_nav#:#Vorwärtsblättern im Lernmodul reglementieren
-content#:#cont_restrict_forw_nav_info#:#Benutzer können eine nachfolgende Seite erst dann aufrufen, wenn sie zuvor alle vorherigen Testfragen korrekt beantwortet haben.
+content#:#cont_restrict_forw_nav_info#:#Eine nachfolgende Seite kann erst dann aufgerufen werden, wenn auf der aktuellen Lernmodulseite alle Testfragen korrekt beantwortet wurden. Diese Funktion erfordert bei der Einstellung „Antwortversuche“ die Option „Speichere Antwortversuche“.
 content#:#cont_revision#:#Änderung
 content#:#cont_right#:#Rechts
 content#:#cont_right_float#:#Rechts, Text umfließt
@@ -7080,9 +7026,9 @@ content#:#cont_tree_fixed#:#Die Lernmodulstruktur wurde repariert.
 content#:#cont_tries#:#Antwortversuche
 content#:#cont_tries_remaining#:#Verbleibende Versuche
 content#:#cont_tries_reset_on_visit#:#Zurücksetzen bei Aufruf der Seite
-content#:#cont_tries_reset_on_visit_info#:#Benutzer haben bei jedem Aufruf einer Seite mit einer Testfrage die maximale Anzahl an Antwortversuchen. Die Testfragen müssen jedesmal beantwortet werden.
+content#:#cont_tries_reset_on_visit_info#:#Bei jedem Aufruf einer Seite mit eingebetteter Testfrage ist die maximale Anzahl an Antwortversuchen möglich. Die Testfragen können jedes Mal erneut beantwortet werden.
 content#:#cont_tries_store#:#Speichere Antwortversuche
-content#:#cont_tries_store_info#:#Die Zahl der Antwortversuche wird festgehalten und gespeichert. Korrekt beantwortete Fragen müssen nicht mehr beantwortet werden. Benutzer können Fragen nach Erreichen der maximalen Versuche nicht erneut beantworten.
+content#:#cont_tries_store_info#:#Die Zahl der Antwortversuche wird festgehalten und gespeichert. Korrekt beantwortete Fragen können nicht mehr beantwortet werden. Nach Erreichen der maximalen Anzahl an Versuchen ist ein weiterer Antwortversuch nicht mehr möglich.
 content#:#cont_trigger_area#:#Bereich für Auslöser
 content#:#cont_type#:#Typ
 content#:#cont_type_not_allowed#:#Dieses Element ist an dieser Stelle nicht erlaubt
@@ -7147,7 +7093,7 @@ content#:#glo_full_definitions_info#:#Alle Begriffe und Definitionen werden voll
 content#:#glo_hide_taxonomy#:#Taxonomie ausblenden
 content#:#glo_list_usages#:#Nutzung
 content#:#glo_mode_level_info#:#Nur Begriffe aus Glossaren, die sich im Magazin auf gleicher Ebene befinden, werden eingefügt.
-content#:#glo_mode_normal_info#:#Das Glossar beinhaltet alle Begriffe, die aktiv eingefügt werden.
+content#:#glo_mode_normal_info#:#Das Glossar beinhaltet alle Begriffe, die im Glossar angelegt wurden.
 content#:#glo_mode_subtree_info#:#Auch Begriffe aus Glossaren auf untergeordneten Magazinebenen werden eingefügt.
 content#:#glo_online_info#:#Nur wenn das Glossar online geschaltet ist, können Benutzer das Glossar sehen und benutzen.
 content#:#glo_presentation_mode#:#Ansicht
@@ -7420,12 +7366,12 @@ crs#:#crs_groupings#:#Kursgruppierungen
 crs#:#crs_groups_nr#:#Anzahl Gruppen
 crs#:#crs_grp_added_grouping#:#Eine neue Mitgliedschaftsbeschränkung wurde angelegt.
 crs#:#crs_grp_already_assigned#:#Da Sie bereits Mitglied in einem der Kurse sind, können Sie nicht einem weiteren Kurs aus der Liste beitreten!
-crs#:#crs_grp_assign_crs#:#Kurs zuordnen
+crs#:#crs_grp_assign_crs#:#Ausgewählte Objekte der Mitgliedschaftsbeschränkung
 crs#:#crs_grp_assignments#:#Zuordnung von Kursmitgliedern zu Gruppen
 crs#:#crs_grp_enter_title#:#Bitte geben Sie einen Titel ein.
 crs#:#crs_grp_info_reg#:#Die folgenden Kurse unterliegen einer Mitgliedschaftsbeschränkung. Sie können nur einem dieser Kurse beitreten:
 crs#:#crs_grp_matriculation_required#:#Zur Aufnahme in diese Kursgruppierung ist eine eindeutige Matrikelnummer notwendig. <br />Bitte tragen Sie diese in den Einstellungen des Persönlichen Profils ein.
-crs#:#crs_grp_no_courses_assigned#:#Keine zugeordneten Kurse.
+crs#:#crs_grp_no_courses_assigned#:#Keine
 crs#:#crs_grp_table_assigned_courses#:#Zugeordnete Kurse
 crs#:#crs_header_archives#:#Kursarchive
 crs#:#crs_header_delete_members#:#Sie möchten folgende Mitglieder aus dem Kurs austragen?
@@ -7584,11 +7530,13 @@ crs#:#crs_member#:#Mitglied
 crs#:#crs_member_administration#:#Teilnehmerverwaltung
 crs#:#crs_member_passed_status_changed#:#Update-Status
 crs#:#crs_members#:#Mitglieder
-crs#:#crs_members_deleted#:#Das/die Mitglied(er) wurde(n) aus dem Kurs ausgetragen
+crs#:#crs_members_deleted#:#Die ausgewählten Mitglieder sind aus dem Kurs ausgetragen worden.
 crs#:#crs_members_groups#:#Gruppenmitgliedschaften
 crs#:#crs_members_map#:#Karte Kursmitglieder
 crs#:#crs_members_print_title#:#Kursmitglieder
 crs#:#crs_min_one_admin#:#Diesem Kurs muss mindestens ein Administrator zugeordnet bleiben.
+crs#:#crs_my_courses_groups_enabled#:#Meine Kurse und Gruppen
+crs#:#crs_my_courses_groups_enabled_info#:#Wenn Sie diese Option aktivieren, wird die Option 'Meine Kurse und Gruppen' im Magazin angezeigt.
 crs#:#crs_new_status#:#Ihr Status:
 crs#:#crs_new_subscription#:#Beitritt zum Kurs "%s"
 crs#:#crs_new_subscription_body#:#%1$s ist dem Kurs %2$s beigetreten.
@@ -7990,6 +7938,8 @@ dash#:#dash_studyprogramme#:#Meine Studienprogramme
 dash#:#dash_tile#:#Kacheln
 dash#:#dash_view_courses_groups#:#Block ‘Meine Kurse und Gruppen’
 dash#:#dash_view_favourites#:#Block ‘Favoriten’
+dash#:#favourites_disabled_info#:#Das Setzen von Favoriten ist deaktiviert. Sie können dieses in den Magazin-Einstellungen ändern.
+dash#:#memberships_disabled_info#:#Das Setzen von Mitgliedschaften ist deaktiviert. Sie können dieses in den Kurs-Einstellungen ändern.
 dateplaner#:#Fr_long#:#Freitag
 dateplaner#:#Fr_short#:#Fr
 dateplaner#:#Mo_long#:#Montag
@@ -8260,6 +8210,7 @@ dateplaner#:#cal_on_the#:#Am:
 dateplaner#:#cal_open_calendar#:#Kalender öffnen
 dateplaner#:#cal_origin#:#Herkunft
 dateplaner#:#cal_owner#:#Im Besitz von###Modified as part of gender mainstreaming activities for ILIAS 8
+dateplaner#:#cal_period#:#Zeitraum
 dateplaner#:#cal_rec_err_limit#:#Bitte geben Sie eine Anzahl von Terminen ein.
 dateplaner#:#cal_recurrence_confirm_deletion#:#Bitte wählen Sie aus, ob Sie einzelne Termine oder aber die gesamte Terminserie löschen möchten.
 dateplaner#:#cal_recurrences#:#Wiederholungen
@@ -9486,6 +9437,10 @@ file#:#action_show#:#Infoseite anzeigen
 file#:#add_icon#:#Icon hinzufügen
 file#:#amount_of_downloads#:#Downloads
 file#:#amount_of_downloads_since#:#%d seit %s
+file#:#copyright_custom#:#Benutzerdefiniert
+file#:#copyright_custom_info#:#Benutzerdefiniertes Copyright auswählen, welches auf alle entpackten Dateien dieses Archivs angewandt wird.
+file#:#copyright_inherited#:#Vererbt
+file#:#copyright_inherited_info#:#Copyright des Zip-Archivs auf seine entpackten Dateien anwenden. <br \>Copyright des Zip-Archivs: %s.
 file#:#de_activate_icon#:#(De-)Aktivieren
 file#:#download_ascii_filename#:#Verwende ASCII-Zeichen für Dateinamen von Downloads
 file#:#download_ascii_filename_info#:#Dateinamen von Heruntergeladenen Dateien sollten nur ASCII-Zeichen enthalten. Option deaktivieren, um alle Zeichen zu verwenden.
@@ -9532,7 +9487,6 @@ file#:#msg_success_icon_deactivated#:#Icon erfolgreich deaktiviert.
 file#:#msg_success_icon_deletion#:#Icon erfolgreich gelöscht.
 file#:#msg_success_icon_updated#:#Icon erfolgreich aktualisiert.
 file#:#msg_unzip_success#:#Archiv wurde erfolreich entpackt.
-file#:#not_yet_migrated#:#Dieses Datei-Objekt wurde noch nicht migriert und es können keine neue Versionen angelegt werden. Wenden Sie sich an die Administratoren der Plattform.
 file#:#on_click_action#:#Klick auf Titel
 file#:#preview_caption#:#Vorschau %svon %s
 file#:#preview_image_size_info#:#Maximale Seitenlänge der Vorschaubilder in px.
@@ -9540,6 +9494,7 @@ file#:#preview_persisting#:#Vorschaubilder persistieren
 file#:#preview_persisting_info#:#Generierte vVorschaubilder werden gespeichert. Wenn deaktiviert, werden die Vorschaubilder jeweils beim Aufruf generiert.
 file#:#replace_file_info#:#Alle Dateiversionen werden gelöscht.
 file#:#resource_id#:#Ressourcen ID
+file#:#set_license_for_all_files#:#Lizenz für alle Dateien festlegen
 file#:#show_amount_of_downloads#:#Anzahl Downloads anzeigen
 file#:#show_amount_of_downloads_info#:#Wenn aktiv, wird die Anzahl Downloads auf der Info-Seite eines File-Objektes angezeigt.
 file#:#storage_id#:#Storage ID
@@ -9838,6 +9793,9 @@ forum#:#topic_close#:#geschlossen
 forum#:#topics_please_select_one_action#:#Bitte wählen Sie eine Aktion aus.
 forum#:#user_decides_notification#:#Mitglieder müssen Benachrichtigungen selbst aktivieren.
 glo#:#glo_add_from_other#:#Begriffe sammeln
+glo#:#glo_add_glossary#:#Glossar hinzufügen
+glo#:#glo_add_to_collection#:#Glossar zum Sammelglossar hinzufügen
+glo#:#glo_added_to_collection_info#:#Das Glossar wurde dem Sammelglossar hinzugefügt.
 glo#:#glo_answered_correctly#:#Wusste ich
 glo#:#glo_answered_not_correctly#:#Wusste ich nicht
 glo#:#glo_box#:#Fach
@@ -9846,9 +9804,12 @@ glo#:#glo_box_last_presented#:#Fach zuletzt angezeigt
 glo#:#glo_boxes#:#Fächer
 glo#:#glo_boxes_really_reset#:#Möchten Sie wirklich alle Fächer zurücksetzen? Alle Lernkarten werden in das erste Fach verschoben.
 glo#:#glo_boxes_reset#:#Die Fächer wurden erfolgreich zurückgesetzt.
+glo#:#glo_change_to_collection_unavailable_info#:#Um die Zusammenstellung der Inhalte auf "Sammelglossar" zu ändern, müssen Sie zuerst alle bestehenden Begriffe innerhalb dieses Glossars im Reiter "Inhalt" löschen.
+glo#:#glo_change_to_standard_unavailable_info#:#Um die Zusammenstellung der Inhalte auf "Normales Glossar" zu ändern, müssen Sie zuerst die ausgewählten Glossare im Reiter "Inhalt" entfernen.
 glo#:#glo_col_ordering_info#:#Sortieren Sie die Titel der Metadatenfelder, die in der Präsentationsansicht des Glossars als Spaltenüberschriften angezeigt werden.
 glo#:#glo_collection#:#Sammelglossar
-glo#:#glo_collection_info#:#Das Glossar sammelt automatisch zusätzliche Begriffe aus anderen Glossaren ein.
+glo#:#glo_collection_empty_info#:#Dieses Sammelglossar ist aktuell leer. Bitte fügen mindestens ein Glossar hinzu.
+glo#:#glo_collection_info#:#Das Glossar sammelt automatisch alle Begriffe aus den ausgewählten Glossaren.
 glo#:#glo_content_assembly#:#Zusammenstellung der Inhalte
 glo#:#glo_copy#:#Glossar kopieren
 glo#:#glo_copy_terms#:#Begriffe kopieren
@@ -9867,12 +9828,17 @@ glo#:#glo_mode#:#Modus
 glo#:#glo_page_type_gdf#:#Begriffsdefinition
 glo#:#glo_please_select_other_glo#:#Bitte wählen Sie ein anderes Glossar aus.
 glo#:#glo_quit_box#:#Fach verlassen
+glo#:#glo_really_remove_from_collection#:#Sind Sie sich sicher, dass Sie das folgende Glossar aus dem Sammelglossar entfernen wollen?
 glo#:#glo_reference#:#Link
 glo#:#glo_reference_terms#:#Begriffe verlinken
 glo#:#glo_referenced_term#:#Verlinkte Begriffe
+glo#:#glo_removed_from_collection_info#:#Das Glossar wurde aus dem Sammelglossar entfernt.
 glo#:#glo_reset_all_boxes#:#Alle Fächer zurücksetzen
 glo#:#glo_select_source_glo#:#Bitte wählen Sie das Ausgangsglossar aus.
 glo#:#glo_select_terms#:#Begriffe auswählen
+glo#:#glo_selected_glossaries#:#Ausgewählte Glossare
+glo#:#glo_selected_glossaries_info#:#Die Begriffe stammen aus den folgenden Glossaren:
+glo#:#glo_selected_glossary_is_current_info#:#Das ausgewählte Glossar entspricht dem aktuellen Glossar. Bitte wählen Sie ein anderes Glossar.
 glo#:#glo_selected_terms_have_been_copied#:#Die ausgewählten Begriffe wurden in die Zwischenablage kopiert. Bitte öffnen Sie das Zielglossar und klicken dann auf "Einfügen".
 glo#:#glo_show_definition#:#Definition zeigen
 glo#:#glo_show_term#:#Begriff zeigen
@@ -9980,7 +9946,7 @@ grp#:#grp_mem_contacts#:#Tutorielle Betreuung
 grp#:#grp_mem_tbl_header#:#Gruppenteilnehmer
 grp#:#grp_member_administration#:#Teilnehmerverwaltung
 grp#:#grp_members#:#Mitglieder
-grp#:#grp_members_deleted#:#Das/die Mitglied(er) wurde(n) aus der Gruppe ausgetragen
+grp#:#grp_members_deleted#:#Die ausgewählten Mitglieder sind aus der Gruppe ausgetragen worden.
 grp#:#grp_members_map#:#Karte Gruppenmitglieder
 grp#:#grp_members_print_title#:#Gruppenmitglieder
 grp#:#grp_missing_grp_type#:#Bitte wählen Sie die Art der Gruppe aus.
@@ -10146,6 +10112,7 @@ iass#:#iass_record_template_explanation#:#Hier eingegebener Text dient als Vorla
 iass#:#iass_remove_user_qst#:#Soll der Teilnehmer wirklich entfernt werden?
 iass#:#iass_responsibility#:#Zuständigkeit
 iass#:#iass_save_amend#:#Geänderte Prüfungsdaten speichern
+iass#:#iass_settings_availability#:#Verfügbarkeit
 iass#:#iass_settings_saved#:#Einstellungen gespeichert.
 iass#:#iass_sort_changetime_asc#:#Letzte Änderung → aufsteigend
 iass#:#iass_sort_changetime_desc#:#Letzte Änderung → absteigend
@@ -10177,17 +10144,28 @@ init#:#init_error_redirect_info#:#Weiterleitungen werden durch Kontext nicht unt
 irss#:#action_download#:#Herunterladen
 irss#:#action_goto#:#Ressource öffnen
 irss#:#action_remove_resource#:#Ressource löschen
+irss#:#action_remove_resource_msg#:#Möchten Sie die folgende(n) Ressource(n) löschen?
 irss#:#action_show_revisions#:#Revisionen anzeigen
+irss#:#by_creation_date_asc#:#Erstellungsdatum (aufsteigend)
+irss#:#by_creation_date_desc#:#Erstellungsdatum (absteigend)
+irss#:#by_size_asc#:#Dateigrösse (aufsteigend)
+irss#:#by_size_desc#:#Dateigrösse (absteigend)
+irss#:#by_title_asc#:#Titel (aufsteigend)
+irss#:#by_title_desc#:#Titel (absteigend)
 irss#:#creation_date#:#Erstellungsdatum (Diese Revision)
 irss#:#file_size#:#Dateigrösse (Diese Revision)
 irss#:#file_size_bigger_than#:#Dateigrösse grösser als (MB)
 irss#:#full_size#:#Ressourcengrössse (Alle Revisionen)
 irss#:#max_revision#:#Max. Revision
+irss#:#msg_upload#:#Dateien zum Hinzufügen hier ablegen
 irss#:#resource_id#:#Resource ID
 irss#:#resource_no_stakeholder_uri#:#Kein Stakeholder stellt einen Link zu der Nutzung dieser Resource zur Verfügung.
 irss#:#resource_overview#:#Ressourcen-Übersicht
 irss#:#revision#:#Revision
 irss#:#revisions#:#Verfügbare Revisionen
+irss#:#rid_deleted#:#Datei entfernt
+irss#:#rids_appended#:#Ressource(n) hinzugefügt
+irss#:#rids_deleted#:#Ressource(n) gelöscht
 irss#:#sorting#:#Sortierung
 irss#:#sorting_1#:#Titel (aufsteigend)
 irss#:#sorting_2#:#Titel (absteigend)
@@ -10199,6 +10177,8 @@ irss#:#stakeholders#:#Stakeholders
 irss#:#storage_id#:#Storage ID
 irss#:#storage_info#:#Storage Information
 irss#:#type#:#Dateityp
+irss#:#upload_field_title#:#Ausgewählte Dateien
+irss#:#upload_modal_title#:#Dateien hinzufügen
 itgr#:#itgr_always_open#:#Immer offen
 itgr#:#itgr_assign_materials#:#Objekte auswählen
 itgr#:#itgr_assigned_materials#:#Objekte im Objekteblock
@@ -10522,7 +10502,7 @@ lso#:#lso_mainbar_button_label_curriculum#:#Lernsequenz
 lso#:#lso_mainbar_button_label_toc#:#Inhalte
 lso#:#lso_mem_tbl_header#:#Lernsequenz Teilnehmer
 lso#:#lso_member_administration#:#Teilnehmerverwaltung
-lso#:#lso_members_deleted#:#Das/die Mitglied(er) wurde(n) aus der Lernsequenz ausgetragen
+lso#:#lso_members_deleted#:#Die ausgewählten Mitglieder sind aus der Lernsequenz ausgetragen worden.
 lso#:#lso_members_gallery#:#Mitgliedergalerie
 lso#:#lso_members_print_title#:#Lernsequenzmitglieder
 lso#:#lso_min_one_admin#:#Dieser Lernsequenz muß mindestens ein Administrator zugeordnet bleiben.
@@ -10546,6 +10526,7 @@ lso#:#lso_print_list#:#Liste erstellen
 lso#:#lso_read#:#Lesezugriff auf Learning Sequence
 lso#:#lso_search_users#:#Benutzer suchen
 lso#:#lso_settings_availability#:#Verfügbarkeit
+lso#:#lso_settings_availability_error#:#Das Enddatum darf nicht vor dem Startdatum liegen
 lso#:#lso_settings_extro#:#Abschlussseite bearbeiten
 lso#:#lso_settings_intro#:#Einleitungsseite bearbeiten
 lso#:#lso_settings_old_extro#:#Alte Abschlussseite ansehen
@@ -10743,6 +10724,7 @@ lti#:#lti_con_tool_url#:#Login URL
 lti#:#lti_con_version#:#LTI Version
 lti#:#lti_con_version_1.1#:#Version 1.1
 lti#:#lti_con_version_1.3#:#Version 1.3
+lti#:#lti_con_version_1.3_before_id#:#Wenn keine dynamische Registrierung genutzt wird, erscheinen nach Eingabe der vom Tool bereitgestellten Daten weitere Daten, die beim Tool einzutragen sind.
 lti#:#lti_confirm_delete_providers#:#Sind Sie sicher, dass Sie die folgenden Provider löschen möchten?
 lti#:#lti_consumer#:#Freigegeben für
 lti#:#lti_consumer_created#:#Konsument hinzugefügt
@@ -11109,7 +11091,7 @@ mail#:#send_mail_members#:#Alle Mitglieder
 mail#:#send_mail_to#:#Mail an
 mail#:#send_mail_tutors#:#Alle Tutoren
 mail#:#show_mail_settings#:#Einstellungen anzeigen
-mail#:#show_mail_settings_info#:#Benutzer können ihre Mail-Einstellungen im Bereich „Einstellungen“ oder „Mail“ selbst vornehmen.
+mail#:#show_mail_settings_info#:#Aktiviert die Anzeige der Mail-Einstellungen im Bereich 'Einstellungen' oder 'Mail'. Benutzer können die Mail-Einstellungen nur ändern, wenn die Konfiguration des Benutzer-Profils dies erlaubt. Wenn Benutzer nicht berechtigt sind, die Mail-Einstellung ihrer Profils zu ändern, dann gelten die globalen Einstellungen. Dies gilt auch dann, wenn Benutzer in der Vergangenheit die Berechtigung zum Ändern der Mail-Einstellungen hatten und persönliche Einstellungen vorgenommen haben.
 mail#:#system_notification_installation_changed_by#:#Geändert durch
 mail#:#usrFieldChange_second_mail_visible_in_personal_data#:#Sie haben das Attribut "%s" im Feld "%s" verändert.<br>Dies führt dazu, dass, für alle bestehenden und künftig angelegten Konten,<br>die bei den Benutzern gewählte Empfangsart und der Standard für neue Anmeldekonten bei externer Zustellung auf die primäre E-Mail-Adresse geändert wird,<br>unter Inkaufnahme der Rücksetzung von bestehenden Benutzer-Einstellungen.
 maps#:#configure_geolocation#:#Um nach Adressen suchen zu können, schließen Sie bitte die Konfiguration für die Geolocation im Administrationsmenü „Software von Drittanbietern“ ab.
@@ -12289,6 +12271,9 @@ notifications_adm#:#osd_vanish_desc#:#Dauer der Anzeige von Benachrichtigungen i
 obj#:#cont_filter_empty#:#Bitte nutzen Sie den Filter zur Anzeige von Objekten.
 obj#:#cont_skll_published#:#Alle Kompetenzzuweisungen wurden veröffentlicht.
 obj#:#cont_skll_published_some_not#:#Alle gegebenen Kompetenzzuweisungen wurden veröffentlicht. Zu einigen Benutzern konnten keine Kompetenzen veröffentlicht werden, da keine Zuweisungen vorlagen.
+obj#:#copy_container_page_no_label#:#Seitengestaltung nicht übernehmen
+obj#:#copy_container_page_yes_byline#:#Die komplette Seitengestaltung des Kurses, aus dem Sie Objekte kopieren, wird in den Zielkurs übernommen. Allfällig vorhandene Seitenelemente werden überschrieben.
+obj#:#copy_container_page_yes_label#:#Seitengestaltung übernehmen
 obj#:#custom_icon#:#Angepasstes Icon
 obj#:#edit_questions#:#Fragen bearbeiten
 obj#:#obj_activate_content_lang#:#Mehrsprachigkeit für Seiteneditor aktivieren
@@ -12336,13 +12321,13 @@ obj#:#obj_tool_setting_booking#:#Ressourcen
 obj#:#obj_tool_setting_filter#:#Filter
 obj#:#obj_tool_setting_filter_empty#:#Anzeige bei leerem Filter
 obj#:#obj_tool_setting_filter_empty_info#:#Zeigt alle Elemente, wenn der Filter leer ist.
-obj#:#obj_tool_setting_filter_info#:#Ein Filter wird im Reiter "Inhalte" angezeigt.
+obj#:#obj_tool_setting_filter_info#:#Ein Filter wird im Reiter „Inhalte“ angezeigt.
 obj#:#obj_tool_setting_info_tab#:#Info-Reiter
-obj#:#obj_tool_setting_info_tab_info#:#Der Reiter "Info" wird angezeigt.
+obj#:#obj_tool_setting_info_tab_info#:#Der Reiter „Info“ wird angezeigt.
 obj#:#obj_tool_setting_skills#:#Kompetenzen
 obj#:#obj_tool_setting_skills_info#:#Die Funktion ermöglicht es Kompetenzen auszuwählen und Mitgliedern Kompetenzstufen zuzuweisen.
 obj#:#obj_tool_setting_tag_cloud#:#Tag Cloud
-obj#:#obj_tool_setting_tag_cloud_info#:#Es wird eine Tag Cloud im Block "Auswahl nach Themen" im Reiter "Inhalt" angezeigt.
+obj#:#obj_tool_setting_tag_cloud_info#:#Es wird eine Tag Cloud im Block „Auswahl nach Themen“ im Reiter „Inhalt“ angezeigt.
 obj#:#obj_tool_setting_taxonomies#:#Taxonomien
 obj#:#obj_tool_setting_use_news#:#Neuigkeiten
 obj#:#obj_tool_setting_use_news_info#:#Nutzung des Blocks „Neuigkeiten“ oder der Timeline für Neuigkeiten. Benutzer können Benachrichtigungen für Neuigkeiten aktivieren, sobald der Block oder die Timeline aktiv sind.
@@ -12373,8 +12358,6 @@ orgu#:#employee#:#Mitarbeiter
 orgu#:#ext_id#:#Externe ID
 orgu#:#ext_id_updated#:#Die externe ID wurde erfolgreich bearbeitet.n, da die Daten anonymisiert gespeichert werden.
 orgu#:#form_title_org_default_permissions_update#:#Standardrechte
-orgu#:#il_orgu_employee#:#Mitarbeiter
-orgu#:#il_orgu_superior#:#Vorgesetzte
 orgu#:#import_failed#:#Der Import ist fehlgeschlagen. Stellen Sie sicher, dass die Datei im XML-Format geschrieben ist und eine valide Struktur aufweist.
 orgu#:#import_successful#:#Der Import wurde erfolgreich durchgeführt. Neu erstellt: %s, Bearbeitet/Verschoben: %s, Gelöscht: %s.
 orgu#:#import_terminated_with_errors#:#Der Import hat Fehler erkannt.
@@ -12659,6 +12642,7 @@ prg#:#auto_memberships#:#Automatische Zuweisung
 prg#:#category#:#Kategorie
 prg#:#completion_date#:#Abschlussdatum
 prg#:#confirm_to_remove_selected_assignments#:#Benutzerzuweisung(en) wirklich entfernen?
+prg#:#cont_ed_insert_prgstatusinfo#:#Studienprogamm Statusinformation einfügen
 prg#:#content_automation#:#Inhaltsautomatisierung
 prg#:#content_automation_title#:#Kurse dieser Kategorien automatisch hinzufügen/entfernen
 prg#:#could_not_add_users_no_permissons#:#Konnte %d Benutzer wegen mangelnder Berechtigung nicht hinzufügen.
@@ -12711,6 +12695,13 @@ prg#:#not_a_valid_cat_id#:#%s entspricht keiner Kategorie.
 prg#:#optgrp_label_restart#:#Wiederaufnahme
 prg#:#optgrp_label_validity#:#Ablauf
 prg#:#orgu#:#Organisationseinheit
+prg#:#pc_prgstatus_edit_qualification#:#Erneut zu bearbeiten ab
+prg#:#pc_prgstatus_expiration_date#:#Ablaufdatum
+prg#:#pc_prgstatus_qualification_headline#:#Status Ihrer Qualifikation
+prg#:#pc_prgstatus_status_no_qualification#:#Keine Qualifikation
+prg#:#pc_prgstatus_status_valid_qualification#:#Gültig
+prg#:#pc_prgstatus_text_no_qualification#:#Sie besitzen keine gültige Qualifikation
+prg#:#pc_prgstatus_unlimited_validation#:#unbegrenzt gültig
 prg#:#percentage#:#%
 prg#:#prg_access_by_orgu#:#Zugriffsregelungen nach Organisationseinheiten
 prg#:#prg_access_by_orgu_byline#:#Wenn aktiviert, können zusätzliche Zugriffsregelungen über Positionen in Organisationseinheiten vergeben werden.
@@ -13375,7 +13366,9 @@ rbac#:#crs_visible#:#Kurs ist sichtbar
 rbac#:#crs_write#:#Kurs bearbeiten
 rbac#:#crsr_copy#:#Kurslinks kopieren
 rbac#:#crsr_delete#:#Kurslinks verschieben oder löschen
+rbac#:#crsr_edit_learning_progress#:#Benutzer kann Lernfortschrittseinstellungen bearbeiten
 rbac#:#crsr_edit_permission#:#Rechteeinstellungen ändern
+rbac#:#crsr_read_learning_progress#:#Benutzer kann Lernfortschritt anderer Benutzer einsehen
 rbac#:#crsr_visible#:#Kurslinks sind sichtbar und können genutzt werden
 rbac#:#crsr_write#:#Einstellungen der Kurslinks bearbeiten
 rbac#:#crss_edit_permission#:#Rechteeinstellungen für die Kurs-Administration ändern
@@ -13534,8 +13527,6 @@ rbac#:#iass_read_learning_progress#:#Lernfortschritt in Individuellen Bewertung 
 rbac#:#iass_visible#:#Individuelle Bewertung ist sichtbar
 rbac#:#iass_write#:#Einstellungen der Individuelle Bewertung bearbeiten
 rbac#:#il_lti_global_role#:#LTI User
-rbac#:#il_orgu_employee#:#Organisationseinheit Mitarbeiter
-rbac#:#il_orgu_superior#:#Organisationseinheit Vorgesetzter
 rbac#:#il_sess_participant#:#Sitzungsteilnehmer
 rbac#:#il_sess_status_closed#:#Nicht-Teilnehmer geschlossene Sitzung
 rbac#:#ilias_id#:#ILIAS-ID
@@ -14897,6 +14888,8 @@ skmg#:#skmg_confirm_level_resources_removal#:#Wollen Sie wirklich die folgenden 
 skmg#:#skmg_confirm_remove_level_ass#:#Wollen Sie wirklich die folgenden Kompetenzstufen aus dem Profil entfernen?
 skmg#:#skmg_confirm_user_removal#:#Wollen Sie wirklich die folgenden Benutzer aus dem Profil entfernen?
 skmg#:#skmg_cont_profiles_info#:#In dieser Ansicht können Sie die Kompetenzprofile mit Kompetenzeinträgen auswählen, die im Zusammenhang mit dem derzeit geöffneten Objekt (Kurs/Gruppe) stehen. Um zu der globalen Ansicht mit allen Ihnen zugewiesenen Kompetenzprofilen und sämtlichen Kompetenzeinträgen zu gelangen, klicken Sie auf den unten stehenden Link.
+skmg#:#skmg_cont_profiles_info_empty#:#Es gibt keine Kompetenzprofile, die mit dem derzeit geöffneten Objekt im Zusammenhang stehen.
+skmg#:#skmg_cont_records_info_empty#:#Es gibt keine Kompetenzen, die mit dem derzeit geöffneten Objekt im Zusammenhang stehen.
 skmg#:#skmg_context_global#:#Global
 skmg#:#skmg_context_local#:#Lokal
 skmg#:#skmg_create_sctp#:#Vorlagenkategorie erstellen
@@ -14963,8 +14956,10 @@ skmg#:#skmg_previous_step#:#Voriger Schritt
 skmg#:#skmg_profile#:#Profil
 skmg#:#skmg_really_delete_levels#:#Sollen die folgenden Kompetenzstufen wirklich gelöscht werden?
 skmg#:#skmg_really_remove_skills#:#Möchten Sie die folgenden Kompetenzen wirklich entfernen?
-skmg#:#skmg_recommended_learning_material#:#Lerninhalte zur Zielerreichung
-skmg#:#skmg_recommended_learning_material_info#:#Wählen Sie genau einen der folgenden Lerninhalte aus. Bearbeiten Sie ihn um das Kompetenzziel zu erreichen.
+skmg#:#skmg_recommended_learning_material_crs#:#Lerninhalte im Kurs zur Zielerreichung
+skmg#:#skmg_recommended_learning_material_global#:#Lerninhalte zur Zielerreichung
+skmg#:#skmg_recommended_learning_material_grp#:#Lerninhalte in der Gruppe zur Zielerreichung
+skmg#:#skmg_recommended_learning_material_info#:#Bearbeiten Sie folgende Lerninhalte um das Kompetenzziel zu erreichen. Wählen Sie genau einen Lerninhalt pro Kompetenzstufe aus.
 skmg#:#skmg_refresh_view#:#Ansicht aktualisieren
 skmg#:#skmg_remove_levels#:#Ausprägungen entfernen
 skmg#:#skmg_remove_skill#:#Kompetenz entfernen
@@ -15000,7 +14995,8 @@ skmg#:#skmg_skill_needs_self_eval#:#Bitte führen Sie zunächst eine Selbsteinsc
 skmg#:#skmg_skill_needs_self_eval_box#:#Bitte beachten Sie, dass für mindestens eine Kompetenz in diesem Profil noch keine Selbsteinschätzung durchgeführt wurde. Ihnen wird das Kompetenzziel für die betroffenen Kompetenzen angezeigt, sobald eine Selbsteinschätzung durchgeführt wurde.
 skmg#:#skmg_skill_no_needs_impr#:#Kompetenzziel erfüllt!
 skmg#:#skmg_skill_no_needs_impr_info#:#Sie haben das Ziel für diese Kompetenz erfüllt.
-skmg#:#skmg_skill_profile_comparison#:#Profilvergleich
+skmg#:#skmg_skill_overview#:#Übersicht
+skmg#:#skmg_skill_profile_records#:#Kompetenzeinträge
 skmg#:#skmg_skill_profiles#:#Kompetenzprofile
 skmg#:#skmg_skill_template#:#Vorlage
 skmg#:#skmg_skill_templates#:#Vorlagen
@@ -16689,8 +16685,8 @@ user#:#clipboard_user_added#:#Die ausgewählten Benutzer wurden der Zwischenabla
 user#:#confirm_delete_starting_point#:#Sind Sie sich sicher, dass diese Regel gelöscht werden soll?
 user#:#create_starting_point#:#Regel erstellen
 user#:#criteria#:#Kriterium
-user#:#del_mail_body#:#Hallo %1$s, %2$sSie haben sich seit längerer Zeit nicht mehr auf der Lernplattform %3$s angemeldet. Ihr ILIAS-Konto wird daher voraussichtlich am %4$s gelöscht. Bitte melden Sie sich erneut an, damit Ihr ILIAS-Konto erhalten bleibt.
-user#:#del_mail_subject#:#[ILIAS] – Ihr ILIAS-Konto wird bald gelöscht
+user#:#del_mail_body#:#Hallo %1$s, %2$s Sie haben sich seit längerer Zeit nicht mehr auf %3$s angemeldet. Daher wird ihr ILIAS-Konto voraussichtlich am %4$s gelöscht. Um Ihr ILIAS-Konto zu behalten, müssen Sie sich vor dem genannten Tag erneut einloggen.
+user#:#del_mail_subject#:#Ihr ILIAS-Konto wird bald gelöscht
 user#:#delete_inactive_user_accounts_frequency#:#Intervall
 user#:#delete_inactive_user_accounts_frequency_desc#:#Intervall, mit welchem auf Löschung sowie auf E-Mail-Versand getestet wird.
 user#:#editing_this_role#:#Regel editieren
@@ -16704,6 +16700,7 @@ user#:#interests_general#:#Allgemeine Interessen
 user#:#interests_help_looking#:#Suche Hilfe
 user#:#interests_help_offered#:#Biete Hilfe
 user#:#msg_spoint_not_modified#:#Die Startseite wurde nicht geändert.
+user#:#no_deactivate_yourself#:#Sie können Ihr eigenes Benutzerkonto nicht deaktivieren.
 user#:#obj_ref_id_not_exist#:#Die eingegebene Referenz-ID existiert nicht.
 user#:#restrict_user_access#:#Eingeschränkter Zugriff auf Anmeldekonten
 user#:#restrict_user_access_info#:#Aktivieren Sie diese Option nur, wenn Sie den Zugriff auf Anmeldekonten beschränken möchten. Wenn aktiviert, benötigen Benutzer das Recht „Lesezugriff auf Anmeldekonten“, um auf lokale Anmeldekonten in Kategorien und auf die globalen Anmeldekonten zugreifen zu können.

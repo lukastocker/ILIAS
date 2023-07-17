@@ -58,6 +58,7 @@ class ilMembershipGUI
         $this->lng->loadLanguageModule($this->getParentObject()->getType());
         $this->tpl = $DIC->ui()->mainTemplate();
         $this->ctrl = $DIC->ctrl();
+        $this->lng->loadLanguageModule('trac');
         $this->logger = $DIC->logger()->mmbr();
         $this->access = $DIC->access();
         $this->user = $DIC->user();
@@ -247,14 +248,16 @@ class ilMembershipGUI
                     $rep_search->setCallback(
                         $this,
                         'assignMembers',
-                        $this->getParentGUI()->getLocalRoles()
+                        $this->getParentGUI()->getLocalRoles(),
+                        (string) $this->getDefaultRole()
                     );
                 } else {
                     //#18445 excludes admin role
                     $rep_search->setCallback(
                         $this,
                         'assignMembers',
-                        $this->getLocalRoles()
+                        $this->getLocalRoles(),
+                        (string) $this->getDefaultRole()
                     );
                 }
 
