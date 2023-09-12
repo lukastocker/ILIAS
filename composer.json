@@ -91,7 +91,7 @@
 			"ILIAS\\CI\\" : "./CI"
 		},
 		"classmap": [
-			"./Customizing/global/plugins",
+			"./components/SERVICEPROVIDER",
 			"./components/ILIAS",
 			"./libs/ilias",
 			"./webservice/soap",
