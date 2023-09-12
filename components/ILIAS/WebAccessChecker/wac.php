@@ -7,7 +7,7 @@
 
 use ILIAS\HTTP\Cookies\CookieFactoryImpl;
 
-chdir('../../');
+chdir("../../../");
 /** @noRector */
 require_once('./libs/composer/vendor/autoload.php');
 

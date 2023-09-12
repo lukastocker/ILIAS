@@ -67,10 +67,10 @@ class ilResourceStorageMigrationHelper
         $data_dir = $ilias_ini->readVariable('clients', 'datadir');
         $client_data_dir = "{$data_dir}/{$client_id}";
         if (!defined("CLIENT_WEB_DIR")) {
-            define("CLIENT_WEB_DIR", dirname(__DIR__, 4) . "/data/" . $client_id);
+            define("CLIENT_WEB_DIR", dirname(__DIR__, 5) . "/data/" . $client_id);
         }
         if (!defined("ILIAS_WEB_DIR")) {
-            define("ILIAS_WEB_DIR", dirname(__DIR__, 4));
+            define("ILIAS_WEB_DIR", dirname(__DIR__, 5));
         }
         if (!defined("CLIENT_ID")) {
             define("CLIENT_ID", $client_id);

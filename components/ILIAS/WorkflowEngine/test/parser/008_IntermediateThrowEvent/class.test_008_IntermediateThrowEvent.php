@@ -2,7 +2,7 @@
 
 /* Copyright (c) 1998-2014 ILIAS open source, Extended GPL, see docs/LICENSE */
 
-require_once 'Services/WorkflowEngine/test/ilWorkflowEngineBaseTest.php';
+require_once 'components/ILIAS/WorkflowEngine/test/ilWorkflowEngineBaseTest.php';
 
 /**
  * @author Maximilian Becker <mbecker@databay.de>
@@ -13,7 +13,7 @@ require_once 'Services/WorkflowEngine/test/ilWorkflowEngineBaseTest.php';
 class test_008_IntermediateThrowEvent extends ilWorkflowEngineBaseTest
 {
     #region Helper
-    public string $base_path = './Services/WorkflowEngine/test/parser/';
+    public string $base_path = './components/ILIAS/WorkflowEngine/test/parser/';
     public string $suite_path = '008_IntermediateThrowEvent/';
 
     public function getTestInputFilename($test_name): string
@@ -38,7 +38,7 @@ class test_008_IntermediateThrowEvent extends ilWorkflowEngineBaseTest
 
         parent::setUp();
 
-        require_once './Services/WorkflowEngine/classes/parser/class.ilBPMN2Parser.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/parser/class.ilBPMN2Parser.php';
     }
 
     public function test_WorkflowWithSimpleIntermediateThrowSignalEventShouldOutputAccordingly(): void
@@ -56,7 +56,7 @@ class test_008_IntermediateThrowEvent extends ilWorkflowEngineBaseTest
         $goldsample = file_get_contents($this->getTestGoldsampleFilename($test_name));
         $this->assertEquals($goldsample, $parse_result, 'Output does not match goldsample.');
 
-        //require_once './Services/EventHandling/classes/class.ilAppEventHandler.php';
+        //require_once './components/ILIAS/EventHandling/classes/class.ilAppEventHandler.php';
         $ilappeventhandler_mock = $this->createMock(ilAppEventHandler::class);
         $ilappeventhandler_mock
             ->expects($this->once())

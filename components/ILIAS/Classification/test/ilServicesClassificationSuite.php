@@ -28,7 +28,7 @@ class ilServicesClassificationSuite extends TestSuite
     {
         $suite = new self();
 
-        require_once("./Services/Classification/test/ClassificationSessionRepositoryTest.php");
+        require_once("./components/ILIAS/Classification/test/ClassificationSessionRepositoryTest.php");
         $suite->addTestSuite("ClassificationSessionRepositoryTest");
 
         return $suite;

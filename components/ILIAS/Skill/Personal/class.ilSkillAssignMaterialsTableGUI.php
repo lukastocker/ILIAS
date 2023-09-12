@@ -88,7 +88,7 @@ class ilSkillAssignMaterialsTableGUI extends ilTable2GUI
 
         $this->setEnableHeader(true);
         //		$this->setFormAction($ilCtrl->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.skill_materials_row.html", "Services/Skill");
+        $this->setRowTemplate("tpl.skill_materials_row.html", "components/ILIAS/Skill");
         $this->disable("footer");
         $this->setEnableTitle(true);
 

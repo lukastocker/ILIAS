@@ -46,23 +46,23 @@ class ilUserExporter extends ilXmlExporter
 
             return array(
                 array(
-                    "component" => "Services/User",
+                    "component" => "components/ILIAS/User",
                     "entity" => "usr_profile",
                     "ids" => $a_ids),
                 array(
-                    "component" => "Services/User",
+                    "component" => "components/ILIAS/User",
                     "entity" => "usr_multi",
                     "ids" => $a_ids),
                 array(
-                    "component" => "Services/User",
+                    "component" => "components/ILIAS/User",
                     "entity" => "usr_setting",
                     "ids" => $a_ids),
                 array(
-                    "component" => "Services/Notes",
+                    "component" => "components/ILIAS/Notes",
                     "entity" => "user_notes",
                     "ids" => $a_ids),
                 array(
-                    "component" => "Services/Calendar",
+                    "component" => "components/ILIAS/Calendar",
                     "entity" => "calendar",
                     "ids" => $cal_ids)
                 );
@@ -81,25 +81,25 @@ class ilUserExporter extends ilXmlExporter
     {
         return array(
             "4.3.0" => array(
-                "namespace" => "https://www.ilias.de/Services/User/usr/4_3",
+                "namespace" => "https://www.ilias.de/components/ILIAS/User/usr/4_3",
                 "xsd_file" => "ilias_usr_4_3.xsd",
                 "uses_dataset" => true,
                 "min" => "4.3.0",
                 "max" => "4.4.99"),
             "5.1.0" => array(
-                "namespace" => "https://www.ilias.de/Services/User/usr/5_1",
+                "namespace" => "https://www.ilias.de/components/ILIAS/User/usr/5_1",
                 "xsd_file" => "ilias_usr_5_1.xsd",
                 "uses_dataset" => true,
                 "min" => "5.1.0",
                 "max" => "5.1.99"),
             "5.2.0" => array(
-                "namespace" => "https://www.ilias.de/Services/User/usr/5_2",
+                "namespace" => "https://www.ilias.de/components/ILIAS/User/usr/5_2",
                 "xsd_file" => "ilias_usr_5_2.xsd",
                 "uses_dataset" => true,
                 "min" => "5.2.0",
                 "max" => "5.2.99"),
             "5.3.0" => array(
-                "namespace" => "https://www.ilias.de/Services/User/usr/5_3",
+                "namespace" => "https://www.ilias.de/components/ILIAS/User/usr/5_3",
                 "xsd_file" => "ilias_usr_5_3.xsd",
                 "uses_dataset" => true,
                 "min" => "5.3.0",

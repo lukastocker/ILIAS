@@ -34,7 +34,7 @@ class ilAssociationElement extends ilBaseElement
 
         $event_definition = null;
         // TODO: Implement.
-        $class_object->registerRequire('./Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
+        $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
         $code .= '
 			// association_missing
 		';

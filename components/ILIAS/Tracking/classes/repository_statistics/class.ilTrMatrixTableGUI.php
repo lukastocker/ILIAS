@@ -89,7 +89,7 @@ class ilTrMatrixTableGUI extends ilLPTableBaseGUI
         );
         $this->setRowTemplate(
             "tpl.user_object_matrix_row.html",
-            "Services/Tracking"
+            "components/ILIAS/Tracking"
         );
         $this->setDefaultOrderField("login");
         $this->setDefaultOrderDirection("asc");

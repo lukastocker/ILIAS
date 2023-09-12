@@ -48,7 +48,7 @@ class ilNewsExporter extends ilXmlExporter
 
         return [
             [
-                "component" => "Services/MediaObjects",
+                "component" => "components/ILIAS/MediaObjects",
                 "entity" => "mob",
                 "ids" => $mob_ids
             ]
@@ -64,14 +64,14 @@ class ilNewsExporter extends ilXmlExporter
     {
         return [
             "5.4.0" => [
-                "namespace" => "https://www.ilias.de/Services/News/news/5_4",
+                "namespace" => "https://www.ilias.de/components/ILIAS/News/news/5_4",
                 "xsd_file" => "ilias_news_5_4.xsd",
                 "uses_dataset" => true,
                 "min" => "5.4.0",
                 "max" => ""
             ],
             "4.1.0" => [
-                "namespace" => "https://www.ilias.de/Services/News/news/4_1",
+                "namespace" => "https://www.ilias.de/components/ILIAS/News/news/4_1",
                 "xsd_file" => "ilias_news_4_1.xsd",
                 "uses_dataset" => true,
                 "min" => "4.1.0",

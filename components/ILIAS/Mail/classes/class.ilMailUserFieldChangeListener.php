@@ -50,6 +50,6 @@ class ilMailUserFieldChangeListener extends UserFieldAttributesChangeListener
 
     public function getComponentName(): string
     {
-        return 'Services/Mail';
+        return 'components/ILIAS/Mail';
     }
 }

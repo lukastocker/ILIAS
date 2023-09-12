@@ -643,8 +643,8 @@ class ilLMPresentationGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInt
             }
 
             // from main menu
-            //				$this->tpl->addJavascript("./Services/JavaScript/js/Basic.js");
-            $this->tpl->addJavaScript("./Services/Navigation/js/ServiceNavigation.js");
+            //				$this->tpl->addJavascript("./components/ILIAS/JavaScript/js/Basic.js");
+            $this->tpl->addJavaScript("./components/ILIAS/Navigation/js/ServiceNavigation.js");
             ilYuiUtil::initConnection($this->tpl);
         }
     }

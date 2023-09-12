@@ -16,8 +16,8 @@
  ********************************************************************
  */
 
-include_once("./Services/UICore/lib/html-it/IT.php");
-include_once("./Services/UICore/lib/html-it/ITX.php");
+include_once("./components/ILIAS/UICore/lib/html-it/IT.php");
+include_once("./components/ILIAS/UICore/lib/html-it/ITX.php");
 
 /**
  * special template class to simplify handling of ITX/PEAR
@@ -189,17 +189,17 @@ class ilDataCollectionGlobalTemplate implements ilGlobalTemplateInterface
      * List of JS-Files that should be included.
      * @var array<int,string>
      */
-    protected $js_files = array(0 => "./Services/JavaScript/js/Basic.js");
+    protected $js_files = array(0 => "./components/ILIAS/JavaScript/js/Basic.js");
     /**
      * Stores if a version parameter should be appended to the js-file to force reloading.
      * @var array<string,bool>
      */
-    protected $js_files_vp = array("./Services/JavaScript/js/Basic.js" => true);
+    protected $js_files_vp = array("./components/ILIAS/JavaScript/js/Basic.js" => true);
     /**
      * Stores the order in which js-files should be included.
      * @var array<string,int>
      */
-    protected $js_files_batch = array("./Services/JavaScript/js/Basic.js" => 1);
+    protected $js_files_batch = array("./components/ILIAS/JavaScript/js/Basic.js" => 1);
 
     /**
      * Add a javascript file that should be included in the header.
@@ -212,7 +212,7 @@ class ilDataCollectionGlobalTemplate implements ilGlobalTemplateInterface
         }
 
         // ensure jquery files being loaded first
-        if (is_int(strpos($a_js_file, "Services/jQuery"))
+        if (is_int(strpos($a_js_file, "components/ILIAS/jQuery"))
             || is_int(strpos($a_js_file, "/jquery.js"))
             || is_int(strpos($a_js_file, "/jquery-min.js"))
         ) {
@@ -678,10 +678,10 @@ class ilDataCollectionGlobalTemplate implements ilGlobalTemplateInterface
         $html = "";
 
         if (is_object($ilPluginAdmin)) {
-            include_once("./Services/UIComponent/classes/class.ilUIHookProcessor.php");
+            include_once("./components/ILIAS/UIComponent/classes/class.ilUIHookProcessor.php");
             $html = $ilLocator->getHTML();
             $uip = new ilUIHookProcessor(
-                "Services/Locator",
+                "components/ILIAS/Locator",
                 "main_locator",
                 ["locator_gui" => $ilLocator, "html" => $html]
             );

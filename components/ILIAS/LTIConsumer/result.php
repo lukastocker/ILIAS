@@ -18,14 +18,14 @@ declare(strict_types=1);
  *
  *********************************************************************/
 
-chdir("../../");
+chdir("../../../");
 
 if (!isset($_GET['client_id']) || !strlen($_GET['client_id'])) {
     header('HTTP/1.1 401 Authorization Required');
     exit;
 }
 
-require_once("Services/Init/classes/class.ilInitialisation.php");
+require_once("components/ILIAS/Init/classes/class.ilInitialisation.php");
 \ilContext::init(\ilContext::CONTEXT_SCORM);
 \ilInitialisation::initILIAS();
 

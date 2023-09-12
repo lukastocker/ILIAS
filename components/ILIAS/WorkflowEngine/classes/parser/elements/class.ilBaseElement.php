@@ -43,7 +43,7 @@ abstract class ilBaseElement
         if (isset($element['children']) && count($element['children'])) {
             foreach ($element['children'] as $child) {
                 if ($child['name'] === 'dataInputAssociation') {
-                    $class_object->registerRequire('./Services/WorkflowEngine/classes/detectors/class.ilDataDetector.php');
+                    $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/detectors/class.ilDataDetector.php');
                     $reference_name = $child['children'][0]['content'];
                     $code .= '
 			' . $element_varname . '_inputDataDetector = new ilDataDetector(' . $element_varname . ');
@@ -54,7 +54,7 @@ abstract class ilBaseElement
                 }
 
                 if ($child['name'] === 'dataOutputAssociation') {
-                    $class_object->registerRequire('./Services/WorkflowEngine/classes/emitters/class.ilDataEmitter.php');
+                    $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/emitters/class.ilDataEmitter.php');
                     $reference_name = $child['children'][0]['content'];
                     // So we need a data emitter to the given
                     $code .= '

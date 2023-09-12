@@ -29,7 +29,7 @@ class ilServicesCacheSuite extends TestSuite
     {
         $suite = new self();
 
-        require_once("./Services/Cache/test/ilCacheTest.php");
+        require_once("./components/ILIAS/Cache/test/ilCacheTest.php");
         $suite->addTestSuite("ilCacheTest");
 
         return $suite;

@@ -1331,7 +1331,7 @@ class ilNewsItem
         );
 
         $ilAppEventHandler->raise(
-            "Services/News",
+            "components/ILIAS/News",
             "readNews",
             ["user_id" => $a_user_id, "news_ids" => [$a_news_id]]
         );
@@ -1355,7 +1355,7 @@ class ilNewsItem
             " AND news_id = " . $ilDB->quote($a_news_id, "integer"));
 
         $ilAppEventHandler->raise(
-            "Services/News",
+            "components/ILIAS/News",
             "unreadNews",
             ["user_id" => $a_user_id, "news_ids" => [$a_news_id]]
         );

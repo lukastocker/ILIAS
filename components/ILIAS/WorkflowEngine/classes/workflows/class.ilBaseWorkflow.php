@@ -77,7 +77,7 @@ abstract class ilBaseWorkflow implements ilWorkflow
 
     /**
      * Holds the path to the workflow definition class relative to the applications root.
-     * @var string $workflow_location Path to class, e.g. Services/WorkflowEngine for './Services/WorkflowEngine/classes/class..."
+     * @var string $workflow_location Path to class, e.g. Services/WorkflowEngine for './components/ILIAS/WorkflowEngine/classes/class..."
      */
     protected ?string $workflow_location = null;
 
@@ -417,7 +417,7 @@ abstract class ilBaseWorkflow implements ilWorkflow
                 return;
         }
 
-        $filename = './Services/WorkflowEngine/classes/' . $componentDirectory . '/class.' . $class_name . '.php';
+        $filename = './components/ILIAS/WorkflowEngine/classes/' . $componentDirectory . '/class.' . $class_name . '.php';
     }
 
     /**

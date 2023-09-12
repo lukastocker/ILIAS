@@ -33,7 +33,7 @@ class ilServiceUISuite extends TestSuite
     {
         $suite = new self();
 
-        require_once("./Services/Skill/test/ilUIFilterTest.php");
+        require_once("./components/ILIAS/Skill/test/ilUIFilterTest.php");
         $suite->addTestSuite(UIFilterServiceSessionGatewayTest::class);
 
         return $suite;

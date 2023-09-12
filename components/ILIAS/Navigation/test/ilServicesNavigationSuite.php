@@ -32,7 +32,7 @@ class ilServicesNavigationSuite extends TestSuite
     {
         $suite = new self();
 
-        require_once("./Services/Navigation/test/NavigationSessionRepositoryTest.php");
+        require_once("./components/ILIAS/Navigation/test/NavigationSessionRepositoryTest.php");
         $suite->addTestSuite("NavigationSessionRepositoryTest");
 
         return $suite;

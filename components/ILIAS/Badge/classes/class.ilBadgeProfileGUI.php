@@ -130,7 +130,7 @@ class ilBadgeProfileGUI
         // :TODO:
         $data = ilArrayUtil::sortArray($data, "issued_on", "desc", true);
 
-        $tmpl = new ilTemplate("tpl.badge_backpack.html", true, true, "Services/Badge");
+        $tmpl = new ilTemplate("tpl.badge_backpack.html", true, true, "components/ILIAS/Badge");
 
         ilDatePresentation::setUseRelativeDates(false);
 
@@ -359,7 +359,7 @@ class ilBadgeProfileGUI
             return;
         }
 
-        $tmpl = new ilTemplate("tpl.badge_backpack.html", true, true, "Services/Badge");
+        $tmpl = new ilTemplate("tpl.badge_backpack.html", true, true, "components/ILIAS/Badge");
 
         $tmpl->setVariable("BACKPACK_TITLE", $lng->txt("badge_backpack_list"));
 

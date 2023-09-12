@@ -35,7 +35,7 @@ class ilTermsOfServiceAppEventListenerTest extends ilTermsOfServiceBaseTest
 
         $listener = new ilTermsOfServiceAppEventListener($helper);
         $listener
-            ->withComponent('Services/User')
+            ->withComponent('components/ILIAS/User')
             ->withEvent('deleteUser')
             ->withParameters(['usr_id' => 6])
             ->handle();
@@ -47,7 +47,7 @@ class ilTermsOfServiceAppEventListenerTest extends ilTermsOfServiceBaseTest
             ->handle();
 
         $listener
-            ->withComponent('Services/User')
+            ->withComponent('components/ILIAS/User')
             ->withEvent('afterCreate')
             ->withParameters(['usr_id' => 6])
             ->handle();
@@ -79,7 +79,7 @@ class ilTermsOfServiceAppEventListenerTest extends ilTermsOfServiceBaseTest
             ->with($this->isType('integer'));
 
         ilTestableTermsOfServiceAppEventListener::$mockHelper = $helper;
-        ilTestableTermsOfServiceAppEventListener::handleEvent('Services/User', 'deleteUser', ['usr_id' => 6]);
+        ilTestableTermsOfServiceAppEventListener::handleEvent('components/ILIAS/User', 'deleteUser', ['usr_id' => 6]);
     }
 }
 

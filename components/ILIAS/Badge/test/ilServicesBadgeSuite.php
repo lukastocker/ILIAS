@@ -31,7 +31,7 @@ class ilServicesBadgeSuite extends TestSuite
     {
         $suite = new self();
 
-        require_once("./Services/Badge/test/BadgeManagementSessionRepositoryTest.php");
+        require_once("./components/ILIAS/Badge/test/BadgeManagementSessionRepositoryTest.php");
         $suite->addTestSuite("BadgeManagementSessionRepositoryTest");
 
         return $suite;

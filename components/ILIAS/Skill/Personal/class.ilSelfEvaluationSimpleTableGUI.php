@@ -87,7 +87,7 @@ class ilSelfEvaluationSimpleTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt("description"));
 
         $this->setEnableHeader(true);
-        $this->setRowTemplate("tpl.simple_self_eval.html", "Services/Skill");
+        $this->setRowTemplate("tpl.simple_self_eval.html", "components/ILIAS/Skill");
         $this->disable("footer");
         $this->setEnableTitle(true);
 

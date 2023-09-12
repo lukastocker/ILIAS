@@ -264,7 +264,7 @@ class ilObjFileGUI extends ilObject2GUI
         $title = (!empty($inputs)) ?
             $inputs[array_key_first($inputs)]->getLabel() : '';
 
-        $tpl = new ilTemplate("tpl.creation_acc_head.html", true, true, "Services/Object");
+        $tpl = new ilTemplate("tpl.creation_acc_head.html", true, true, "components/ILIAS/Object");
         $tpl->setVariable("TITLE", $this->lng->txt("option") . " " . $form_type . ": " . $title);
 
         $accordion->addItem($tpl->get(), $this->ui->renderer()->render($form));
@@ -287,7 +287,7 @@ class ilObjFileGUI extends ilObject2GUI
             }
         }
 
-        $tpl = new ilTemplate("tpl.creation_acc_head.html", true, true, "Services/Object");
+        $tpl = new ilTemplate("tpl.creation_acc_head.html", true, true, "components/ILIAS/Object");
         $tpl->setVariable("TITLE", $this->lng->txt("option") . " " . $form_type . ": " . $form->getTitle());
 
         $accordion->addItem($tpl->get(), $form->getHTML());

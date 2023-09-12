@@ -81,9 +81,9 @@ class ilTestScoringByQuestionsGUI extends ilTestScoringGUI
             $tpl->addJavaScript($mathJaxSetting->get("path_to_mathjax"));
         }
 
-        $tpl->addJavaScript("./Services/JavaScript/js/Basic.js");
-        $tpl->addJavaScript("./Services/Form/js/Form.js");
-        $tpl->addJavascript('./Services/UIComponent/Modal/js/Modal.js');
+        $tpl->addJavaScript("./components/ILIAS/JavaScript/js/Basic.js");
+        $tpl->addJavaScript("./components/ILIAS/Form/js/Form.js");
+        $tpl->addJavascript('./components/ILIAS/UIComponent/Modal/js/Modal.js');
         $this->lng->toJSMap(['answer' => $this->lng->txt('answer')]);
 
         $table = new ilTestManScoringParticipantsBySelectedQuestionAndPassTableGUI($this);

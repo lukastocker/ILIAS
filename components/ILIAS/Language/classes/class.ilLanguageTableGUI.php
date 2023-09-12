@@ -19,7 +19,7 @@ declare(strict_types=1);
  ********************************************************************
  */
 
-include_once "./Services/Table/classes/class.ilTable2GUI.php";
+include_once "./components/ILIAS/Table/classes/class.ilTable2GUI.php";
 
 /**
 * TableGUI class for
@@ -57,7 +57,7 @@ class ilLanguageTableGUI extends ilTable2GUI
 
         $this->setEnableHeader(true);
         $this->setFormAction($this->ctrl->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.lang_list_row_extended.html", "Services/Language");
+        $this->setRowTemplate("tpl.lang_list_row_extended.html", "components/ILIAS/Language");
         $this->disable("footer");
         $this->setEnableTitle(true);
 

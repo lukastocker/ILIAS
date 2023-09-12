@@ -66,7 +66,7 @@ class ilLoggingActivityTest extends TestCase
     {
         // Arrange
         $activity = new ilLoggingActivity($this->node);
-        $expected = './Services/WorkflowEngine/test/testlog.txt';
+        $expected = './components/ILIAS/WorkflowEngine/test/testlog.txt';
 
         // Act
         $activity->setLogFile($expected);
@@ -106,7 +106,7 @@ class ilLoggingActivityTest extends TestCase
 
         // Arrange
         $activity = new ilLoggingActivity($this->node);
-        $expected = './Services/WorkflowEngine/test/malicious.php';
+        $expected = './components/ILIAS/WorkflowEngine/test/malicious.php';
         // Is either one of: .log or .txt
 
         // Act

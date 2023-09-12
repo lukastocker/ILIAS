@@ -17,7 +17,7 @@
  */
 
 declare(strict_types=1);
-require_once("./Services/Form/classes/class.ilFormPropertyGUI.php");
+require_once("./components/ILIAS/Form/classes/class.ilFormPropertyGUI.php");
 
 /**
  * Class ilDclGenericMultiInputGUI
@@ -214,7 +214,7 @@ class ilOrgUnitGenericMultiInputGUI extends ilFormPropertyGUI
     public function render(int|string $iterator_id = 0, bool $clean_render = false): string
     {
         $first_label = true;
-        //		$tpl = new \ilTemplate("tpl.multi_line_input.html", true, true, 'Customizing/global/plugins/Services/Repository/RepositoryObject/LiveVoting');
+        //		$tpl = new \ilTemplate("tpl.multi_line_input.html", true, true, 'Customizing/global/plugins/components/ILIAS/Repository/RepositoryObject/LiveVoting');
         $tpl = new ilTemplate("tpl.prop_generic_multi_line.html", true, true, 'components/ILIAS/OrgUnit');
 
         $class = 'multi_input_line';

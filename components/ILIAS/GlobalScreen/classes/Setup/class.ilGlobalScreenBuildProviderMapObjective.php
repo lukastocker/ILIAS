@@ -34,7 +34,7 @@ class ilGlobalScreenBuildProviderMapObjective extends Setup\Artifact\BuildArtifa
 {
     public function getArtifactPath(): string
     {
-        return "Services/GlobalScreen/artifacts/global_screen_providers.php";
+        return "components/ILIAS/GlobalScreen/artifacts/global_screen_providers.php";
     }
 
     public function build(): Setup\Artifact

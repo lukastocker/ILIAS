@@ -64,7 +64,7 @@ class ilSkillLevelProfileAssignmentTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt("actions"));
 
         $this->setFormAction($ilCtrl->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.skill_level_profile_assignment_row.html", "Services/Skill");
+        $this->setRowTemplate("tpl.skill_level_profile_assignment_row.html", "components/ILIAS/Skill");
     }
 
     protected function fillRow(array $a_set): void

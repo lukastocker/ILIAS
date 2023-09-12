@@ -65,7 +65,7 @@ class ilIntermediateCatchEventElement extends ilBaseElement
             }
         }
 
-        $class_object->registerRequire('./Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
+        $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
         $code .= '
 			' . $this->element_varname . ' = new ilBasicNode($this);
 			$this->addNode(' . $this->element_varname . ');
@@ -73,7 +73,7 @@ class ilIntermediateCatchEventElement extends ilBaseElement
 		';
 
         if (is_array($event_definition)) {
-            $class_object->registerRequire('./Services/WorkflowEngine/classes/detectors/class.ilEventDetector.php');
+            $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/detectors/class.ilEventDetector.php');
             $code .= '
 			' . $this->element_varname . '_detector = new ilEventDetector(' . $this->element_varname . ');
 			' . $this->element_varname . '_detector->setName(\'' . $this->element_varname . '_detector\');

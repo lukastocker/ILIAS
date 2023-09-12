@@ -95,7 +95,7 @@ class ilCalendarSubscriptionGUI
             'tpl.subscription_dialog.html',
             true,
             true,
-            'Services/Calendar'
+            'components/ILIAS/Calendar'
         );
 
         $tpl->setVariable('TXT_SUBSCRIPTION_INFO', $this->lng->txt('cal_subscription_info'));

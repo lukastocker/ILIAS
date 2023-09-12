@@ -29,6 +29,6 @@ class ilEmptyWorkflow extends ilBaseWorkflow
         $this->workflow_context_type = 'none';
         $this->workflow_context_id = '0';
         $this->workflow_class = 'class.ilEmptyWorkflow.php';
-        $this->workflow_location = 'Services/WorkflowEngine/classes/workflows';
+        $this->workflow_location = 'components/ILIAS/WorkflowEngine/classes/workflows';
     }
 }

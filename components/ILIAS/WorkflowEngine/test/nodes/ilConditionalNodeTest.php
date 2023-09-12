@@ -22,7 +22,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     protected function setUp(): void
     {
         // Empty workflow.
-        require_once './Services/WorkflowEngine/classes/workflows/class.ilEmptyWorkflow.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/workflows/class.ilEmptyWorkflow.php';
         $this->workflow = new ilEmptyWorkflow();
     }
 
@@ -70,7 +70,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
         $node->addDetector($detector);
         $evaluation_expression = 'return null;';
@@ -88,7 +88,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
         $node->addDetector($detector);
         $evaluation_expression = 'return null;';
@@ -108,7 +108,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector1 = new ilSimpleDetector($node);
         $node->addDetector($detector1);
         $detector2 = new ilSimpleDetector($node);
@@ -145,7 +145,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector1 = new ilSimpleDetector($node);
         $node->addDetector($detector1);
         $detector2 = new ilSimpleDetector($node);
@@ -182,7 +182,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector1 = new ilSimpleDetector($node);
         $node->addDetector($detector1);
         $detector2 = new ilSimpleDetector($node);
@@ -218,7 +218,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
         $node->addDetector($detector);
         $node->activate();
@@ -237,7 +237,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
 
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
         $node->addDetector($detector);
         $node->activate();
@@ -254,13 +254,13 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
         $node->addDetector($detector);
 
         vfs\vfsStream::setup('example');
 
-        require_once './Services/WorkflowEngine/classes/activities/class.ilLoggingActivity.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/activities/class.ilLoggingActivity.php';
         $activity = new ilLoggingActivity($node);
         $activity->setLogFile(vfs\vfsStream::url('example/ilTransitionLog.txt'));
         $activity->setLogLevel('MESSAGE');
@@ -286,13 +286,13 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
         $node->addDetector($detector);
 
         vfs\vfsStream::setup('example');
 
-        require_once './Services/WorkflowEngine/classes/activities/class.ilLoggingActivity.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/activities/class.ilLoggingActivity.php';
         $activity = new ilLoggingActivity($node);
         $activity->setLogFile(vfs\vfsStream::url('example/ilTransitionLog.txt'));
         $activity->setLogLevel('MESSAGE');
@@ -318,11 +318,11 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
         $node->addDetector($detector);
 
-        require_once './Services/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php';
         $t_node = new ilBasicNode($this->workflow);
         $t_detector = new ilSimpleDetector($t_node);
         $t_node->addDetector($t_detector);
@@ -346,11 +346,11 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
         $node->addDetector($detector);
 
-        require_once './Services/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php';
         $t_node = new ilBasicNode($this->workflow);
         $t_detector = new ilSimpleDetector($t_node);
         $t_node->addDetector($t_detector);
@@ -374,11 +374,11 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
         $node->addDetector($detector);
 
-        require_once './Services/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php';
         $t_node = new ilBasicNode($this->workflow);
         $t_detector = new ilSimpleDetector($t_node);
         $t_node->addDetector($t_detector);
@@ -402,7 +402,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
 
         // Act
@@ -417,7 +417,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/emitters/class.ilSimpleEmitter.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/emitters/class.ilSimpleEmitter.php';
         $emitter = new ilSimpleEmitter($node);
 
         // Act
@@ -432,7 +432,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/emitters/class.ilSimpleEmitter.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/emitters/class.ilSimpleEmitter.php';
         $emitter = new ilSimpleEmitter($node);
 
         // Act
@@ -447,7 +447,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/activities/class.ilLoggingActivity.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/activities/class.ilLoggingActivity.php';
         $activity = new ilLoggingActivity($node);
 
         // Act
@@ -462,7 +462,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/activities/class.ilLoggingActivity.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/activities/class.ilLoggingActivity.php';
         $activity = new ilLoggingActivity($node);
 
         // Act
@@ -478,7 +478,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
         // Arrange
         $node = new ilConditionalNode($this->workflow);
 
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
         $node->addDetector($detector);
         $detector->setDetectorState(true);
@@ -503,7 +503,7 @@ class ilConditionalNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilConditionalNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector1 = new ilSimpleDetector($node);
         $node->addDetector($detector1);
         $detector2 = new ilSimpleDetector($node);

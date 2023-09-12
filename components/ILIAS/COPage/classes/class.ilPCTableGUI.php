@@ -690,7 +690,7 @@ class ilPCTableGUI extends ilPageContentGUI
         $ilTabs->setSubTabActive("cont_width");
         $ilTabs->setTabActive("cont_table_cell_properties");
 
-        $ctpl = new ilTemplate("tpl.table_cell_properties.html", true, true, "Services/COPage");
+        $ctpl = new ilTemplate("tpl.table_cell_properties.html", true, true, "components/ILIAS/COPage");
         $ctpl->setVariable("BTN_NAME", "setWidths");
         $ctpl->setVariable("BTN_TEXT", $lng->txt("cont_save_widths"));
         $ctpl->setVariable("FORMACTION", $ilCtrl->getFormAction($this));
@@ -713,7 +713,7 @@ class ilPCTableGUI extends ilPageContentGUI
         $ilTabs->setSubTabActive("cont_span");
         $ilTabs->setTabActive("cont_table_cell_properties");
 
-        $ctpl = new ilTemplate("tpl.table_cell_properties.html", true, true, "Services/COPage");
+        $ctpl = new ilTemplate("tpl.table_cell_properties.html", true, true, "components/ILIAS/COPage");
         $ctpl->setVariable("BTN_NAME", "setSpans");
         $ctpl->setVariable("BTN_TEXT", $lng->txt("cont_save_spans"));
         $ctpl->setVariable("FORMACTION", $ilCtrl->getFormAction($this));
@@ -1048,7 +1048,7 @@ class ilPCTableGUI extends ilPageContentGUI
     {
         $ilCtrl = $this->ctrl;
 
-        $dtpl = new ilTemplate("tpl.tabledata2.html", true, true, "Services/COPage");
+        $dtpl = new ilTemplate("tpl.tabledata2.html", true, true, "components/ILIAS/COPage");
         $dtpl->setVariable("FORMACTION", $this->ctrl->getFormAction($this, "tableAction"));
         $dtpl->setVariable("HIERID", $this->hier_id);
         $dtpl->setVariable("PCID", $this->pc_id);

@@ -21,17 +21,17 @@ class ilDataDetectorTest extends ilWorkflowEngineBaseTest
     protected function setUp(): void
     {
         // Empty workflow.
-        require_once './Services/WorkflowEngine/classes/workflows/class.ilEmptyWorkflow.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/workflows/class.ilEmptyWorkflow.php';
         $this->workflow = new ilEmptyWorkflow();
 
         // Basic node
-        require_once './Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php';
         $this->node = new ilBasicNode($this->workflow);
 
         // Wiring up so the node is attached to the workflow.
         $this->workflow->addNode($this->node);
 
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilDataDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilDataDetector.php';
     }
 
     protected function tearDown(): void

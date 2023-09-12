@@ -60,21 +60,21 @@ class ilObjectExporter extends ilXmlExporter
     {
         return [
             "5.4.0" => [
-                "namespace" => "http://www.ilias.de/Services/Object/obj/5_4",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Object/obj/5_4",
                 "xsd_file" => "ilias_obj_5_4.xsd",
                 "uses_dataset" => true,
                 "min" => "5.4.0",
                 "max" => ""
             ],
             "5.1.0" => [
-                "namespace" => "http://www.ilias.de/Services/Object/obj/5_1",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Object/obj/5_1",
                 "xsd_file" => "ilias_obj_5_1.xsd",
                 "uses_dataset" => true,
                 "min" => "5.1.0",
                 "max" => "5.3.99"
             ],
             "4.4.0" => [
-                "namespace" => "http://www.ilias.de/Services/Object/obj/4_4",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Object/obj/4_4",
                 "xsd_file" => "ilias_obj_4_4.xsd",
                 "uses_dataset" => true,
                 "min" => "4.4.0",

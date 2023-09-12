@@ -44,13 +44,13 @@ class ilPollExporter extends ilXmlExporter
     {
         return array(
                 "4.3.0" => array(
-                    "namespace" => "http://www.ilias.de/Services/components/ILIAS/Poll/4_3",
+                    "namespace" => "http://www.ilias.de/components/ILIAS/components/ILIAS/Poll/4_3",
                     "xsd_file" => "ilias_poll_4_3.xsd",
                     "uses_dataset" => true,
                     "min" => "4.3.0",
                     "max" => "4.4.99"),
                 "5.0.0" => array(
-                    "namespace" => "http://www.ilias.de/Services/components/ILIAS/Poll/5_0",
+                    "namespace" => "http://www.ilias.de/components/ILIAS/components/ILIAS/Poll/5_0",
                     "xsd_file" => "ilias_poll_5_0.xsd",
                     "uses_dataset" => true,
                     "min" => "5.0.0",

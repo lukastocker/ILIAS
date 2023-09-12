@@ -45,7 +45,7 @@ class ilTestImporter extends ilXmlImporter
     {
         ilObjTest::_setImportDirectory($this->getImportDirectoryContainer());
 
-        if ($new_id = $a_mapping->getMapping('Services/Container', 'objs', $a_id)) {
+        if ($new_id = $a_mapping->getMapping('components/ILIAS/Container', 'objs', $a_id)) {
             // container content
             $newObj = ilObjectFactory::getInstanceByObjId($new_id, false);
             ilSession::set('tst_import_subdir', $this->getImportPackageName());
@@ -95,14 +95,14 @@ class ilTestImporter extends ilXmlImporter
 
         foreach ($qtiParser->getQuestionIdMapping() as $oldQuestionId => $newQuestionId) {
             $a_mapping->addMapping(
-                "Services/Taxonomy",
+                "components/ILIAS/Taxonomy",
                 "tax_item",
                 "tst:quest:$oldQuestionId",
                 $newQuestionId
             );
 
             $a_mapping->addMapping(
-                "Services/Taxonomy",
+                "components/ILIAS/Taxonomy",
                 "tax_item_obj_id",
                 "tst:quest:$oldQuestionId",
                 $newObj->getId()
@@ -170,7 +170,7 @@ class ilTestImporter extends ilXmlImporter
     protected function finalRandomTestTaxonomyProcessing(ilImportMapping $mapping, $oldTstObjId, $newTstObjId, ilObjTest $testOBJ)
     {
         $new_tax_ids = $mapping->getMapping(
-            'Services/Taxonomy',
+            'components/ILIAS/Taxonomy',
             'tax_usage_of_obj',
             $oldTstObjId
         );
@@ -227,7 +227,7 @@ class ilTestImporter extends ilXmlImporter
 
         foreach ($mappedFilter as $taxId => $taxNodes) {
             $newTaxId = $mapping->getMapping(
-                'Services/Taxonomy',
+                'components/ILIAS/Taxonomy',
                 'tax',
                 $taxId
             );
@@ -240,7 +240,7 @@ class ilTestImporter extends ilXmlImporter
 
             foreach ($taxNodes as $taxNodeId) {
                 $newTaxNodeId = $mapping->getMapping(
-                    'Services/Taxonomy',
+                    'components/ILIAS/Taxonomy',
                     'tax_tree',
                     $taxNodeId
                 );

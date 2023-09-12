@@ -151,7 +151,7 @@ class ilWorkflowScaffold
 
     public function __construct(array $bpmn2_array)
     {
-        $this->registerRequire('./Services/WorkflowEngine/classes/workflows/class.ilBaseWorkflow.php');
+        $this->registerRequire('./components/ILIAS/WorkflowEngine/classes/workflows/class.ilBaseWorkflow.php');
         $this->bpmn2_array = $bpmn2_array;
         $this->auxilliary_methods = [];
     }

@@ -436,7 +436,7 @@ class ilObjUser extends ilObject
         $mail_options->createMailOptionsEntry();
 
         $ilAppEventHandler->raise(
-            "Services/User",
+            "components/ILIAS/User",
             "afterCreate",
             array("user_obj" => $this)
         );
@@ -545,7 +545,7 @@ class ilObjUser extends ilObject
         $this->read();
 
         $ilAppEventHandler->raise(
-            "Services/User",
+            "components/ILIAS/User",
             "afterUpdate",
             ["user_obj" => $this]
         );
@@ -759,7 +759,7 @@ class ilObjUser extends ilObject
                 array($this->id)
             );
             $this->app_event_handler->raise(
-                "Services/User",
+                "components/ILIAS/User",
                 "firstLogin",
                 array("user_obj" => $this)
             );
@@ -1188,7 +1188,7 @@ class ilObjUser extends ilObject
 
         $ilAppEventHandler = $DIC['ilAppEventHandler'];
         $ilAppEventHandler->raise(
-            'Services/User',
+            'components/ILIAS/User',
             'deleteUser',
             array('usr_id' => $this->getId())
         );
@@ -3974,7 +3974,7 @@ class ilObjUser extends ilObject
             "personal_data",
             $this->getId(),
             "",
-            "Services/User",
+            "components/ILIAS/User",
             $title,
             $dir
         );
@@ -4013,24 +4013,24 @@ class ilObjUser extends ilObject
     ): void {
         $imp = new ilImport();
         // bookmarks need to be skipped, importer does not exist anymore
-        $imp->addSkipImporter("Services/Bookmarks");
+        $imp->addSkipImporter("components/ILIAS/Bookmarks");
         if (!$a_profile_data) {
-            $imp->addSkipEntity("Services/User", "usr_profile");
+            $imp->addSkipEntity("components/ILIAS/User", "usr_profile");
         }
         if (!$a_settings) {
-            $imp->addSkipEntity("Services/User", "usr_setting");
+            $imp->addSkipEntity("components/ILIAS/User", "usr_setting");
         }
         if (!$a_notes) {
-            $imp->addSkipEntity("Services/Notes", "user_notes");
+            $imp->addSkipEntity("components/ILIAS/Notes", "user_notes");
         }
         if (!$a_calendar) {
-            $imp->addSkipEntity("Services/Calendar", "calendar");
+            $imp->addSkipEntity("components/ILIAS/Calendar", "calendar");
         }
         $imp->importEntity(
             $a_file["tmp_name"],
             $a_file["name"],
             "personal_data",
-            "Services/User"
+            "components/ILIAS/User"
         );
     }
 

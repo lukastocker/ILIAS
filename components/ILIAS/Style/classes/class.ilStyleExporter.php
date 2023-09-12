@@ -43,7 +43,7 @@ class ilStyleExporter extends ilXmlExporter
     {
         return array(
             "5.1.0" => array(
-                "namespace" => "http://www.ilias.de/Services/Style/5_1",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Style/5_1",
                 "xsd_file" => "ilias_style_5_1.xsd",
                 "uses_dataset" => true,
                 "min" => "5.1.0",

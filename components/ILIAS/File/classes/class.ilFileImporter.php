@@ -33,7 +33,7 @@ class ilFileImporter extends ilXmlImporter
     public function importXmlRepresentation(string $a_entity, string $a_id, string $a_xml, ilImportMapping $a_mapping): void
     {
         // case i container
-        if ($new_id = $a_mapping->getMapping('Services/Container', 'objs', $a_id)) {
+        if ($new_id = $a_mapping->getMapping('components/ILIAS/Container', 'objs', $a_id)) {
             $newObj = ilObjectFactory::getInstanceByObjId($new_id, false);
             $newObj->setVersion(0); // If $version is 0 from database, it will be set to 1 in ilObFile::doRead(). In ilFileXMLParser::handlerBeginTag $version will being increased. So its incorrectly 2. Set $version to 0 like case ii, non container
         } else {    // case ii, non container
@@ -55,7 +55,7 @@ class ilFileImporter extends ilXmlImporter
 
         $a_mapping->addMapping("components/ILIAS/File", "file", $a_id, $newObj->getId());
         $a_mapping->addMapping(
-            "Services/MetaData",
+            "components/ILIAS/MetaData",
             "md",
             $a_id . ":0:file",
             $newObj->getId() . ":0:file"

@@ -54,7 +54,7 @@ class ilCOPageExporter extends ilXmlExporter
         $this->ds = new ilCOPageDataSet();
         $this->ds->setExportDirectories($this->dir_relative, $this->dir_absolute);
         $this->ds->setDSPrefix("ds");
-        $this->config = $this->getExport()->getConfig("Services/COPage");
+        $this->config = $this->getExport()->getConfig("components/ILIAS/COPage");
         if ($this->config->getMasterLanguageOnly()) {
             $this->ds->setMasterLanguageOnly(true);
         }
@@ -63,7 +63,7 @@ class ilCOPageExporter extends ilXmlExporter
         foreach ($component_repository->getPluginSlotById("pgcp")->getActivePlugins() as $plugin) {
             $plugin_name = $plugin->getName();
             if ($plugin->supportsExport()) {
-                require_once('Customizing/global/plugins/Services/COPage/PageComponent/'
+                require_once('Customizing/global/plugins/components/ILIAS/COPage/PageComponent/'
                     . $plugin_name . '/classes/class.il' . $plugin_name . 'Exporter.php');
 
                 $this->plugin_dependencies[$plugin_name] = array(
@@ -112,7 +112,7 @@ class ilCOPageExporter extends ilXmlExporter
 
             return array(
                 array(
-                    "component" => "Services/MediaObjects",
+                    "component" => "components/ILIAS/MediaObjects",
                     "entity" => "mob",
                     "ids" => $mob_ids),
                 array(
@@ -138,7 +138,7 @@ class ilCOPageExporter extends ilXmlExporter
 
             return array(
                 array(
-                    "component" => "Services/COPage",
+                    "component" => "components/ILIAS/COPage",
                     "entity" => "pg",
                     "ids" => $pg_ids)
                 );
@@ -202,12 +202,12 @@ class ilCOPageExporter extends ilXmlExporter
         if ($a_entity == "pg") {
             return array(
                 "4.2.0" => array(
-                    "namespace" => "https://www.ilias.de/Services/COPage/pg/4_2",
+                    "namespace" => "https://www.ilias.de/components/ILIAS/COPage/pg/4_2",
                     "xsd_file" => "ilias_pg_4_2.xsd",
                     "min" => "4.2.0",
                     "max" => ""),
                 "4.1.0" => array(
-                    "namespace" => "https://www.ilias.de/Services/COPage/pg/4_1",
+                    "namespace" => "https://www.ilias.de/components/ILIAS/COPage/pg/4_1",
                     "xsd_file" => "ilias_pg_4_1.xsd",
                     "min" => "4.1.0",
                     "max" => "4.1.99")
@@ -216,7 +216,7 @@ class ilCOPageExporter extends ilXmlExporter
         if ($a_entity == "pgtp") {
             return array(
                 "4.2.0" => array(
-                    "namespace" => "https://www.ilias.de/Services/COPage/pgtp/4_1",
+                    "namespace" => "https://www.ilias.de/components/ILIAS/COPage/pgtp/4_1",
                     "xsd_file" => "ilias_pgtp_4_1.xsd",
                     "uses_dataset" => true,
                     "min" => "4.2.0",

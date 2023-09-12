@@ -80,7 +80,7 @@ class ilCmiXapiImporter extends ilXmlImporter
         $this->_import_objId = (int) $a_id;
         $this->_mapping = $a_mapping;
 
-        if (false === ($this->_newId = $a_mapping->getMapping('Services/Container', 'objs', (string) $this->_import_objId))) {
+        if (false === ($this->_newId = $a_mapping->getMapping('components/ILIAS/Container', 'objs', (string) $this->_import_objId))) {
             $this->prepareSingleObject();
             $this->getImportDirectorySingle();
             $this->_isSingleImport = true;
@@ -121,7 +121,7 @@ class ilCmiXapiImporter extends ilXmlImporter
      */
     private function prepareContainerObject(): void
     {
-        if ($this->_newId = $this->_mapping->getMapping('Services/Container', 'objs', (string) $this->_import_objId)) {
+        if ($this->_newId = $this->_mapping->getMapping('components/ILIAS/Container', 'objs', (string) $this->_import_objId)) {
             // container content
             $this->_cmixObj = ilObjectFactory::getInstanceByObjId($this->_newId, false);
             //$_SESSION['tst_import_subdir'] = $this->getImportPackageName();

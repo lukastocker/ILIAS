@@ -68,7 +68,7 @@ class ilMailAppEventListener implements ilAppEventListener
 
     private function isRelevantEvent(): bool
     {
-        return $this->component === 'Services/User'
+        return $this->component === 'components/ILIAS/User'
             && $this->event === 'onUserFieldAttributesChanged';
     }
 

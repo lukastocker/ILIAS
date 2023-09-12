@@ -55,7 +55,7 @@ class ilSkillAssignedObjectsTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt("title"), "title");
         $this->addColumn($this->lng->txt("path"), "path");
 
-        $this->setRowTemplate("tpl.skill_assigned_objects_row.html", "Services/Skill");
+        $this->setRowTemplate("tpl.skill_assigned_objects_row.html", "components/ILIAS/Skill");
     }
 
     protected function fillRow(array $a_set): void

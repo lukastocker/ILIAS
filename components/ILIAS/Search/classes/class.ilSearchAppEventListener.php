@@ -56,8 +56,8 @@ class ilSearchAppEventListener implements ilAppEventListener
         }
 
         switch ($a_component) {
-            case 'Services/Help':
-            case 'Services/Object':
+            case 'components/ILIAS/Help':
+            case 'components/ILIAS/Object':
 
                 switch ($a_event) {
                     case 'undelete':

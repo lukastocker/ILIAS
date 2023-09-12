@@ -192,7 +192,7 @@ class ilComponentUpdatePluginObjective implements Setup\Objective
         };
 
         if (!defined("ILIAS_ABSOLUTE_PATH")) {
-            define("ILIAS_ABSOLUTE_PATH", dirname(__FILE__, 5));
+            define("ILIAS_ABSOLUTE_PATH", dirname(__FILE__, 6));
         }
 
         if (!defined('SYSTEM_ROLE_ID')) {
@@ -204,7 +204,7 @@ class ilComponentUpdatePluginObjective implements Setup\Objective
         }
 
         if (!defined("ILIAS_WEB_DIR")) {
-            define('ILIAS_WEB_DIR', dirname(__DIR__, 4) . "/data/");
+            define('ILIAS_WEB_DIR', dirname(__DIR__, 5) . "/data/");
         }
 
         return [$ORIG_DIC, $ORIG_ilDB];

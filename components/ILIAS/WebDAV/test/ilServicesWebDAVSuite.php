@@ -20,7 +20,7 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestSuite;
 
-require_once __DIR__ . "/../../../libs/composer/vendor/autoload.php";
+require_once __DIR__ . "/../../../../libs/composer/vendor/autoload.php";
 
 /**
  * @author Stephan Winiker <stephan.winiker@hslu.ch>
@@ -32,16 +32,16 @@ class ilServicesWebDAVSuite extends TestSuite
     {
         $suite = new ilServicesWebDAVSuite();
 
-        require_once "./Services/WebDAV/test/traits/ilWebDAVCheckValidTitleTraitTest.php";
+        require_once "./components/ILIAS/WebDAV/test/traits/ilWebDAVCheckValidTitleTraitTest.php";
         $suite->addTestSuite("ilWebDAVCheckValidTitleTraitTest");
 
-        require_once "./Services/WebDAV/test/lock/ilWebDAVLockUriPathResolverTest.php";
+        require_once "./components/ILIAS/WebDAV/test/lock/ilWebDAVLockUriPathResolverTest.php";
         $suite->addTestSuite("ilWebDAVLockUriPathResolverTest");
 
-        require_once "./Services/WebDAV/test/dav/class.ilDAVContainerTest.php";
+        require_once "./components/ILIAS/WebDAV/test/dav/class.ilDAVContainerTest.php";
         $suite->addTestSuite("ilDAVContainerTest");
 
-        require_once "./Services/WebDAV/test/dav/class.ilDAVClientNodeTest.php";
+        require_once "./components/ILIAS/WebDAV/test/dav/class.ilDAVClientNodeTest.php";
         $suite->addTestSuite("ilDAVClientNodeTest");
 
         return $suite;

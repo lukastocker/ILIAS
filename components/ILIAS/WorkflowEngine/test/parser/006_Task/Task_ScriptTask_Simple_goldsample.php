@@ -1,9 +1,9 @@
 <?php
-require_once './Services/WorkflowEngine/classes/workflows/class.ilBaseWorkflow.php';
-require_once './Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php';
-require_once './Services/WorkflowEngine/classes/activities/class.ilScriptActivity.php';
-require_once './Services/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php';
-require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+require_once './components/ILIAS/WorkflowEngine/classes/workflows/class.ilBaseWorkflow.php';
+require_once './components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php';
+require_once './components/ILIAS/WorkflowEngine/classes/activities/class.ilScriptActivity.php';
+require_once './components/ILIAS/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php';
+require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
 
 		class Task_ScriptTask_Simple extends ilBaseWorkflow
 		{
@@ -55,7 +55,7 @@ require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector
 			public function _v_ScriptTask_1_script($context)
 			 {
 			 
-                require_once './Services/WorkflowEngine/test/parser/006_Task/class.test_006_Task.php';
+                require_once './components/ILIAS/WorkflowEngine/test/parser/006_Task/class.test_006_Task.php';
                 test_006_Task::triggerMe();
             
 			 }

@@ -262,7 +262,7 @@ class ilPCResourcesGUI extends ilPageContentGUI
         foreach ($type_grps as $type => $v) {
             if (is_int(strpos($a_content, "[list-" . $type . "]"))) {
                 // render block
-                $tpl = new ilTemplate("tpl.resource_block.html", true, true, "Services/COPage");
+                $tpl = new ilTemplate("tpl.resource_block.html", true, true, "components/ILIAS/COPage");
                 $cnt = 0;
 
                 if (isset($childs_by_type[$type]) && count($childs_by_type[$type]) > 0) {
@@ -293,7 +293,7 @@ class ilPCResourcesGUI extends ilPageContentGUI
                 $items = $itgr_items->getValidItems();
 
                 // render block
-                $tpl = new ilTemplate("tpl.resource_block.html", true, true, "Services/COPage");
+                $tpl = new ilTemplate("tpl.resource_block.html", true, true, "components/ILIAS/COPage");
                 foreach ($items as $it_ref_id) {
                     $it_obj_id = ilObject::_lookupObjId($it_ref_id);
                     $it_title = ilObject::_lookupTitle($it_obj_id);

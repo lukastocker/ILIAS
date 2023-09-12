@@ -21,7 +21,7 @@ class ilPluginNodeTest extends ilWorkflowEngineBaseTest
     protected function setUp(): void
     {
         // Empty workflow.
-        require_once './Services/WorkflowEngine/classes/workflows/class.ilEmptyWorkflow.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/workflows/class.ilEmptyWorkflow.php';
         $this->workflow = new ilEmptyWorkflow();
     }
 
@@ -68,7 +68,7 @@ class ilPluginNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilPluginNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
         $node->addDetector($detector);
 
@@ -84,7 +84,7 @@ class ilPluginNodeTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $node = new ilPluginNode($this->workflow);
-        require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
         $detector = new ilSimpleDetector($node);
         $node->addDetector($detector);
 

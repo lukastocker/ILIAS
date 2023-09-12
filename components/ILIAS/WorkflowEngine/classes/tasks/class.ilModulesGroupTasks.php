@@ -23,7 +23,7 @@ class ilModulesGroupTasks
 
       <bpmn2:extensionElements>
           <ilias:properties>
-              <ilias:libraryCall location="Services/WorkflowEngine/classes/tasks/class.ilModulesGroupTasks.php" api="ilModulesGroupTasks" method="readMembersFromGroup" />
+              <ilias:libraryCall location="components/ILIAS/WorkflowEngine/classes/tasks/class.ilModulesGroupTasks.php" api="ilModulesGroupTasks" method="readMembersFromGroup" />
           </ilias:properties>
       </bpmn2:extensionElements>
 
@@ -50,7 +50,7 @@ class ilModulesGroupTasks
 
       <bpmn2:extensionElements>
           <ilias:properties>
-              <ilias:libraryCall location="Services/WorkflowEngine/classes/tasks/class.ilModulesGroupTasks.php" api="ilModulesGroupTasks" method="readAdminsFromGroup" />
+              <ilias:libraryCall location="components/ILIAS/WorkflowEngine/classes/tasks/class.ilModulesGroupTasks.php" api="ilModulesGroupTasks" method="readAdminsFromGroup" />
           </ilias:properties>
       </bpmn2:extensionElements>
 
@@ -77,7 +77,7 @@ class ilModulesGroupTasks
 
       <bpmn2:extensionElements>
           <ilias:properties>
-              <ilias:libraryCall location="Services/WorkflowEngine/classes/tasks/class.ilModulesGroupTasks.php" api="ilModulesGroupTasks" method="assignMembersToGroup" />
+              <ilias:libraryCall location="components/ILIAS/WorkflowEngine/classes/tasks/class.ilModulesGroupTasks.php" api="ilModulesGroupTasks" method="assignMembersToGroup" />
           </ilias:properties>
       </bpmn2:extensionElements>
 
@@ -103,7 +103,7 @@ class ilModulesGroupTasks
 
       <bpmn2:extensionElements>
           <ilias:properties>
-              <ilias:libraryCall location="Services/WorkflowEngine/classes/tasks/class.ilModulesGroupTasks.php" api="ilModulesGroupTasks" method="assignAdminsToGroup" />
+              <ilias:libraryCall location="components/ILIAS/WorkflowEngine/classes/tasks/class.ilModulesGroupTasks.php" api="ilModulesGroupTasks" method="assignAdminsToGroup" />
           </ilias:properties>
       </bpmn2:extensionElements>
 

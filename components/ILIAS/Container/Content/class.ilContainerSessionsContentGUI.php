@@ -64,7 +64,7 @@ class ilContainerSessionsContentGUI extends ilContainerContentGUI
             "tpl.container_page.html",
             true,
             true,
-            "Services/Container"
+            "components/ILIAS/Container"
         );
 
         $this->showMaterials($tpl);
@@ -164,7 +164,7 @@ class ilContainerSessionsContentGUI extends ilContainerContentGUI
             'tpl.container_list_item.html',
             true,
             true,
-            "Services/Container"
+            "components/ILIAS/Container"
         );
         $tpl->setVariable('DIV_CLASS', 'ilContainerListItemOuter');
         $tpl->setCurrentBlock('item_title_linked');

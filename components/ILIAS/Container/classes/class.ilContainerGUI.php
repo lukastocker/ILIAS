@@ -615,7 +615,7 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
             "tpl.container_link_help.html",
             true,
             true,
-            "Services/Container"
+            "components/ILIAS/Container"
         );
 
         $type_ordering = [
@@ -2094,7 +2094,7 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
         // include plugin slot for async item list
         foreach ($this->component_factory->getActivePluginsInSlot("uihk") as $plugin) {
             $gui_class = $plugin->getUIClassInstance();
-            $resp = $gui_class->getHTML("Services/Container", "async_item_list", ["html" => $html]);
+            $resp = $gui_class->getHTML("components/ILIAS/Container", "async_item_list", ["html" => $html]);
             if ((string) $resp["mode"] !== ilUIHookPluginGUI::KEEP) {
                 $html = $gui_class->modifyHTML($html, $resp);
             }

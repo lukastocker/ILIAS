@@ -254,7 +254,7 @@ class ilPersonalProfileGUI
         $this->tabs->clearTargets();
         $this->tabs->clearSubTabs();
 
-        $tpl = new \ilTemplate('tpl.view_terms_of_service.html', true, true, 'Services/Init');
+        $tpl = new \ilTemplate('tpl.view_terms_of_service.html', true, true, 'components/ILIAS/Init');
 
         $this->tpl->setTitle($this->lng->txt('usr_agreement'));
 
@@ -358,7 +358,7 @@ class ilPersonalProfileGUI
 
         $domainEvent = new ilTermsOfServiceEventWithdrawn($this->user);
         $this->eventHandler->raise(
-            'Services/TermsOfService',
+            'components/ILIAS/TermsOfService',
             'ilTermsOfServiceEventWithdrawn',
             ['event' => $domainEvent]
         );

@@ -54,11 +54,11 @@ class ilTermsOfServiceAcceptanceHistoryTableGUI extends ilTermsOfServiceTableGUI
         iljQueryUtil::initjQuery($globalTemplate);
         ilYuiUtil::initPanel(false, $globalTemplate);
         ilYuiUtil::initOverlay($globalTemplate);
-        $globalTemplate->addJavaScript('./Services/Form/js/Form.js');
+        $globalTemplate->addJavaScript('./components/ILIAS/Form/js/Form.js');
 
         $this->setShowRowsSelector(true);
 
-        $this->setRowTemplate('tpl.tos_acceptance_history_table_row.html', 'Services/TermsOfService');
+        $this->setRowTemplate('tpl.tos_acceptance_history_table_row.html', 'components/ILIAS/TermsOfService');
 
         $this->initFilter();
         $this->setFilterCommand('applyAcceptanceHistoryFilter');

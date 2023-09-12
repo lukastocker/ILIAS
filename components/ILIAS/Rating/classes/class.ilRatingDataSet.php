@@ -36,7 +36,7 @@ class ilRatingDataSet extends ilDataSet
      */
     protected function getXmlNamespace(string $a_entity, string $a_schema_version): string
     {
-        return "https://www.ilias.de/xml/Services/Rating/" . $a_entity;
+        return "https://www.ilias.de/xml/components/ILIAS/Rating/" . $a_entity;
     }
 
     /**
@@ -99,7 +99,7 @@ class ilRatingDataSet extends ilDataSet
     ): void {
         switch ($a_entity) {
             case "rating_category":
-                if ($parent_id = $a_mapping->getMapping('Services/Rating', 'rating_category_parent_id', $a_rec['ParentId'])) {
+                if ($parent_id = $a_mapping->getMapping('components/ILIAS/Rating', 'rating_category_parent_id', $a_rec['ParentId'])) {
                     $newObj = new ilRatingCategory();
                     $newObj->setParentId($parent_id);
                     $newObj->save();

@@ -165,7 +165,7 @@ class ilMDEditorGUI
 
         $this->__setTabs('meta_quickedit');
 
-        $tpl = new ilTemplate('tpl.md_quick_edit_scorm.html', true, true, 'Services/MetaData');
+        $tpl = new ilTemplate('tpl.md_quick_edit_scorm.html', true, true, 'components/ILIAS/MetaData');
 
         $this->ctrl->setReturn($this, 'listGeneral');
         $this->ctrl->setParameter($this, 'section', 'meta_general');
@@ -587,7 +587,7 @@ class ilMDEditorGUI
 
         if (ilMDSettings::_getInstance()->isCopyrightSelectionActive()) {
             $this->tpl->addJavaScript(
-                'Services/MetaData/js/ilMetaCopyrightListener.js'
+                'components/ILIAS/MetaData/js/ilMetaCopyrightListener.js'
             );
             $this->tpl->addOnLoadCode(
                 'il.MetaDataCopyrightListener.init("' .
@@ -1314,7 +1314,7 @@ class ilMDEditorGUI
 
         $this->__setTabs('meta_general');
 
-        $tpl = new ilTemplate('tpl.md_general.html', true, true, 'Services/MetaData');
+        $tpl = new ilTemplate('tpl.md_general.html', true, true, 'components/ILIAS/MetaData');
 
         $this->ctrl->setReturn($this, 'listGeneral');
         $this->ctrl->setParameter($this, 'section', 'meta_general');
@@ -1751,7 +1751,7 @@ class ilMDEditorGUI
     public function listTechnical(): bool
     {
         $this->__setTabs('meta_technical');
-        $tpl = new ilTemplate('tpl.md_technical.html', true, true, 'Services/MetaData');
+        $tpl = new ilTemplate('tpl.md_technical.html', true, true, 'components/ILIAS/MetaData');
 
         $this->ctrl->setParameter($this, "section", "meta_technical");
         if (!is_object($this->md_section = $this->md_obj->getTechnical())) {
@@ -2039,7 +2039,7 @@ class ilMDEditorGUI
     public function listLifecycle(): bool
     {
         $this->__setTabs('meta_lifecycle');
-        $tpl = new ilTemplate('tpl.md_lifecycle.html', true, true, 'Services/MetaData');
+        $tpl = new ilTemplate('tpl.md_lifecycle.html', true, true, 'components/ILIAS/MetaData');
 
         $this->ctrl->setParameter($this, "section", "meta_lifecycle");
         if (!is_object($this->md_section = $this->md_obj->getLifecycle())) {
@@ -2252,7 +2252,7 @@ class ilMDEditorGUI
     public function listMetaMetaData(): bool
     {
         $this->__setTabs('meta_meta_metadata');
-        $tpl = new ilTemplate('tpl.md_meta_metadata.html', true, true, 'Services/MetaData');
+        $tpl = new ilTemplate('tpl.md_meta_metadata.html', true, true, 'components/ILIAS/MetaData');
 
         $this->ctrl->setParameter($this, "section", "meta_meta_metadata");
         if (!is_object($this->md_section = $this->md_obj->getMetaMetadata())) {
@@ -2466,7 +2466,7 @@ class ilMDEditorGUI
     public function listRights(): void
     {
         $this->__setTabs('meta_rights');
-        $tpl = new ilTemplate('tpl.md_rights.html', true, true, 'Services/MetaData');
+        $tpl = new ilTemplate('tpl.md_rights.html', true, true, 'components/ILIAS/MetaData');
 
         if (!is_object($this->md_section = $this->md_obj->getRights())) {
             $tpl->setCurrentBlock("no_rights");
@@ -2556,7 +2556,7 @@ class ilMDEditorGUI
     public function listEducational(): void
     {
         $this->__setTabs('meta_educational');
-        $tpl = new ilTemplate('tpl.md_educational.html', true, true, 'Services/MetaData');
+        $tpl = new ilTemplate('tpl.md_educational.html', true, true, 'components/ILIAS/MetaData');
 
         if (!is_object($this->md_section = $this->md_obj->getEducational())) {
             $tpl->setCurrentBlock("no_educational");
@@ -2922,7 +2922,7 @@ class ilMDEditorGUI
     public function listRelation(): void
     {
         $this->__setTabs('meta_relation');
-        $tpl = new ilTemplate('tpl.md_relation.html', true, true, 'Services/MetaData');
+        $tpl = new ilTemplate('tpl.md_relation.html', true, true, 'components/ILIAS/MetaData');
 
         $rel_ids = $this->md_obj->getRelationIds();
         if ($rel_ids === []) {
@@ -3115,7 +3115,7 @@ class ilMDEditorGUI
     public function listAnnotation(): void
     {
         $this->__setTabs('meta_annotation');
-        $tpl = new ilTemplate('tpl.md_annotation.html', true, true, 'Services/MetaData');
+        $tpl = new ilTemplate('tpl.md_annotation.html', true, true, 'components/ILIAS/MetaData');
 
         $anno_ids = $this->md_obj->getAnnotationIds();
         if ($anno_ids === []) {
@@ -3221,7 +3221,7 @@ class ilMDEditorGUI
     public function listClassification(): void
     {
         $this->__setTabs('meta_classification');
-        $tpl = new ilTemplate('tpl.md_classification.html', true, true, 'Services/MetaData');
+        $tpl = new ilTemplate('tpl.md_classification.html', true, true, 'components/ILIAS/MetaData');
 
         $class_ids = $this->md_obj->getClassificationIds();
         if ($class_ids === []) {
@@ -3859,7 +3859,7 @@ class ilMDEditorGUI
             "tpl.lang_selection.html",
             true,
             true,
-            "Services/MetaData"
+            "components/ILIAS/MetaData"
         );
 
         foreach (ilMDLanguageItem::_getLanguages() as $code => $text) {

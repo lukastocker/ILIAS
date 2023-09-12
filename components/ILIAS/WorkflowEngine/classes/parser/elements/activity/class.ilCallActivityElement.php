@@ -34,8 +34,8 @@ class ilCallActivityElement extends ilBaseElement
 
         $library_definition = ilBPMN2ParserUtils::extractILIASLibraryCallDefinitionFromElement($element);
 
-        $class_object->registerRequire('./Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
-        $class_object->registerRequire('./Services/WorkflowEngine/classes/activities/class.ilStaticMethodCallActivity.php');
+        $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
+        $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/activities/class.ilStaticMethodCallActivity.php');
 
         $data_inputs = $this->getDataInputAssociationIdentifiers($element);
         $activity_parameters = '';

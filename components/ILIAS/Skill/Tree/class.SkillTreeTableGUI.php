@@ -70,7 +70,7 @@ class SkillTreeTableGUI extends \ilTable2GUI
         $this->addColumn($this->lng->txt("actions"));
 
         $this->setFormAction($this->ctrl->getFormActionByClass("ilobjskilltreegui"));
-        $this->setRowTemplate("tpl.skill_tree_row.html", "Services/Skill/Tree");
+        $this->setRowTemplate("tpl.skill_tree_row.html", "components/ILIAS/Skill/Tree");
 
         if ($this->management_access_manager->hasCreateTreePermission()) {
             $this->addMultiCommand("delete", $this->lng->txt("delete"));

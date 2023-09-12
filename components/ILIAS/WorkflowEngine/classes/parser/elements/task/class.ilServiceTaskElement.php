@@ -34,7 +34,7 @@ class ilServiceTaskElement extends ilBaseElement
         // TODO Parse extensions to make a static method call.
         $event_definition = null;
 
-        $class_object->registerRequire('./Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
+        $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
         $code .= '
 			' . $this->element_varname . ' = new ilBasicNode($this);
 			$this->addNode(' . $this->element_varname . ');

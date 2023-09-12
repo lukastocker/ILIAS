@@ -48,7 +48,7 @@ class ilContainerSimpleContentGUI extends ilContainerContentGUI
             "tpl.container_page.html",
             true,
             true,
-            "Services/Container"
+            "components/ILIAS/Container"
         );
 
         // Feedback

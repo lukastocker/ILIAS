@@ -52,8 +52,8 @@ class ilSequenceFlowElement extends ilBaseElement
 			' . $source_element . '->addEmitter(' . $source_element . '_emitter);
 		';
 
-        $class_object->registerRequire('./Services/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php');
-        $class_object->registerRequire('./Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php');
+        $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php');
+        $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php');
 
         return $code;
     }

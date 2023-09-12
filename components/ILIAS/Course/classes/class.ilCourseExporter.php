@@ -52,7 +52,7 @@ class ilCourseExporter extends ilXmlExporter
         // always trigger container because of co-page(s)
         return array(
             array(
-                'component' => 'Services/Container',
+                'component' => 'components/ILIAS/Container',
                 'entity' => 'struct',
                 'ids' => $a_ids
             )
@@ -83,7 +83,7 @@ class ilCourseExporter extends ilXmlExporter
 
             if ($page_ids !== []) {
                 $dependencies[] = array(
-                    'component' => 'Services/COPage',
+                    'component' => 'components/ILIAS/COPage',
                     'entity' => 'pg',
                     'ids' => $page_ids
                 );

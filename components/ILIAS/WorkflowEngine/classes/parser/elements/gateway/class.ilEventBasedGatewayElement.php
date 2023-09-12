@@ -34,7 +34,7 @@ class ilEventBasedGatewayElement extends ilBaseElement
 
         $event_definition = null;
 
-        $class_object->registerRequire('./Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
+        $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
         $code .= '
 			' . $this->element_varname . ' = new ilBasicNode($this);
 			' . $this->element_varname . '->setName(\'' . $this->element_varname . '\');

@@ -751,7 +751,7 @@ class ilSoapFunctions
      */
     public static function startBackgroundTaskWorker(string $sid)
     {
-        require_once("./Services/BackgroundTasks/classes/class.ilSoapBackgroundTasksAdministration.php");
+        require_once("./components/ILIAS/BackgroundTasks/classes/class.ilSoapBackgroundTasksAdministration.php");
         $soa = new ilSoapBackgroundTasksAdministration();
         return $soa->runAsync($sid);
     }
@@ -858,7 +858,7 @@ class ilSoapFunctions
         $path = dirname($_SERVER['REQUEST_URI'] ?? '');
 
         //dirname cuts the last directory from a directory path e.g content/classes return content
-        include_once 'Services/FileServices/classes/class.ilFileUtils.php';
+        include_once 'components/ILIAS/FileServices/classes/class.ilFileUtils.php';
         $module = ilFileUtils::removeTrailingPathSeparators(ILIAS_MODULE);
 
         $dirs = explode('/', $module);

@@ -274,7 +274,7 @@ class ilPCDataTableGUI extends ilPCTableGUI
                 true,
                 false
             );
-            include_once("./Services/COPage/classes/class.ilPCParagraphGUI.php");
+            include_once("./components/ILIAS/COPage/classes/class.ilPCParagraphGUI.php");
             $s_text = ilPCParagraphGUI::xml2outputJS(
                 $s_text,
                 "TableContent",

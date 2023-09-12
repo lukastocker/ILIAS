@@ -2,7 +2,7 @@
 
 /* Copyright (c) 1998-2014 ILIAS open source, Extended GPL, see docs/LICENSE */
 
-require_once 'Services/WorkflowEngine/test/ilWorkflowEngineBaseTest.php';
+require_once 'components/ILIAS/WorkflowEngine/test/ilWorkflowEngineBaseTest.php';
 
 /**
  * @author Maximilian Becker <mbecker@databay.de>
@@ -13,7 +13,7 @@ require_once 'Services/WorkflowEngine/test/ilWorkflowEngineBaseTest.php';
 class test_003_ParallelGateway extends ilWorkflowEngineBaseTest
 {
     #region Helper
-    public string $base_path = './Services/WorkflowEngine/test/parser/';
+    public string $base_path = './components/ILIAS/WorkflowEngine/test/parser/';
     public string $suite_path = '003_ParallelGateway/';
 
     public function getTestInputFilename($test_name): string
@@ -38,7 +38,7 @@ class test_003_ParallelGateway extends ilWorkflowEngineBaseTest
 
         parent::setUp();
 
-        require_once './Services/WorkflowEngine/classes/parser/class.ilBPMN2Parser.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/parser/class.ilBPMN2Parser.php';
     }
 
     public function test_WorkflowWithSimpleParallelGatewayShouldOutputAccordingly(): void

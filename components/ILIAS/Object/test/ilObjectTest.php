@@ -95,14 +95,14 @@ class ilObjectTest extends TestCase
     ilObjectTest::testSetGetLookup
     Undefined array key "keyword"
 
-    /home/runner/work/ILIAS/ILIAS/Services/Administration/classes/class.ilSetting.php:92
-    /home/runner/work/ILIAS/ILIAS/Services/Administration/classes/class.ilSetting.php:62
-    /home/runner/work/ILIAS/ILIAS/Services/Logging/classes/class.ilLoggingDBSettings.php:37
-    /home/runner/work/ILIAS/ILIAS/Services/Logging/classes/class.ilLoggingDBSettings.php:46
-    /home/runner/work/ILIAS/ILIAS/Services/Logging/classes/public/class.ilLoggerFactory.php:69
-    /home/runner/work/ILIAS/ILIAS/Services/Logging/classes/public/class.ilLoggerFactory.php:91
-    /home/runner/work/ILIAS/ILIAS/Services/Object/classes/class.ilObject.php:90
-    /home/runner/work/ILIAS/ILIAS/Services/Object/test/ilObjectTest.php:106
+    /home/runner/work/ILIAS/ILIAS/components/ILIAS/Administration/classes/class.ilSetting.php:92
+    /home/runner/work/ILIAS/ILIAS/components/ILIAS/Administration/classes/class.ilSetting.php:62
+    /home/runner/work/ILIAS/ILIAS/components/ILIAS/Logging/classes/class.ilLoggingDBSettings.php:37
+    /home/runner/work/ILIAS/ILIAS/components/ILIAS/Logging/classes/class.ilLoggingDBSettings.php:46
+    /home/runner/work/ILIAS/ILIAS/components/ILIAS/Logging/classes/public/class.ilLoggerFactory.php:69
+    /home/runner/work/ILIAS/ILIAS/components/ILIAS/Logging/classes/public/class.ilLoggerFactory.php:91
+    /home/runner/work/ILIAS/ILIAS/components/ILIAS/Object/classes/class.ilObject.php:90
+    /home/runner/work/ILIAS/ILIAS/components/ILIAS/Object/test/ilObjectTest.php:106
 
     public function testSetGetLookup(): void
     {

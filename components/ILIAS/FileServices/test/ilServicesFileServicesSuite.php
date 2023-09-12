@@ -26,7 +26,7 @@ class ilServicesFileServicesSuite extends TestSuite
     {
         $suite = new self();
 
-        require_once("./Services/FileServices/test/ilServicesFileServicesTest.php");
+        require_once("./components/ILIAS/FileServices/test/ilServicesFileServicesTest.php");
         $suite->addTestSuite("ilServicesFileServicesTest");
 
         return $suite;

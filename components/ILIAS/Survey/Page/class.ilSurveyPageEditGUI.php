@@ -1407,7 +1407,7 @@ class ilSurveyPageEditGUI
 
                 /**
                  * Alex Killing, 27 July 2018
-                 * I removed a line $tpl->addJavascript("./Services/RTE/tiny_mce_.../tiny_mce_src.js"); at the end
+                 * I removed a line $tpl->addJavascript("./components/ILIAS/RTE/tiny_mce_.../tiny_mce_src.js"); at the end
                  * of this function. Currently I have no idea when this tiny will be presented...
                  * Maybe a bug will come out of this during 5.4 testing
                  */

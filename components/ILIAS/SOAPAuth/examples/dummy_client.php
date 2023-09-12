@@ -19,7 +19,7 @@ declare(strict_types=1);
 exit;
 include_once './webservice/soap/lib/nusoap.php';
 
-$server = $_GET["server"] ?: "http://localhost/Services/SOAPAuth/dummy_server.php";
+$server = $_GET["server"] ?: "http://localhost/components/ILIAS/SOAPAuth/dummy_server.php";
 
 $ext_uid = $_GET["ext_uid"] ?: "testuser";
 

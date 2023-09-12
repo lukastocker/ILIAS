@@ -54,7 +54,7 @@ class ilHelpModuleTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt("actions"));
 
         $this->setFormAction($ilCtrl->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.help_module_row.html", "Services/Help");
+        $this->setRowTemplate("tpl.help_module_row.html", "components/ILIAS/Help");
 
         if ($this->has_write_permission) {
             $this->addMultiCommand("confirmHelpModulesDeletion", $lng->txt("delete"));

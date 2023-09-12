@@ -54,7 +54,7 @@ class ilDclMultiTextInputGUI extends ilMultipleTextsInputGUI
 
     public function render(string $a_mode = ""): string
     {
-        $tpl = new ilTemplate("tpl.prop_multi_text_inp.html", true, true, "Services/Form");
+        $tpl = new ilTemplate("tpl.prop_multi_text_inp.html", true, true, "components/ILIAS/Form");
         $i = 0;
         foreach ($this->getIdentifiedMultiValues() as $identifier => $value) {
             if (is_array($value)) {
@@ -103,10 +103,10 @@ class ilDclMultiTextInputGUI extends ilMultipleTextsInputGUI
 
         if (!$this->getDisabled()) {
             $globalTpl = $GLOBALS['DIC'] ? $GLOBALS['DIC']['tpl'] : $GLOBALS['tpl'];
-            $globalTpl->addJavascript("./Services/Form/js/ServiceFormWizardInput.js");
-            $globalTpl->addJavascript("./Services/Form/js/ServiceFormIdentifiedWizardInputExtend.js");
+            $globalTpl->addJavascript("./components/ILIAS/Form/js/ServiceFormWizardInput.js");
+            $globalTpl->addJavascript("./components/ILIAS/Form/js/ServiceFormIdentifiedWizardInputExtend.js");
 
-            $globalTpl->addJavascript("./Services/Form/js/ServiceFormMultiTextInputInit.js");
+            $globalTpl->addJavascript("./components/ILIAS/Form/js/ServiceFormMultiTextInputInit.js");
         }
 
         return $tpl->get();

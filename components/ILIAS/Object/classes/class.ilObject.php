@@ -602,7 +602,7 @@ class ilObject
         ));
 
         $this->app_event_handler->raise(
-            'Services/Object',
+            'components/ILIAS/Object',
             'create',
             [
                 'obj_id' => $this->id,
@@ -665,7 +665,7 @@ class ilObject
         }
 
         $this->app_event_handler->raise(
-            'Services/Object',
+            'components/ILIAS/Object',
             'update',
             [
                 'obj_id' => $this->getId(),
@@ -690,7 +690,7 @@ class ilObject
     {
         if ($this->beforeMDUpdateListener($element)) {
             $this->app_event_handler->raise(
-                'Services/Object',
+                'components/ILIAS/Object',
                 'update',
                 array('obj_id' => $this->getId(),
                       'obj_type' => $this->getType(),
@@ -1223,7 +1223,7 @@ class ilObject
         $this->log->write($log_entry);
 
         $this->app_event_handler->raise(
-            'Services/Object',
+            'components/ILIAS/Object',
             'putObjectInTree',
             [
                 'object' => $this,
@@ -1343,7 +1343,7 @@ class ilObject
                 );
             }
 
-            $this->app_event_handler->raise('Services/Object', 'beforeDeletion', ['object' => $this]);
+            $this->app_event_handler->raise('components/ILIAS/Object', 'beforeDeletion', ['object' => $this]);
 
             $sql =
                 "DELETE FROM " . self::TABLE_OBJECT_DATA . PHP_EOL
@@ -1405,7 +1405,7 @@ class ilObject
         if ($this->referenced) {
             ilObjectActivation::deleteAllEntries($this->getRefId());
 
-            $this->app_event_handler->raise('Services/Object', 'deleteReference', ['ref_id' => $this->getRefId()]);
+            $this->app_event_handler->raise('components/ILIAS/Object', 'deleteReference', ['ref_id' => $this->getRefId()]);
 
             $sql =
                 "DELETE FROM object_reference" . PHP_EOL
@@ -1679,7 +1679,7 @@ class ilObject
         $tile_image->copy($new_obj->getId());
 
         $this->app_event_handler->raise(
-            'Services/Object',
+            'components/ILIAS/Object',
             'cloneObject',
             [
                 'object' => $new_obj,

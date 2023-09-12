@@ -95,7 +95,7 @@ class InternalGUIService
         \ilModalGUI::initJS($tpl);
 
         $lng->toJS(array("private_notes", "notes_public_comments", "cancel"), $tpl);
-        $tpl->addJavaScript("./Services/Notes/js/ilNotes.js");
+        $tpl->addJavaScript("./components/ILIAS/Notes/js/ilNotes.js");
         $tpl->addOnLoadCode("ilNotes.setAjaxUrl('" . $ajax_url . "');");
     }
 

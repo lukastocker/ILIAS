@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 class test_case_01 extends TestCase
 {
     #region Helper
-    public string $base_path = './Services/WorkflowEngine/test/parser/';
+    public string $base_path = './components/ILIAS/WorkflowEngine/test/parser/';
     public string $suite_path = 'case_01/';
 
     public function getTestInputFilename($test_name): string
@@ -36,7 +36,7 @@ class test_case_01 extends TestCase
         chdir(__DIR__);
         chdir('../../../../../');
 
-        require_once './Services/WorkflowEngine/classes/parser/class.ilBPMN2Parser.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/parser/class.ilBPMN2Parser.php';
     }
 
     public function test_WorkflowWithSimpleEndEventShouldOutputAccordingly(): void

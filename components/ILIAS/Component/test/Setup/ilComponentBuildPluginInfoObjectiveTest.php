@@ -98,14 +98,14 @@ class ilComponentBuildPluginInfoObjectiveTest extends TestCase
             "Services" => ["Service1"],
             "components/ILIAS/Module1" => ["Slot1", "Slot2"],
             "components/ILIAS/Module2" => [],
-            "Services/Service1" => ["Slot3",".DS_Store"] // .DS_Store should be skipped
+            "components/ILIAS/Service1" => ["Slot3",".DS_Store"] // .DS_Store should be skipped
         ];
 
         $this->builder->build();
 
         $expected = ["Modules", "Services", "components/ILIAS/Module1", "components/ILIAS/Module2",
-            "Services/Service1", "components/ILIAS/Module1/Slot1", "components/ILIAS/Module1/Slot2",
-            "Services/Service1/Slot3"];
+            "components/ILIAS/Service1", "components/ILIAS/Module1/Slot1", "components/ILIAS/Module1/Slot2",
+            "components/ILIAS/Service1/Slot3"];
         sort($expected);
         sort($this->scanned);
         $this->assertEquals($expected, $this->scanned);
@@ -117,9 +117,9 @@ class ilComponentBuildPluginInfoObjectiveTest extends TestCase
             "Modules" => ["Module1"],
             "Services" => ["Service1"],
             "components/ILIAS/Module1" => ["Slot1"],
-            "Services/Service1" => ["Slot2"],
+            "components/ILIAS/Service1" => ["Slot2"],
             "components/ILIAS/Module1/Slot1" => ["Plugin1", "Plugin2"],
-            "Services/Service1/Slot2" => ["Plugin3"]
+            "components/ILIAS/Service1/Slot2" => ["Plugin3"]
         ];
 
         $this->builder->build();
@@ -127,7 +127,7 @@ class ilComponentBuildPluginInfoObjectiveTest extends TestCase
         $expected = [
             "components/ILIAS/Module1/Slot1/Plugin1",
             "components/ILIAS/Module1/Slot1/Plugin2",
-            "Services/Service1/Slot2/Plugin3"
+            "components/ILIAS/Service1/Slot2/Plugin3"
         ];
         sort($expected);
         sort($this->added);
@@ -140,7 +140,7 @@ class ilComponentBuildPluginInfoObjectiveTest extends TestCase
         $expected = ["ROADMAP.md", "classes", "exceptions", "maintenance.json", "service.xml", "test"];
         $actual = array_values(
             array_diff(
-                $this->builder->_scanDir(__DIR__ . "/../.."),
+                $this->builder->_scanDir(__DIR__ . "/../../.."),
                 ["artifacts", ".DS_Store"] // .DS_Store is a macOS artifact which is not relevant for the test.
             )
         );
@@ -151,7 +151,7 @@ class ilComponentBuildPluginInfoObjectiveTest extends TestCase
     {
         // Use the component directory, because this should be mostly stable.
         $expected = true;
-        $actual = $this->builder->_isDir(__DIR__ . "/../..");
+        $actual = $this->builder->_isDir(__DIR__ . "/../../..");
         $this->assertEquals($expected, $actual);
     }
 

@@ -1,6 +1,6 @@
 <?php
-require_once './Services/WorkflowEngine/classes/workflows/class.ilBaseWorkflow.php';
-require_once './Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php';
+require_once './components/ILIAS/WorkflowEngine/classes/workflows/class.ilBaseWorkflow.php';
+require_once './components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php';
 
 		class StartEvent_Blank extends ilBaseWorkflow
 		{

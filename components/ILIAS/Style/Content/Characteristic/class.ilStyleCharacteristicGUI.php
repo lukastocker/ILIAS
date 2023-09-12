@@ -699,7 +699,7 @@ class ilStyleCharacteristicGUI
             ilObjStyleSheet::getContentStylePath($this->object->getId())
         );
 
-        $ts_tpl = new ilTemplate("tpl.style_tag_edit.html", true, true, "Services/Style/Content");
+        $ts_tpl = new ilTemplate("tpl.style_tag_edit.html", true, true, "components/ILIAS/Style/Content");
 
         $ts_tpl->setVariable(
             "EXAMPLE",

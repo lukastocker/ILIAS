@@ -98,7 +98,7 @@ class ilGlobalPageTemplate implements ilGlobalTemplateInterface
     {
         iljQueryUtil::initjQuery($this);
         iljQueryUtil::initjQueryUI($this);
-        $this->gs->layout()->meta()->addJs("./Services/JavaScript/js/Basic.js", true, 1);
+        $this->gs->layout()->meta()->addJs("./components/ILIAS/JavaScript/js/Basic.js", true, 1);
         ilUIFramework::init($this);
         ilBuddySystemGUI::initializeFrontend($this);
         ilOnScreenChatGUI::initializeFrontend($this);

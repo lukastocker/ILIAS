@@ -67,7 +67,7 @@ class ilContainerByTypeContentGUI extends ilContainerContentGUI
             "tpl.container_page.html",
             true,
             true,
-            "Services/Container"
+            "components/ILIAS/Container"
         );
 
         // get all sub items

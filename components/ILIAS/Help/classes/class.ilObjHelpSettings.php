@@ -78,7 +78,7 @@ class ilObjHelpSettings extends ilObject2
 
         try {
             $imp = new ilImport();
-            $conf = $imp->getConfig("Services/Help");
+            $conf = $imp->getConfig("components/ILIAS/Help");
             $conf->setModuleId($id);
             $new_id = $imp->importObject(null, $a_file["tmp_name"], $a_file["name"], "lm", "components/ILIAS/LearningModule"); //
             $newObj = new ilObjLearningModule($new_id, false);
@@ -90,7 +90,7 @@ class ilObjHelpSettings extends ilObject2
 
 
         $GLOBALS['ilAppEventHandler']->raise(
-            'Services/Help',
+            'components/ILIAS/Help',
             'create',
             array(
                 'obj_id' => $id,

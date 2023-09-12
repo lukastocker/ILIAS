@@ -31,7 +31,7 @@ class ilServicesMediaObjectsSuite extends TestSuite
     {
         $suite = new self();
 
-        require_once("./Services/MediaObjects/test/ImageMapEditSessionRepositoryTest.php");
+        require_once("./components/ILIAS/MediaObjects/test/ImageMapEditSessionRepositoryTest.php");
         $suite->addTestSuite("ImageMapEditSessionRepositoryTest");
 
         return $suite;

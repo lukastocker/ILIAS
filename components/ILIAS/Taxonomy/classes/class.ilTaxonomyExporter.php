@@ -81,7 +81,7 @@ class ilTaxonomyExporter extends ilXmlExporter
     {
         return array(
             "4.3.0" => array(
-                "namespace" => "http://www.ilias.de/Services/Taxonomy/tax/4_3",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Taxonomy/tax/4_3",
                 "xsd_file" => "ilias_tax_4_3.xsd",
                 "uses_dataset" => true,
                 "min" => "4.3.0",

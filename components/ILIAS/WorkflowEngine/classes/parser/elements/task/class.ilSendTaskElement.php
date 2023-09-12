@@ -45,7 +45,7 @@ class ilSendTaskElement extends ilBaseElement
 
         $message_element = $element['attributes']['ilias:message'] ?? false;
 
-        $class_object->registerRequire('./Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
+        $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
         $code .= '
 			' . $this->element_varname . ' = new ilBasicNode($this);
 			$this->addNode(' . $this->element_varname . ');
@@ -53,7 +53,7 @@ class ilSendTaskElement extends ilBaseElement
 		';
 
         if (isset($event_definition['type'], $event_definition['content'])) {
-            $class_object->registerRequire('./Services/WorkflowEngine/classes/activities/class.ilEventRaisingActivity.php');
+            $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/activities/class.ilEventRaisingActivity.php');
             $code .= '
 				' . $this->element_varname . '_sendTaskActivity = new ilEventRaisingActivity(' . $this->element_varname . ');
 				' . $this->element_varname . '_sendTaskActivity->setName(\'' . $this->element_varname . '_sendTaskActivity\');
@@ -74,7 +74,7 @@ class ilSendTaskElement extends ilBaseElement
                 $task_parameters = '"' . implode('","', $data_inputs) . '"';
             }
 
-            $class_object->registerRequire('./Services/WorkflowEngine/classes/activities/class.ilSendMailActivity.php');
+            $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/activities/class.ilSendMailActivity.php');
             $code .= '
 				' . $this->element_varname . '_sendTaskActivity = new ilSendMailActivity(' . $this->element_varname . ');
 				' . $this->element_varname . '_sendTaskActivity->setMessageName(\'' . $message_name . '\');

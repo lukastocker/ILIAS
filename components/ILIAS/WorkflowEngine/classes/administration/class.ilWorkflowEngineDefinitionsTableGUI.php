@@ -50,7 +50,7 @@ class ilWorkflowEngineDefinitionsTableGUI extends ilTable2GUI
 
         $this->initFilter();
 
-        $this->setRowTemplate("tpl.wfe_def_row.html", "Services/WorkflowEngine");
+        $this->setRowTemplate("tpl.wfe_def_row.html", "components/ILIAS/WorkflowEngine");
         $this->populateTable();
 
         $this->setDefaultOrderField("title");

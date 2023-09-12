@@ -21,17 +21,17 @@ class ilStaticMethodCallActivityTest extends ilWorkflowEngineBaseTest
     protected function setUp(): void
     {
         // Empty workflow.
-        require_once './Services/WorkflowEngine/classes/workflows/class.ilEmptyWorkflow.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/workflows/class.ilEmptyWorkflow.php';
         $this->workflow = new ilEmptyWorkflow();
 
         // Basic node
-        require_once './Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php';
         $this->node = new ilBasicNode($this->workflow);
 
         // Wiring up so the node is attached to the workflow.
         $this->workflow->addNode($this->node);
 
-        require_once './Services/WorkflowEngine/classes/activities/class.ilStaticMethodCallActivity.php';
+        require_once './components/ILIAS/WorkflowEngine/classes/activities/class.ilStaticMethodCallActivity.php';
     }
 
     protected function tearDown(): void
@@ -61,7 +61,7 @@ class ilStaticMethodCallActivityTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $activity = new ilStaticMethodCallActivity($this->node);
-        $expected = 'Services/WorkflowEngine/classes/utils/class.ilWorkflowUtils.php';
+        $expected = 'components/ILIAS/WorkflowEngine/classes/utils/class.ilWorkflowUtils.php';
 
         // Act
         $activity->setIncludeFilename($expected);
@@ -103,7 +103,7 @@ class ilStaticMethodCallActivityTest extends ilWorkflowEngineBaseTest
     {
         // Arrange
         $activity = new ilStaticMethodCallActivity($this->node);
-        $file = 'Services/WorkflowEngine/test/activities/ilStaticMethodCallActivityTest.php';
+        $file = 'components/ILIAS/WorkflowEngine/test/activities/ilStaticMethodCallActivityTest.php';
         $class_and_method = 'ilStaticMethodCallActivityTest::executionTargetMethod';
         $parameters = array('homer', 'marge', 'bart', 'lisa', 'maggy');
 

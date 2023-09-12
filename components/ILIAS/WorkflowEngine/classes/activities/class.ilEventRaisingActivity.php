@@ -43,7 +43,7 @@ class ilEventRaisingActivity implements ilActivity, ilWorkflowEngineElement
     public function __construct(ilNode $a_context)
     {
         $this->context = $a_context;
-        $this->event_type = 'Services/WorkflowEngine';
+        $this->event_type = 'components/ILIAS/WorkflowEngine';
         $this->event_name = 'nondescript';
     }
 

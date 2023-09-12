@@ -44,13 +44,13 @@ class ilUserAppEventListener implements ilAppEventListener
             $settings
         );
 
-        if ('Services/Object' === $component && 'beforeDeletion' === $event) {
+        if ('components/ILIAS/Object' === $component && 'beforeDeletion' === $event) {
             if (isset($parameter['object']) && $parameter['object'] instanceof ilObjRole) {
                 $user_starting_point_repository->onRoleDeleted($parameter['object']);
             }
         }
 
-        if ('Services/TermsOfService' === $component && ilTermsOfServiceEventWithdrawn::class === $event) {
+        if ('components/ILIAS/TermsOfService' === $component && ilTermsOfServiceEventWithdrawn::class === $event) {
             $user = $parameter['event']->getUser();
 
             $defaultAuth = ilAuthUtils::AUTH_LOCAL;

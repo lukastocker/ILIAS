@@ -31,7 +31,7 @@ class ilServicesContainerSuite extends TestSuite
     {
         $suite = new self();
 
-        require_once("./Services/Container/test/ContentViewManagerTest.php");
+        require_once("./components/ILIAS/Container/test/ContentViewManagerTest.php");
         $suite->addTestSuite("ContentViewManagerTest");
 
         return $suite;

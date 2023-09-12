@@ -31,7 +31,7 @@ class ilServicesRepositorySuite extends TestSuite
     {
         $suite = new self();
 
-        require_once("./Services/Repository/test/ClipboardSessionRepositoryTest.php");
+        require_once("./components/ILIAS/Repository/test/ClipboardSessionRepositoryTest.php");
         $suite->addTestSuite("ClipboardSessionRepositoryTest");
 
         return $suite;

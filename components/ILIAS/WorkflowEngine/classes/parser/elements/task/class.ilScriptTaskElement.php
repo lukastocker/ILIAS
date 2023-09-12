@@ -34,7 +34,7 @@ class ilScriptTaskElement extends ilBaseElement
 
         $event_definition = null;
 
-        $class_object->registerRequire('./Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
+        $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php');
         $code .= '
 			' . $this->element_varname . ' = new ilBasicNode($this);
 			$this->addNode(' . $this->element_varname . ');
@@ -49,7 +49,7 @@ class ilScriptTaskElement extends ilBaseElement
 			 }"
         );
 
-        $class_object->registerRequire('./Services/WorkflowEngine/classes/activities/class.ilScriptActivity.php');
+        $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/activities/class.ilScriptActivity.php');
 
         $code .= "
 			" . $this->element_varname . "_scriptActivity = new ilScriptActivity(" . $this->element_varname . ");

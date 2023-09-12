@@ -122,7 +122,7 @@ class ilClassificationBlockGUI extends ilBlockGUI
             return "";
         }
 
-        $tpl->addJavaScript("Services/Classification/js/ilClassification.js");
+        $tpl->addJavaScript("components/ILIAS/Classification/js/ilClassification.js");
 
         return parent::getHTML();
     }
@@ -169,7 +169,7 @@ class ilClassificationBlockGUI extends ilBlockGUI
 
         $overall_html = "";
         if (sizeof($html)) {
-            $btpl = new ilTemplate("tpl.classification_block.html", true, true, "Services/Classification");
+            $btpl = new ilTemplate("tpl.classification_block.html", true, true, "components/ILIAS/Classification");
 
             foreach ($html as $item) {
                 $btpl->setCurrentBlock("provider_chunk_bl");
@@ -229,7 +229,7 @@ class ilClassificationBlockGUI extends ilBlockGUI
         $has_content = false;
 
 
-        $ltpl = new ilTemplate("tpl.classification_object_list.html", true, true, "Services/Classification");
+        $ltpl = new ilTemplate("tpl.classification_object_list.html", true, true, "components/ILIAS/Classification");
 
         if (isset($all_matching_provider_object_ids) && sizeof($all_matching_provider_object_ids)) {
             $fields = array(
@@ -251,7 +251,7 @@ class ilClassificationBlockGUI extends ilBlockGUI
                 $valid_objects = array();
 
                 // :TODO: not sure if this makes sense...
-                include_once "Services/Object/classes/class.ilObjectListGUIPreloader.php";
+                include_once "components/ILIAS/Object/classes/class.ilObjectListGUIPreloader.php";
                 $preloader = new ilObjectListGUIPreloader(ilObjectListGUI::CONTEXT_REPOSITORY);
 
                 foreach ($matching as $item) {
@@ -362,7 +362,7 @@ class ilClassificationBlockGUI extends ilBlockGUI
     protected function initProviders(bool $a_check_post = false): void
     {
         if (!isset(self::$providers_cache[$this->parent_ref_id])) {
-            include_once "Services/Classification/classes/class.ilClassificationProvider.php";
+            include_once "components/ILIAS/Classification/classes/class.ilClassificationProvider.php";
             self::$providers_cache[$this->parent_ref_id] = ilClassificationProvider::getValidProviders(
                 $this->parent_ref_id,
                 $this->parent_obj_id,

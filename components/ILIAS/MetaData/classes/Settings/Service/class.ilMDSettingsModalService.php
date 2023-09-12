@@ -33,7 +33,7 @@ class ilMDSettingsModalService
 
     public function initJS(ilGlobalTemplateInterface $tpl): void
     {
-        $tpl->addJavaScript('./Services/Repository/js/repository.js');
+        $tpl->addJavaScript('./components/ILIAS/Repository/js/repository.js');
     }
 
     public function placeholderModal(string $async_link): RoundTrip

@@ -31,7 +31,7 @@ use ILIAS\ResourceStorage\StorageHandler\StorageHandler;
  */
 class ilWACSrcBuilder extends InlineSrcBuilder implements SrcBuilder
 {
-    public const WAC_BASE_URL = './Services/WebAccessChecker/wac.php';
+    public const WAC_BASE_URL = './components/ILIAS/WebAccessChecker/wac.php';
 
     public function getResourceURL(Revision $revision, bool $signed = true): string
     {

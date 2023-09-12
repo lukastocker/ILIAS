@@ -47,7 +47,7 @@ class ilCOPageDataSet extends ilDataSet
 
     protected function getXmlNamespace(string $a_entity, string $a_schema_version): string
     {
-        return "https://www.ilias.de/xml/Services/COPage/" . $a_entity;
+        return "https://www.ilias.de/xml/components/ILIAS/COPage/" . $a_entity;
     }
 
     protected function getTypes(string $a_entity, string $a_version): array
@@ -113,13 +113,13 @@ class ilCOPageDataSet extends ilDataSet
 
                 $this->current_obj = $pt;
                 $a_mapping->addMapping(
-                    "Services/COPage",
+                    "components/ILIAS/COPage",
                     "pgtp",
                     $a_rec["Id"],
                     $pt->getId()
                 );
                 $a_mapping->addMapping(
-                    "Services/COPage",
+                    "components/ILIAS/COPage",
                     "pg",
                     "stys:" . $a_rec["Id"],
                     "stys:" . $pt->getId()

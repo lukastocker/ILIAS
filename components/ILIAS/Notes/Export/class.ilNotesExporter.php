@@ -50,7 +50,7 @@ class ilNotesExporter extends ilXmlExporter
     ): array {
         return array(
             "4.3.0" => array(
-                "namespace" => "https://www.ilias.de/Services/Notes/note/4_3",
+                "namespace" => "https://www.ilias.de/components/ILIAS/Notes/note/4_3",
                 "xsd_file" => "ilias_usr_4_3.xsd",
                 "uses_dataset" => true,
                 "min" => "4.3.0",

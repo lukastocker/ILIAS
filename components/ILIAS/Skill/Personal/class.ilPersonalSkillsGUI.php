@@ -417,7 +417,7 @@ class ilPersonalSkillsGUI
         $main_tpl = $this->tpl;
         $ilToolbar = $this->toolbar;
 
-        $tpl = new ilTemplate("tpl.skill_filter.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_filter.html", true, true, "components/ILIAS/Skill");
 
         $this->setTabs("list_skills");
 
@@ -495,7 +495,7 @@ class ilPersonalSkillsGUI
 
         // user interface plugin slot + default rendering
         $uip = new ilUIHookProcessor(
-            "Services/Skill",
+            "components/ILIAS/Skill",
             "personal_skill_html",
             array("personal_skills_gui" => $this, "top_skill_id" => $a_top_skill_id, "user_id" => $a_user_id,
                   "edit" => $a_edit, "tref_id" => $a_tref_id)
@@ -505,7 +505,7 @@ class ilPersonalSkillsGUI
             $skill_html = $this->renderSkillHTML($a_top_skill_id, $a_user_id, $a_edit, $a_tref_id);
         }
         $skill_html = $uip->getHTML($skill_html);
-        $main_tpl->addJavaScript("./Services/Skill/js/SkillEntries.js");
+        $main_tpl->addJavaScript("./components/ILIAS/Skill/js/SkillEntries.js");
 
         return $skill_html;
     }
@@ -528,7 +528,7 @@ class ilPersonalSkillsGUI
             $user = new ilObjUser($a_user_id);
         }
 
-        $tpl = new ilTemplate("tpl.skill_pres.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_pres.html", true, true, "components/ILIAS/Skill");
 
         $vtree = $this->tree_repo->getVirtualTreeForNodeId($a_top_skill_id);
         $tref_id = $a_tref_id;
@@ -1020,7 +1020,7 @@ class ilPersonalSkillsGUI
         }
 
         // fill template
-        $mtpl = new ilTemplate("tpl.materials_selection.html", true, true, "Services/Skill");
+        $mtpl = new ilTemplate("tpl.materials_selection.html", true, true, "components/ILIAS/Skill");
         $mtpl->setVariable("EXP", $exp->getHTML());
 
         // toolbars
@@ -1709,7 +1709,7 @@ class ilPersonalSkillsGUI
             }
         }
 
-        $tpl = new ilTemplate("tpl.skill_eval_item.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_eval_item.html", true, true, "components/ILIAS/Skill");
         $tpl->setVariable("SCALE_BAR", $this->getScaleBar($a_levels, $a_activated_levels));
 
         $tpl->setVariable("TYPE", $lng->txt("skmg_target_level"));
@@ -1742,7 +1742,7 @@ class ilPersonalSkillsGUI
             $title = ilObject::_lookupTitle($this->gap_mode_obj_id);
         }
 
-        $tpl = new ilTemplate("tpl.skill_eval_item.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_eval_item.html", true, true, "components/ILIAS/Skill");
         $tpl->setVariable("SCALE_BAR", $this->getScaleBar($a_levels, $a_activated_levels));
 
         $type = 1;
@@ -1780,7 +1780,7 @@ class ilPersonalSkillsGUI
             return "";
         }
 
-        $tpl = new ilTemplate("tpl.skill_eval_item.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_eval_item.html", true, true, "components/ILIAS/Skill");
         $tpl->setVariable("SCALE_BAR", $this->getScaleBar($a_levels, $a_activated_levels));
 
         $type = 3;
@@ -1819,7 +1819,7 @@ class ilPersonalSkillsGUI
         $lng = $this->lng;
         $ilAccess = $this->access;
 
-        $tpl = new ilTemplate("tpl.skill_eval_item.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_eval_item.html", true, true, "components/ILIAS/Skill");
         $tpl->setVariable("SCALE_BAR", $this->getScaleBar($a_levels, $a_level_entry["level_id"]));
 
         $type = Personal\SkillEval::TYPE_APPRAISAL;
@@ -1879,7 +1879,7 @@ class ilPersonalSkillsGUI
     ): string {
         $lng = $this->lng;
 
-        $tpl = new ilTemplate("tpl.skill_entries_latest.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_entries_latest.html", true, true, "components/ILIAS/Skill");
 
         $user_entries = $skill->getAllHistoricLevelEntriesOfUser($bs["tref"], $user->getId(), $eval_type);
         $user_entries_filtered = $this->getFilteredEntriesForSkill(
@@ -1930,7 +1930,7 @@ class ilPersonalSkillsGUI
     ): string {
         $lng = $this->lng;
 
-        $tpl = new ilTemplate("tpl.skill_entries_non_latest.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_entries_non_latest.html", true, true, "components/ILIAS/Skill");
 
         $user_entries = $skill->getAllHistoricLevelEntriesOfUser($bs["tref"], $user->getId(), $eval_type);
         $user_entries_filtered = $this->getFilteredEntriesForSkill(
@@ -2071,7 +2071,7 @@ class ilPersonalSkillsGUI
 
     protected function getSkillEntriesHeader(int $eval_type): string
     {
-        $tpl = new ilTemplate("tpl.skill_entries_header.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_entries_header.html", true, true, "components/ILIAS/Skill");
 
         if ($eval_type == ilBasicSkill::EVAL_BY_SELF) {
             $tpl->setVariable("HEADING", $this->lng->txt("skmg_self_evaluation"));
@@ -2089,7 +2089,7 @@ class ilPersonalSkillsGUI
 
     protected function getSkillCategoryDescription(int $skill_id, int $tref_id): string
     {
-        $tpl = new ilTemplate("tpl.skill_description_category.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_description_category.html", true, true, "components/ILIAS/Skill");
 
         //if (ilSkillTreeNode::_lookupType($skill_id) == "scat") {
         $des = ilSkillTreeNode::_lookupDescription($skill_id);
@@ -2105,7 +2105,7 @@ class ilPersonalSkillsGUI
 
     protected function getBasicSkillDescription(string $description): string
     {
-        $tpl = new ilTemplate("tpl.skill_description_basic.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_description_basic.html", true, true, "components/ILIAS/Skill");
 
         if (!empty($description)) {
             $tpl->setCurrentBlock("description_basic");
@@ -2119,7 +2119,7 @@ class ilPersonalSkillsGUI
     public function getSkillLevelDescription(ilSkillTreeNode $skill): string
     {
         $level_data = $skill->getLevelData();
-        $tpl = new ilTemplate("tpl.skill_desc.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_desc.html", true, true, "components/ILIAS/Skill");
 
         $desc_exists = false;
         foreach ($level_data as $l) {
@@ -2311,7 +2311,7 @@ class ilPersonalSkillsGUI
 
         $main_tpl = $this->tpl;
 
-        $tpl = new ilTemplate("tpl.skill_filter.html", true, true, "Services/Skill");
+        $tpl = new ilTemplate("tpl.skill_filter.html", true, true, "components/ILIAS/Skill");
 
         $this->tabs->clearTargets();
         $this->tabs->setBackTarget(

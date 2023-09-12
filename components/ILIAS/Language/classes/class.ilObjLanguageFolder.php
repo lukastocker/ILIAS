@@ -30,7 +30,7 @@ declare(strict_types=1);
 * @extends  ilObject
 */
 
-require_once "./Services/Object/classes/class.ilObject.php";
+require_once "./components/ILIAS/Object/classes/class.ilObject.php";
 
 class ilObjLanguageFolder extends ilObject
 {
@@ -188,7 +188,7 @@ class ilObjLanguageFolder extends ilObject
         if (count($a_languages) > 0) {
             foreach ($a_languages as $lang_key => $lang_data) {
                 if (isset($lang_data["info"]) && $lang_data["info"] === "new_language") {
-                    include_once "./Services/Language/classes/class.ilObjLanguage.php";
+                    include_once "./components/ILIAS/Language/classes/class.ilObjLanguage.php";
                     $lngObj = new ilObjLanguage();
                     $lngObj->setTitle($lang_key);
                     $lngObj->setDescription("not_installed");

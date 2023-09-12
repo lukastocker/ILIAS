@@ -86,7 +86,7 @@ class ilSkillProfileUserTableGUI extends ilTable2GUI
         //		$this->addColumn($this->lng->txt("actions"));
 
         $this->setFormAction($ilCtrl->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.profile_user_row.html", "Services/Skill");
+        $this->setRowTemplate("tpl.profile_user_row.html", "components/ILIAS/Skill");
 
         if ($this->tree_access_manager->hasManageProfilesPermission() && !$this->profile->getRefId() > 0) {
             $this->addMultiCommand("confirmUserRemoval", $lng->txt("remove"));

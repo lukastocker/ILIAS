@@ -1,9 +1,9 @@
 <?php
-require_once './Services/WorkflowEngine/classes/workflows/class.ilBaseWorkflow.php';
-require_once './Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php';
-require_once './Services/WorkflowEngine/classes/activities/class.ilStaticMethodCallActivity.php';
-require_once './Services/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php';
-require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+require_once './components/ILIAS/WorkflowEngine/classes/workflows/class.ilBaseWorkflow.php';
+require_once './components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php';
+require_once './components/ILIAS/WorkflowEngine/classes/activities/class.ilStaticMethodCallActivity.php';
+require_once './components/ILIAS/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php';
+require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
 
 		class Task_CallActivity_Simple extends ilBaseWorkflow
 		{
@@ -19,7 +19,7 @@ require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector
 			
 			$_v_Task_1_callActivity = new ilStaticMethodCallActivity($_v_Task_1);
 			$_v_Task_1_callActivity->setName('$_v_Task_1_callActivity');
-			$_v_Task_1_callActivity->setIncludeFilename("Services/WorkflowEngine/test/parser/006_Task/class.test_006_Task.php");
+			$_v_Task_1_callActivity->setIncludeFilename("components/ILIAS/WorkflowEngine/test/parser/006_Task/class.test_006_Task.php");
 			$_v_Task_1_callActivity->setClassAndMethodName("test_006_Task::triggerMe");
 			$_v_Task_1_callActivity_params = array();
 			$_v_Task_1_callActivity->setParameters($_v_Task_1_callActivity_params);

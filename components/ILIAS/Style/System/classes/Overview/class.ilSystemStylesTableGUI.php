@@ -46,7 +46,7 @@ class ilSystemStylesTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt('active'));
         $this->addColumn($this->lng->txt('users'), 'users');
         $this->addColumn($this->lng->txt('version'));
-        $this->setRowTemplate('tpl.sys_styles_row.html', 'Services/Style/System');
+        $this->setRowTemplate('tpl.sys_styles_row.html', 'components/ILIAS/Style/System');
         $this->setEnableHeader(true);
     }
 
@@ -61,7 +61,7 @@ class ilSystemStylesTableGUI extends ilTable2GUI
 
         $this->setFormAction($this->ctrl->getFormAction($this->getParentObject()));
         $this->addCommandButton('saveStyleSettings', $this->lng->txt('save'));
-        $this->setRowTemplate('tpl.sys_styles_row_with_actions.html', 'Services/Style/System');
+        $this->setRowTemplate('tpl.sys_styles_row_with_actions.html', 'components/ILIAS/Style/System');
 
         if ($read_documentation || $management_enabled) {
             $this->setWithActions(true);

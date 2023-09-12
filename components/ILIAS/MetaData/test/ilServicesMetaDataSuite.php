@@ -11,7 +11,7 @@ class ilServicesMetaDataSuite extends TestSuite
     {
         $suite = new ilServicesMetaDataSuite();
 
-        include_once("./Services/MetaData/test/ilMDTest.php");
+        include_once("./components/ILIAS/MetaData/test/ilMDTest.php");
         $suite->addTestSuite(ilMDTest::class);
 
         return $suite;

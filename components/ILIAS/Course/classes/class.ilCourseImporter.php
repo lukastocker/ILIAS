@@ -49,11 +49,11 @@ class ilCourseImporter extends ilXmlImporter
         string $a_xml,
         ilImportMapping $a_mapping
     ): void {
-        if ($new_id = $a_mapping->getMapping('Services/Container', 'objs', $a_id)) {
+        if ($new_id = $a_mapping->getMapping('components/ILIAS/Container', 'objs', $a_id)) {
             $refs = ilObject::_getAllReferences((int) $new_id);
             $this->course = ilObjectFactory::getInstanceByRefId((int) end($refs), false);
         } // Mapping for containers without subitems
-        elseif ($new_id = $a_mapping->getMapping('Services/Container', 'refs', '0')) {
+        elseif ($new_id = $a_mapping->getMapping('components/ILIAS/Container', 'refs', '0')) {
             $this->course = ilObjectFactory::getInstanceByRefId((int) $new_id, false);
         } elseif (!$this->course instanceof ilObjCourse) {
             $this->course = new ilObjCourse();

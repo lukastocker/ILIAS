@@ -35,7 +35,7 @@ class ilSkillExporter extends ilXmlExporter
         $this->ds = new ilSkillDataSet();
         $this->ds->setExportDirectories($this->dir_relative, $this->dir_absolute);
         $this->ds->setDSPrefix("ds");
-        $this->config = $this->getExport()->getConfig("Services/Skill");
+        $this->config = $this->getExport()->getConfig("components/ILIAS/Skill");
         $this->ds->setSelectedNodes($this->config->getSelectedNodes());
         $this->ds->setSelectedProfiles($this->config->getSelectedProfiles());
         $this->ds->setMode($this->config->getMode());
@@ -57,19 +57,19 @@ class ilSkillExporter extends ilXmlExporter
     {
         return array(
             "8.0" => array(
-                "namespace" => "http://www.ilias.de/Services/Skill/skll/8_0",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Skill/skll/8_0",
                 "xsd_file" => "ilias_skll_8_0.xsd",
                 "uses_dataset" => true,
                 "min" => "8.0",
                 "max" => ""),
             "7.0" => array(
-                "namespace" => "http://www.ilias.de/Services/Skill/skll/7_0",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Skill/skll/7_0",
                 "xsd_file" => "ilias_skll_7_0.xsd",
                 "uses_dataset" => true,
                 "min" => "7.0",
                 "max" => ""),
             "5.1.0" => array(
-                "namespace" => "http://www.ilias.de/Services/Skill/skll/5_1",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Skill/skll/5_1",
                 "xsd_file" => "ilias_skll_5_1.xsd",
                 "uses_dataset" => true,
                 "min" => "5.1.0",

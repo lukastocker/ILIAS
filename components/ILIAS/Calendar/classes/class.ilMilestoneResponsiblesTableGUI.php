@@ -52,7 +52,7 @@ class ilMilestoneResponsiblesTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt("user"), "", "100%");
         $this->setRowTemplate(
             "tpl.ms_responsible_users_row.html",
-            "Services/Calendar"
+            "components/ILIAS/Calendar"
         );
         $this->setEnableHeader(true);
         $this->setDefaultOrderField("lastname");

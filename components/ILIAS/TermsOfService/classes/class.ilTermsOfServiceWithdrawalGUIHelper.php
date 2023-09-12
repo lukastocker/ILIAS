@@ -52,7 +52,7 @@ class ilTermsOfServiceWithdrawalGUIHelper
 
     private function getWithdrawalSectionForModal(): ilTemplate
     {
-        $template = new ilTemplate('tpl.tos_withdrawal_section.html', true, true, 'Services/TermsOfService');
+        $template = new ilTemplate('tpl.tos_withdrawal_section.html', true, true, 'components/ILIAS/TermsOfService');
         $template->setVariable('TXT_TOS_WITHDRAWAL_HEADLINE', $this->lng->txt('withdraw_consent_header'));
         $template->setVariable('TXT_TOS_WITHDRAWAL', $this->lng->txt('withdraw_consent_description'));
         $template->setVariable(

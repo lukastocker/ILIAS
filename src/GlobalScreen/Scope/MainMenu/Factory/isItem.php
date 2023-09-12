@@ -64,7 +64,7 @@ interface isItem extends isGlobalScreenItem
      * @see withAvailableCallable ), please provide the
      *      reason why. You can pass e Legacy Component for the moment, in most cases
      *      this will be something like in
-     *      Services/Administration/templates/default/tpl.external_settings.html
+     *      components/ILIAS/Administration/templates/default/tpl.external_settings.html
      */
     public function withNonAvailableReason(Legacy $element): isItem;
 

@@ -34,7 +34,7 @@ class ilInclusiveGatewayElement extends ilBaseElement
 
         $event_definition = null;
 
-        $class_object->registerRequire('./Services/WorkflowEngine/classes/nodes/class.ilCaseNode.php');
+        $class_object->registerRequire('./components/ILIAS/WorkflowEngine/classes/nodes/class.ilCaseNode.php');
         $code .= '
 			' . $this->element_varname . ' = new ilCaseNode($this);
 			' . $this->element_varname . '->setName(\'' . $this->element_varname . '\');

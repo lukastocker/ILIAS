@@ -72,7 +72,7 @@ class ilSkillProfileTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt("actions"));
 
         $this->setFormAction($ilCtrl->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.skill_profile_row.html", "Services/Skill");
+        $this->setRowTemplate("tpl.skill_profile_row.html", "components/ILIAS/Skill");
 
         if ($this->tree_access_manager->hasManageProfilesPermission()) {
             $this->addMultiCommand("exportProfiles", $lng->txt("export"));

@@ -32,7 +32,7 @@ use ILIAS\Setup\ImplementationOfInterfaceFinder;
  */
 class ilResourceStorageFlavourArtifact extends BuildArtifactObjective
 {
-    public const PATH = './Services/ResourceStorage/artifacts/flavour_data.php';
+    public const PATH = './components/ILIAS/ResourceStorage/artifacts/flavour_data.php';
 
     public function getArtifactPath(): string
     {

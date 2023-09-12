@@ -55,7 +55,7 @@ class ilTermsOfServiceDocumentTableGUI extends ilTermsOfServiceTableGUI
         $this->setExternalSegmentation(true);
         $this->setLimit(PHP_INT_MAX);
 
-        $this->setRowTemplate('tpl.tos_documents_row.html', 'Services/TermsOfService');
+        $this->setRowTemplate('tpl.tos_documents_row.html', 'components/ILIAS/TermsOfService');
 
         if ($this->isEditable) {
             $this->setSelectAllCheckbox('tos_id[]');

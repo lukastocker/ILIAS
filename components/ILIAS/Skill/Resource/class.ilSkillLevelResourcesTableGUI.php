@@ -86,7 +86,7 @@ class ilSkillLevelResourcesTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt("skmg_lp_triggers_level"));
 
         $this->setFormAction($ilCtrl->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.level_resources_row.html", "Services/Skill");
+        $this->setRowTemplate("tpl.level_resources_row.html", "components/ILIAS/Skill");
 
         if ($this->write_permission) {
             $this->addMultiCommand("confirmLevelResourcesRemoval", $lng->txt("remove"));

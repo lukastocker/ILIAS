@@ -40,7 +40,7 @@ class ilGroupExporter extends ilXmlExporter
         // always trigger container because of co-page(s)
         return array(
             array(
-                'component' => 'Services/Container',
+                'component' => 'components/ILIAS/Container',
                 'entity' => 'struct',
                 'ids' => $a_ids
             )

@@ -485,7 +485,7 @@ class ilObjSystemFolderGUI extends ilObjectGUI
                 "SEL_LANGUAGE",
                 "sel_language",
                 "tpl.lang_selection.html",
-                "Services/MetaData"
+                "components/ILIAS/MetaData"
             );
             $this->tpl->setVariable("SEL_NAME", "Fobject[" . $key . "][lang]");
 

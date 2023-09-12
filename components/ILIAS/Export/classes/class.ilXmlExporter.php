@@ -114,7 +114,7 @@ abstract class ilXmlExporter
      * fit to the target release. Please put the newest on top. Example:
      *        return array (
      *        "4.1.0" => array(
-     *            "namespace" => "http://www.ilias.de/Services/MetaData/md/4_1",
+     *            "namespace" => "http://www.ilias.de/components/ILIAS/MetaData/md/4_1",
      *            "xsd_file" => "ilias_md_4_1.xsd",
      *            "min" => "4.1.0",
      *            "max" => "")

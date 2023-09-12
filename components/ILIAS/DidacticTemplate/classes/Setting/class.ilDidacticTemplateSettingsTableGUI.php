@@ -57,7 +57,7 @@ class ilDidacticTemplateSettingsTableGUI extends ilTable2GUI
 
             $this->setSelectAllCheckbox('tpls');
         }
-        $this->setRowTemplate('tpl.didactic_template_overview_row.html', 'Services/DidacticTemplate');
+        $this->setRowTemplate('tpl.didactic_template_overview_row.html', 'components/ILIAS/DidacticTemplate');
         $this->setDefaultOrderField('title');
         $this->setDefaultOrderDirection('asc');
         $this->setFormAction($this->ctrl->getFormAction($this->getParentObject()));

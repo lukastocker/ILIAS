@@ -1,10 +1,10 @@
 <?php
-require_once './Services/WorkflowEngine/classes/workflows/class.ilBaseWorkflow.php';
-require_once './Services/WorkflowEngine/classes/nodes/class.ilBasicNode.php';
-require_once './Services/WorkflowEngine/classes/detectors/class.ilDataDetector.php';
-require_once './Services/WorkflowEngine/classes/emitters/class.ilDataEmitter.php';
-require_once './Services/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php';
-require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
+require_once './components/ILIAS/WorkflowEngine/classes/workflows/class.ilBaseWorkflow.php';
+require_once './components/ILIAS/WorkflowEngine/classes/nodes/class.ilBasicNode.php';
+require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilDataDetector.php';
+require_once './components/ILIAS/WorkflowEngine/classes/emitters/class.ilDataEmitter.php';
+require_once './components/ILIAS/WorkflowEngine/classes/emitters/class.ilActivationEmitter.php';
+require_once './components/ILIAS/WorkflowEngine/classes/detectors/class.ilSimpleDetector.php';
 
 		class DataObject_Wiring_Input_Object_Output extends ilBaseWorkflow
 		{

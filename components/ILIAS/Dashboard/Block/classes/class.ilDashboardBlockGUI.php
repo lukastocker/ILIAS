@@ -163,7 +163,7 @@ abstract class ilDashboardBlockGUI extends ilBlockGUI
     public function init(): void
     {
         $this->initViewSettings();
-        $this->main_tpl->addJavaScript('Services/Dashboard/Block/js/ReplaceModalContent.js');
+        $this->main_tpl->addJavaScript('components/ILIAS/Dashboard/Block/js/ReplaceModalContent.js');
         $this->viewSettings->parse();
         $this->requested_item_ref_id = (int) ($this->http->request()->getQueryParams()["item_ref_id"] ?? 0);
         $this->initData();
@@ -588,7 +588,7 @@ abstract class ilDashboardBlockGUI extends ilBlockGUI
         $bot_tb->addStickyItem($button);
         $bot_tb->setOpenFormTag(false);
 
-        $tpl = new ilTemplate('tpl.remove_multiple_modal_id_wrapper.html', true, true, 'Services/Dashboard');
+        $tpl = new ilTemplate('tpl.remove_multiple_modal_id_wrapper.html', true, true, 'components/ILIAS/Dashboard');
         $tpl->setVariable('CONTENT', $top_tb->getHTML() . $this->renderManageList($grouped_items) . $bot_tb->getHTML());
         $tpl->setVariable('VIEW', $this->viewSettings->getCurrentView());
 

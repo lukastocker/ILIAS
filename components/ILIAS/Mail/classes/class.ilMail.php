@@ -534,7 +534,7 @@ class ilMail
         $raise_event = !$sender_equals_reveiver || !$is_sent_folder_of_sender;
 
         if ($raise_event) {
-            $this->eventHandler->raise('Services/Mail', 'sentInternalMail', [
+            $this->eventHandler->raise('components/ILIAS/Mail', 'sentInternalMail', [
                 'id' => $nextId,
                 'subject' => $subject,
                 'body' => $message,

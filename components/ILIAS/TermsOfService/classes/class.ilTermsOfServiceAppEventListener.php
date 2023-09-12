@@ -62,7 +62,7 @@ class ilTermsOfServiceAppEventListener implements ilAppEventListener
     protected function isUserDeletionEvent(): bool
     {
         return (
-            'Services/User' === $this->component &&
+            'components/ILIAS/User' === $this->component &&
             'deleteUser' === $this->event
         );
     }

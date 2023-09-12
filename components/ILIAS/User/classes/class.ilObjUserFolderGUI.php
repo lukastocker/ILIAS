@@ -2663,7 +2663,7 @@ class ilObjUserFolderGUI extends ilObjectGUI
 
         if ($this->usrFieldChangeListenersAccepted && count($changedFields) > 0) {
             $this->event->raise(
-                'Services/User',
+                'components/ILIAS/User',
                 'onUserFieldAttributesChanged',
                 $changedFields
             );
@@ -2699,7 +2699,7 @@ class ilObjUserFolderGUI extends ilObjectGUI
             'tpl.usr_field_change_listener_confirm.html',
             true,
             true,
-            'Services/User'
+            'components/ILIAS/User'
         );
 
         foreach ($interestedChangeListeners as $interestedChangeListener) {
@@ -3106,7 +3106,7 @@ class ilObjUserFolderGUI extends ilObjectGUI
             'tpl.usrf_new_account_mail.html',
             true,
             true,
-            'Services/User'
+            'components/ILIAS/User'
         );
         $ftpl->setVariable(
             'FORM',

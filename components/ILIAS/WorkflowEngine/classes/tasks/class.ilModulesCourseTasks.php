@@ -23,7 +23,7 @@ class ilModulesCourseTasks
 
       <bpmn2:extensionElements>
           <ilias:properties>
-              <ilias:libraryCall location="Services/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="readLearnersFromCourse" />
+              <ilias:libraryCall location="components/ILIAS/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="readLearnersFromCourse" />
           </ilias:properties>
       </bpmn2:extensionElements>
 
@@ -50,7 +50,7 @@ class ilModulesCourseTasks
 
       <bpmn2:extensionElements>
           <ilias:properties>
-              <ilias:libraryCall location="Services/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="readTutorsFromCourse" />
+              <ilias:libraryCall location="components/ILIAS/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="readTutorsFromCourse" />
           </ilias:properties>
       </bpmn2:extensionElements>
 
@@ -78,7 +78,7 @@ class ilModulesCourseTasks
 
       <bpmn2:extensionElements>
           <ilias:properties>
-              <ilias:libraryCall location="Services/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="readAdminsFromCourse" />
+              <ilias:libraryCall location="components/ILIAS/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="readAdminsFromCourse" />
           </ilias:properties>
       </bpmn2:extensionElements>
 
@@ -106,7 +106,7 @@ class ilModulesCourseTasks
 
       <bpmn2:extensionElements>
           <ilias:properties>
-              <ilias:libraryCall location="Services/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="createCourse" />
+              <ilias:libraryCall location="components/ILIAS/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="createCourse" />
           </ilias:properties>
       </bpmn2:extensionElements>
 
@@ -141,7 +141,7 @@ class ilModulesCourseTasks
 
       <bpmn2:extensionElements>
           <ilias:properties>
-              <ilias:libraryCall location="Services/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="assignLearnersToCourse" />
+              <ilias:libraryCall location="components/ILIAS/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="assignLearnersToCourse" />
           </ilias:properties>
       </bpmn2:extensionElements>
 
@@ -167,7 +167,7 @@ class ilModulesCourseTasks
 
       <bpmn2:extensionElements>
           <ilias:properties>
-              <ilias:libraryCall location="Services/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="assignTutorsToCourse" />
+              <ilias:libraryCall location="components/ILIAS/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="assignTutorsToCourse" />
           </ilias:properties>
       </bpmn2:extensionElements>
 
@@ -193,7 +193,7 @@ class ilModulesCourseTasks
 
       <bpmn2:extensionElements>
           <ilias:properties>
-              <ilias:libraryCall location="Services/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="assignAdminsToCourse" />
+              <ilias:libraryCall location="components/ILIAS/WorkflowEngine/classes/tasks/class.ilModulesCourseTasks.php" api="ilModulesCourseTasks" method="assignAdminsToCourse" />
           </ilias:properties>
       </bpmn2:extensionElements>
 

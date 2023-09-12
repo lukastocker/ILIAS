@@ -84,7 +84,6 @@ final class RootFolderTest extends TestCase
         'CI',
         'Customizing',
         'components',
-        'Services',
         'cron',
         'data',
         'dicto',

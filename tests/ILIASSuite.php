@@ -12,7 +12,7 @@ use PHPUnit\Runner\Filter\ExcludeGroupFilterIterator as GroupExcludeFilter;
 /**
 * This is the global ILIAS test suite. It searches automatically for
 * components test suites by scanning all components/.../test and
-* Services/.../test directories for test suite files.
+* components/ILIAS/.../test directories for test suite files.
 *
 * Test suite files are identified automatically, if they are named
 * "ilServices[ServiceName]Suite.php" or ilModules[ModuleName]Suite.php".
@@ -34,7 +34,7 @@ class ILIASSuite extends TestSuite
         echo "\n";
 
         // scan components and Services directories
-        $basedirs = array("Services", "components/ILIAS");
+        $basedirs = array("components/ILIAS");
 
         foreach ($basedirs as $basedir) {
             // read current directory

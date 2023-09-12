@@ -95,7 +95,7 @@ class ilCalendarDayGUI extends ilCalendarViewGUI
         }
         $evening_aggr = $this->user_settings->getDayEnd() * 60;
 
-        $this->tpl = new ilTemplate('tpl.day_view.html', true, true, 'Services/Calendar');
+        $this->tpl = new ilTemplate('tpl.day_view.html', true, true, 'components/ILIAS/Calendar');
 
         ilYuiUtil::initDragDrop();
 
@@ -255,7 +255,7 @@ class ilCalendarDayGUI extends ilCalendarViewGUI
 
     protected function showFulldayAppointment(array $a_app): void
     {
-        $event_tpl = new ilTemplate('tpl.day_event_view.html', true, true, 'Services/Calendar');
+        $event_tpl = new ilTemplate('tpl.day_event_view.html', true, true, 'components/ILIAS/Calendar');
 
         // milestone icon
         if ($a_app['event']->isMilestone()) {
@@ -311,7 +311,7 @@ class ilCalendarDayGUI extends ilCalendarViewGUI
 
     protected function showAppointment(array $a_app): void
     {
-        $event_tpl = new ilTemplate('tpl.day_event_view.html', true, true, 'Services/Calendar');
+        $event_tpl = new ilTemplate('tpl.day_event_view.html', true, true, 'components/ILIAS/Calendar');
         $event_tpl->setCurrentBlock('app');
         $this->tpl->setVariable('APP_ROWSPAN', $a_app['rowspan']);
         $time = '';

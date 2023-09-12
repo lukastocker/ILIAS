@@ -140,7 +140,7 @@ class ilTypicalLearningTimeInputGUI extends ilFormPropertyGUI
 
     public function insert(ilTemplate $a_tpl): void
     {
-        $ttpl = new ilTemplate("tpl.prop_typical_learning_time.html", true, true, "Services/MetaData");
+        $ttpl = new ilTemplate("tpl.prop_typical_learning_time.html", true, true, "components/ILIAS/MetaData");
         $val = $this->getValue();
 
         $ttpl->setVariable("TXT_MONTH", $this->lng->txt('md_months'));

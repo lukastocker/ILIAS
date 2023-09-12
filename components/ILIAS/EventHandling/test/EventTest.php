@@ -21,7 +21,7 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use ILIAS\DI\Container;
 
-require_once __DIR__ . "/../../../libs/composer/vendor/autoload.php";
+require_once __DIR__ . "/../../../../libs/composer/vendor/autoload.php";
 
 /**
  * Test clipboard repository
@@ -48,7 +48,7 @@ class EventTest extends TestCase
             ->will(
                 $this->onConsecutiveCalls(
                     [
-                     "component" => "Services/EventHandling",
+                     "component" => "components/ILIAS/EventHandling",
                      "id" => "MyTestComponent"
                  ],
                     null
@@ -113,7 +113,7 @@ class EventTest extends TestCase
         $this->expectException(ilEventHandlingTestException::class);
 
         $handler->raise(
-            "Services/EventHandling",
+            "components/ILIAS/EventHandling",
             "myEvent",
             [
                 "par1" => "val1",

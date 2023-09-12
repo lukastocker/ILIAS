@@ -76,7 +76,7 @@ class ilSkillUsageTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt("skmg_number"), "", "50%");
 
         $this->setFormAction($ilCtrl->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.skill_usage_row.html", "Services/Skill");
+        $this->setRowTemplate("tpl.skill_usage_row.html", "components/ILIAS/Skill");
         $this->setEnableNumInfo(false);
 
         //		$this->addMultiCommand("", $lng->txt(""));
