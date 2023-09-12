@@ -41,7 +41,7 @@ class ilPDFGeneratorUtils
 
     public static function getTestPdfDir(): string
     {
-        $iliasPDFTestPath = 'data/' . CLIENT_ID . '/pdf_service/';
+        $iliasPDFTestPath = 'cli/' . CLIENT_ID . '/pdf_service/';
         if (!is_dir($iliasPDFTestPath) && !mkdir($iliasPDFTestPath) && !is_dir($iliasPDFTestPath)) {
             throw new RuntimeException(sprintf('Directory "%s" was not created', $iliasPDFTestPath));
         }

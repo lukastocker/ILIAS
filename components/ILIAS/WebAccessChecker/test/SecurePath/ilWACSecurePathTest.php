@@ -47,7 +47,7 @@ class ilWACSecurePathTest //extends MockeryTestCase
         /**
          * @var $obj ilWACSecurePath
          */
-        $ilWACPath = new ilWACPath('http://www.ilias.de/docu/data/docu/mobs/mm_43803/test.png');
+        $ilWACPath = new ilWACPath('http://www.ilias.de/docu/cli/docu/mobs/mm_43803/test.png');
         $obj = ilWACSecurePath::find($ilWACPath->getSecurePathId());
         $this->assertEquals('./components/ILIAS/MediaObjects', $obj->getComponentDirectory());
     }

@@ -942,7 +942,7 @@ class ilObjLTIConsumerGUI extends ilObject2GUI
 //        $filter->setActivityId($this->object->getActivityId());
 //
 //        $aggregateEndPointUrl = str_replace(
-//            'data/xAPI',
+//            'cli/xAPI',
 //            'api/statements/aggregate',
 //            $this->object->getProvider()->getXapiLaunchUrl() // should be named endpoint not launch url
 //        );

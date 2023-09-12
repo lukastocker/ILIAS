@@ -95,17 +95,17 @@ class ilWACTokenTest extends MockeryTestCase
         parent::setUp();
 
         $this->root = vfs\vfsStream::setup('ilias.de');
-        $this->file_one = vfs\vfsStream::newFile('data/client_name/mobs/mm_123/dummy.jpg')
+        $this->file_one = vfs\vfsStream::newFile('cli/client_name/mobs/mm_123/dummy.jpg')
                                        ->at($this->root)->setContent('dummy');
-        $this->file_one_subfolder = vfs\vfsStream::newFile('data/client_name/mobs/mm_123/mobile/dummy.jpg')
+        $this->file_one_subfolder = vfs\vfsStream::newFile('cli/client_name/mobs/mm_123/mobile/dummy.jpg')
                                                  ->at($this->root)->setContent('dummy');
-        $this->file_one_subfolder_two = vfs\vfsStream::newFile('data/client_name/mobs/mm_123/mobile/device/dummy.jpg')
+        $this->file_one_subfolder_two = vfs\vfsStream::newFile('cli/client_name/mobs/mm_123/mobile/device/dummy.jpg')
                                                      ->at($this->root)->setContent('dummy');
-        $this->file_two = vfs\vfsStream::newFile('data/client_name/mobs/mm_123/dummy2.jpg')
+        $this->file_two = vfs\vfsStream::newFile('cli/client_name/mobs/mm_123/dummy2.jpg')
                                        ->at($this->root)->setContent('dummy2');
-        $this->file_three = vfs\vfsStream::newFile('data/client_name/mobs/mm_124/dummy.jpg')
+        $this->file_three = vfs\vfsStream::newFile('cli/client_name/mobs/mm_124/dummy.jpg')
                                          ->at($this->root)->setContent('dummy');
-        $this->file_four = vfs\vfsStream::newFile('data/client_name/sec/ilBlog/mm_124/dummy.jpg')
+        $this->file_four = vfs\vfsStream::newFile('cli/client_name/sec/ilBlog/mm_124/dummy.jpg')
                                         ->at($this->root)->setContent('dummy');
 
         //setup container for HttpServiceAware classes
@@ -166,7 +166,7 @@ class ilWACTokenTest extends MockeryTestCase
 
         $this->assertEquals('dummy.jpg', $ilWACSignedPath->getPathObject()->getFileName());
         $this->assertEquals($query, $ilWACSignedPath->getPathObject()->getQuery());
-        $this->assertEquals('./data/' . self::CLIENT_NAME
+        $this->assertEquals('./cli/' . self::CLIENT_NAME
                             . '/sec/ilBlog/mm_124/', $ilWACSignedPath->getPathObject()
                                                                      ->getSecurePath());
         $this->assertEquals('ilBlog', $ilWACSignedPath->getPathObject()->getSecurePathId());
@@ -180,7 +180,7 @@ class ilWACTokenTest extends MockeryTestCase
         $ilWACToken = new ilWACToken($ilWacPath->getPath(), self::CLIENT_NAME, 123456, 20);
         $ilWACToken->generateToken();
         $this->assertEquals('SALT-client_name-123456-20', $ilWACToken->getRawToken());
-        $this->assertEquals('./data/client_name/sec/ilBlog/mm_124/dummy.jpg', $ilWACToken->getId());
+        $this->assertEquals('./cli/client_name/sec/ilBlog/mm_124/dummy.jpg', $ilWACToken->getId());
 
         $this->assertEquals(self::SALT, ilWACToken::getSALT());
         $ilWACToken = new ilWACToken($ilWacPath->getPath(), self::CLIENT_NAME, 123456, 20);

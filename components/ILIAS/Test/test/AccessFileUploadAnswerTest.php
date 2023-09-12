@@ -45,7 +45,7 @@ class AccessFileUploadAnswerTest extends TestCase
 
         $instance = new AccessFileUploadAnswer($container, $readable);
 
-        $this->assertTrue($instance->isPermitted('/data/some/path/file.pdf')->isError());
+        $this->assertTrue($instance->isPermitted('/cli/some/path/file.pdf')->isError());
     }
 
     public function testFalseWithZeroAsTestId(): void
@@ -59,7 +59,7 @@ class AccessFileUploadAnswerTest extends TestCase
             $this->assertFalse('Should not be called.');
         };
 
-        $this->assertFalse($instance->isPermitted('/data/assessment/tst_0/ignored/file.mp3')->value());
+        $this->assertFalse($instance->isPermitted('/cli/assessment/tst_0/ignored/file.mp3')->value());
     }
 
     public function testFalseWithInvalidTestId(): void
@@ -76,7 +76,7 @@ class AccessFileUploadAnswerTest extends TestCase
 
         $instance = new AccessFileUploadAnswer($container, $readable, $object_id_of_test_id);
 
-        $this->assertFalse($instance->isPermitted('/data/assessment/tst_8/ignored/file.mp3')->value());
+        $this->assertFalse($instance->isPermitted('/cli/assessment/tst_8/ignored/file.mp3')->value());
         $this->assertTrue($called);
     }
 
@@ -104,7 +104,7 @@ class AccessFileUploadAnswerTest extends TestCase
 
         $instance = new AccessFileUploadAnswer($container, $readable, $object_id_of_test_id, $references_of);
 
-        $this->assertFalse($instance->isPermitted('/data/assessment/tst_8/ignored/file.mp3')->value());
+        $this->assertFalse($instance->isPermitted('/cli/assessment/tst_8/ignored/file.mp3')->value());
         $this->assertTrue($called);
     }
 
@@ -142,7 +142,7 @@ class AccessFileUploadAnswerTest extends TestCase
 
         $instance = new AccessFileUploadAnswer($container, $readable, $object_id_of_test_id, $references_of, $session);
 
-        $this->assertFalse($instance->isPermitted('/data/assessment/tst_8/ignored/file.mp3')->value());
+        $this->assertFalse($instance->isPermitted('/cli/assessment/tst_8/ignored/file.mp3')->value());
         $this->assertTrue($called);
     }
 
@@ -190,7 +190,7 @@ class AccessFileUploadAnswerTest extends TestCase
 
         $instance = new AccessFileUploadAnswer($container, $readable, $object_id_of_test_id, $references_of, $session);
 
-        $this->assertFalse($instance->isPermitted('/data/assessment/tst_8/ignored/file.mp3')->value());
+        $this->assertFalse($instance->isPermitted('/cli/assessment/tst_8/ignored/file.mp3')->value());
         $this->assertTrue($called);
     }
 
@@ -238,7 +238,7 @@ class AccessFileUploadAnswerTest extends TestCase
 
         $instance = new AccessFileUploadAnswer($container, $readable, $object_id_of_test_id, $references_of, $session);
 
-        $this->assertTrue($instance->isPermitted('/data/assessment/tst_8/ignored/file.mp3')->value());
+        $this->assertTrue($instance->isPermitted('/cli/assessment/tst_8/ignored/file.mp3')->value());
         $this->assertTrue($called);
     }
 
@@ -299,7 +299,7 @@ class AccessFileUploadAnswerTest extends TestCase
 
         $instance = new AccessFileUploadAnswer($container, $readable, $object_id_of_test_id, $references_of, $session, $checkResultsAccess);
 
-        $this->assertTrue($instance->isPermitted('/data/assessment/tst_8/ignored/file.mp3')->value());
+        $this->assertTrue($instance->isPermitted('/cli/assessment/tst_8/ignored/file.mp3')->value());
         $this->assertTrue($called);
         $this->assertTrue($checkResultsAccessCalled);
     }

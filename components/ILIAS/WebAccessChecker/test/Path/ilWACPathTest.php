@@ -41,7 +41,7 @@ class ilWACPathTest //extends MockeryTestCase
 
     public function testMobs(): void
     {
-        $ilWacPath = new ilWACPath('http://trunk.local/data/trunk/mobs/mm_270/Koeniz_Komturei1.jpg');
+        $ilWacPath = new ilWACPath('http://trunk.local/cli/trunk/mobs/mm_270/Koeniz_Komturei1.jpg');
         $this->assertEquals('mobs', $ilWacPath->getModuleType());
         $this->assertEquals('mm_270', $ilWacPath->getModuleIdentifier());
         $this->assertEquals('Koeniz_Komturei1.jpg', $ilWacPath->getAppendix());
@@ -55,9 +55,9 @@ class ilWACPathTest //extends MockeryTestCase
 
     public function testUserImage(): void
     {
-        $ilWacPath = new ilWACPath('http://trunk.local/data/trunk/usr_images/usr_6_small.jpg?t=63944');
+        $ilWacPath = new ilWACPath('http://trunk.local/cli/trunk/usr_images/usr_6_small.jpg?t=63944');
         $this->assertEquals('usr_images', $ilWacPath->getModuleType());
-        $this->assertEquals('./data/trunk/usr_images/', $ilWacPath->getModulePath());
+        $this->assertEquals('./cli/trunk/usr_images/', $ilWacPath->getModulePath());
         $this->assertEquals(null, $ilWacPath->getModuleIdentifier());
         $this->assertEquals('usr_6_small.jpg', $ilWacPath->getAppendix());
         $this->assertEquals('trunk', $ilWacPath->getClient());
@@ -70,9 +70,9 @@ class ilWACPathTest //extends MockeryTestCase
 
     public function testBlogInSec(): void
     {
-        $ilWacPath = new ilWACPath('http://trunk.local/data/trunk/sec/ilBlog/blog_123/Header.mp4');
+        $ilWacPath = new ilWACPath('http://trunk.local/cli/trunk/sec/ilBlog/blog_123/Header.mp4');
         $this->assertEquals('ilBlog', $ilWacPath->getModuleType());
-        $this->assertEquals('./data/trunk/sec/ilBlog/', $ilWacPath->getModulePath());
+        $this->assertEquals('./cli/trunk/sec/ilBlog/', $ilWacPath->getModulePath());
         $this->assertEquals('blog_123', $ilWacPath->getModuleIdentifier());
         $this->assertEquals('Header.mp4', $ilWacPath->getAppendix());
         $this->assertEquals('trunk', $ilWacPath->getClient());
@@ -85,8 +85,8 @@ class ilWACPathTest //extends MockeryTestCase
 
     public function testSubfolders(): void
     {
-        $ilWacPathBase = new ilWACPath('http://trunk.local/data/trunk/lm_data/lm_123456/start.html');
-        $ilWacPathSub = new ilWACPath('http://trunk.local/data/trunk/lm_data/lm_123456/subfolder/image.png');
+        $ilWacPathBase = new ilWACPath('http://trunk.local/cli/trunk/lm_data/lm_123456/start.html');
+        $ilWacPathSub = new ilWACPath('http://trunk.local/cli/trunk/lm_data/lm_123456/subfolder/image.png');
         $this->assertEquals($ilWacPathBase->getModulePath(), $ilWacPathSub->getModulePath());
     }
 }

@@ -53,7 +53,7 @@ class ilWACCheckingInstanceTest //extends MockeryTestCase
     protected function setUp(): void
     {
         $this->root = vfs\vfsStream::setup('ilias.de');
-        $this->file_one = vfs\vfsStream::newFile('data/trunk/mobs/mm_123/dummy.jpg')
+        $this->file_one = vfs\vfsStream::newFile('cli/trunk/mobs/mm_123/dummy.jpg')
                                        ->at($this->root)->setContent('dummy');
 
         //setup container for HttpServiceAware classes

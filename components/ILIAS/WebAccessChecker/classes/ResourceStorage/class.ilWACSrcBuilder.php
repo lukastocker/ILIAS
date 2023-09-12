@@ -55,7 +55,7 @@ class ilWACSrcBuilder extends InlineSrcBuilder implements SrcBuilder
 
     protected function signURL(string $access_key, bool $sign): string
     {
-        $url = "./data/" . CLIENT_NAME . "/sec/rs/" . $access_key;
+        $url = "./cli/" . CLIENT_NAME . "/sec/rs/" . $access_key;
         if ($sign === false) {
             return $url;
         }
