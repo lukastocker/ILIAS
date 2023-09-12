@@ -971,7 +971,7 @@ class ilObjExerciseGUI extends ilObjectGUI
             return;
         }
 
-        $tpl->addJavaScript("./Modules/Exercise/js/ilExcPresentation.js");
+        $tpl->addJavaScript("./components/ILIAS/Exercise/js/ilExcPresentation.js");
 
         ilLearningProgress::_tracProgress(
             $ilUser->getId(),
@@ -1021,7 +1021,7 @@ class ilObjExerciseGUI extends ilObjectGUI
             $acc->setUseSessionStorage(true);
         }
 
-        $mtpl = new ilTemplate("tpl.exc_ass_overview.html", true, true, "Modules/Exercise");
+        $mtpl = new ilTemplate("tpl.exc_ass_overview.html", true, true, "components/ILIAS/Exercise");
         $mtpl->setVariable("CONTENT", $acc->getHTML());
 
         $tpl->setContent($mtpl->get());

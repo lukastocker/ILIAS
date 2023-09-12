@@ -66,7 +66,7 @@ abstract class ilParticipants
     protected ilRecommendedContentManager $recommended_content_manager;
 
     /**
-     * @param string component definition e.g Modules/Course used for event handler
+     * @param string component definition e.g components/ILIAS/Course used for event handler
      * @param int ref_id of container
      */
     public function __construct(string $a_component_name, int $a_ref_id)

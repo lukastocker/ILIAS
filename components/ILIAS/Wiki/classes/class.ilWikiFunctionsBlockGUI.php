@@ -122,7 +122,7 @@ class ilWikiFunctionsBlockGUI extends ilBlockGUI
         $ui_factory = $this->gui->ui()->factory();
         $ui_renderer = $this->gui->ui()->renderer();
 
-        $tpl = new ilTemplate("tpl.wiki_side_block_content.html", true, true, "Modules/Wiki");
+        $tpl = new ilTemplate("tpl.wiki_side_block_content.html", true, true, "components/ILIAS/Wiki");
 
         $wp = $this->getPageObject();
 

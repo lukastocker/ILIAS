@@ -97,7 +97,7 @@ class ilCategoryExporter extends ilXmlExporter
     {
         return [
             "4.3.0" => [
-                "namespace" => "https://www.ilias.de/Modules/Category/cat/4_3",
+                "namespace" => "https://www.ilias.de/components/ILIAS/Category/cat/4_3",
                 "xsd_file" => "ilias_cat_4_3.xsd",
                 "uses_dataset" => false,
                 "min" => "4.3.0",

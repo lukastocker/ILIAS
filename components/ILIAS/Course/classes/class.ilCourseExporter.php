@@ -69,7 +69,7 @@ class ilCourseExporter extends ilXmlExporter
             }
 
             $dependencies[] = array(
-                'component' => 'Modules/Course',
+                'component' => 'components/ILIAS/Course',
                 'entity' => self::ENTITY_OBJECTIVE,
                 'ids' => $obj_id
             );
@@ -127,14 +127,14 @@ class ilCourseExporter extends ilXmlExporter
     {
         return array(
             "4.1.0" => array(
-                "namespace" => "http://www.ilias.de/Modules/Course/crs/4_1",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Course/crs/4_1",
                 "xsd_file" => "ilias_course_4_1.xsd",
                 "uses_dataset" => false,
                 "min" => "4.1.0",
                 "max" => "4.4.999"
             ),
             "5.0.0" => array(
-                "namespace" => "http://www.ilias.de/Modules/Course/crs/5_0",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Course/crs/5_0",
                 "xsd_file" => "ilias_crs_5_0.xsd",
                 "uses_dataset" => false,
                 "min" => "5.0.0",

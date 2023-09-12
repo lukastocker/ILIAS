@@ -81,7 +81,7 @@ Todo 4.4
 - Objekte sollen Nutzung "anmelden" (done)
 - Skill-Template muss in 360 nutzbar sein (done)
 - (tiefer) Skill Explorer inkl. Referenzen (done)
-  - Modules/Survey/classes/class.ilSurveySkillExplorer.php
+  - components/ILIAS/Survey/classes/class.ilSurveySkillExplorer.php
   -> ilSkillSelectorGUI
 - historische Darstellung aller "has levels" (inkl. Datum + Objekttitel) (done)
 - Resources müssen Template/Basis Kombi zuordbar sein (done)
@@ -207,7 +207,7 @@ ilPersonalSkillExplorerGUI (external use)
 - offers selectable basic skills, refs or categories (nothing within templates)
 
 ilVirtualSkillTreeExplorerGUI
-- no instances created in Modules/Services
+- no instances created in components/ILIAS/Services
 - only extended by
 -- ilSkillSelectorGUI
 -- ilSkillTreeExplorerGUI

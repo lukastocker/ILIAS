@@ -50,7 +50,7 @@ class ilOrgUnitPositionTableGUI extends ilTable2GUI
 
         $this->setPrefix('orgu_types_table');
         $this->setId('orgu_types_table');
-        $this->setRowTemplate('tpl.position_row.html', 'Modules/OrgUnit');
+        $this->setRowTemplate('tpl.position_row.html', 'components/ILIAS/OrgUnit');
         $this->initColumns();
         $this->addColumn($this->lng->txt('action'), '', '100px', false, 'text-right');
         $this->buildData();

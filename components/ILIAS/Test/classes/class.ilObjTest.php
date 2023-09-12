@@ -23,7 +23,7 @@ use ILIAS\Test\MainSettingsRepository;
 use ILIAS\Filesystem\Filesystem;
 use ILIAS\Filesystem\Stream\Streams;
 
-require_once 'Modules/Test/classes/inc.AssessmentConstants.php';
+require_once 'components/ILIAS/Test/classes/inc.AssessmentConstants.php';
 
 /**
  * Class ilObjTest
@@ -32,7 +32,7 @@ require_once 'Modules/Test/classes/inc.AssessmentConstants.php';
  * @author		Björn Heyser <bheyser@databay.de>
  * @version		$Id$
  *
- * @defgroup ModulesTest Modules/Test
+ * @defgroup ModulesTest components/ILIAS/Test
  * @extends ilObject
  */
 class ilObjTest extends ilObject implements ilMarkSchemaAware
@@ -6642,7 +6642,7 @@ class ilObjTest extends ilObject implements ilMarkSchemaAware
             $print_output = str_replace("&nbsp;", "&#160;", $print_output);
             $print_output = str_replace("&otimes;", "X", $print_output);
         }
-        $xsl = file_get_contents("./Modules/Test/xml/question2fo.xsl");
+        $xsl = file_get_contents("./components/ILIAS/Test/xml/question2fo.xsl");
 
         // additional font support
 
@@ -6670,7 +6670,7 @@ class ilObjTest extends ilObject implements ilMarkSchemaAware
     public function deliverPDFfromHTML($content, $title = null)
     {
         $content = preg_replace("/href=\".*?\"/", "", $content);
-        $printbody = new ilTemplate("tpl.il_as_tst_print_body.html", true, true, "Modules/Test");
+        $printbody = new ilTemplate("tpl.il_as_tst_print_body.html", true, true, "components/ILIAS/Test");
         $printbody->setVariable("TITLE", ilLegacyFormElementsUtil::prepareFormOutput($this->getTitle()));
         $printbody->setVariable("ADM_CONTENT", $content);
         $printbody->setCurrentBlock("css_file");

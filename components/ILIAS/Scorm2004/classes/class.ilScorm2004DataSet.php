@@ -38,7 +38,7 @@ class ilScorm2004DataSet extends ilDataSet
 
     public function getXmlNamespace(string $a_entity, string $a_schema_version): string
     {
-        return "http://www.ilias.de/xml/Modules/Scorm2004/" . $a_entity;
+        return "http://www.ilias.de/xml/components/ILIAS/Scorm2004/" . $a_entity;
     }
 
     /**

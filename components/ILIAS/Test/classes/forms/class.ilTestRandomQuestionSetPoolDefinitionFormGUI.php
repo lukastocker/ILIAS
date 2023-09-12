@@ -20,7 +20,7 @@
  * GUI class for random question set pool config form
  *
  * @author		Björn Heyser <bheyser@databay.de>
- * @package		Modules/Test
+ * @package		components/ILIAS/Test
  *
  * @ilCtrl_Calls ilTestRandomQuestionSetPoolDefinitionFormGUI: ilFormPropertyDispatchGUI
  */

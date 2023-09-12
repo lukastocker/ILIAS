@@ -19,7 +19,7 @@
 /**
  * Handles a list of questions
  * @author		Björn Heyser <bheyser@databay.de>
- * @package		Modules/TestQuestionPool
+ * @package		components/ILIAS/TestQuestionPool
  *
  */
 class ilAssQuestionList implements ilTaxAssignedItemInfo

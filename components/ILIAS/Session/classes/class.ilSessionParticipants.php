@@ -29,7 +29,7 @@ declare(strict_types=1);
  */
 class ilSessionParticipants extends ilParticipants
 {
-    public const COMPONENT_NAME = 'Modules/Session';
+    public const COMPONENT_NAME = 'components/ILIAS/Session';
 
     protected static array $instances = [];
 

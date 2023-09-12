@@ -44,7 +44,7 @@ class ilCmiXapiExporter extends ilXmlExporter
 
         /*
         $this->main_object = $a_main_object;
-        include_once("./Modules/CmiXapi/classes/class.ilCmiXapiDataSet.php");
+        include_once("./components/ILIAS/CmiXapi/classes/class.ilCmiXapiDataSet.php");
         $this->dataset = new ilCmiXapiDataSet($this->main_object->getRefId());
         $this->getXmlRepresentation(self::ENTITY, self::SCHEMA_VERSION, $this->main_object->getRefId());
         */
@@ -69,7 +69,7 @@ class ilCmiXapiExporter extends ilXmlExporter
     {
         return array(
             "5.1.0" => array(
-                "namespace" => "http://www.ilias.de/Modules/CmiXapi/cmix/5_1",
+                "namespace" => "http://www.ilias.de/components/ILIAS/CmiXapi/cmix/5_1",
                 "xsd_file" => "xml/ilias_cmix_5_1.xsd",
                 "uses_dataset" => true,
                 "min" => "5.1.0",

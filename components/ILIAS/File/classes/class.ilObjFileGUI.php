@@ -752,7 +752,7 @@ class ilObjFileGUI extends ilObject2GUI
 
         // download link added in repository
         if ($this->id_type == self::REPOSITORY_NODE_ID && $this->checkPermissionBool("read", "sendfile")) {
-            $tpl = new ilTemplate("tpl.download_link.html", true, true, "Modules/File");
+            $tpl = new ilTemplate("tpl.download_link.html", true, true, "components/ILIAS/File");
             $tpl->setVariable("LINK", ilObjFileAccess::_getPermanentDownloadLink($this->node_id));
             $info->addProperty($this->lng->txt("download_link"), $tpl->get());
         }

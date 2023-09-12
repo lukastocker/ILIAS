@@ -16,7 +16,7 @@
  *
  *********************************************************************/
 
-require_once './Modules/Test/classes/inc.AssessmentConstants.php';
+require_once './components/ILIAS/Test/classes/inc.AssessmentConstants.php';
 
 /**
  * A class defining mark schemas for assessment test objects

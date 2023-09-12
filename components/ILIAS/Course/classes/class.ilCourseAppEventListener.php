@@ -140,7 +140,7 @@ class ilCourseAppEventListener
         }
 
         switch ($a_component) {
-            case 'Modules/Course':
+            case 'components/ILIAS/Course':
                 if ($a_event == 'addParticipant') {
                     self::initializeTimings($a_parameter['obj_id'], $a_parameter['usr_id'], $a_parameter['role_id']);
                     return;

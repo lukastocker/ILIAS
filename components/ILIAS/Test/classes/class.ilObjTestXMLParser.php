@@ -20,7 +20,7 @@
  * @author        Björn Heyser <bheyser@databay.de>
  * @version        $Id$
  *
- * @package     Modules/Test
+ * @package     components/ILIAS/Test
  */
 class ilObjTestXMLParser extends ilSaxParser
 {
@@ -147,7 +147,7 @@ class ilObjTestXMLParser extends ilSaxParser
                     $this->sourcePoolDefinition->saveToDb();
 
                     $this->getImportMapping()->addMapping(
-                        'Modules/Test',
+                        'components/ILIAS/Test',
                         'rnd_src_pool_def',
                         $this->attr['id'],
                         $this->sourcePoolDefinition->getId()
@@ -215,7 +215,7 @@ class ilObjTestXMLParser extends ilSaxParser
         $newPoolId = $ilDB->nextId('object_data'); // yes !!
 
         $this->getImportMapping()->addMapping(
-            'Modules/Test',
+            'components/ILIAS/Test',
             'pool',
             $oldPoolId,
             $newPoolId
@@ -225,7 +225,7 @@ class ilObjTestXMLParser extends ilSaxParser
 
         foreach ($oldQuestionIds as $oldQuestionId) {
             $newQuestionId = $this->getImportMapping()->getMapping(
-                'Modules/Test',
+                'components/ILIAS/Test',
                 'quest',
                 $oldQuestionId
             );
@@ -251,7 +251,7 @@ class ilObjTestXMLParser extends ilSaxParser
     {
         $source_pool_id = (int) $attr['poolId'];
         $effective_pool_id = (int) $this->getImportMapping()->getMapping(
-            'Modules/Test',
+            'components/ILIAS/Test',
             'pool',
             $source_pool_id
         );

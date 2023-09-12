@@ -85,7 +85,7 @@ class ilGroupParticipantsTableGUI extends ilParticipantTableGUI
         $this->addColumn($this->lng->txt('actions'), 'optional', '', false, 'ilMembershipRowActionsHeader');
         $this->setDefaultOrderField('roles');
 
-        $this->setRowTemplate("tpl.show_participants_row.html", "Modules/Group");
+        $this->setRowTemplate("tpl.show_participants_row.html", "components/ILIAS/Group");
 
         $this->setShowRowsSelector(true);
 

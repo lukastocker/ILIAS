@@ -20,7 +20,7 @@ declare(strict_types=1);
  */
 
 /**
-* @defgroup ModulesSession Modules/Session
+* @defgroup ModulesSession components/ILIAS/Session
 *
 * @author Stefan Meyer <smeyer.ilias@gmx.de>
 * @version $Id$
@@ -488,7 +488,7 @@ class ilObjSession extends ilObject
         $this->event_id = $next_id;
 
         $ilAppEventHandler->raise(
-            'Modules/Session',
+            'components/ILIAS/Session',
             'create',
             array('object' => $this,
                 'obj_id' => $this->getId(),
@@ -533,7 +533,7 @@ class ilObjSession extends ilObject
         $res = $ilDB->manipulate($query);
 
         $ilAppEventHandler->raise(
-            'Modules/Session',
+            'components/ILIAS/Session',
             'update',
             array('object' => $this,
                 'obj_id' => $this->getId(),
@@ -563,7 +563,7 @@ class ilObjSession extends ilObject
         ilEventParticipants::_deleteByEvent($this->getId());
 
         $ilAppEventHandler->raise(
-            'Modules/Session',
+            'components/ILIAS/Session',
             'delete',
             array('object' => $this,
                 'obj_id' => $this->getId(),

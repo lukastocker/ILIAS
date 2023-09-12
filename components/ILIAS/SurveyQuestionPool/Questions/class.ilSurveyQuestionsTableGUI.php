@@ -103,7 +103,7 @@ class ilSurveyQuestionsTableGUI extends ilTable2GUI
         }
 
 
-        $this->setRowTemplate("tpl.il_svy_qpl_questions_row.html", "Modules/SurveyQuestionPool");
+        $this->setRowTemplate("tpl.il_svy_qpl_questions_row.html", "components/ILIAS/SurveyQuestionPool");
 
         $this->setFormAction($this->ctrl->getFormAction($a_parent_obj, $a_parent_cmd));
         $this->setDefaultOrderField("title");
@@ -269,7 +269,7 @@ class ilSurveyQuestionsTableGUI extends ilTable2GUI
             $obligatory = "<input type=\"checkbox\" name=\"obligatory[" .
                 $a_set["question_id"] . "]\" value=\"1\"" . $checked . " />";
         } elseif ($a_set["obligatory"]) {
-            $obligatory = "<img src=\"" . ilUtil::getImagePath("obligatory.png", "Modules/Survey") .
+            $obligatory = "<img src=\"" . ilUtil::getImagePath("obligatory.png", "components/ILIAS/Survey") .
                 "\" alt=\"" . $this->lng->txt("question_obligatory") .
                 "\" title=\"" . $this->lng->txt("question_obligatory") . "\" />";
         }

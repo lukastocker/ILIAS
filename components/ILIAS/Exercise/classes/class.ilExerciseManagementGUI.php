@@ -554,7 +554,7 @@ class ilExerciseManagementGUI
         $this->toolbar->addSeparator();
         $this->toolbar->addComponent($button_print);
 
-        $group_panels_tpl = new ilTemplate("tpl.exc_group_report_panels.html", true, true, "Modules/Exercise");
+        $group_panels_tpl = new ilTemplate("tpl.exc_group_report_panels.html", true, true, "components/ILIAS/Exercise");
         $group_panels_tpl->setVariable('TITLE', $this->lng->txt("exc_list_text_assignment") . ": " . $this->assignment->getTitle());
 
         $report_html = "";
@@ -594,7 +594,7 @@ class ilExerciseManagementGUI
     {
         $this->setBackToMembers();
 
-        $group_panels_tpl = new ilTemplate("tpl.exc_group_report_panels.html", true, true, "Modules/Exercise");
+        $group_panels_tpl = new ilTemplate("tpl.exc_group_report_panels.html", true, true, "components/ILIAS/Exercise");
         $group_panels_tpl->setVariable('TITLE', $this->lng->txt("exc_compare_selected_submissions"));
 
         $report_html = "";
@@ -691,7 +691,7 @@ class ilExerciseManagementGUI
             $this->lng->txt('feedback_given') => $a_data['fb_given'],
             $this->lng->txt('feedback_received') => $a_data['fb_received']
         );
-        $card_tpl = new ilTemplate("tpl.exc_report_details_card.html", true, true, "Modules/Exercise");
+        $card_tpl = new ilTemplate("tpl.exc_report_details_card.html", true, true, "components/ILIAS/Exercise");
         foreach ($card_content as $key => $value) {
             $card_tpl->setCurrentBlock("assingment_card");
             $card_tpl->setVariable("ROW_KEY", $key);
@@ -702,7 +702,7 @@ class ilExerciseManagementGUI
         $main_panel = $this->ui_factory->panel()->sub($a_data['uname'], $this->ui_factory->legacy($a_data['utext']))
             ->withFurtherInformation($this->ui_factory->card()->standard($this->lng->txt('text_assignment'))->withSections(array($this->ui_factory->legacy($card_tpl->get()))))->withActions($actions_dropdown);
 
-        $feedback_tpl = new ilTemplate("tpl.exc_report_feedback.html", true, true, "Modules/Exercise");
+        $feedback_tpl = new ilTemplate("tpl.exc_report_feedback.html", true, true, "components/ILIAS/Exercise");
         //if no feedback filter the feedback is displayed. Can be list submissions or compare submissions.
         $filter_feedback = $this->filter["feedback"] ?? "";
         if (array_key_exists("peer", $a_data) && (($filter_feedback == self::FEEDBACK_FULL_SUBMISSION) || $filter_feedback == "")) {
@@ -750,7 +750,7 @@ class ilExerciseManagementGUI
     public function getEvaluationModal(
         array $a_data
     ): RoundTrip {
-        $modal_tpl = new ilTemplate("tpl.exc_report_evaluation_modal.html", true, true, "Modules/Exercise");
+        $modal_tpl = new ilTemplate("tpl.exc_report_evaluation_modal.html", true, true, "components/ILIAS/Exercise");
         $modal_tpl->setVariable("USER_NAME", $a_data['uname']);
 
         $form = $this->getEvaluationModalForm($a_data);
@@ -1869,7 +1869,7 @@ class ilExerciseManagementGUI
 
         $ajax_url = $this->ctrl->getLinkTarget($this, "handleIndividualDeadlineCalls", "", true, false);
 
-        $tpl->addJavaScript("./Modules/Exercise/js/ilExcIDl.js", true, 3);
+        $tpl->addJavaScript("./components/ILIAS/Exercise/js/ilExcIDl.js", true, 3);
         $tpl->addOnLoadCode('il.ExcIDl.init("' . $ajax_url . '");');
 
         ilCalendarUtil::initDateTimePicker();

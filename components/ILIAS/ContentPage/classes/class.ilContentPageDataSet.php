@@ -35,7 +35,7 @@ class ilContentPageDataSet extends ilDataSet implements ilContentPageObjectConst
 
     protected function getXmlNamespace(string $a_entity, string $a_schema_version): string
     {
-        return 'http://www.ilias.de/xml/Modules/ContentPage/' . $a_entity;
+        return 'http://www.ilias.de/xml/components/ILIAS/ContentPage/' . $a_entity;
     }
 
     protected function getTypes(string $a_entity, string $a_version): array
@@ -123,7 +123,7 @@ class ilContentPageDataSet extends ilDataSet implements ilContentPageObjectConst
                 );
 
                 $a_mapping->addMapping(
-                    'Modules/ContentPage',
+                    'components/ILIAS/ContentPage',
                     self::OBJ_TYPE,
                     (string) $a_rec['id'],
                     (string) $newObject->getId()

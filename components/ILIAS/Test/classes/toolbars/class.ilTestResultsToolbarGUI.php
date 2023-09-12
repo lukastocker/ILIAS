@@ -20,7 +20,7 @@
  * @author	Björn Heyser <bheyser@databay.de>
  * @version	$Id$
  *
- * @package	Modules/Test
+ * @package	components/ILIAS/Test
  */
 class ilTestResultsToolbarGUI extends ilToolbarGUI
 {
@@ -73,7 +73,7 @@ class ilTestResultsToolbarGUI extends ilToolbarGUI
             $link->setCaption($this->lng->txt('tst_res_jump_to_participant_btn'), false);
             $this->addButtonInstance($link);
 
-            $this->tpl->addJavaScript('Modules/Test/js/ilTestResultParticipantSelector.js');
+            $this->tpl->addJavaScript('components/ILIAS/Test/js/ilTestResultParticipantSelector.js');
         }
     }
 

@@ -52,7 +52,7 @@ class ilTestVerificationTableGUI extends ilTable2GUI
         $this->setTitle($this->lng->txt('tstv_create'));
         $this->setDescription($this->lng->txt('tstv_create_info'));
 
-        $this->setRowTemplate('tpl.il_test_verification_row.html', 'Modules/Test');
+        $this->setRowTemplate('tpl.il_test_verification_row.html', 'components/ILIAS/Test');
         $this->setFormAction($ilCtrl->getFormAction($a_parent_obj, $a_parent_cmd));
 
         $this->getItems();

@@ -24,7 +24,7 @@
  * @version		$Id$
  *
  * @ingroup ModulesTestQuestionPool
- * @package Modules/TestQuestionPool
+ * @package components/ILIAS/TestQuestionPool
  */
 class ilAssQuestionTypeOrderer
 {

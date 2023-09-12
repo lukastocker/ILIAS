@@ -927,7 +927,7 @@ class ilObjCategoryGUI extends ilContainerGUI
             'ADM_CONTENT',
             'adm_content',
             'tpl.cat_admin_users.html',
-            "Modules/Category"
+            "components/ILIAS/Category"
         );
 
         if (count($rbacreview->getGlobalAssignableRoles()) ||

@@ -21,7 +21,7 @@ class ilGroupReferenceExporter extends ilContainerReferenceExporter
      */
     protected function initWriter(ilContainerReference $ref): ilContainerReferenceXmlWriter
     {
-        include_once './Modules/GroupReference/classes/class.ilGroupReferenceXmlWriter.php';
+        include_once './components/ILIAS/GroupReference/classes/class.ilGroupReferenceXmlWriter.php';
         return new ilGroupReferenceXmlWriter($ref);
     }
 }

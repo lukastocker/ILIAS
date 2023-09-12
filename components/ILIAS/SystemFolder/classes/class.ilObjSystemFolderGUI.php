@@ -232,7 +232,7 @@ class ilObjSystemFolderGUI extends ilObjectGUI
                 "ADM_CONTENT",
                 "adm_content",
                 "tpl.adm_check.html",
-                "Modules/SystemFolder"
+                "components/ILIAS/SystemFolder"
             );
 
             if ($hasScanLog) {
@@ -422,7 +422,7 @@ class ilObjSystemFolderGUI extends ilObjectGUI
             "ADM_CONTENT",
             "adm_content",
             "tpl.header_title_edit.html",
-            "Modules/SystemFolder"
+            "components/ILIAS/SystemFolder"
         );
 
         $array_push = true;
@@ -651,7 +651,7 @@ class ilObjSystemFolderGUI extends ilObjectGUI
             "ADM_CONTENT",
             "adm_content",
             "tpl.adm_scan.html",
-            "Modules/SystemFolder"
+            "components/ILIAS/SystemFolder"
         );
 
         $this->tpl->setVariable("FORMACTION", $this->ctrl->getFormAction($this));
@@ -686,7 +686,7 @@ class ilObjSystemFolderGUI extends ilObjectGUI
             "ADM_CONTENT",
             "adm_content",
             "tpl.adm_scan.html",
-            "Modules/SystemFolder"
+            "components/ILIAS/SystemFolder"
         );
         $this->tpl->setVariable("TXT_TITLE", $this->lng->txt("scan_details"));
         $this->tpl->setVariable("COLSPAN", 3);
@@ -1003,7 +1003,7 @@ class ilObjSystemFolderGUI extends ilObjectGUI
 //        $this->tabs->setTabActive("server");
         $this->setServerInfoSubTabs("server_data");
 
-        $btpl = new ilTemplate("tpl.server_data.html", true, true, "Modules/SystemFolder");
+        $btpl = new ilTemplate("tpl.server_data.html", true, true, "components/ILIAS/SystemFolder");
         $btpl->setVariable("FORM", $this->form->getHTML());
         $btpl->setVariable("PHP_INFO_TARGET", $ilCtrl->getLinkTarget($this, "showPHPInfo"));
         $tpl->setContent($btpl->get());
@@ -1675,7 +1675,7 @@ class ilObjSystemFolderGUI extends ilObjectGUI
     {
         $tpl = $this->tpl;
 
-        $tpl->addBlockFile('ADM_CONTENT', 'adm_content', 'tpl.java_settings.html', 'Modules/SystemFolder');
+        $tpl->addBlockFile('ADM_CONTENT', 'adm_content', 'tpl.java_settings.html', 'components/ILIAS/SystemFolder');
 
         $GLOBALS['lng']->loadLanguageModule('search');
 

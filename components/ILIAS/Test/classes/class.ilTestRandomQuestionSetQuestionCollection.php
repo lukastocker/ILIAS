@@ -20,7 +20,7 @@
  * @author		Björn Heyser <bheyser@databay.de>
  * @version		$Id$
  *
- * @package     Modules/Test
+ * @package     components/ILIAS/Test
  */
 // hey: fixRandomTestBuildable - iterator interface for collection
 class ilTestRandomQuestionSetQuestionCollection implements

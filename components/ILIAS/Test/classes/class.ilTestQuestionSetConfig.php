@@ -19,7 +19,7 @@
 /**
  * abstract parent class that manages/holds the data for a question set configuration
  * @author		Björn Heyser <bheyser@databay.de>
- * @package		Modules/Test
+ * @package		components/ILIAS/Test
  */
 abstract class ilTestQuestionSetConfig
 {

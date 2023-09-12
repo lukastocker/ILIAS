@@ -22,7 +22,7 @@
  * @author		Björn Heyser <bheyser@databay.de>
  * @version		$Id$
  *
- * @package		Modules/TestQuestionPool
+ * @package		components/ILIAS/TestQuestionPool
  *
  * @ilCtrl_Calls ilAssQuestionHintRequestGUI: ilAssQuestionHintsTableGUI
  * @ilCtrl_Calls ilAssQuestionHintRequestGUI: ilConfirmationGUI, ilPropertyFormGUI, ilAssHintPageGUI
@@ -284,7 +284,7 @@ class ilAssQuestionHintRequestGUI extends ilAssQuestionHintAbstractGUI
                 'CONTENT',
                 'kiosk_content',
                 'tpl.il_tst_question_hints_kiosk_page.html',
-                'Modules/TestQuestionPool'
+                'components/ILIAS/TestQuestionPool'
             );
 
             $tpl->setVariable('KIOSK_HEAD', $this->parentGUI->getKioskHead());

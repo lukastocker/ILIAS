@@ -57,7 +57,7 @@ class ilOrgUnitUserAssignmentTableGUI extends ilTable2GUI
         $this->setEnableHeader(true);
         $this->setEnableTitle(true);
         $this->setTitle($position->getTitle());
-        $this->setRowTemplate("tpl.staff_row.html", "Modules/OrgUnit");
+        $this->setRowTemplate("tpl.staff_row.html", "components/ILIAS/OrgUnit");
         $this->parseData();
     }
 

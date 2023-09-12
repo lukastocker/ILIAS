@@ -45,7 +45,7 @@ class ilTestPassOverviewTableGUI extends ilTable2GUI
         $this->setLimit(PHP_INT_MAX);
         $this->disable('sort');
 
-        $this->setRowTemplate('tpl.il_as_tst_pass_overview_row.html', 'Modules/Test');
+        $this->setRowTemplate('tpl.il_as_tst_pass_overview_row.html', 'components/ILIAS/Test');
     }
 
     public function init(): void

@@ -57,7 +57,7 @@ class ilTestParticipantsTableGUI extends ilTable2GUI
         $this->setFormName('participantsForm');
         $this->setFormAction($this->ctrl->getFormAction($a_parent_obj, $a_parent_cmd));
 
-        $this->setRowTemplate("tpl.il_as_tst_participants_row.html", "Modules/Test");
+        $this->setRowTemplate("tpl.il_as_tst_participants_row.html", "components/ILIAS/Test");
 
         $this->enable('header');
         $this->enable('sort');

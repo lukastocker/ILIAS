@@ -56,7 +56,7 @@ class ilPollBlockGUI extends ilBlockGUI
         parent::__construct();
 
         $this->lng->loadLanguageModule("poll");
-        $this->setRowTemplate("tpl.block.html", "Modules/Poll");
+        $this->setRowTemplate("tpl.block.html", "components/ILIAS/Poll");
 
         $this->container_view_manager = $DIC
             ->container()
@@ -344,7 +344,7 @@ class ilPollBlockGUI extends ilBlockGUI
                 );
                 $this->tpl->setVariable("COMMENTS_REDRAW_URL", $redraw_url);
 
-                $this->main_tpl->addJavaScript("Modules/Poll/js/ilPoll.js");
+                $this->main_tpl->addJavaScript("components/ILIAS/Poll/js/ilPoll.js");
                 self::$js_init = true;
             }
         }

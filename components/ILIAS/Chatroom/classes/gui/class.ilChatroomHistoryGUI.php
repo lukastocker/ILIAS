@@ -84,13 +84,13 @@ class ilChatroomHistoryGUI extends ilChatroomGUIHandler
 
         $this->gui->switchToVisibleMode();
 
-        $this->mainTpl->addCss('Modules/Chatroom/templates/default/style.css');
+        $this->mainTpl->addCss('components/ILIAS/Chatroom/templates/default/style.css');
 
         // should be able to grep templates
         if ($export) {
-            $roomTpl = new ilGlobalTemplate('tpl.history_export.html', true, true, 'Modules/Chatroom');
+            $roomTpl = new ilGlobalTemplate('tpl.history_export.html', true, true, 'components/ILIAS/Chatroom');
         } else {
-            $roomTpl = new ilTemplate('tpl.history.html', true, true, 'Modules/Chatroom');
+            $roomTpl = new ilTemplate('tpl.history.html', true, true, 'components/ILIAS/Chatroom');
         }
 
         if ($export) {

@@ -21,7 +21,7 @@
  *
  * @version		$Id$
  *
- * @package		Modules/Test
+ * @package		components/ILIAS/Test
  */
 class ilTestPlayerCommands
 {

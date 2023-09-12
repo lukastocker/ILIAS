@@ -20,7 +20,7 @@
  * GUI class that manages the editing of general test settings/properties
  * shown on "general" subtab
  * @author		Björn Heyser <bheyser@databay.de>
- * @package		Modules/Test
+ * @package		components/ILIAS/Test
  */
 abstract class ilTestSettingsGUI
 {

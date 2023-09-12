@@ -22,7 +22,7 @@
  * @author    Björn Heyser <info@bjoernheyser.de>
  * @version    $Id$
  *
- * @package    Modules/Test(QuestionPool)
+ * @package    components/ILIAS/Test(QuestionPool)
  */
 class ilAssLongmenuCorrectionsInputGUI extends ilAnswerWizardInputGUI
 {
@@ -33,7 +33,7 @@ class ilAssLongmenuCorrectionsInputGUI extends ilAnswerWizardInputGUI
 
     public function insert(ilTemplate $a_tpl): void
     {
-        $tpl = new ilTemplate('tst.longmenu_corrections_input.html', true, true, 'Modules/TestQuestionPool');
+        $tpl = new ilTemplate('tst.longmenu_corrections_input.html', true, true, 'components/ILIAS/TestQuestionPool');
 
         $tpl->setVariable('ANSWERS_MODAL', $this->buildAnswersModal()->getHTML());
 

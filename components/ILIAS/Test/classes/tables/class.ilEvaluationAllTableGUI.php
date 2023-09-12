@@ -109,7 +109,7 @@ class ilEvaluationAllTableGUI extends ilTable2GUI
         $this->addColumn($lng->txt("detailed_evaluation"), "", "");
 
         $this->setFormAction($this->ctrl->getFormAction($a_parent_obj, $a_parent_cmd));
-        $this->setRowTemplate("tpl.table_evaluation_all.html", "Modules/Test");
+        $this->setRowTemplate("tpl.table_evaluation_all.html", "components/ILIAS/Test");
         $this->setDefaultOrderField("name");
         $this->setDefaultOrderDirection("asc");
         $this->enable('sort');

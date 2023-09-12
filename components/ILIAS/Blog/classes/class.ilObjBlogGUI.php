@@ -1167,7 +1167,7 @@ class ilObjBlogGUI extends ilObject2GUI implements ilDesktopItemHandling
         string $a_content,
         string $a_nav
     ): string {
-        $wtpl = new ilTemplate("tpl.blog_embedded.html", true, true, "Modules/Blog");
+        $wtpl = new ilTemplate("tpl.blog_embedded.html", true, true, "components/ILIAS/Blog");
         $wtpl->setVariable("VAL_LIST", $a_content);
         $wtpl->setVariable("VAL_NAVIGATION", $a_nav);
         return $wtpl->get();
@@ -1362,7 +1362,7 @@ class ilObjBlogGUI extends ilObject2GUI implements ilDesktopItemHandling
         $ui_factory = $this->ui->factory();
         $ui_renderer = $this->ui->renderer();
 
-        $wtpl = new ilTemplate("tpl.blog_list.html", true, true, "Modules/Blog");
+        $wtpl = new ilTemplate("tpl.blog_list.html", true, true, "components/ILIAS/Blog");
 
         // quick editing in portfolio
         if ($this->prt_id > 0 &&
@@ -1696,7 +1696,7 @@ class ilObjBlogGUI extends ilObject2GUI implements ilDesktopItemHandling
             //$max_detail_postings = $this->object->getNavModeListPostings();
             $max_months = $this->object->getNavModeListMonths();
 
-            $wtpl = new ilTemplate("tpl.blog_list_navigation_by_date.html", true, true, "Modules/Blog");
+            $wtpl = new ilTemplate("tpl.blog_list_navigation_by_date.html", true, true, "components/ILIAS/Blog");
 
             $ilCtrl->setParameter($this, "blpg", "");
 
@@ -1787,7 +1787,7 @@ class ilObjBlogGUI extends ilObject2GUI implements ilDesktopItemHandling
         }
         // single month
         else {
-            $wtpl = new ilTemplate("tpl.blog_list_navigation_month.html", true, true, "Modules/Blog");
+            $wtpl = new ilTemplate("tpl.blog_list_navigation_month.html", true, true, "components/ILIAS/Blog");
 
             $ilCtrl->setParameter($this, "blpg", "");
 
@@ -1875,7 +1875,7 @@ class ilObjBlogGUI extends ilObject2GUI implements ilDesktopItemHandling
 
         $keywords = $this->getKeywords($a_show_inactive, $blpg);
         if ($keywords) {
-            $wtpl = new ilTemplate("tpl.blog_list_navigation_keywords.html", true, true, "Modules/Blog");
+            $wtpl = new ilTemplate("tpl.blog_list_navigation_keywords.html", true, true, "components/ILIAS/Blog");
 
             $max = max($keywords);
 
@@ -1965,7 +1965,7 @@ class ilObjBlogGUI extends ilObject2GUI implements ilDesktopItemHandling
             }
             ksort($list);
 
-            $wtpl = new ilTemplate("tpl.blog_list_navigation_authors.html", true, true, "Modules/Blog");
+            $wtpl = new ilTemplate("tpl.blog_list_navigation_authors.html", true, true, "components/ILIAS/Blog");
 
             $wtpl->setCurrentBlock("author");
             foreach ($list as $author) {
@@ -2227,7 +2227,7 @@ class ilObjBlogGUI extends ilObject2GUI implements ilDesktopItemHandling
             );
         }
 
-        $wtpl = new ilTemplate("tpl.blog_list_navigation.html", true, true, "Modules/Blog");
+        $wtpl = new ilTemplate("tpl.blog_list_navigation.html", true, true, "components/ILIAS/Blog");
 
         $blocks = array();
 

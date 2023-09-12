@@ -250,7 +250,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
         if (ilForumPostDraft::isAutoSavePostDraftAllowed()) {
             $interval = ilForumPostDraft::lookupAutosaveInterval();
 
-            $this->tpl->addJavaScript('./Modules/Forum/js/autosave.js');
+            $this->tpl->addJavaScript('./components/ILIAS/Forum/js/autosave.js');
             $autosave_cmd = 'autosaveDraftAsync';
             if ($this->objCurrentPost->getId() === 0 && $this->objCurrentPost->getThreadId() === 0) {
                 $autosave_cmd = 'autosaveThreadDraftAsync';
@@ -726,7 +726,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             'tpl.forums_threads_liste.html',
             true,
             true,
-            'Modules/Forum'
+            'components/ILIAS/Forum'
         );
 
         if ($this->confirmation_gui_html !== '') {
@@ -1713,7 +1713,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
 
         $this->objCurrentPost->activatePost();
         $GLOBALS['ilAppEventHandler']->raise(
-            'Modules/Forum',
+            'components/ILIAS/Forum',
             'activatedPost',
             [
                 'object' => $this->object,
@@ -1977,7 +1977,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
     {
         /** @var ilForum $frm */
         $frm = $this->object->Forum;
-        $form_tpl = new ilTemplate('tpl.frm_censorship_post_form.html', true, true, 'Modules/Forum');
+        $form_tpl = new ilTemplate('tpl.frm_censorship_post_form.html', true, true, 'components/ILIAS/Forum');
 
         $form_tpl->setVariable('ANCHOR', $this->objCurrentPost->getId());
         $form_tpl->setVariable('SPACER', '<hr noshade="noshade" width="100%" size="1" align="center" />');
@@ -2438,7 +2438,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
 
             if (ilForumPostDraft::isSavePostDraftAllowed()) {
                 $GLOBALS['ilAppEventHandler']->raise(
-                    'Modules/Forum',
+                    'components/ILIAS/Forum',
                     'publishedDraft',
                     [
                         'draftObj' => $draft_obj,
@@ -2450,7 +2450,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             $draft_obj->deleteDraft();
 
             $GLOBALS['ilAppEventHandler']->raise(
-                'Modules/Forum',
+                'components/ILIAS/Forum',
                 'createdPost',
                 [
                     'object' => $this->object,
@@ -2604,7 +2604,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
                 }
 
                 $GLOBALS['ilAppEventHandler']->raise(
-                    'Modules/Forum',
+                    'components/ILIAS/Forum',
                     'createdPost',
                     [
                         'object' => $this->object,
@@ -2720,7 +2720,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
                     }
 
                     $GLOBALS['ilAppEventHandler']->raise(
-                        'Modules/Forum',
+                        'components/ILIAS/Forum',
                         'updatedPost',
                         [
                             'ref_id' => $this->object->getRefId(),
@@ -2938,7 +2938,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             'tpl.forums_threads_view.html',
             true,
             true,
-            'Modules/Forum'
+            'components/ILIAS/Forum'
         );
 
 
@@ -3241,7 +3241,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
                 }
                 $this->ctrl->setParameter($this, 'pos_pk', $firstNodeInThread->getId());
                 $this->ctrl->setParameter($this, 'thr_pk', $firstNodeInThread->getThreadId());
-                $jsTpl = new ilTemplate('tpl.forum_post_quoation_ajax_handler.js', true, true, 'Modules/Forum');
+                $jsTpl = new ilTemplate('tpl.forum_post_quoation_ajax_handler.js', true, true, 'components/ILIAS/Forum');
                 $jsTpl->setVariable(
                     'IL_FRM_QUOTE_CALLBACK_SRC',
                     $this->ctrl->getLinkTarget($this, 'getQuotationHTMLAsynch', '', true)
@@ -3675,7 +3675,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
                 'tpl.forums_threads_move.html',
                 true,
                 true,
-                'Modules/Forum'
+                'components/ILIAS/Forum'
             );
 
             if (!$this->hideToolbar()) {
@@ -3692,7 +3692,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             $tblThr->disable('sort');
             $tblThr->disable('linkbar');
             $tblThr->setLimit(PHP_INT_MAX);
-            $tblThr->setRowTemplate('tpl.forums_threads_move_thr_row.html', 'Modules/Forum');
+            $tblThr->setRowTemplate('tpl.forums_threads_move_thr_row.html', 'components/ILIAS/Forum');
             $tblThr->setDefaultOrderField('is_sticky');
             $counter = 0;
             $result = [];
@@ -3747,7 +3747,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
                 $draftFileData->delete();
 
                 $GLOBALS['ilAppEventHandler']->raise(
-                    'Modules/Forum',
+                    'components/ILIAS/Forum',
                     'deletedDraft',
                     [
                         'draftObj' => $draft,
@@ -3837,7 +3837,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             $this->error->raiseError($this->lng->txt('permission_denied'), $this->error->MESSAGE);
         }
 
-        $tpl = new ilTemplate('tpl.create_thread_form.html', true, true, 'Modules/Forum');
+        $tpl = new ilTemplate('tpl.create_thread_form.html', true, true, 'components/ILIAS/Forum');
 
         $accordion = new ilAccordionGUI();
         $accordion->setId('acc_' . $this->obj_id);
@@ -3960,7 +3960,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             }
 
             $GLOBALS['ilAppEventHandler']->raise(
-                'Modules/Forum',
+                'components/ILIAS/Forum',
                 'createdPost',
                 [
                     'object' => $this->object,
@@ -4485,7 +4485,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             'tpl.forums_threads_liste.html',
             true,
             true,
-            'Modules/Forum'
+            'components/ILIAS/Forum'
         );
 
         $topicData = $frm->getOneTopic();
@@ -4774,7 +4774,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             }
 
             $GLOBALS['ilAppEventHandler']->raise(
-                'Modules/Forum',
+                'components/ILIAS/Forum',
                 'savedAsDraft',
                 [
                     'draftObj' => $draft,
@@ -4842,7 +4842,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             $draft->updateDraft();
 
             $GLOBALS['ilAppEventHandler']->raise(
-                'Modules/Forum',
+                'components/ILIAS/Forum',
                 'updatedDraft',
                 [
                     'draftObj' => $draft,
@@ -4986,7 +4986,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
 
                 if (ilForumPostDraft::isSavePostDraftAllowed()) {
                     $GLOBALS['ilAppEventHandler']->raise(
-                        'Modules/Forum',
+                        'components/ILIAS/Forum',
                         'savedAsDraft',
                         [
                             'draftObj' => $draftObj,
@@ -5089,7 +5089,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
 
                 if (ilForumPostDraft::isSavePostDraftAllowed()) {
                     $GLOBALS['ilAppEventHandler']->raise(
-                        'Modules/Forum',
+                        'components/ILIAS/Forum',
                         'updatedDraft',
                         [
                             'draftObj' => $update_draft,
@@ -5205,7 +5205,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
 
         if (ilForumPostDraft::isSavePostDraftAllowed()) {
             $GLOBALS['ilAppEventHandler']->raise(
-                'Modules/Forum',
+                'components/ILIAS/Forum',
                 'deletedDraft',
                 [
                     'draftObj' => $draft_obj,
@@ -5478,7 +5478,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             $items = [];
             foreach ($actions as $lng_id => $url) {
                 if ('frm_revoke_censorship' === $lng_id || 'frm_censorship' === $lng_id) {
-                    $modalTemplate = new ilTemplate("tpl.forums_censor_modal.html", true, true, 'Modules/Forum');
+                    $modalTemplate = new ilTemplate("tpl.forums_censor_modal.html", true, true, 'components/ILIAS/Forum');
                     $formID = str_replace('.', '_', uniqid('form', true));
                     $modalTemplate->setVariable('FORM_ID', $formID);
 
@@ -5581,7 +5581,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
             $modal = ilModalGUI::getInstance();
             $modal->setHeading($this->lng->txt('restore_draft_from_autosave'));
             $modal->setId('frm_autosave_restore');
-            $form_tpl = new ilTemplate('tpl.restore_thread_draft.html', true, true, 'Modules/Forum');
+            $form_tpl = new ilTemplate('tpl.restore_thread_draft.html', true, true, 'components/ILIAS/Forum');
 
             foreach ($draftsFromHistory as $history_instance) {
                 $accordion = new ilAccordionGUI();
@@ -5601,7 +5601,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
                     'tpl.restore_thread_draft_accordion_content.html',
                     true,
                     true,
-                    'Modules/Forum'
+                    'components/ILIAS/Forum'
                 );
                 $accordion_tpl->setVariable('HEADER', $history_instance->getPostSubject());
                 $accordion_tpl->setVariable('MESSAGE', $message);
@@ -5703,7 +5703,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
                 $this->ctrl->setParameter($this, 'pos_pk', $this->objCurrentPost->getId());
                 $this->ctrl->setParameter($this, 'thr_pk', $this->objCurrentPost->getThreadId());
 
-                $jsTpl = new ilTemplate('tpl.forum_post_quoation_ajax_handler.js', true, true, 'Modules/Forum');
+                $jsTpl = new ilTemplate('tpl.forum_post_quoation_ajax_handler.js', true, true, 'components/ILIAS/Forum');
                 $jsTpl->setVariable(
                     'IL_FRM_QUOTE_CALLBACK_SRC',
                     $this->ctrl->getLinkTarget($this, 'getQuotationHTMLAsynch', '', true)
@@ -5732,7 +5732,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
 
                 $this->ctrl->setParameter($this, 'pos_pk', $this->objCurrentPost->getParentId());
                 $this->ctrl->setParameter($this, 'thr_pk', $this->objCurrentPost->getThreadId());
-                $jsTpl = new ilTemplate('tpl.forum_post_quoation_ajax_handler.js', true, true, 'Modules/Forum');
+                $jsTpl = new ilTemplate('tpl.forum_post_quoation_ajax_handler.js', true, true, 'components/ILIAS/Forum');
                 $jsTpl->setVariable(
                     'IL_FRM_QUOTE_CALLBACK_SRC',
                     $this->ctrl->getLinkTarget($this, 'getQuotationHTMLAsynch', '', true)
@@ -5768,7 +5768,7 @@ class ilObjForumGUI extends ilObjectGUI implements ilDesktopItemHandling, ilForu
                 $this->ctrl->setParameter($this, 'pos_pk', $this->objCurrentPost->getId());
                 $this->ctrl->setParameter($this, 'thr_pk', $this->objCurrentPost->getThreadId());
 
-                $jsTpl = new ilTemplate('tpl.forum_post_quoation_ajax_handler.js', true, true, 'Modules/Forum');
+                $jsTpl = new ilTemplate('tpl.forum_post_quoation_ajax_handler.js', true, true, 'components/ILIAS/Forum');
                 $jsTpl->setVariable(
                     'IL_FRM_QUOTE_CALLBACK_SRC',
                     $this->ctrl->getLinkTarget($this, 'getQuotationHTMLAsynch', '', true)

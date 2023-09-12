@@ -45,7 +45,7 @@ class ilScormAiccExporter extends ilXmlExporter
     {
         return array(
             "5.1.0" => array(
-                "namespace" => "http://www.ilias.de/Modules/ScormAicc/sahs/5_1",
+                "namespace" => "http://www.ilias.de/components/ILIAS/ScormAicc/sahs/5_1",
                 "xsd_file" => "xml/ilias_sahs_5_1.xsd",
                 "uses_dataset" => true,
                 "min" => "5.1.0",
@@ -60,7 +60,7 @@ class ilScormAiccExporter extends ilXmlExporter
     //
     //            return array (
     //                array(
-    //                    "component" => "Modules/ScormAicc",
+    //                    "component" => "components/ILIAS/ScormAicc",
     //                    "entity" => "md",
     //                    "ids" => $md_ids)
     //                );

@@ -31,7 +31,7 @@ class ilHTMLLearningModuleDataSet extends ilDataSet
 
     protected function getXmlNamespace(string $a_entity, string $a_schema_version): string
     {
-        return "https://www.ilias.de/xml/Modules/HTMLLearningModule/" . $a_entity;
+        return "https://www.ilias.de/xml/components/ILIAS/HTMLLearningModule/" . $a_entity;
     }
 
     protected function getTypes(string $a_entity, string $a_version): array
@@ -103,7 +103,7 @@ class ilHTMLLearningModuleDataSet extends ilDataSet
                     ilFileUtils::rCopy($source_dir, $target_dir);
                 }
 
-                $a_mapping->addMapping("Modules/HTMLLearningModule", "htlm", $a_rec["Id"], $newObj->getId());
+                $a_mapping->addMapping("components/ILIAS/HTMLLearningModule", "htlm", $a_rec["Id"], $newObj->getId());
                 $a_mapping->addMapping(
                     "Services/MetaData",
                     "md",

@@ -23,7 +23,7 @@
  * @author		Björn Heyser <bheyser@databay.de>
  * @version		$Id$
  *
- * @package		Modules/Test
+ * @package		components/ILIAS/Test
  *
  * @ilCtrl_Calls ilTestFixedQuestionSetConfigGUI: ilTestExpressPageObjectGUI
  * @ilCtrl_Calls ilTestFixedQuestionSetConfigGUI: ilPageEditorGUI

@@ -149,31 +149,31 @@ class ilWikiExporter extends ilXmlExporter
     {
         return array(
             "5.4.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/Wiki/wiki/5_4",
+                "namespace" => "https://www.ilias.de/components/ILIAS/Wiki/wiki/5_4",
                 "xsd_file" => "ilias_wiki_5_4.xsd",
                 "uses_dataset" => true,
                 "min" => "5.4.0",
                 "max" => ""),
             "4.1.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/Wiki/wiki/4_1",
+                "namespace" => "https://www.ilias.de/components/ILIAS/Wiki/wiki/4_1",
                 "xsd_file" => "ilias_wiki_4_1.xsd",
                 "uses_dataset" => true,
                 "min" => "4.1.0",
                 "max" => "4.2.99"),
             "4.3.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/Wiki/wiki/4_3",
+                "namespace" => "https://www.ilias.de/components/ILIAS/Wiki/wiki/4_3",
                 "xsd_file" => "ilias_wiki_4_3.xsd",
                 "uses_dataset" => true,
                 "min" => "4.3.0",
                 "max" => "4.3.99"),
             "4.4.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/Wiki/wiki/4_4",
+                "namespace" => "https://www.ilias.de/components/ILIAS/Wiki/wiki/4_4",
                 "xsd_file" => "ilias_wiki_4_4.xsd",
                 "uses_dataset" => true,
                 "min" => "4.4.0",
                 "max" => "5.0.99"),
             "5.1.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/Wiki/wiki/5_1",
+                "namespace" => "https://www.ilias.de/components/ILIAS/Wiki/wiki/5_1",
                 "xsd_file" => "ilias_wiki_5_1.xsd",
                 "uses_dataset" => true,
                 "min" => "5.1.0",

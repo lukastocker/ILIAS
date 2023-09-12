@@ -18,7 +18,7 @@
 
 /**
  * @author		Björn Heyser <bheyser@databay.de>
- * @package     Modules/Test
+ * @package     components/ILIAS/Test
  * @ilCtrl_Calls ilTestPlayerFixedQuestionSetGUI: ilAssGenFeedbackPageGUI
  * @ilCtrl_Calls ilTestPlayerFixedQuestionSetGUI: ilAssSpecFeedbackPageGUI
  * @ilCtrl_Calls ilTestPlayerFixedQuestionSetGUI: ilAssQuestionHintRequestGUI

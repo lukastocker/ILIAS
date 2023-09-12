@@ -138,7 +138,7 @@ class WeekGridGUI
             'tpl.week_grid.html',
             true,
             true,
-            'Modules/BookingManager/BookingProcess'
+            'components/ILIAS/BookingManager/BookingProcess'
         );
 
         $cells = $this->buildCellData();

@@ -50,7 +50,7 @@ class ilTestManScoringParticipantsBySelectedQuestionAndPassTableGUI extends ilTa
         parent::__construct($parentObj, self::PARENT_DEFAULT_CMD);
 
         $this->setFormAction($ilCtrl->getFormAction($parentObj, self::PARENT_DEFAULT_CMD));
-        $this->setRowTemplate("tpl.il_as_tst_man_scoring_by_question_tblrow.html", "Modules/Test");
+        $this->setRowTemplate("tpl.il_as_tst_man_scoring_by_question_tblrow.html", "components/ILIAS/Test");
         $this->setShowRowsSelector(true);
 
         $this->initOrdering();

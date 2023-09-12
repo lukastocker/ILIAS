@@ -37,7 +37,7 @@ class ilSurveyDataSet extends ilDataSet
 
     protected function getXmlNamespace(string $a_entity, string $a_schema_version): string
     {
-        return "https://www.ilias.de/xml/Modules/Survey/" . $a_entity;
+        return "https://www.ilias.de/xml/components/ILIAS/Survey/" . $a_entity;
     }
 
     /**
@@ -129,7 +129,7 @@ class ilSurveyDataSet extends ilDataSet
         switch ($a_entity) {
             case "svy_quest_skill":
                 $skill_data = ilBasicSkill::getCommonSkillIdForImportId($this->getCurrentInstallationId(), $a_rec["BaseSkillId"], $a_rec["TrefId"]);
-                $q_id = $a_mapping->getMapping("Modules/Survey", "svy_q", $a_rec["QId"]);
+                $q_id = $a_mapping->getMapping("components/ILIAS/Survey", "svy_q", $a_rec["QId"]);
                 if ($q_id > 0 && count($skill_data) > 0) {
                     $skill_survey = new ilSurveySkill($this->getImport()->getSurvey());
                     $skill_survey->addQuestionSkillAssignment($q_id, $skill_data[0]["skill_id"], $skill_data[0]["tref_id"]);

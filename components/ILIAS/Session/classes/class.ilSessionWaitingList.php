@@ -38,9 +38,9 @@ class ilSessionWaitingList extends ilWaitingList
             return false;
         }
 
-        $ilLog->info('Raise new event: Modules/Session addToWaitingList');
+        $ilLog->info('Raise new event: components/ILIAS/Session addToWaitingList');
         $ilAppEventHandler->raise(
-            "Modules/Session",
+            "components/ILIAS/Session",
             'addToWaitingList',
             array(
                     'obj_id' => $this->getObjId(),

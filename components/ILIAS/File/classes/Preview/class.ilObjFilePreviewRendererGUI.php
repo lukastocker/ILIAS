@@ -225,7 +225,7 @@ class ilObjFilePreviewRendererGUI implements ilCtrlBaseClassInterface
             $pages = $this->ui_factory->modal()->lightboxTextPage(
                 sprintf(
                     $this->language->txt('preview_not_possible'),
-                    'Modules/File/classes/Preview/README.md'
+                    'components/ILIAS/File/classes/Preview/README.md'
                 ),
                 $this->language->txt('preview')
             );

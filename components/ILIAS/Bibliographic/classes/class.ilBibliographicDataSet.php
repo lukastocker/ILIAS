@@ -74,7 +74,7 @@ class ilBibliographicDataSet extends ilDataSet
 
     public function getXmlNamespace(string $a_entity, string $a_schema_version): string
     {
-        return 'http://www.ilias.de/xml/Modules/Bibliographic/' . $a_entity;
+        return 'http://www.ilias.de/xml/components/ILIAS/Bibliographic/' . $a_entity;
     }
 
 
@@ -104,7 +104,7 @@ class ilBibliographicDataSet extends ilDataSet
                     $new_obj->create();
                 }
                 $this->import_bib_object = $new_obj;
-                $a_mapping->addMapping('Modules/Bibliographic', 'bibl', $a_rec['id'], $new_obj->getId());
+                $a_mapping->addMapping('components/ILIAS/Bibliographic', 'bibl', $a_rec['id'], $new_obj->getId());
                 $this->importLibraryFile($a_mapping);
                 break;
         }
@@ -196,7 +196,7 @@ class ilBibliographicDataSet extends ilDataSet
     {
         $bib_id = $this->import_bib_object->getId();
         $filename = $this->import_bib_object->getFilename();
-        $import_path = $this->getImportDirectory() . "/Modules/Bibliographic/set_1/expDir_1/" . $filename;
+        $import_path = $this->getImportDirectory() . "/components/ILIAS/Bibliographic/set_1/expDir_1/" . $filename;
 
         // create new resource from stream
         $stream = Streams::ofResource(@fopen($import_path, 'rb'));

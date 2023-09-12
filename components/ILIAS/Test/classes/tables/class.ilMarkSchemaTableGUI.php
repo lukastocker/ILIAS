@@ -45,7 +45,7 @@ class ilMarkSchemaTableGUI extends ilTable2GUI
         $this->setFormAction($this->ctrl->getFormAction($this->getParentObject(), $cmd));
         $this->setFormName('form_' . $this->getId());
 
-        $this->setRowTemplate('tpl.il_as_tst_mark_schema_row.html', 'Modules/Test');
+        $this->setRowTemplate('tpl.il_as_tst_mark_schema_row.html', 'components/ILIAS/Test');
 
         $this->setNoEntriesText($this->lng->txt('tst_no_marks_defined'));
 

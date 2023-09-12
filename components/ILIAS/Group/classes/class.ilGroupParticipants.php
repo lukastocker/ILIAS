@@ -30,7 +30,7 @@ declare(strict_types=1);
 
 class ilGroupParticipants extends ilParticipants
 {
-    protected const COMPONENT_NAME = 'Modules/Group';
+    protected const COMPONENT_NAME = 'components/ILIAS/Group';
 
     protected static array $instances = [];
 
@@ -101,9 +101,9 @@ class ilGroupParticipants extends ilParticipants
     {
         parent::addSubscriber($a_usr_id);
 
-        $this->logger->info('Raise new event: Modules/Group addSubscriber.');
+        $this->logger->info('Raise new event: components/ILIAS/Group addSubscriber.');
         $this->eventHandler->raise(
-            "Modules/Group",
+            "components/ILIAS/Group",
             'addSubscriber',
             array(
                     'obj_id' => $this->getObjId(),

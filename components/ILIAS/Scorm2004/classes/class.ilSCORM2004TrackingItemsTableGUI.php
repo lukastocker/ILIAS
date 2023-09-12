@@ -94,7 +94,7 @@ class ilSCORM2004TrackingItemsTableGUI extends ilTable2GUI
             $this->addColumn($s, $c);
         }
 
-        $this->setRowTemplate('tpl.scorm2004_tracking_items.html', 'Modules/Scorm2004');
+        $this->setRowTemplate('tpl.scorm2004_tracking_items.html', 'components/ILIAS/Scorm2004');
         $this->setFormAction($this->ctrl->getFormAction($this->getParentObject()));
 
         $this->setExternalSorting(true);

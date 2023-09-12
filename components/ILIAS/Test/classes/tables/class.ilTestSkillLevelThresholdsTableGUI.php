@@ -20,7 +20,7 @@
  * @author		Björn Heyser <bheyser@databay.de>
  * @version		$Id$
  *
- * @package     Modules/Test
+ * @package     components/ILIAS/Test
  */
 class ilTestSkillLevelThresholdsTableGUI extends ilTable2GUI
 {
@@ -65,7 +65,7 @@ class ilTestSkillLevelThresholdsTableGUI extends ilTable2GUI
 
         $this->setStyle('table', 'fullwidth');
 
-        $this->setRowTemplate("tpl.tst_skl_thresholds_row.html", "Modules/Test");
+        $this->setRowTemplate("tpl.tst_skl_thresholds_row.html", "components/ILIAS/Test");
 
         $this->enable('header');
         #$this->disable('sort');

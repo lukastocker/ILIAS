@@ -20,7 +20,7 @@ use ILIAS\Refinery\Transformation;
 use ILIAS\Refinery\Random\Seed\GivenSeed;
 use ILIAS\Refinery\Random\Group as RandomGroup;
 
-require_once "./Modules/Test/classes/inc.AssessmentConstants.php";
+require_once "./components/ILIAS/Test/classes/inc.AssessmentConstants.php";
 
 /**
 * Service GUI class for tests. This class is the parent class for all
@@ -334,7 +334,7 @@ class ilTestServiceGUI
         ilTestQuestionRelatedObjectivesList $objectivesList = null,
         ilTestResultHeaderLabelBuilder $testResultHeaderLabelBuilder = null
     ): string {
-        $maintemplate = new ilTemplate("tpl.il_as_tst_list_of_answers.html", true, true, "Modules/Test");
+        $maintemplate = new ilTemplate("tpl.il_as_tst_list_of_answers.html", true, true, "components/ILIAS/Test");
 
         $counter = 1;
         // output of questions with solutions
@@ -347,7 +347,7 @@ class ilTestServiceGUI
             }
 
             if (($question_data["workedthrough"] == 1) || ($only_answered_questions == false)) {
-                $template = new ilTemplate("tpl.il_as_qpl_question_printview.html", true, true, "Modules/TestQuestionPool");
+                $template = new ilTemplate("tpl.il_as_qpl_question_printview.html", true, true, "components/ILIAS/TestQuestionPool");
                 $question_id = $question_data["qid"] ?? null;
                 if ($question_id !== null
                     && $question_id !== -1
@@ -394,7 +394,7 @@ class ilTestServiceGUI
                         $show_graphical_output = $this->isContextResultPresentation();
 
                         if ($show_best_solution) {
-                            $compare_template = new ilTemplate('tpl.il_as_tst_answers_compare.html', true, true, 'Modules/Test');
+                            $compare_template = new ilTemplate('tpl.il_as_tst_answers_compare.html', true, true, 'components/ILIAS/Test');
                             $compare_template->setVariable("HEADER_PARTICIPANT", $this->lng->txt('tst_header_participant'));
                             $compare_template->setVariable("HEADER_SOLUTION", $this->lng->txt('tst_header_solution'));
                             $result_output = $question_gui->getSolutionOutput($active_id, $pass, $show_graphical_output, false, $show_question_only, $show_feedback);
@@ -472,7 +472,7 @@ class ilTestServiceGUI
      */
     public function getPassListOfAnswersWithScoring(&$result_array, $active_id, $pass, $show_solutions = false): string
     {
-        $maintemplate = new ilTemplate("tpl.il_as_tst_list_of_answers.html", true, true, "Modules/Test");
+        $maintemplate = new ilTemplate("tpl.il_as_tst_list_of_answers.html", true, true, "components/ILIAS/Test");
         $scoring = ilObjAssessmentFolder::_getManualScoring();
 
         $counter = 1;
@@ -482,8 +482,8 @@ class ilTestServiceGUI
             if (is_numeric($question)) {
                 $question_gui = $this->object->createQuestionGUI("", $question);
                 if (in_array($question_gui->object->getQuestionTypeID(), $scoring)) {
-                    $template = new ilTemplate("tpl.il_as_qpl_question_printview.html", true, true, "Modules/TestQuestionPool");
-                    $scoretemplate = new ilTemplate("tpl.il_as_tst_manual_scoring_points.html", true, true, "Modules/Test");
+                    $template = new ilTemplate("tpl.il_as_qpl_question_printview.html", true, true, "components/ILIAS/TestQuestionPool");
+                    $scoretemplate = new ilTemplate("tpl.il_as_tst_manual_scoring_points.html", true, true, "components/ILIAS/Test");
                     #mbecker: No such block. $this->tpl->setCurrentBlock("printview_question");
                     $template->setVariable("COUNTER_QUESTION", $counter . ". ");
                     $template->setVariable("QUESTION_TITLE", $this->object->getQuestionTitle($question_gui->object->getTitle()));
@@ -611,7 +611,7 @@ class ilTestServiceGUI
     public function getResultsSignature(): string
     {
         if ($this->object->getShowSolutionSignature() && !$this->object->getAnonymity()) {
-            $template = new ilTemplate("tpl.il_as_tst_results_userdata_signature.html", true, true, "Modules/Test");
+            $template = new ilTemplate("tpl.il_as_tst_results_userdata_signature.html", true, true, "components/ILIAS/Test");
             $template->setVariable("TXT_DATE", $this->lng->txt("date"));
             $old_value = ilDatePresentation::useRelativeDates();
             ilDatePresentation::setUseRelativeDates(false);
@@ -639,7 +639,7 @@ class ilTestServiceGUI
         if (!is_object($testSession)) {
             throw new InvalidArgumentException('Not an object, expected ilTestSession');
         }
-        $template = new ilTemplate("tpl.il_as_tst_results_userdata.html", true, true, "Modules/Test");
+        $template = new ilTemplate("tpl.il_as_tst_results_userdata.html", true, true, "components/ILIAS/Test");
         $user_id = $this->object->_getUserIdFromActiveId($active_id);
         if (strlen(ilObjUser::_lookupLogin($user_id)) > 0) {
             $user = new ilObjUser($user_id);
@@ -705,7 +705,7 @@ class ilTestServiceGUI
         $test_id = $this->object->getTestId();
         $question_gui = $this->object->createQuestionGUI("", $question_id);
 
-        $template = new ilTemplate("tpl.il_as_tst_correct_solution_output.html", true, true, "Modules/Test");
+        $template = new ilTemplate("tpl.il_as_tst_correct_solution_output.html", true, true, "components/ILIAS/Test");
         $show_question_only = ($this->object->getShowSolutionAnswersOnly()) ? true : false;
         $result_output = $question_gui->getSolutionOutput($active_id, $pass, true, false, $show_question_only, $this->object->getShowSolutionFeedback(), false, false, true);
         $best_output = $question_gui->getSolutionOutput($active_id, $pass, false, false, $show_question_only, false, true, false, false);
@@ -763,7 +763,7 @@ class ilTestServiceGUI
     public function getResultsOfUserOutput($testSession, $active_id, $pass, $targetGUI, $show_pass_details = true, $show_answers = true, $show_question_only = false, $show_reached_points = false): string
     {
         $ilObjDataCache = $this->objCache;
-        $template = new ilTemplate("tpl.il_as_tst_results_participant.html", true, true, "Modules/Test");
+        $template = new ilTemplate("tpl.il_as_tst_results_participant.html", true, true, "components/ILIAS/Test");
 
         if ($this->participantData instanceof ilTestParticipantData) {
             $user_id = $this->participantData->getUserIdByActiveId($active_id);
@@ -899,7 +899,7 @@ class ilTestServiceGUI
      */
     public function getResultsHeadUserAndPass($active_id, $pass): string
     {
-        $template = new ilTemplate("tpl.il_as_tst_results_head_user_pass.html", true, true, "Modules/Test");
+        $template = new ilTemplate("tpl.il_as_tst_results_head_user_pass.html", true, true, "components/ILIAS/Test");
         $user_id = $this->object->_getUserIdFromActiveId($active_id);
         if (strlen(ilObjUser::_lookupLogin($user_id)) > 0) {
             $user = new ilObjUser($user_id);
@@ -1165,9 +1165,9 @@ class ilTestServiceGUI
         $this->tpl->setVariable("LOCATION_SYNTAX_STYLESHEET", ilObjStyleSheet::getSyntaxStylePath());
         $this->tpl->parseCurrentBlock();
 
-        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "Modules/Test"), "print");
+        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "components/ILIAS/Test"), "print");
         if ($this->object->getShowSolutionAnswersOnly()) {
-            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "Modules/Test"), "print");
+            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "components/ILIAS/Test"), "print");
         }
 
         $solution = $this->getCorrectSolutionOutput($questionId, $activeId, $pass, $objectivesList);

@@ -88,7 +88,7 @@ class ilDclFieldListTableGUI extends ilTable2GUI
         $this->setDefaultOrderDirection('asc');
 
         $this->setTitle($lng->txt('dcl_table_list_fields'));
-        $this->setRowTemplate('tpl.field_list_row.html', 'Modules/DataCollection');
+        $this->setRowTemplate('tpl.field_list_row.html', 'components/ILIAS/DataCollection');
         $this->setStyle('table', $this->getStyle('table') . ' ' . 'dcl_record_list');
 
         $this->setData($this->table->getFields());

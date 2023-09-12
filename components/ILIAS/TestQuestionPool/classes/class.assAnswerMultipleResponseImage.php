@@ -15,7 +15,7 @@
  *
  *********************************************************************/
 
-require_once './Modules/Test/classes/inc.AssessmentConstants.php';
+require_once './components/ILIAS/Test/classes/inc.AssessmentConstants.php';
 
 /**
 * ASS_AnswerBinaryStateImage is a class for answers with a binary state

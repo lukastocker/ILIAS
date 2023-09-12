@@ -22,7 +22,7 @@
  * @author    Björn Heyser <info@bjoernheyser.de>
  * @version    $Id$
  *
- * @package    Modules/Test(QuestionPool)
+ * @package    components/ILIAS/Test(QuestionPool)
  */
 class ilTestPlayerConfirmationModal
 {
@@ -186,7 +186,7 @@ class ilTestPlayerConfirmationModal
      */
     public function buildBody(): string
     {
-        $tpl = new ilTemplate('tpl.tst_player_confirmation_modal.html', true, true, 'Modules/Test');
+        $tpl = new ilTemplate('tpl.tst_player_confirmation_modal.html', true, true, 'components/ILIAS/Test');
 
         if ($this->isConfirmationCheckboxRequired()) {
             $tpl->setCurrentBlock('checkbox');

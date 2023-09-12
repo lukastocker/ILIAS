@@ -53,7 +53,7 @@ class ilSessionDataSet extends ilDataSet
 
     protected function getXmlNamespace(string $a_entity, string $a_schema_version): string
     {
-        return "http://www.ilias.de/xml/Modules/Session/" . $a_entity;
+        return "http://www.ilias.de/xml/components/ILIAS/Session/" . $a_entity;
     }
 
     protected function getTypes(string $a_entity, string $a_version): array
@@ -378,7 +378,7 @@ class ilSessionDataSet extends ilDataSet
                 $app->create();
 
                 $this->current_obj = $newObj;
-                $a_mapping->addMapping("Modules/Session", "sess", $a_rec["Id"], (string) $newObj->getId());
+                $a_mapping->addMapping("components/ILIAS/Session", "sess", $a_rec["Id"], (string) $newObj->getId());
                 $a_mapping->addMapping('Services/Object', 'objs', $a_rec['Id'], (string) $newObj->getId());
                 $a_mapping->addMapping('Services/AdvancedMetaData', 'parent', $a_rec['Id'], (string) $newObj->getId());
                 $a_mapping->addMapping(

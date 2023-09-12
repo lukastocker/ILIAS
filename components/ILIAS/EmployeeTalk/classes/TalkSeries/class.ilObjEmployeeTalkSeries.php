@@ -64,7 +64,7 @@ final class ilObjEmployeeTalkSeries extends ilContainer
         $container = $GLOBALS['DIC'];
 
         $container->event()->raise(
-            'Modules/EmployeeTalk',
+            'components/ILIAS/EmployeeTalk',
             'create',
             ['object' => $this,
              'obj_id' => $this->getId(),
@@ -87,7 +87,7 @@ final class ilObjEmployeeTalkSeries extends ilContainer
         $container = $GLOBALS['DIC'];
 
         $container->event()->raise(
-            'Modules/EmployeeTalk',
+            'components/ILIAS/EmployeeTalk',
             'update',
             ['object' => $this,
                   'obj_id' => $this->getId(),
@@ -121,7 +121,7 @@ final class ilObjEmployeeTalkSeries extends ilContainer
         $container = $GLOBALS['DIC'];
 
         $container->event()->raise(
-            'Modules/EmployeeTalk',
+            'components/ILIAS/EmployeeTalk',
             'delete',
             [
                 'object' => $this,

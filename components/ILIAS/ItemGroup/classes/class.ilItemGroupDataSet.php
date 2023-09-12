@@ -31,7 +31,7 @@ class ilItemGroupDataSet extends ilDataSet
 
     public function getXmlNamespace(string $a_entity, string $a_schema_version): string
     {
-        return "https://www.ilias.de/xml/Modules/ItemGroup/" . $a_entity;
+        return "https://www.ilias.de/xml/components/ILIAS/ItemGroup/" . $a_entity;
     }
 
     protected function getTypes(string $a_entity, string $a_version): array
@@ -149,7 +149,7 @@ class ilItemGroupDataSet extends ilDataSet
                 $newObj->setHideTitle($a_rec["HideTitle"]);
                 $newObj->update();
                 $this->current_obj = $newObj;
-                $a_mapping->addMapping("Modules/ItemGroup", "itgr", $a_rec["Id"], $newObj->getId());
+                $a_mapping->addMapping("components/ILIAS/ItemGroup", "itgr", $a_rec["Id"], $newObj->getId());
 
                 break;
 

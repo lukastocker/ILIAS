@@ -33,7 +33,7 @@ class ilTestDetailedEvaluationStatisticsTableGUI extends ilTable2GUI
 
         $this->setFormAction($DIC->ctrl()->getFormAction($this->getParentObject(), $this->getParentCmd()));
 
-        $this->setRowTemplate('tpl.table_evaluation_detail_row.html', 'Modules/Test');
+        $this->setRowTemplate('tpl.table_evaluation_detail_row.html', 'components/ILIAS/Test');
         $this->setShowRowsSelector(false);
         $this->disable('sort');
         $this->disable('header');

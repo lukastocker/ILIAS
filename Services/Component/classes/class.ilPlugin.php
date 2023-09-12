@@ -116,7 +116,7 @@ abstract class ilPlugin
     /**
      * Only very little classes seem to care about this:
      *     - Services/COPage/classes/class.ilPCPlugged.php
-     *     - Modules/DataCollection/classes/Fields/class.ilDclFieldFactory.php
+     *     - components/ILIAS/DataCollection/classes/Fields/class.ilDclFieldFactory.php
      */
     public function getDirectory(): string
     {

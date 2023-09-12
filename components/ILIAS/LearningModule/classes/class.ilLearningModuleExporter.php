@@ -34,7 +34,7 @@ class ilLearningModuleExporter extends ilXmlExporter
         $this->ds = new ilLearningModuleDataSet();
         $this->ds->setExportDirectories($this->dir_relative, $this->dir_absolute);
         $this->ds->setDSPrefix("ds");
-        $this->config = $this->getExport()->getConfig("Modules/LearningModule");
+        $this->config = $this->getExport()->getConfig("components/ILIAS/LearningModule");
         if ($this->config->getMasterLanguageOnly()) {
             $conf = $this->getExport()->getConfig("Services/COPage");
             $conf->setMasterLanguageOnly(true, $this->config->getIncludeMedia());
@@ -177,25 +177,25 @@ class ilLearningModuleExporter extends ilXmlExporter
     ): array {
         return array(
             "8.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/LearningModule/lm/8",
+                "namespace" => "https://www.ilias.de/components/ILIAS/LearningModule/lm/8",
                 "xsd_file" => "ilias_lm_8.xsd",
                 "uses_dataset" => true,
                 "min" => "8.0",
                 "max" => ""),
             "5.4.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/LearningModule/lm/5_4",
+                "namespace" => "https://www.ilias.de/components/ILIAS/LearningModule/lm/5_4",
                 "xsd_file" => "ilias_lm_5_4.xsd",
                 "uses_dataset" => true,
                 "min" => "5.4.0",
                 "max" => "7.99.99"),
             "5.1.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/LearningModule/lm/5_1",
+                "namespace" => "https://www.ilias.de/components/ILIAS/LearningModule/lm/5_1",
                 "xsd_file" => "ilias_lm_5_1.xsd",
                 "uses_dataset" => true,
                 "min" => "5.1.0",
                 "max" => "5.3.99"),
             "4.1.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/LearningModule/lm/4_1",
+                "namespace" => "https://www.ilias.de/components/ILIAS/LearningModule/lm/4_1",
                 "xsd_file" => "ilias_lm_4_1.xsd",
                 "uses_dataset" => false,
                 "min" => "4.1.0",

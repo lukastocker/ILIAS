@@ -23,7 +23,7 @@ use ILIAS\Test\InternalRequestService;
  * GUI class that manages the question set configuration for continues tests
  *
  * @author		Björn Heyser <bheyser@databay.de>
- * @package		Modules/Test
+ * @package		components/ILIAS/Test
  *
  * @ilCtrl_Calls ilTestRandomQuestionSetConfigGUI: ilTestRandomQuestionSetGeneralConfigFormGUI
  * @ilCtrl_Calls ilTestRandomQuestionSetConfigGUI: ilTestRandomQuestionSetSourcePoolDefinitionListToolbarGUI

@@ -22,10 +22,10 @@
 * @author		Björn Heyser <bheyser@databay.de>
 * @version		$Id$
 *
-* @defgroup ModulesTest Modules/Test
+* @defgroup ModulesTest components/ILIAS/Test
 * @extends ilObject
 */
-require_once './Modules/Test/classes/inc.AssessmentConstants.php';
+require_once './components/ILIAS/Test/classes/inc.AssessmentConstants.php';
 
 class ilTestEvaluationUserData
 {

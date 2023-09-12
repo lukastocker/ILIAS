@@ -1718,7 +1718,7 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
                     $participants = ilCourseParticipant::_getInstanceByObjId($pobj_id, $ilUser->getId());
                     if (!$participants->isAssigned()) {
                         // subscription currently possible?
-                        include_once "Modules/Course/classes/class.ilObjCourse.php";
+                        include_once "components/ILIAS/Course/classes/class.ilObjCourse.php";
                         if (ilObjCourse::_isActivated($pobj_id) &&
                             ilObjCourse::_registrationEnabled($pobj_id)) {
                             $block_obj[] = $path_ref_id;
@@ -1729,10 +1729,10 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
                     }
                 } elseif ($ptype == "grp") {
                     // check if already participant
-                    include_once "Modules/Group/classes/class.ilGroupParticipants.php";
+                    include_once "components/ILIAS/Group/classes/class.ilGroupParticipants.php";
                     if (!ilGroupParticipants::_isParticipant($path_ref_id, $ilUser->getId())) {
                         // subscription currently possible?
-                        include_once "Modules/Group/classes/class.ilObjGroup.php";
+                        include_once "components/ILIAS/Group/classes/class.ilObjGroup.php";
                         $group_obj = new ilObjGroup($path_ref_id);
                         if ($group_obj->isRegistrationEnabled()) {
                             $block_obj[] = $path_ref_id;

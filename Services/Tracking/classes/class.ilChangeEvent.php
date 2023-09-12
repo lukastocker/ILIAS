@@ -901,7 +901,7 @@ class ilChangeEvent
     /**
      * _updateAccessForScormOfflinePlayer
      * needed to synchronize last_access and first_access when learning modul is used offline
-     * called in ./Modules/ScormAicc/classes/class.ilSCORMOfflineMode.php
+     * called in ./components/ILIAS/ScormAicc/classes/class.ilSCORMOfflineMode.php
      */
     public static function _updateAccessForScormOfflinePlayer(
         int $obj_id,

@@ -16,7 +16,7 @@
  *
  *********************************************************************/
 
-require_once './Modules/Test/classes/inc.AssessmentConstants.php';
+require_once './components/ILIAS/Test/classes/inc.AssessmentConstants.php';
 
 /**
 * Class ilObjQuestionPool
@@ -25,7 +25,7 @@ require_once './Modules/Test/classes/inc.AssessmentConstants.php';
 * @version $Id$
 *
 * @extends ilObject
-* @defgroup ModulesTestQuestionPool Modules/TestQuestionPool
+* @defgroup ModulesTestQuestionPool components/ILIAS/TestQuestionPool
 */
 
 class ilObjQuestionPool extends ilObject

@@ -41,7 +41,7 @@ class ilTermsOfServiceAppEventListenerTest extends ilTermsOfServiceBaseTest
             ->handle();
 
         $listener
-            ->withComponent('Modules/Course')
+            ->withComponent('components/ILIAS/Course')
             ->withEvent('deleteUser')
             ->withParameters(['usr_id' => 6])
             ->handle();

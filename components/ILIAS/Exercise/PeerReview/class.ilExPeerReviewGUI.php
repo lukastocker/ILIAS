@@ -805,7 +805,7 @@ class ilExPeerReviewGUI
         $panel = "";
         $panel_data = $tbl->getPanelInfo();
         if (is_array($panel_data) && count($panel_data) > 0) {
-            $ptpl = new ilTemplate("tpl.exc_peer_review_overview_panel.html", true, true, "Modules/Exercise");
+            $ptpl = new ilTemplate("tpl.exc_peer_review_overview_panel.html", true, true, "components/ILIAS/Exercise");
             foreach ($panel_data as $item) {
                 $ptpl->setCurrentBlock("user_bl");
                 foreach ($item["value"] as $user) {

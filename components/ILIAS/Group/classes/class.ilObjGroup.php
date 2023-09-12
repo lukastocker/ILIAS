@@ -522,7 +522,7 @@ class ilObjGroup extends ilContainer implements ilMembershipRegistrationCodes
         $res = $this->db->manipulate($query);
 
         $this->app_event_handler->raise(
-            'Modules/Group',
+            'components/ILIAS/Group',
             'create',
             array('object' => $this,
                 'obj_id' => $this->getId(),
@@ -578,7 +578,7 @@ class ilObjGroup extends ilContainer implements ilMembershipRegistrationCodes
         $res = $this->db->manipulate($query);
 
         $this->app_event_handler->raise(
-            'Modules/Group',
+            'components/ILIAS/Group',
             'update',
             array('object' => $this,
                 'obj_id' => $this->getId(),
@@ -606,7 +606,7 @@ class ilObjGroup extends ilContainer implements ilMembershipRegistrationCodes
         ilGroupParticipants::_deleteAllEntries($this->getId());
 
         $this->app_event_handler->raise(
-            'Modules/Group',
+            'components/ILIAS/Group',
             'delete',
             array('object' => $this,
                 'obj_id' => $this->getId(),

@@ -1365,7 +1365,7 @@ class ilSurveyPageEditGUI
 
         $this->renderToolbar($pages);
         if ($pages) {
-            $ttpl = new ilTemplate("tpl.il_svy_svy_page_view.html", true, true, "Modules/Survey");
+            $ttpl = new ilTemplate("tpl.il_svy_svy_page_view.html", true, true, "components/ILIAS/Survey");
             $tpl->addOnLoadCode("ilSurveyPageView.init();");
             $ttpl->setVariable("FORM_ACTION", $ilCtrl->getFormAction($this));
             $lng->loadLanguageModule("form");
@@ -1453,7 +1453,7 @@ class ilSurveyPageEditGUI
 
             // add js to template
             ilYuiUtil::initDragDrop();
-            $tpl->addJavaScript("./Modules/Survey/js/SurveyPageView.js");
+            $tpl->addJavaScript("./components/ILIAS/Survey/js/SurveyPageView.js");
         }
     }
 
@@ -1470,7 +1470,7 @@ class ilSurveyPageEditGUI
         $ilCtrl = $this->ctrl;
         $lng = $this->lng;
 
-        $ttpl = new ilTemplate("tpl.il_svy_svy_page_view_nodes.html", true, true, "Modules/Survey");
+        $ttpl = new ilTemplate("tpl.il_svy_svy_page_view_nodes.html", true, true, "components/ILIAS/Survey");
 
         $has_clipboard = !$this->edit_manager->isQuestionClipboardEmpty($this->ref_id);
 

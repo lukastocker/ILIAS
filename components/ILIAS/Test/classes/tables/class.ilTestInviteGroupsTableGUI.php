@@ -46,7 +46,7 @@ class ilTestInviteGroupsTableGUI extends ilTable2GUI
 
         $this->setTitle($this->lng->txt('search_groups'), 'icon_grp.svg', $this->lng->txt('grp'));
 
-        $this->setRowTemplate("tpl.il_as_tst_invite_groups_row.html", "Modules/Test");
+        $this->setRowTemplate("tpl.il_as_tst_invite_groups_row.html", "components/ILIAS/Test");
 
         $this->addMultiCommand('addParticipants', $this->lng->txt('add'));
 

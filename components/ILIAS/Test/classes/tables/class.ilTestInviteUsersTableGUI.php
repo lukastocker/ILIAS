@@ -49,7 +49,7 @@ class ilTestInviteUsersTableGUI extends ilTable2GUI
 
         $this->setTitle($this->lng->txt('search_users'), 'icon_usr.svg', $this->lng->txt('usr'));
 
-        $this->setRowTemplate("tpl.il_as_tst_invite_users_row.html", "Modules/Test");
+        $this->setRowTemplate("tpl.il_as_tst_invite_users_row.html", "components/ILIAS/Test");
 
         $this->addMultiCommand('addParticipants', $this->lng->txt('add'));
 

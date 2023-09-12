@@ -22,7 +22,7 @@
  * @author    Björn Heyser <info@bjoernheyser.de>
  * @version    $Id$
  *
- * @package    Modules/Test
+ * @package    components/ILIAS/Test
  *
  * @ilCtrl_Calls ilTestResultsGUI: ilParticipantsTestResultsGUI
  * @ilCtrl_Calls ilTestResultsGUI: ilMyTestResultsGUI

@@ -42,7 +42,7 @@ class ilDataCollectionExporter extends ilXmlExporter
     {
         return array(
             '4.5.0' => array(
-                'namespace' => 'https://www.ilias.de/Modules/DataCollection/dcl/4_5',
+                'namespace' => 'https://www.ilias.de/components/ILIAS/DataCollection/dcl/4_5',
                 'xsd_file" => "ilias_dcl_4_5.xsd',
                 'uses_dataset' => true,
                 'min' => '4.5.0',
@@ -71,7 +71,7 @@ class ilDataCollectionExporter extends ilXmlExporter
     {
         $dependencies = array(
             ilDclDatatype::INPUTFORMAT_FILEUPLOAD => array(
-                'component' => 'Modules/File',
+                'component' => 'components/ILIAS/File',
                 'entity' => 'file',
                 'ids' => array(),
             ),

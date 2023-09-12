@@ -48,7 +48,7 @@ class ilPortfolioDataSet extends ilDataSet
 
     protected function getXmlNamespace(string $a_entity, string $a_schema_version): string
     {
-        return "https://www.ilias.de/xml/Modules/Portfolio/" . $a_entity;
+        return "https://www.ilias.de/xml/components/ILIAS/Portfolio/" . $a_entity;
     }
 
     protected function getTypes(string $a_entity, string $a_version): array
@@ -195,12 +195,12 @@ class ilPortfolioDataSet extends ilDataSet
                     }
                 }
 
-                $a_mapping->addMapping("Modules/Portfolio", "prtt", $a_rec["Id"], $newObj->getId());
+                $a_mapping->addMapping("components/ILIAS/Portfolio", "prtt", $a_rec["Id"], $newObj->getId());
                 $a_mapping->addMapping("Services/Object", "obj", $a_rec["Id"], $newObj->getId());
                 break;
 
             case "portfolio_page":
-                $prtt_id = (int) $a_mapping->getMapping("Modules/Portfolio", "prtt", $a_rec["PortfolioId"]);
+                $prtt_id = (int) $a_mapping->getMapping("components/ILIAS/Portfolio", "prtt", $a_rec["PortfolioId"]);
                 if ($prtt_id) {
                     $newObj = new ilPortfolioTemplatePage();
                     $newObj->setPortfolioId($prtt_id);

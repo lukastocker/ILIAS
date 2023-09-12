@@ -117,31 +117,31 @@ class ilSessionExporter extends ilXmlExporter
     {
         return array(
             "4.1.0" => array(
-                "namespace" => "http://www.ilias.de/Modules/Session/sess/4_1",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Session/sess/4_1",
                 "xsd_file" => "ilias_sess_4_1.xsd",
                 "uses_dataset" => true,
                 "min" => "4.1.0",
                 "max" => "4.4.999"),
             "5.0.0" => array(
-                "namespace" => "http://www.ilias.de/Modules/Session/sess/5_0",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Session/sess/5_0",
                 "xsd_file" => "ilias_sess_5_0.xsd",
                 "uses_dataset" => true,
                 "min" => "5.0.0",
                 "max" => "5.0.999"),
             "5.1.0" => array(
-                "namespace" => "http://www.ilias.de/Modules/Session/sess/5_1",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Session/sess/5_1",
                 "xsd_file" => "ilias_sess_5_1.xsd",
                 "uses_dataset" => true,
                 "min" => "5.1.0",
                 "max" => "5.3.999"),
             "5.4.0" => array(
-                "namespace" => "http://www.ilias.de/Modules/Session/sess/5_1",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Session/sess/5_1",
                 "xsd_file" => "ilias_sess_5_1.xsd",
                 "uses_dataset" => true,
                 "min" => "5.4.0",
                 "max" => "6.999"),
             "7.0" => array(
-                "namespace" => "http://www.ilias.de/Modules/Session/sess/7",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Session/sess/7",
                 "xsd_file" => "ilias_sess_7.xsd",
                 "uses_dataset" => true,
                 "min" => "7.0",

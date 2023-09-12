@@ -58,7 +58,7 @@ class ilIndividualAssessmentDataSetTest extends TestCase
 
     public function test_getXmlNamespaceWrapper(): void
     {
-        $expected = 'http://www.ilias.de/xml/Modules/IndividualAssessment/entity_string';
+        $expected = 'http://www.ilias.de/xml/components/ILIAS/IndividualAssessment/entity_string';
 
         $obj = new ilIndividualAssessmentDataSetWrapper();
         $result = $obj->getXmlNamespaceWrapper("entity_string", "not_implemented");

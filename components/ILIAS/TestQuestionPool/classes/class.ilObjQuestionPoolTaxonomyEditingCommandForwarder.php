@@ -19,7 +19,7 @@
 /**
  * class can be used as forwarder for taxonomy editing context
  * @author		Björn Heyser <bheyser@databay.de>
- * @package		Modules/TestQuestionPool
+ * @package		components/ILIAS/TestQuestionPool
  */
 class ilObjQuestionPoolTaxonomyEditingCommandForwarder
 {

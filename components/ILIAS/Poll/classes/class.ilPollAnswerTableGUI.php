@@ -55,7 +55,7 @@ class ilPollAnswerTableGUI extends ilTable2GUI
         }
 
         $this->setFormAction($this->ctrl->getFormAction($a_parent_obj, $a_parent_cmd));
-        $this->setRowTemplate("tpl.answer_row.html", "Modules/Poll");
+        $this->setRowTemplate("tpl.answer_row.html", "components/ILIAS/Poll");
         $this->setDefaultOrderField("pos");
         $this->setDefaultOrderDirection("asc");
 

@@ -42,7 +42,7 @@ class ilSurveySavePhraseTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt("use_other_answer"), '', '');
         $this->addColumn($this->lng->txt("scale"), '', '');
 
-        $this->setRowTemplate("tpl.il_svy_qpl_phrase_save_row.html", "Modules/SurveyQuestionPool");
+        $this->setRowTemplate("tpl.il_svy_qpl_phrase_save_row.html", "components/ILIAS/SurveyQuestionPool");
 
         $this->setFormAction($this->ctrl->getFormAction($a_parent_obj, $a_parent_cmd));
         $this->disable('sort');

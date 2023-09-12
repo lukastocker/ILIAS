@@ -55,7 +55,7 @@ class ilCourseVerificationTableGUI extends ilTable2GUI
         $this->setTitle($this->lng->txt('crsv_create'));
         $this->setDescription($this->lng->txt('crsv_create_info'));
 
-        $this->setRowTemplate('tpl.crs_verification_row.html', 'Modules/Course');
+        $this->setRowTemplate('tpl.crs_verification_row.html', 'components/ILIAS/Course');
         $this->setFormAction($this->ctrl->getFormAction($a_parent_obj, $a_parent_cmd));
 
         $this->getItems();

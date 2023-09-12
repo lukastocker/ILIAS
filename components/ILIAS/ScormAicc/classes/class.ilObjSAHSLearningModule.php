@@ -19,7 +19,7 @@ declare(strict_types=1);
  *********************************************************************/
 
 //require_once "Services/MetaData/classes/class.ilMDLanguageItem.php";
-/** @defgroup ModulesScormAicc Modules/ScormAicc
+/** @defgroup ModulesScormAicc components/ILIAS/ScormAicc
  */
 /**
 * Class ilObjSCORMLearningModule

@@ -20,7 +20,7 @@
  * @author	Björn Heyser <bheyser@databay.de>
  * @version	$Id$
  *
- * @package	Modules/Test
+ * @package	components/ILIAS/Test
  *
  * @ilCtrl_Calls ilTestPassDetailsOverviewTableGUI: ilFormPropertyDispatchGUI
  */
@@ -83,7 +83,7 @@ class ilTestPassDetailsOverviewTableGUI extends ilTable2GUI
         //$this->disable('numinfo_header');
         // KEEP THIS ENABLED, SINCE NO TABLE FILTER ARE PROVIDED OTHERWISE
 
-        $this->setRowTemplate('tpl.il_as_tst_pass_details_overview_qst_row.html', 'Modules/Test');
+        $this->setRowTemplate('tpl.il_as_tst_pass_details_overview_qst_row.html', 'components/ILIAS/Test');
     }
 
     public function initColumns(): void

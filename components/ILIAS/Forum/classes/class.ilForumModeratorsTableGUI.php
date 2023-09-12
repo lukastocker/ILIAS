@@ -34,7 +34,7 @@ class ilForumModeratorsTableGUI extends ilTable2GUI
 
         $this->setFormAction($DIC->ctrl()->getFormAction($a_parent_obj, $a_parent_cmd));
         $this->setTitle($this->lng->txt('frm_moderators'));
-        $this->setRowTemplate('tpl.forum_moderators_table_row.html', 'Modules/Forum');
+        $this->setRowTemplate('tpl.forum_moderators_table_row.html', 'components/ILIAS/Forum');
         $this->setDefaultOrderField('login');
         $this->setNoEntriesText($this->lng->txt('frm_moderators_not_exist_yet'));
 

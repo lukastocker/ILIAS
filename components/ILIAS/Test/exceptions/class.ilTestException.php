@@ -17,7 +17,7 @@
  *********************************************************************/
 
 /**
- * Base Exception for all Exceptions relating to Modules/Test.
+ * Base Exception for all Exceptions relating to components/ILIAS/Test.
  *
  * @author	Björn Heyser <bheyser@databay.de>
  * @version	$Id$

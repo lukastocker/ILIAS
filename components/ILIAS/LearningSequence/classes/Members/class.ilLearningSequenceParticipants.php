@@ -23,7 +23,7 @@ declare(strict_types=1);
  */
 class ilLearningSequenceParticipants extends ilParticipants
 {
-    public const COMPONENT_NAME = 'Modules/LearningSequence';
+    public const COMPONENT_NAME = 'components/ILIAS/LearningSequence';
 
     /**
      * @var ilLearningSequenceParticipants[]
@@ -109,9 +109,9 @@ class ilLearningSequenceParticipants extends ilParticipants
     {
         parent::addSubscriber($a_usr_id);
 
-        $this->logger->info('Raise new event: Modules/LearningSequence addSubscriber.');
+        $this->logger->info('Raise new event: components/ILIAS/LearningSequence addSubscriber.');
         $this->app_event_handler->raise(
-            "Modules/LearningSequence",
+            "components/ILIAS/LearningSequence",
             'addSubscriber',
             array(
                 'obj_id' => $this->getObjId(),

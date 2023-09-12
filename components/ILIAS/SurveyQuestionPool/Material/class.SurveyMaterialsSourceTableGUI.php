@@ -43,7 +43,7 @@ class SurveyMaterialsSourceTableGUI extends ilTable2GUI
         $this->setLimit(9999);
         $this->disable("numinfo");
 
-        $this->setRowTemplate("tpl.il_svy_qpl_material_source_row.html", "Modules/SurveyQuestionPool");
+        $this->setRowTemplate("tpl.il_svy_qpl_material_source_row.html", "components/ILIAS/SurveyQuestionPool");
 
         $this->setFormAction($ilCtrl->getFormAction($this->getParentObject(), $this->getParentCmd()));
         $this->addCommandButton($a_cancel_cmd, $this->lng->txt('cancel'));

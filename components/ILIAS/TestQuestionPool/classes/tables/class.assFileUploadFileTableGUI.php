@@ -54,7 +54,7 @@ class assFileUploadFileTableGUI extends ilTable2GUI
         $this->setSelectAllCheckbox('deletefiles');
         // hey.
 
-        $this->setRowTemplate("tpl.il_as_qpl_fileupload_file_row.html", "Modules/TestQuestionPool");
+        $this->setRowTemplate("tpl.il_as_qpl_fileupload_file_row.html", "components/ILIAS/TestQuestionPool");
 
         $this->disable('sort');
         $this->disable('linkbar');

@@ -47,7 +47,7 @@ class ilContentPageExporter extends ilXmlExporter implements ilContentPageObject
     {
         return [
             '5.4.0' => [
-                'namespace' => 'http://www.ilias.de/Modules/ContentPage/' . self::OBJ_TYPE . '/5_4',
+                'namespace' => 'http://www.ilias.de/components/ILIAS/ContentPage/' . self::OBJ_TYPE . '/5_4',
                 'xsd_file' => 'ilias_' . self::OBJ_TYPE . '_5_4.xsd',
                 'uses_dataset' => true,
                 'min' => '5.4.0',

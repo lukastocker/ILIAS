@@ -49,7 +49,7 @@ class ilSurveyMaterialsTableGUI extends ilTable2GUI
         $this->setTitle($this->lng->txt('materials'));
 
         $this->setFormAction($this->ctrl->getFormAction($a_parent_obj, $a_parent_cmd));
-        $this->setRowTemplate("tpl.il_svy_qpl_material_row.html", "Modules/SurveyQuestionPool");
+        $this->setRowTemplate("tpl.il_svy_qpl_material_row.html", "components/ILIAS/SurveyQuestionPool");
         $this->setPrefix('idx');
         $this->setSelectAllCheckbox('idx');
         $this->disable('sort');

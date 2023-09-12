@@ -83,7 +83,7 @@ final class RootFolderTest extends TestCase
         '.idea',
         'CI',
         'Customizing',
-        'Modules',
+        'components',
         'Services',
         'cron',
         'data',

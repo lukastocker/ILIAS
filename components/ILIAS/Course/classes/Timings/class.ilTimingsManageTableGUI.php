@@ -77,7 +77,7 @@ class ilTimingsManageTableGUI extends ilTable2GUI
     public function init(): void
     {
         $this->setFormAction($this->ctrl->getFormAction($this->getParentObject()));
-        $this->setRowTemplate('tpl.crs_manage_timings_row.html', 'Modules/Course');
+        $this->setRowTemplate('tpl.crs_manage_timings_row.html', 'components/ILIAS/Course');
 
         $this->setTitle($this->lng->txt('edit_timings_list'));
 

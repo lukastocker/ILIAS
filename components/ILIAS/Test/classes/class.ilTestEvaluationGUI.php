@@ -338,9 +338,9 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
             $ilToolbar->addButtonInstance($button);
         }
 
-        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "Modules/Test"), "print");
+        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "components/ILIAS/Test"), "print");
         if ($this->object->getShowSolutionAnswersOnly()) {
-            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "Modules/Test"), "print");
+            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "components/ILIAS/Test"), "print");
         }
 
         $this->tpl->setContent($table_gui->getHTML());
@@ -365,7 +365,7 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
             $this->ctrl->redirect($this, 'outEvaluation');
         }
 
-        $this->tpl->addCss(ilUtil::getStyleSheetLocation('output', 'test_print.css', 'Modules/Test'), 'print');
+        $this->tpl->addCss(ilUtil::getStyleSheetLocation('output', 'test_print.css', 'components/ILIAS/Test'), 'print');
 
         $backBtn = ilLinkButton::getInstance();
         $backBtn->setCaption('back');
@@ -564,7 +564,7 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
 
         $this->tabs->activateTab(ilTestTabsManager::TAB_ID_STATISTICS);
 
-        $this->tpl->addBlockFile("ADM_CONTENT", "adm_content", "tpl.il_as_tst_eval_anonymous_aggregation.html", "Modules/Test");
+        $this->tpl->addBlockFile("ADM_CONTENT", "adm_content", "tpl.il_as_tst_eval_anonymous_aggregation.html", "components/ILIAS/Test");
 
         $this->object->setAccessFilteredParticipantList(
             $this->object->buildStatisticsAccessFilteredParticipantList()
@@ -915,7 +915,7 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
         $user_data = $this->getAdditionalUsrDataHtmlAndPopulateWindowTitle($testSession, $active_id, false);
         $user_id = $this->object->_getUserIdFromActiveId($active_id);
 
-        $template = new ilTemplate("tpl.il_as_tst_pass_details_overview_participants.html", true, true, "Modules/Test");
+        $template = new ilTemplate("tpl.il_as_tst_pass_details_overview_participants.html", true, true, "components/ILIAS/Test");
 
         $toolbar = $this->buildUserTestResultsToolbarGUI();
 
@@ -974,9 +974,9 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
         $this->populateExamId($template, $active_id, $pass);
         $this->populatePassFinishDate($template, ilObjTest::lookupLastTestPassAccess($active_id, $pass));
 
-        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "Modules/Test"), "print");
+        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "components/ILIAS/Test"), "print");
         if ($this->object->getShowSolutionAnswersOnly()) {
-            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "Modules/Test"), "print");
+            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "components/ILIAS/Test"), "print");
         }
 
         $this->tpl->setVariable("ADM_CONTENT", $template->get());
@@ -1011,7 +1011,7 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
             $this->ctrl->getLinkTargetByClass(['ilObjTestGUI', 'ilTestResultsGUI', 'ilParticipantsTestResultsGUI'])
         );
 
-        $template = new ilTemplate("tpl.il_as_tst_pass_overview_participants.html", true, true, "Modules/Test");
+        $template = new ilTemplate("tpl.il_as_tst_pass_overview_participants.html", true, true, "components/ILIAS/Test");
 
         $toolbar = $this->buildUserTestResultsToolbarGUI();
         $toolbar->build();
@@ -1064,9 +1064,9 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
         $template->parseCurrentBlock();
 
 
-        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "Modules/Test"), "print");
+        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "components/ILIAS/Test"), "print");
         if ($this->object->getShowSolutionAnswersOnly()) {
-            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "Modules/Test"), "print");
+            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "components/ILIAS/Test"), "print");
         }
 
         if ($this->testrequest->isset("pdf") && ($this->testrequest->raw("pdf") == 1)) {
@@ -1176,7 +1176,7 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
         $questionAnchorNav =
             $this->object->getShowSolutionListOwnAnswers();
 
-        $tpl = new ilTemplate('tpl.il_as_tst_pass_details_overview_participants.html', true, true, "Modules/Test");
+        $tpl = new ilTemplate('tpl.il_as_tst_pass_details_overview_participants.html', true, true, "components/ILIAS/Test");
 
         $toolbar = $this->buildUserTestResultsToolbarGUI();
 
@@ -1263,9 +1263,9 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
         $this->populateExamId($tpl, $active_id, (int) $pass);
         $this->populatePassFinishDate($tpl, ilObjTest::lookupLastTestPassAccess($active_id, $pass));
 
-        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "Modules/Test"), "print");
+        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "components/ILIAS/Test"), "print");
         if ($this->object->getShowSolutionAnswersOnly()) {
-            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "Modules/Test"), "print");
+            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "components/ILIAS/Test"), "print");
         }
 
         $this->tpl->setContent($tpl->get());
@@ -1285,8 +1285,8 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
             $this->ctrl->redirectByClass("ilobjtestgui", "infoScreen");
         }
 
-        $templatehead = new ilTemplate("tpl.il_as_tst_results_participants.html", true, true, "Modules/Test");
-        $template = new ilTemplate("tpl.il_as_tst_results_participant.html", true, true, "Modules/Test");
+        $templatehead = new ilTemplate("tpl.il_as_tst_results_participants.html", true, true, "components/ILIAS/Test");
+        $template = new ilTemplate("tpl.il_as_tst_results_participant.html", true, true, "components/ILIAS/Test");
 
         $toolbar = $this->buildUserTestResultsToolbarGUI();
 
@@ -1355,9 +1355,9 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
             }
         }
 
-        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "Modules/Test"), "print");
+        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "components/ILIAS/Test"), "print");
         if ($this->object->getShowSolutionAnswersOnly()) {
-            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "Modules/Test"), "print");
+            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "components/ILIAS/Test"), "print");
         }
         $templatehead->setVariable("RESULTS_PARTICIPANT", $template->get());
 
@@ -1374,7 +1374,7 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
             $this->ctrl->redirectByClass("ilobjtestgui", "infoScreen");
         }
 
-        $template = new ilTemplate("tpl.il_as_tst_info_list_of_answers.html", true, true, "Modules/Test");
+        $template = new ilTemplate("tpl.il_as_tst_info_list_of_answers.html", true, true, "components/ILIAS/Test");
 
         $pass = null;
         if ($this->testrequest->isset("pass")) {
@@ -1462,9 +1462,9 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
         }
         $this->tpl->setVariable("ADM_CONTENT", $template->get());
 
-        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "Modules/Test"), "print");
+        $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "components/ILIAS/Test"), "print");
         if ($this->object->getShowSolutionAnswersOnly()) {
-            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "Modules/Test"), "print");
+            $this->tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print_hide_content.css", "components/ILIAS/Test"), "print");
         }
     }
 
@@ -1500,7 +1500,7 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
         $data = $this->object->getCompleteEvaluationData();
         $color_class = array("tblrow1", "tblrow2");
         $counter = 0;
-        $this->tpl->addBlockFile("ADM_CONTENT", "adm_content", "tpl.il_as_tst_eval_single_answers.html", "Modules/Test");
+        $this->tpl->addBlockFile("ADM_CONTENT", "adm_content", "tpl.il_as_tst_eval_single_answers.html", "components/ILIAS/Test");
         $foundParticipants = $data->getParticipants();
         if (count($foundParticipants) == 0) {
             $this->tpl->setOnScreenMessage('info', $this->lng->txt("tst_no_evaluation_data"));
@@ -2014,13 +2014,13 @@ class ilTestEvaluationGUI extends ilTestServiceGUI
             "tpl.question_statistics_print_view.html",
             true,
             true,
-            "Modules/Test"
+            "components/ILIAS/Test"
         );
 
         $tpl->addCss(\ilUtil::getStyleSheetLocation("filesystem"));
         $tpl->addCss(\ilObjStyleSheet::getContentPrintStyle());
         $tpl->addCss(\ilObjStyleSheet::getSyntaxStylePath());
-        $tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "Modules/Test"), "print");
+        $tpl->addCss(ilUtil::getStyleSheetLocation("output", "test_print.css", "components/ILIAS/Test"), "print");
 
         ilMathJax::getInstance()->includeMathJax($tpl);
 

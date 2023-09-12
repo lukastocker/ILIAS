@@ -43,7 +43,7 @@ class ilForumAppEventListener implements ilAppEventListener
         $immediate_notifications_enabled = (int) $DIC->settings()->get('forum_notification', '0') === 1;
 
         switch ($a_component) {
-            case 'Modules/Forum':
+            case 'components/ILIAS/Forum':
                 switch ($a_event) {
                     case 'mergedThreads':
                         ilForumPostDraft::moveDraftsByMergedThreads(
@@ -441,8 +441,8 @@ class ilForumAppEventListener implements ilAppEventListener
                 }
                 break;
 
-            case "Modules/Course":
-            case "Modules/Group":
+            case "components/ILIAS/Course":
+            case "components/ILIAS/Group":
                 switch ($a_event) {
                     case "addParticipant":
                         $ref_ids = self::getCachedReferences($a_parameter['obj_id']);

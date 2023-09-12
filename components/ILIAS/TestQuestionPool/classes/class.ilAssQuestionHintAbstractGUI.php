@@ -23,7 +23,7 @@
  * @author		Grégory Saive <gsaive@databay.de>
  * @version		$Id$
  *
- * @package		Modules/TestQuestionPool
+ * @package		components/ILIAS/TestQuestionPool
  */
 abstract class ilAssQuestionHintAbstractGUI
 {

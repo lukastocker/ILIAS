@@ -148,7 +148,7 @@ class SurveySingleChoiceQuestionGUI extends SurveyQuestionGUI
 
         // rendering
 
-        $template = new ilTemplate("tpl.il_svy_qpl_sc_printview.html", true, true, "Modules/SurveyQuestionPool");
+        $template = new ilTemplate("tpl.il_svy_qpl_sc_printview.html", true, true, "components/ILIAS/SurveyQuestionPool");
         switch ($this->object->orientation) {
             case 0:
                 // vertical orientation
@@ -247,7 +247,7 @@ class SurveySingleChoiceQuestionGUI extends SurveyQuestionGUI
             $template_file = "tpl.il_svy_out_sc_comp.html";
             $orientation = 3;
         }
-        $template = new ilTemplate($template_file, true, true, "Modules/SurveyQuestionPool");
+        $template = new ilTemplate($template_file, true, true, "components/ILIAS/SurveyQuestionPool");
         if ($this->getMaterialOutput() !== "") {
             $template->setCurrentBlock("material");
             $template->setVariable("TEXT_MATERIAL", $this->getMaterialOutput());

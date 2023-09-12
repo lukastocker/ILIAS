@@ -21,7 +21,7 @@
  * @author	Björn Heyser <bheyser@databay.de>
  * @version	$Id$
  *
- * @package	Modules/Test
+ * @package	components/ILIAS/Test
  */
 class ilTestRandomQuestionSetSourcePoolDefinitionListTableGUI extends ilTable2GUI
 {
@@ -206,7 +206,7 @@ class ilTestRandomQuestionSetSourcePoolDefinitionListTableGUI extends ilTable2GU
 
         $this->setTitle($this->lng->txt('tst_src_quest_pool_def_list_table'));
 
-        $this->setRowTemplate("tpl.il_tst_rnd_quest_set_src_pool_def_row.html", "Modules/Test");
+        $this->setRowTemplate("tpl.il_tst_rnd_quest_set_src_pool_def_row.html", "components/ILIAS/Test");
 
         $this->enable('header');
         $this->disable('sort');

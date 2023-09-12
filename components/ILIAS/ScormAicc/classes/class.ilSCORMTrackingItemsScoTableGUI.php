@@ -106,7 +106,7 @@ class ilSCORMTrackingItemsScoTableGUI extends ilTable2GUI
 
 
         $this->setFormAction($ilCtrl->getFormAction($this->getParentObject()));
-        $this->setRowTemplate('tpl.scorm_track_item_sco.html', 'Modules/ScormAicc');
+        $this->setRowTemplate('tpl.scorm_track_item_sco.html', 'components/ILIAS/ScormAicc');
         $sco = $this->getSco();
         if ($sco !== null) {
             $this->setTitle($sco->getTitle());

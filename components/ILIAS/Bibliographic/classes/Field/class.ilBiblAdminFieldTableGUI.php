@@ -44,7 +44,7 @@ class ilBiblAdminFieldTableGUI extends ilTable2GUI
 
         parent::__construct($a_parent_obj);
         $this->parent_obj = $a_parent_obj;
-        $this->setRowTemplate('tpl.bibl_administration_fields_list_row.html', 'Modules/Bibliographic');
+        $this->setRowTemplate('tpl.bibl_administration_fields_list_row.html', 'components/ILIAS/Bibliographic');
 
         $this->setFormAction($this->ctrl()->getFormAction($this->parent_obj));
 

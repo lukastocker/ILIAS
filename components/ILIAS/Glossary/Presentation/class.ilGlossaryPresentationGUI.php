@@ -463,7 +463,7 @@ class ilGlossaryPresentationGUI implements ilCtrlBaseClassInterface
             $tpl->setRightContent($mdgui->getBlockHTML($cmd));
         }
 
-        $def_tpl = new ilTemplate("tpl.glossary_definition_list.html", true, true, "Modules/Glossary");
+        $def_tpl = new ilTemplate("tpl.glossary_definition_list.html", true, true, "components/ILIAS/Glossary");
 
         $def_tpl->setVariable("TXT_TERM", $term->getTerm());
         $this->mobs = array();
@@ -687,7 +687,7 @@ class ilGlossaryPresentationGUI implements ilCtrlBaseClassInterface
             throw new ilPermissionException($lng->txt("permission_denied"));
         }
 
-        $this->tpl->addBlockFile("ADM_CONTENT", "adm_content", "tpl.glo_download_list.html", "Modules/Glossary");
+        $this->tpl->addBlockFile("ADM_CONTENT", "adm_content", "tpl.glo_download_list.html", "components/ILIAS/Glossary");
 
         $this->setTabs();
         $ilTabs->activateTab("download");
@@ -703,7 +703,7 @@ class ilGlossaryPresentationGUI implements ilCtrlBaseClassInterface
         $this->tpl->addBlockFile("DOWNLOAD_TABLE", "download_table", "tpl.table.html");
 
         // load template for table content data
-        $this->tpl->addBlockFile("TBL_CONTENT", "tbl_content", "tpl.download_file_row.html", "Modules/Glossary");
+        $this->tpl->addBlockFile("TBL_CONTENT", "tbl_content", "tpl.download_file_row.html", "components/ILIAS/Glossary");
 
         $export_files = array();
         $types = array("xml", "html");

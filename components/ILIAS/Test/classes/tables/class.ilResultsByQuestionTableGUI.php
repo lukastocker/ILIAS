@@ -43,7 +43,7 @@ class ilResultsByQuestionTableGUI extends ilTable2GUI
         $this->addColumn($lng->txt("file_uploads"), "", "20%");
 
         $this->setFormAction($ilCtrl->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.table_results_by_question_row.html", "Modules/Test");
+        $this->setRowTemplate("tpl.table_results_by_question_row.html", "components/ILIAS/Test");
         $this->setDefaultOrderField("question_title");
         $this->setDefaultOrderDirection("asc");
     }

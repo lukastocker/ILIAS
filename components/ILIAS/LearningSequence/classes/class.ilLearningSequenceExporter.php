@@ -68,7 +68,7 @@ class ilLearningSequenceExporter extends ilXmlExporter
     {
         return array(
             "5.4.0" => array(
-                "namespace" => "http://www.ilias.de/Modules/LearningSequence/lso/5_4",
+                "namespace" => "http://www.ilias.de/components/ILIAS/LearningSequence/lso/5_4",
                 "xsd_file" => "ilias_lso_5_4.xsd",
                 "uses_dataset" => false,
                 "min" => "5.4.0",

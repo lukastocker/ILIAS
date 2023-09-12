@@ -41,7 +41,7 @@ class ilTestPassManualScoringOverviewTableGUI extends ilTable2GUI
 
         $this->setFormAction($ilCtrl->getFormAction($parentObj, $parentCmd));
 
-        $this->setRowTemplate("tpl.il_as_tst_pass_overview_tblrow.html", "Modules/Test");
+        $this->setRowTemplate("tpl.il_as_tst_pass_overview_tblrow.html", "components/ILIAS/Test");
 
         $this->initColumns();
         $this->initOrdering();

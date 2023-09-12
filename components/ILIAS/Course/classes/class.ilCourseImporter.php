@@ -80,7 +80,7 @@ class ilCourseImporter extends ilXmlImporter
             $this->course->setOfflineStatus(true);
             $this->course->update();
 
-            $a_mapping->addMapping('Modules/Course', 'crs', $a_id, (string) $this->course->getId());
+            $a_mapping->addMapping('components/ILIAS/Course', 'crs', $a_id, (string) $this->course->getId());
         } catch (ilSaxParserException|Exception $e) {
             $this->logger->error('Parsing failed with message, "' . $e->getMessage() . '".');
         }

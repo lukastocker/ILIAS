@@ -16,7 +16,7 @@
  *
  *********************************************************************/
 
-require_once './Modules/Test/classes/inc.AssessmentConstants.php';
+require_once './components/ILIAS/Test/classes/inc.AssessmentConstants.php';
 
 use ILIAS\Refinery\Random\Group as RandomGroup;
 use ILIAS\DI\RBACServices;
@@ -153,7 +153,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
 
         $this->prepareOutput();
 
-        $this->tpl->addCss(ilUtil::getStyleSheetLocation('output', 'test_print.css', 'Modules/Test'), 'print');
+        $this->tpl->addCss(ilUtil::getStyleSheetLocation('output', 'test_print.css', 'components/ILIAS/Test'), 'print');
 
         $q_type = '';
         if (!(in_array($next_class, ['', 'ilobjquestionpoolgui']) && $cmd == 'questions') && $q_id < 1) {
@@ -622,7 +622,7 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
         ilSession::set('qpl_import_qti_file', $qti_file);
         ilSession::set('qpl_import_subdir', $subdir);
 
-        $this->tpl->addBlockFile('ADM_CONTENT', 'adm_content', 'tpl.qpl_import_verification.html', 'Modules/TestQuestionPool');
+        $this->tpl->addBlockFile('ADM_CONTENT', 'adm_content', 'tpl.qpl_import_verification.html', 'components/ILIAS/TestQuestionPool');
         $table = new ilQuestionPoolImportVerificationTableGUI($this, 'uploadQplObject');
         $rows = [];
 
@@ -770,8 +770,8 @@ class ilObjQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassInterfa
             $fullPath = ilSession::get('qpl_import_dir') . '/' . $fileName;
             $imp = new ilImport($this->qplrequest->getRefId());
             $map = $imp->getMapping();
-            $map->addMapping('Modules/TestQuestionPool', 'qpl', 'new_id', $newObj->getId());
-            $imp->importObject($newObj, $fullPath, $fileName, 'qpl', 'Modules/TestQuestionPool', true);
+            $map->addMapping('components/ILIAS/TestQuestionPool', 'qpl', 'new_id', $newObj->getId());
+            $imp->importObject($newObj, $fullPath, $fileName, 'qpl', 'components/ILIAS/TestQuestionPool', true);
         } else {
             $qtiParser = new ilQTIParser(ilSession::get('qpl_import_qti_file'), ilQTIParser::IL_MO_PARSE_QTI, $newObj->getId(), $this->qplrequest->raw('ident'));
             $qtiParser->startParsing();

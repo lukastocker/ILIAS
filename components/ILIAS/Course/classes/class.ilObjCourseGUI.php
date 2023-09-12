@@ -235,7 +235,7 @@ class ilObjCourseGUI extends ilContainerGUI
         }
         // files
         if ($files !== []) {
-            $tpl = new ilTemplate('tpl.event_info_file.html', true, true, 'Modules/Course');
+            $tpl = new ilTemplate('tpl.event_info_file.html', true, true, 'components/ILIAS/Course');
 
             foreach ($files as $file) {
                 $tpl->setCurrentBlock("files");
@@ -287,7 +287,7 @@ class ilObjCourseGUI extends ilContainerGUI
             $mailString = '';
             foreach ($emails as $email) {
                 $email = trim($email);
-                $etpl = new ilTemplate("tpl.crs_contact_email.html", true, true, 'Modules/Course');
+                $etpl = new ilTemplate("tpl.crs_contact_email.html", true, true, 'components/ILIAS/Course');
                 $etpl->setVariable(
                     "EMAIL_LINK",
                     ilMailFormCall::getLinkTarget(
@@ -468,7 +468,7 @@ class ilObjCourseGUI extends ilContainerGUI
         if (!$a_form) {
             $a_form = $this->initInfoEditor();
         }
-        $this->tpl->addBlockFile('ADM_CONTENT', 'adm_content', 'tpl.edit_info.html', 'Modules/Course');
+        $this->tpl->addBlockFile('ADM_CONTENT', 'adm_content', 'tpl.edit_info.html', 'components/ILIAS/Course');
         $this->tpl->setVariable('INFO_TABLE', $a_form->getHTML());
 
         if (!count($files = ilCourseFile::_readFilesByCourse($this->object->getId()))) {

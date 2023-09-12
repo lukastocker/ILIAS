@@ -29,7 +29,7 @@ require_once './Services/WorkflowEngine/classes/detectors/class.ilSimpleDetector
 		
 				$_v_IntermediateThrowEvent_1_throwEventActivity = new ilEventRaisingActivity($_v_IntermediateThrowEvent_1);
 				$_v_IntermediateThrowEvent_1_throwEventActivity->setName('$_v_IntermediateThrowEvent_1');
-				$_v_IntermediateThrowEvent_1_throwEventActivity->setEventType("Modules/Course");
+				$_v_IntermediateThrowEvent_1_throwEventActivity->setEventType("components/ILIAS/Course");
 				$_v_IntermediateThrowEvent_1_throwEventActivity->setEventName("UserLeft");
 				$_v_IntermediateThrowEvent_1->addActivity($_v_IntermediateThrowEvent_1_throwEventActivity);
 			

@@ -22,7 +22,7 @@ use ILIAS\TA\Questions\assQuestionSuggestedSolutionsDatabaseRepository;
 use ILIAS\DI\Container;
 use Psr\Http\Message\ServerRequestInterface;
 
-require_once './Modules/Test/classes/inc.AssessmentConstants.php';
+require_once './components/ILIAS/Test/classes/inc.AssessmentConstants.php';
 
 /**
  * Abstract basic class which is to be extended by the concrete assessment question type classes
@@ -1821,7 +1821,7 @@ abstract class assQuestion
 
                 $component = '';
 
-                if ($levels[4] === 'Modules' || $levels[4] === 'Services') {
+                if ($levels[4] === 'components/ILIAS/' || $levels[4] === 'Services') {
                     $component = $levels[4] . DIRECTORY_SEPARATOR . $levels[5];
                 }
 
@@ -2916,7 +2916,7 @@ abstract class assQuestion
     public static function _getQuestionTypeName($type_tag): string
     {
         global $DIC;
-        if (file_exists("./Modules/TestQuestionPool/classes/class." . $type_tag . ".php")) {
+        if (file_exists("./components/ILIAS/TestQuestionPool/classes/class." . $type_tag . ".php")) {
             $lng = $DIC['lng'];
             return $lng->txt($type_tag);
         }

@@ -45,9 +45,9 @@ class ilGroupWaitingList extends ilWaitingList
             return false;
         }
 
-        $GLOBALS['DIC']->logger()->grp()->info('Raise new event: Modules/Group addToList.');
+        $GLOBALS['DIC']->logger()->grp()->info('Raise new event: components/ILIAS/Group addToList.');
         $ilAppEventHandler->raise(
-            "Modules/Group",
+            "components/ILIAS/Group",
             'addToWaitingList',
             array(
                     'obj_id' => $this->getObjId(),

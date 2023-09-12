@@ -96,15 +96,15 @@ class ilComponentBuildPluginInfoObjectiveTest extends TestCase
         $this->dirs = [
             "Modules" => ["Module1", "Module2"],
             "Services" => ["Service1"],
-            "Modules/Module1" => ["Slot1", "Slot2"],
-            "Modules/Module2" => [],
+            "components/ILIAS/Module1" => ["Slot1", "Slot2"],
+            "components/ILIAS/Module2" => [],
             "Services/Service1" => ["Slot3",".DS_Store"] // .DS_Store should be skipped
         ];
 
         $this->builder->build();
 
-        $expected = ["Modules", "Services", "Modules/Module1", "Modules/Module2",
-            "Services/Service1", "Modules/Module1/Slot1", "Modules/Module1/Slot2",
+        $expected = ["Modules", "Services", "components/ILIAS/Module1", "components/ILIAS/Module2",
+            "Services/Service1", "components/ILIAS/Module1/Slot1", "components/ILIAS/Module1/Slot2",
             "Services/Service1/Slot3"];
         sort($expected);
         sort($this->scanned);
@@ -116,17 +116,17 @@ class ilComponentBuildPluginInfoObjectiveTest extends TestCase
         $this->dirs = [
             "Modules" => ["Module1"],
             "Services" => ["Service1"],
-            "Modules/Module1" => ["Slot1"],
+            "components/ILIAS/Module1" => ["Slot1"],
             "Services/Service1" => ["Slot2"],
-            "Modules/Module1/Slot1" => ["Plugin1", "Plugin2"],
+            "components/ILIAS/Module1/Slot1" => ["Plugin1", "Plugin2"],
             "Services/Service1/Slot2" => ["Plugin3"]
         ];
 
         $this->builder->build();
 
         $expected = [
-            "Modules/Module1/Slot1/Plugin1",
-            "Modules/Module1/Slot1/Plugin2",
+            "components/ILIAS/Module1/Slot1/Plugin1",
+            "components/ILIAS/Module1/Slot1/Plugin2",
             "Services/Service1/Slot2/Plugin3"
         ];
         sort($expected);
@@ -165,7 +165,7 @@ class ilComponentBuildPluginInfoObjectiveTest extends TestCase
     public function testAddPlugins(): void
     {
         $data = [];
-        $this->files["Modules/Module1/Slot1/Plugin1/"] = __DIR__ . "/";
+        $this->files["components/ILIAS/Module1/Slot1/Plugin1/"] = __DIR__ . "/";
         $this->builder->_addPlugin($data, "Modules", "Module1", "Slot1", "Plugin1");
 
         $expected = [

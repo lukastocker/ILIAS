@@ -37,7 +37,7 @@ class ilTestPersonalDefaultSettingsTableGUI extends ilTable2GUI
         $this->setNoEntriesText($this->lng->txt('tst_defaults_not_defined'));
         $this->setFormAction($ilCtrl->getFormAction($parentObj, $cmd));
 
-        $this->setRowTemplate('tpl.il_as_tst_defaults_row.html', 'Modules/Test');
+        $this->setRowTemplate('tpl.il_as_tst_defaults_row.html', 'components/ILIAS/Test');
 
         $this->setShowRowsSelector(true);
         $this->setSelectAllCheckbox('chb_defaults');

@@ -16,7 +16,7 @@
  *
  *********************************************************************/
 
-require_once './Modules/Test/classes/inc.AssessmentConstants.php';
+require_once './components/ILIAS/Test/classes/inc.AssessmentConstants.php';
 
 /**
  * Single choice question GUI representation
@@ -898,7 +898,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
             $user_solution = $this->object->getBestSolution($solutionValues);
         }
 
-        $template = new ilTemplate("tpl.il_as_qpl_formulaquestion_output_solution.html", true, true, 'Modules/TestQuestionPool');
+        $template = new ilTemplate("tpl.il_as_qpl_formulaquestion_output_solution.html", true, true, 'components/ILIAS/TestQuestionPool');
         $correctness_icons = [
             'correct' => $this->generateCorrectnessIconsForCorrectness(self::CORRECTNESS_OK),
             'not_correct' => $this->generateCorrectnessIconsForCorrectness(self::CORRECTNESS_NOT_OK)
@@ -907,7 +907,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
 
         $template->setVariable("QUESTIONTEXT", $this->object->prepareTextareaOutput($questiontext, true));
         $questionoutput = $template->get();
-        $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "Modules/TestQuestionPool");
+        $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "components/ILIAS/TestQuestionPool");
         $feedback = ($show_feedback) ? $this->getGenericFeedbackOutput((int) $active_id, $pass) : "";
         if (strlen($feedback)) {
             $cssClass = (
@@ -964,7 +964,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
             }
         }
 
-        $template = new ilTemplate("tpl.il_as_qpl_formulaquestion_output.html", true, true, 'Modules/TestQuestionPool');
+        $template = new ilTemplate("tpl.il_as_qpl_formulaquestion_output.html", true, true, 'components/ILIAS/TestQuestionPool');
         if (is_object($this->getPreviewSession())) {
             $questiontext = $this->object->substituteVariables($user_solution);
         } else {
@@ -1034,7 +1034,7 @@ class assFormulaQuestionGUI extends assQuestionGUI
         }
 
         // generate the question output
-        $template = new ilTemplate("tpl.il_as_qpl_formulaquestion_output.html", true, true, 'Modules/TestQuestionPool');
+        $template = new ilTemplate("tpl.il_as_qpl_formulaquestion_output.html", true, true, 'components/ILIAS/TestQuestionPool');
 
         $questiontext = $this->object->substituteVariables($user_solution);
 

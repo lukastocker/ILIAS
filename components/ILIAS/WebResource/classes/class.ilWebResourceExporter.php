@@ -85,7 +85,7 @@ class ilWebResourceExporter extends ilXmlExporter
     {
         return array(
             "4.1.0" => array(
-                "namespace" => "http://www.ilias.de/Modules/WebResource/webr/4_1",
+                "namespace" => "http://www.ilias.de/components/ILIAS/WebResource/webr/4_1",
                 "xsd_file" => "ilias_webr_4_1.xsd",
                 "uses_dataset" => false,
                 "min" => "4.1.0",

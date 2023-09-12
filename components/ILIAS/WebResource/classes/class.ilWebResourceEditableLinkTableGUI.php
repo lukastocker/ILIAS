@@ -63,7 +63,7 @@ class ilWebResourceEditableLinkTableGUI extends ilTable2GUI
         );
         $this->setRowTemplate(
             "tpl.webr_editable_link_row.html",
-            'Modules/WebResource'
+            'components/ILIAS/WebResource'
         );
         $this->setEnableTitle(true);
         $this->setEnableNumInfo(true);

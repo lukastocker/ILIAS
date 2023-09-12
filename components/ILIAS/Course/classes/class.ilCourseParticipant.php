@@ -23,7 +23,7 @@ declare(strict_types=0);
  */
 class ilCourseParticipant extends ilParticipant
 {
-    protected const COMPONENT_NAME = 'Modules/Course';
+    protected const COMPONENT_NAME = 'components/ILIAS/Course';
 
     protected static array $instances = [];
 

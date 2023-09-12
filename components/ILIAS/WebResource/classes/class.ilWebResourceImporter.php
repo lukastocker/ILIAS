@@ -68,7 +68,7 @@ class ilWebResourceImporter extends ilXmlImporter
             $parser->setMode(ilWebLinkXmlParser::MODE_CREATE);
             $parser->start();
             $a_mapping->addMapping(
-                'Modules/WebResource',
+                'components/ILIAS/WebResource',
                 'webr',
                 $a_id,
                 (string) $this->link->getId()

@@ -80,7 +80,7 @@ abstract class ilContainerReferenceExporter extends ilXmlExporter
     {
         return [
             "4.3.0" => [
-                "namespace" => "https://www.ilias.de/Modules/CategoryReference/catr/4_3",
+                "namespace" => "https://www.ilias.de/components/ILIAS/CategoryReference/catr/4_3",
                 "xsd_file" => "ilias_catr_4_3.xsd",
                 "uses_dataset" => false,
                 "min" => "4.3.0",

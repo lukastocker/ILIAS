@@ -71,7 +71,7 @@ class ilCourseEditParticipantsTableGUI extends ilTable2GUI
 
         $this->addCommandButton('updateParticipants', $this->lng->txt('save'));
         $this->addCommandButton('participants', $this->lng->txt('cancel'));
-        $this->setRowTemplate("tpl.edit_participants_row.html", "Modules/Course");
+        $this->setRowTemplate("tpl.edit_participants_row.html", "components/ILIAS/Course");
         $this->disable('sort');
         $this->enable('header');
         $this->enable('numinfo');

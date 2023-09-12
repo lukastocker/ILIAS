@@ -22,7 +22,7 @@
 * @author		Björn Heyser <bheyser@databay.de>
 * @version		$Id$
 *
-* @defgroup ModulesTest Modules/Test
+* @defgroup ModulesTest components/ILIAS/Test
 * @extends ilObject
 */
 

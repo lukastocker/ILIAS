@@ -1561,7 +1561,7 @@ class ilExAssignment
         $exc = new ilObjExercise($this->getExerciseId(), false);
 
         $ilAppEventHandler->raise(
-            'Modules/Exercise',
+            'components/ILIAS/Exercise',
             $a_event . 'Assignment',
             array(
             'object' => $exc,

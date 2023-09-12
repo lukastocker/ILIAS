@@ -110,7 +110,7 @@ class ilTestExporter extends ilXmlExporter
     {
         return array(
             "4.1.0" => array(
-                "namespace" => "http://www.ilias.de/Modules/Test/htlm/4_1",
+                "namespace" => "http://www.ilias.de/components/ILIAS/Test/htlm/4_1",
                 "xsd_file" => "ilias_tst_4_1.xsd",
                 "uses_dataset" => false,
                 "min" => "4.1.0",

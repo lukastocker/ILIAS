@@ -55,7 +55,7 @@ class ilFolderExporter extends ilXmlExporter
     {
         return [
             "4.1.0" => [
-                "namespace" => "https://www.ilias.de/Modules/Folder/fold/4_1",
+                "namespace" => "https://www.ilias.de/components/ILIAS/Folder/fold/4_1",
                 "xsd_file" => "ilias_fold_4_1.xsd",
                 "uses_dataset" => false,
                 "min" => "4.1.0",

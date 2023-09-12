@@ -11,7 +11,7 @@ use PHPUnit\Runner\Filter\ExcludeGroupFilterIterator as GroupExcludeFilter;
 
 /**
 * This is the global ILIAS test suite. It searches automatically for
-* components test suites by scanning all Modules/.../test and
+* components test suites by scanning all components/.../test and
 * Services/.../test directories for test suite files.
 *
 * Test suite files are identified automatically, if they are named
@@ -33,8 +33,8 @@ class ILIASSuite extends TestSuite
         echo "ILIAS PHPUnit-Tests need installed dev-requirements, please install using 'composer install' in ./libs/composer \n";
         echo "\n";
 
-        // scan Modules and Services directories
-        $basedirs = array("Services", "Modules");
+        // scan components and Services directories
+        $basedirs = array("Services", "components/ILIAS");
 
         foreach ($basedirs as $basedir) {
             // read current directory

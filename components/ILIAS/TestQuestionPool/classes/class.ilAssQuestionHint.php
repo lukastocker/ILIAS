@@ -21,7 +21,7 @@
  * @author		Björn Heyser <bheyser@databay.de>
  * @version		$Id$
  *
- * @package		Modules/TestQuestionPool
+ * @package		components/ILIAS/TestQuestionPool
  */
 class ilAssQuestionHint
 {

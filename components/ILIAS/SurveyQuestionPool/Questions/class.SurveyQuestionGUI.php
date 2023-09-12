@@ -600,7 +600,7 @@ abstract class SurveyQuestionGUI
 
         $ilTabs->activateTab("preview");
 
-        $tpl = new ilTemplate("tpl.il_svy_qpl_preview.html", true, true, "Modules/SurveyQuestionPool");
+        $tpl = new ilTemplate("tpl.il_svy_qpl_preview.html", true, true, "components/ILIAS/SurveyQuestionPool");
 
         if ($this->object->getObligatory()) {
             $tpl->setCurrentBlock("required");
@@ -640,7 +640,7 @@ abstract class SurveyQuestionGUI
     protected function getMaterialOutput(): string
     {
         if (count($this->object->getMaterial())) {
-            $template = new ilTemplate("tpl.il_svy_qpl_material.html", true, true, "Modules/SurveyQuestionPool");
+            $template = new ilTemplate("tpl.il_svy_qpl_material.html", true, true, "components/ILIAS/SurveyQuestionPool");
             foreach ($this->object->getMaterial() as $material) {
                 $template->setCurrentBlock('material');
                 switch ($material->type) {

@@ -16,7 +16,7 @@
  *
  *********************************************************************/
 
-require_once './Modules/Test/classes/inc.AssessmentConstants.php';
+require_once './components/ILIAS/Test/classes/inc.AssessmentConstants.php';
 
 /**
  * Class for single choice questions
@@ -391,7 +391,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition
                         }
                     }
 
-                    $template = new ilTemplate("tpl.il_as_qpl_formulaquestion_output_solution_image.html", true, true, 'Modules/TestQuestionPool');
+                    $template = new ilTemplate("tpl.il_as_qpl_formulaquestion_output_solution_image.html", true, true, 'components/ILIAS/TestQuestionPool');
 
                     $correctness_icon = $correctness_icons['not_correct'];
                     if ($resObj->isCorrect($this->getVariables(), $this->getResults(), $user_value, $resunit)) {
@@ -405,7 +405,7 @@ class assFormulaQuestion extends assQuestion implements iQuestionCondition
                 }
                 $resultOutput = "";
                 if ($result_output) {
-                    $template = new ilTemplate("tpl.il_as_qpl_formulaquestion_output_solution_result.html", true, true, 'Modules/TestQuestionPool');
+                    $template = new ilTemplate("tpl.il_as_qpl_formulaquestion_output_solution_result.html", true, true, 'components/ILIAS/TestQuestionPool');
 
                     if (is_array($userdata) &&
                         array_key_exists($resObj->getResult(), $userdata) &&

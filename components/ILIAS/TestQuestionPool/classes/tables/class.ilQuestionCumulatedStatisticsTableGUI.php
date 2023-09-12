@@ -38,7 +38,7 @@ class ilQuestionCumulatedStatisticsTableGUI extends ilTable2GUI
         $this->setId('qst_usage_' . $question->getId());
         parent::__construct($controller, $cmd);
 
-        $this->setRowTemplate('tpl.il_as_qpl_question_cumulated_stats_table_row.html', 'Modules/TestQuestionPool');
+        $this->setRowTemplate('tpl.il_as_qpl_question_cumulated_stats_table_row.html', 'components/ILIAS/TestQuestionPool');
         $this->setLimit(PHP_INT_MAX);
 
         $this->setDefaultOrderField('result');

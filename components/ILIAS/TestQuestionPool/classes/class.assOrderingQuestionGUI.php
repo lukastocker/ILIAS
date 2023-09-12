@@ -16,7 +16,7 @@
  *
  *********************************************************************/
 
-require_once './Modules/Test/classes/inc.AssessmentConstants.php';
+require_once './components/ILIAS/Test/classes/inc.AssessmentConstants.php';
 
 /**
  * Ordering question GUI representation
@@ -473,14 +473,14 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
         $solution_html = $answers_gui->getHTML();
 
-        $template = new ilTemplate("tpl.il_as_qpl_nested_ordering_output_solution.html", true, true, "Modules/TestQuestionPool");
+        $template = new ilTemplate("tpl.il_as_qpl_nested_ordering_output_solution.html", true, true, "components/ILIAS/TestQuestionPool");
         $template->setVariable('SOLUTION_OUTPUT', $solution_html);
         if ($show_question_text == true) {
             $template->setVariable("QUESTIONTEXT", $this->object->prepareTextareaOutput($this->object->getQuestion(), true));
         }
         $questionoutput = $template->get();
 
-        $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "Modules/TestQuestionPool");
+        $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "components/ILIAS/TestQuestionPool");
         $solutiontemplate->setVariable("SOLUTION_OUTPUT", $questionoutput);
 
         if ($show_feedback) {
@@ -509,7 +509,7 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         return $this->getILIASPage($solutiontemplate->get());
 
         // is this template still in use? it is not used at this point any longer!
-        // $template = new ilTemplate("tpl.il_as_qpl_ordering_output_solution.html", TRUE, TRUE, "Modules/TestQuestionPool");
+        // $template = new ilTemplate("tpl.il_as_qpl_ordering_output_solution.html", TRUE, TRUE, "components/ILIAS/TestQuestionPool");
     }
 
     public function getPreview($show_question_only = false, $showInlineFeedback = false): string
@@ -529,7 +529,7 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $answers->setInteractionEnabled($this->isInteractivePresentation());
         $answers->setElementList($solutionOrderingElementList);
 
-        $template = new ilTemplate("tpl.il_as_qpl_ordering_output.html", true, true, "Modules/TestQuestionPool");
+        $template = new ilTemplate("tpl.il_as_qpl_ordering_output.html", true, true, "components/ILIAS/TestQuestionPool");
 
         $template->setCurrentBlock('nested_ordering_output');
         $template->setVariable('NESTED_ORDERING', $answers->getHTML());
@@ -575,7 +575,7 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             $pass
         );
 
-        $template = new ilTemplate('tpl.il_as_qpl_ordering_output.html', true, true, 'Modules/TestQuestionPool');
+        $template = new ilTemplate('tpl.il_as_qpl_ordering_output.html', true, true, 'components/ILIAS/TestQuestionPool');
 
         $orderingGUI->setContext(ilAssNestedOrderingElementsInputGUI::CONTEXT_USER_SOLUTION_SUBMISSION);
         $orderingGUI->setElementList($solutionOrderingElementList);
@@ -720,7 +720,7 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
      */
     public function renderAggregateView($aggregate): ilTemplate
     {
-        $tpl = new ilTemplate('tpl.il_as_aggregated_answers_table.html', true, true, "Modules/TestQuestionPool");
+        $tpl = new ilTemplate('tpl.il_as_aggregated_answers_table.html', true, true, "components/ILIAS/TestQuestionPool");
 
         foreach ($aggregate as $line_data) {
             $tpl->setCurrentBlock('aggregaterow');

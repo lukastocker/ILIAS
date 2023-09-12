@@ -83,13 +83,13 @@ class ilPortfolioExporter extends ilXmlExporter
     ): array {
         return array(
                 "4.4.0" => array(
-                        "namespace" => "https://www.ilias.de/Modules/Portfolio/4_4",
+                        "namespace" => "https://www.ilias.de/components/ILIAS/Portfolio/4_4",
                         "xsd_file" => "ilias_portfolio_4_4.xsd",
                         "uses_dataset" => true,
                         "min" => "4.4.0",
                         "max" => "4.9.9"),
                 "5.0.0" => array(
-                        "namespace" => "https://www.ilias.de/Modules/Portfolio/5_0",
+                        "namespace" => "https://www.ilias.de/components/ILIAS/Portfolio/5_0",
                         "xsd_file" => "ilias_portfolio_5_0.xsd",
                         "uses_dataset" => true,
                         "min" => "5.0.0",

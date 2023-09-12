@@ -54,7 +54,8 @@ class ilArtifactComponentRepository implements ilComponentRepositoryWrite
         $this->components = [];
         $this->component_id_by_type_and_name = [
             "Modules" => [],
-            "Services" => []
+            "Services" => [],
+            "components/ILIAS" => []
         ];
         $this->pluginslot_by_id = [];
         $plugins_per_slot = [];

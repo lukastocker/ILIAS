@@ -22,7 +22,7 @@
  * @author		Björn Heyser <bheyser@databay.de>
  * @version		$Id$
  *
- * @package		Modules/Test
+ * @package		components/ILIAS/Test
  */
 class ilTestFixedQuestionSetConfig extends ilTestQuestionSetConfig
 {

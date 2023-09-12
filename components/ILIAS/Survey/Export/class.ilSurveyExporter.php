@@ -62,11 +62,11 @@ class ilSurveyExporter extends ilXmlExporter
         if ($a_entity === "svy") {
             return array(
                     array(
-                            "component" => "Modules/Survey",
+                            "component" => "components/ILIAS/Survey",
                             "entity" => "svy_quest_skill",
                             "ids" => $a_ids),
                     array(
-                            "component" => "Modules/Survey",
+                            "component" => "components/ILIAS/Survey",
                             "entity" => "svy_skill_threshold",
                             "ids" => $a_ids),
                     array(
@@ -84,7 +84,7 @@ class ilSurveyExporter extends ilXmlExporter
         if ($a_entity === "svy") {
             return array(
                     "4.1.0" => array(
-                            "namespace" => "https://www.ilias.de/Modules/Survey/htlm/4_1",
+                            "namespace" => "https://www.ilias.de/components/ILIAS/Survey/htlm/4_1",
                             "xsd_file" => "ilias_svy_4_1.xsd",
                             "uses_dataset" => false,
                             "min" => "4.1.0",
@@ -93,7 +93,7 @@ class ilSurveyExporter extends ilXmlExporter
         } else {
             return array(
                     "5.1.0" => array(
-                            "namespace" => "https://www.ilias.de/Modules/Survey/svy/5_1",
+                            "namespace" => "https://www.ilias.de/components/ILIAS/Survey/svy/5_1",
                             "xsd_file" => "ilias_svy_5_1.xsd",
                             "uses_dataset" => true,
                             "min" => "5.1.0",

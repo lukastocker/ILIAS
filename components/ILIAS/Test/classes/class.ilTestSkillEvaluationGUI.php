@@ -23,7 +23,7 @@
  * @author		Björn Heyser <bheyser@databay.de>
  * @version		$Id: class.ilTestSkillGUI.php 46688 2013-12-09 15:23:17Z bheyser $
  *
- * @package		Modules/Test
+ * @package		components/ILIAS/Test
  *
  * @ilCtrl_Calls ilTestSkillEvaluationGUI: ilTestSkillEvaluationToolbarGUI
  * @ilCtrl_Calls ilTestSkillEvaluationGUI: ilTestPersonalSkillsGUI

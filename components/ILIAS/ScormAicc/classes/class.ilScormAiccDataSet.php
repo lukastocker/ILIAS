@@ -325,7 +325,7 @@ class ilScormAiccDataSet extends ilDataSet
      */
     protected function getXmlNamespace(string $a_entity, string $a_schema_version): string
     {
-        return "http://www.ilias.de/xml/Modules/ScormAicc/" . $a_entity;
+        return "http://www.ilias.de/xml/components/ILIAS/ScormAicc/" . $a_entity;
     }
 
     /**

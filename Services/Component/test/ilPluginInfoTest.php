@@ -245,7 +245,7 @@ class ilPluginInfoTest extends TestCase
     public function testGetPath(): void
     {
         $this->assertEquals(
-            ilComponentRepository::PLUGIN_BASE_PATH . "/" . "Modules/Module1/Slot1/Plugin1",
+            ilComponentRepository::PLUGIN_BASE_PATH . "/" . "components/ILIAS/Module1/Slot1/Plugin1",
             $this->plugin->getPath()
         );
     }

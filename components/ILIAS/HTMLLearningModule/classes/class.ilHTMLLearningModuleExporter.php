@@ -65,7 +65,7 @@ class ilHTMLLearningModuleExporter extends ilXmlExporter
     {
         return array(
             "4.1.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/HTMLLearningModule/htlm/4_1",
+                "namespace" => "https://www.ilias.de/components/ILIAS/HTMLLearningModule/htlm/4_1",
                 "xsd_file" => "ilias_htlm_4_1.xsd",
                 "uses_dataset" => true,
                 "min" => "4.1.0",

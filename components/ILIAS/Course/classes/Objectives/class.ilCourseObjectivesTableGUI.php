@@ -62,7 +62,7 @@ class ilCourseObjectivesTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt('actions'), '5em');
 
         $this->setFormAction($this->ctrl->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.crs_objectives_table_row.html", "Modules/Course");
+        $this->setRowTemplate("tpl.crs_objectives_table_row.html", "components/ILIAS/Course");
         $this->disable('sort');
         $this->enable('header');
         $this->disable('numinfo');

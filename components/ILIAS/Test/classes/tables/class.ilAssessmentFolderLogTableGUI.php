@@ -43,7 +43,7 @@ class ilAssessmentFolderLogTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt("assessment_log_text"), 'message', '50%');
         $this->addColumn($this->lng->txt("ass_location"), '', '20%');
 
-        $this->setRowTemplate("tpl.il_as_tst_assessment_log_row.html", "Modules/Test");
+        $this->setRowTemplate("tpl.il_as_tst_assessment_log_row.html", "components/ILIAS/Test");
 
         $this->setFormAction($this->ctrl->getFormAction($a_parent_obj, $a_parent_cmd));
 

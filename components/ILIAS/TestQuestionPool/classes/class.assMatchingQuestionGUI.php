@@ -15,7 +15,7 @@
  *
  *********************************************************************/
 
-require_once './Modules/Test/classes/inc.AssessmentConstants.php';
+require_once './components/ILIAS/Test/classes/inc.AssessmentConstants.php';
 
 /**
  * Matching question GUI representation
@@ -462,8 +462,8 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $show_manual_scoring = false,
         $show_question_text = true
     ): string {
-        $template = new ilTemplate("tpl.il_as_qpl_matching_output_solution.html", true, true, "Modules/TestQuestionPool");
-        $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "Modules/TestQuestionPool");
+        $template = new ilTemplate("tpl.il_as_qpl_matching_output_solution.html", true, true, "components/ILIAS/TestQuestionPool");
+        $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "components/ILIAS/TestQuestionPool");
 
         $solutions = array();
         if (($active_id > 0) && (!$show_correct_solution)) {
@@ -640,11 +640,11 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             iljQueryUtil::initjQueryUI();
             $this->tpl->addJavaScript('./node_modules/@andxor/jquery-ui-touch-punch-fix/jquery.ui.touch-punch.js');
         }
-        $this->tpl->addJavaScript('Modules/TestQuestionPool/js/ilMatchingQuestion.js');
+        $this->tpl->addJavaScript('components/ILIAS/TestQuestionPool/js/ilMatchingQuestion.js');
         $this->tpl->addOnLoadCode('ilMatchingQuestionInit();');
-        $this->tpl->addCss(ilUtil::getStyleSheetLocation('output', 'test_javascript.css', 'Modules/TestQuestionPool'));
+        $this->tpl->addCss(ilUtil::getStyleSheetLocation('output', 'test_javascript.css', 'components/ILIAS/TestQuestionPool'));
 
-        $template = new ilTemplate("tpl.il_as_qpl_matching_output.html", true, true, "Modules/TestQuestionPool");
+        $template = new ilTemplate("tpl.il_as_qpl_matching_output.html", true, true, "components/ILIAS/TestQuestionPool");
 
         foreach ($solutions as $defId => $terms) {
             foreach ($terms as $termId) {
@@ -796,7 +796,7 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             $files[] = './node_modules/@andxor/jquery-ui-touch-punch-fix/jquery.ui.touch-punch.js';
         }
 
-        $files[] = 'Modules/TestQuestionPool/js/ilMatchingQuestion.js';
+        $files[] = 'components/ILIAS/TestQuestionPool/js/ilMatchingQuestion.js';
 
         return $files;
     }
@@ -811,11 +811,11 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             iljQueryUtil::initjQueryUI();
             $this->tpl->addJavaScript('./node_modules/@andxor/jquery-ui-touch-punch-fix/jquery.ui.touch-punch.js');
         }
-        $this->tpl->addJavaScript('Modules/TestQuestionPool/js/ilMatchingQuestion.js');
+        $this->tpl->addJavaScript('components/ILIAS/TestQuestionPool/js/ilMatchingQuestion.js');
         $this->tpl->addOnLoadCode('ilMatchingQuestionInit();');
-        $this->tpl->addCss(ilUtil::getStyleSheetLocation('output', 'test_javascript.css', 'Modules/TestQuestionPool'));
+        $this->tpl->addCss(ilUtil::getStyleSheetLocation('output', 'test_javascript.css', 'components/ILIAS/TestQuestionPool'));
 
-        $template = new ilTemplate("tpl.il_as_qpl_matching_output.html", true, true, "Modules/TestQuestionPool");
+        $template = new ilTemplate("tpl.il_as_qpl_matching_output.html", true, true, "components/ILIAS/TestQuestionPool");
 
         $solutions = array();
         if ($active_id) {

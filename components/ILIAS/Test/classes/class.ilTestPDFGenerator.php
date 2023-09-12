@@ -134,7 +134,7 @@ class ilTestPDFGenerator
         return $html;
     }
 
-    protected static function getTemplatePath($a_filename, $module_path = 'Modules/Test/'): string
+    protected static function getTemplatePath($a_filename, $module_path = 'components/ILIAS/Test/'): string
     {
         $fname = '';
         if (ilStyleDefinition::getCurrentSkin() != "default") {

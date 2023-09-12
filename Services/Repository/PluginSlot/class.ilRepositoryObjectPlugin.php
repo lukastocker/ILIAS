@@ -28,7 +28,7 @@ abstract class ilRepositoryObjectPlugin extends ilPlugin
     /**
      * Only very little classes seem to care about this:
      *    - Services/Repository/classes/class.ilRepositoryObjectPlugin.php
-     *    - Modules/OrgUnit/classes/Extension/class.ilOrgUnitExtensionPlugin.php
+     *    - components/ILIAS/OrgUnit/classes/Extension/class.ilOrgUnitExtensionPlugin.php
      *
      * @param string $a_ctype
      * @param string $a_cname

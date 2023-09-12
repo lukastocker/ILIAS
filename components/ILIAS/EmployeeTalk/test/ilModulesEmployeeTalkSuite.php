@@ -27,7 +27,7 @@ class ilModulesEmployeeTalkSuite extends TestSuite
     {
         $suite = new self();
         /** @noRector */
-        require_once("./Modules/EmployeeTalk/test/ilModulesEmployeeTalkVEventTest.php");
+        require_once("./components/ILIAS/EmployeeTalk/test/ilModulesEmployeeTalkVEventTest.php");
         $suite->addTestSuite("ilModulesEmployeeTalkVEventTest");
 
         return $suite;

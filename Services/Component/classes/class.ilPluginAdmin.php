@@ -56,7 +56,7 @@ class ilPluginAdmin
      * Checks whether plugin is active (include version checks)
      *
      * ATTENTION: If one tries to remove this, the task doesn't look very hard initially.
-     * `grep -r "isActive([^)]*,.*)" Modules/` (or in Services) only reveals a handful
+     * `grep -r "isActive([^)]*,.*)" components/ILIAS/` (or in Services) only reveals a handful
      * of locations that actually use this function. But: If you attempt to remove these
      * locations, you run into a dependency hell in the T&A. The T&A uses dependency
      * injection, but not container. If you add ilComponentRepository as dependency, you need

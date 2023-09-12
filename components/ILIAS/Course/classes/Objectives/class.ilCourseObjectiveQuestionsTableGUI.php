@@ -49,7 +49,7 @@ class ilCourseObjectiveQuestionsTableGUI extends ilTable2GUI
         $this->addColumn($this->lng->txt('crs_objective_final_test'), 'final', '33%');
 
         $this->setFormAction($this->ctrl->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.crs_questions_table_row.html", "Modules/Course");
+        $this->setRowTemplate("tpl.crs_questions_table_row.html", "components/ILIAS/Course");
         $this->disable('sort');
         $this->enable('header');
         $this->disable('numinfo');

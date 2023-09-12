@@ -47,7 +47,7 @@ class ilTestInviteRolesTableGUI extends ilTable2GUI
 
         $this->setTitle($this->lng->txt('search_roles'), 'icon_role.svg', $this->lng->txt('role'));
 
-        $this->setRowTemplate("tpl.il_as_tst_invite_roles_row.html", "Modules/Test");
+        $this->setRowTemplate("tpl.il_as_tst_invite_roles_row.html", "components/ILIAS/Test");
 
         $this->addMultiCommand('addParticipants', $this->lng->txt('add'));
 

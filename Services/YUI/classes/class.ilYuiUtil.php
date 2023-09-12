@@ -67,7 +67,7 @@ class ilYuiUtil
 
     /**
      * Init YUI Drag and Drop
-     * used in Modules/Survey, Services/Calendar, Services/COPage, Services/Form (Jan 2022)
+     * used in components/ILIAS/Survey, Services/Calendar, Services/COPage, Services/Form (Jan 2022)
      * @deprecated
      */
     public static function initDragDrop(
@@ -82,7 +82,7 @@ class ilYuiUtil
 
     /**
      * Init YUI DomEvent
-     * used in Services/Calendar, Modules/Session, Modules/Test (Jan 2022)
+     * used in Services/Calendar, components/ILIAS/Session, components/ILIAS/Test (Jan 2022)
      * @deprecated
      */
     public static function initDomEvent(
@@ -94,7 +94,7 @@ class ilYuiUtil
 
     /**
      * Init yui panel
-     * used in Modules/Test, Services/TermsOfService (Jan 2022)
+     * used in components/ILIAS/Test, Services/TermsOfService (Jan 2022)
      * @deprecated
      */
     public static function initPanel(
@@ -117,7 +117,7 @@ class ilYuiUtil
 
     /**
      * Init YUI connection and animation module
-     * used in Modules/Test (Jan 2022)
+     * used in components/ILIAS/Test (Jan 2022)
      * @deprecated
      */
     public static function initConnectionWithAnimation(): void
@@ -132,7 +132,7 @@ class ilYuiUtil
 
     /**
      * Init YUI Overlay module
-     * used in Modules/Test, Services/TermsOfService, Services/Tracking, Services/UIComponent
+     * used in components/ILIAS/Test, Services/TermsOfService, Services/Tracking, Services/UIComponent
      * @deprecated
      */
     public static function initOverlay(

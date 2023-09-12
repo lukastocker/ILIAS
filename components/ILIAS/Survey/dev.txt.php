@@ -59,14 +59,14 @@ this answer is perfectly deleted in "svy_variable" table.
 **In the Questions page (Drag and drop section)**
 
 Only the GUI files are affected:
-- Modules/SurveyQuestionPool/classes/class.SurveySingleChoiceQuestionGUI.php
-- Modules/SurveyQuestionPool/classes/class.SurveyMultipleChoiceQuestionGUI.php
-- Modules/SurveyQuestionPool/classes/class.SurveyMatrixQuestionGUI.php
+- components/ILIAS/SurveyQuestionPool/classes/class.SurveySingleChoiceQuestionGUI.php
+- components/ILIAS/SurveyQuestionPool/classes/class.SurveyMultipleChoiceQuestionGUI.php
+- components/ILIAS/SurveyQuestionPool/classes/class.SurveyMatrixQuestionGUI.php
 
 Not affected:
-- Modules/SurveyQuestionPool/classes/class.SurveySingleChoiceQuestion.php
-- Modules/SurveyQuestionPool/classes/class.SurveyMultipleChoiceQuestion.php
-- Modules/SurveyQuestionPool/classes/class.SurveyMatrixQuestion.php
+- components/ILIAS/SurveyQuestionPool/classes/class.SurveySingleChoiceQuestion.php
+- components/ILIAS/SurveyQuestionPool/classes/class.SurveyMultipleChoiceQuestion.php
+- components/ILIAS/SurveyQuestionPool/classes/class.SurveyMatrixQuestion.php
 
 Here que can create pages, add from pool etc...
 
@@ -133,15 +133,15 @@ User answered but the scale is saved as value 10: (scale -1)
     * tstamp:
     * questiontext:
     * label:
-    INSERT: Modules/SurveyQuestionPool/classes/class.SurveyQuestion.php - saveToDb
-    UPDATE: Modules/SurveyQuestionPool/classes/class.SurveyQuestion.php - saveToDb
-    DELETE: Modules/SurveyQuestionPool/classes/class.SurveyQuestion.php - delete
-    UPDATE: Modules/SurveyQuestionPool/classes/class.SurveyQuestion.php - delete
-    UPDATE: Modules/SurveyQuestionPool/classes/class.SurveyQuestion.php - _changeOriginalId
-    INSERT: Modules/SurveyQuestionPool/classes/class.SurveyQuestion.php - createNewQuestion
-    UPDATE: Modules/SurveyQuestionPool/classes/class.SurveyQuestion.php - saveCompletionStatus
-    UPDATE: Modules/Survey/classes/class.ilObjSurvey.php - setObligatoryStates
-    UPDATE: Modules/SurveyQuestionPool/classes/class.ilObjSurveyQuestionPool.php - setObligatoryStates
+    INSERT: components/ILIAS/SurveyQuestionPool/classes/class.SurveyQuestion.php - saveToDb
+    UPDATE: components/ILIAS/SurveyQuestionPool/classes/class.SurveyQuestion.php - saveToDb
+    DELETE: components/ILIAS/SurveyQuestionPool/classes/class.SurveyQuestion.php - delete
+    UPDATE: components/ILIAS/SurveyQuestionPool/classes/class.SurveyQuestion.php - delete
+    UPDATE: components/ILIAS/SurveyQuestionPool/classes/class.SurveyQuestion.php - _changeOriginalId
+    INSERT: components/ILIAS/SurveyQuestionPool/classes/class.SurveyQuestion.php - createNewQuestion
+    UPDATE: components/ILIAS/SurveyQuestionPool/classes/class.SurveyQuestion.php - saveCompletionStatus
+    UPDATE: components/ILIAS/Survey/classes/class.ilObjSurvey.php - setObligatoryStates
+    UPDATE: components/ILIAS/SurveyQuestionPool/classes/class.ilObjSurveyQuestionPool.php - setObligatoryStates
 
 * table svy_category
     * category_id: sequence value -> svy_category_seq (PK)

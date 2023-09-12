@@ -429,7 +429,7 @@ JS;
         $cloze_text->setRTESupport($this->object->getId(), "qpl", "assessment");
         $form->addItem($cloze_text);
 
-        $tpl = new ilTemplate("tpl.il_as_qpl_cloze_gap_button_code.html", true, true, "Modules/TestQuestionPool");
+        $tpl = new ilTemplate("tpl.il_as_qpl_cloze_gap_button_code.html", true, true, "components/ILIAS/TestQuestionPool");
 
         $button = new ilCustomInputGUI('&nbsp;', '');
         $action_button = ilSplitButtonGUI::getInstance();
@@ -822,12 +822,12 @@ JS;
     {
         $user_solution = is_object($this->getPreviewSession()) ? (array) $this->getPreviewSession()->getParticipantsSolution() : [];
 
-        $template = new ilTemplate("tpl.il_as_qpl_cloze_question_output.html", true, true, "Modules/TestQuestionPool");
+        $template = new ilTemplate("tpl.il_as_qpl_cloze_question_output.html", true, true, "components/ILIAS/TestQuestionPool");
         $output = $this->object->getClozeTextHTML();
         foreach ($this->object->getGaps() as $gap_index => $gap) {
             switch ($gap->getType()) {
                 case CLOZE_TEXT:
-                    $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_gap_text.html", true, true, "Modules/TestQuestionPool");
+                    $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_gap_text.html", true, true, "components/ILIAS/TestQuestionPool");
 
                     $gap_size = $gap->getGapSize() > 0 ? $gap->getGapSize() : $this->object->getFixedTextLength();
                     if ($gap_size > 0) {
@@ -848,7 +848,7 @@ JS;
                     // fau.
                     break;
                 case CLOZE_SELECT:
-                    $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_gap_select.html", true, true, "Modules/TestQuestionPool");
+                    $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_gap_select.html", true, true, "components/ILIAS/TestQuestionPool");
                     foreach ($gap->getItems($this->object->getShuffler(), $gap_index) as $item) {
                         $gaptemplate->setCurrentBlock("select_gap_option");
                         $gaptemplate->setVariable("SELECT_GAP_VALUE", $item->getOrder());
@@ -871,7 +871,7 @@ JS;
                     // fau.
                     break;
                 case CLOZE_NUMERIC:
-                    $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_gap_numeric.html", true, true, "Modules/TestQuestionPool");
+                    $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_gap_numeric.html", true, true, "components/ILIAS/TestQuestionPool");
                     $gap_size = $gap->getGapSize() > 0 ? $gap->getGapSize() : $this->object->getFixedTextLength();
                     if ($gap_size > 0) {
                         $gaptemplate->setCurrentBlock('size_and_maxlength');
@@ -936,13 +936,13 @@ JS;
             }
         }
 
-        $template = new ilTemplate("tpl.il_as_qpl_cloze_question_output_solution.html", true, true, "Modules/TestQuestionPool");
+        $template = new ilTemplate("tpl.il_as_qpl_cloze_question_output_solution.html", true, true, "components/ILIAS/TestQuestionPool");
         $output = $this->object->getClozeTextHTML();
         $assClozeGapCombinationObject = new assClozeGapCombination();
         $check_for_gap_combinations = $assClozeGapCombinationObject->loadFromDb($this->object->getId());
 
         foreach ($this->object->getGaps() as $gap_index => $gap) {
-            $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_output_solution_gap.html", true, true, "Modules/TestQuestionPool");
+            $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_output_solution_gap.html", true, true, "components/ILIAS/TestQuestionPool");
             $found = [];
             foreach ($user_solution as $solutionarray) {
                 if ($solutionarray["value1"] == $gap_index) {
@@ -1073,7 +1073,7 @@ JS;
 
         $template->setVariable("CLOZETEXT", $this->object->prepareTextareaOutput($output, true));
         // generate the question output
-        $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "Modules/TestQuestionPool");
+        $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "components/ILIAS/TestQuestionPool");
         $questionoutput = $template->get();
 
         $feedback = '';
@@ -1179,12 +1179,12 @@ JS;
             }
         }
 
-        $template = new ilTemplate("tpl.il_as_qpl_cloze_question_output.html", true, true, "Modules/TestQuestionPool");
+        $template = new ilTemplate("tpl.il_as_qpl_cloze_question_output.html", true, true, "components/ILIAS/TestQuestionPool");
         $output = $this->object->getClozeTextHTML();
         foreach ($this->object->getGaps() as $gap_index => $gap) {
             switch ($gap->getType()) {
                 case CLOZE_TEXT:
-                    $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_gap_text.html", true, true, "Modules/TestQuestionPool");
+                    $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_gap_text.html", true, true, "components/ILIAS/TestQuestionPool");
                     $gap_size = $gap->getGapSize() > 0 ? $gap->getGapSize() : $this->object->getFixedTextLength();
 
                     if ($gap_size > 0) {
@@ -1206,7 +1206,7 @@ JS;
                     // fau.
                     break;
                 case CLOZE_SELECT:
-                    $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_gap_select.html", true, true, "Modules/TestQuestionPool");
+                    $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_gap_select.html", true, true, "components/ILIAS/TestQuestionPool");
                     foreach ($gap->getItems($this->object->getShuffler(), $gap_index) as $item) {
                         $gaptemplate->setCurrentBlock("select_gap_option");
                         $gaptemplate->setVariable("SELECT_GAP_VALUE", $item->getOrder());
@@ -1229,7 +1229,7 @@ JS;
                     // fau.
                     break;
                 case CLOZE_NUMERIC:
-                    $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_gap_numeric.html", true, true, "Modules/TestQuestionPool");
+                    $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_gap_numeric.html", true, true, "components/ILIAS/TestQuestionPool");
                     $gap_size = $gap->getGapSize() > 0 ? $gap->getGapSize() : $this->object->getFixedTextLength();
                     if ($gap_size > 0) {
                         $gaptemplate->setCurrentBlock('size_and_maxlength');

@@ -32,7 +32,7 @@ class ilStudyProgrammePCStatusInfoUpdateSteps implements ilDatabaseUpdateSteps
     public function step_1(): void
     {
         $this->db->manipulate(
-            "INSERT INTO " . self::TABLE_NAME . " VALUES ('prg','ilContainerPage','classes','Modules/StudyProgramme')"
+            "INSERT INTO " . self::TABLE_NAME . " VALUES ('prg','ilContainerPage','classes','components/ILIAS/StudyProgramme')"
         );
     }
 }

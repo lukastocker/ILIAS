@@ -101,21 +101,21 @@ class ilBlogExporter extends ilXmlExporter
     ): array {
         return array(
             "5.3.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/Blog/5_0",
+                "namespace" => "https://www.ilias.de/components/ILIAS/Blog/5_0",
                 "xsd_file" => "ilias_blog_5_0.xsd",
                 "uses_dataset" => true,
                 "min" => "5.3.0",
                 "max" => ""
             ),
             "5.0.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/Blog/5_0",
+                "namespace" => "https://www.ilias.de/components/ILIAS/Blog/5_0",
                 "xsd_file" => "ilias_blog_5_0.xsd",
                 "uses_dataset" => true,
                 "min" => "5.0.0",
                 "max" => "5.2.99"
             ),
             "4.3.0" => array(
-                "namespace" => "https://www.ilias.de/Modules/Blog/4_3",
+                "namespace" => "https://www.ilias.de/components/ILIAS/Blog/4_3",
                 "xsd_file" => "ilias_blog_4_3.xsd",
                 "uses_dataset" => true,
                 "min" => "4.3.0",

@@ -30,7 +30,7 @@ class ilIndividualAssessmentDataSet extends ilDataSet
 
     protected function getXmlNamespace(string $a_entity, string $a_schema_version): string
     {
-        return 'http://www.ilias.de/xml/Modules/IndividualAssessment/' . $a_entity;
+        return 'http://www.ilias.de/xml/components/ILIAS/IndividualAssessment/' . $a_entity;
     }
 
     /**
@@ -159,7 +159,7 @@ class ilIndividualAssessmentDataSet extends ilDataSet
             $newObj->setInfoSettings($info);
             $newObj->update();
             $newObj->updateInfo();
-            $a_mapping->addMapping("Modules/IndividualAssessment", "iass", $a_rec["id"], (string) $newObj->getId());
+            $a_mapping->addMapping("components/ILIAS/IndividualAssessment", "iass", $a_rec["id"], (string) $newObj->getId());
         }
     }
 }

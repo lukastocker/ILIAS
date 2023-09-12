@@ -16,7 +16,7 @@
  *
  *********************************************************************/
 
-require_once './Modules/Test/classes/inc.AssessmentConstants.php';
+require_once './components/ILIAS/Test/classes/inc.AssessmentConstants.php';
 
 
 /**
@@ -269,7 +269,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
         $this->getQuestionTemplate();
 
-        $editorTpl = new ilTemplate('tpl.il_as_qpl_imagemap_question.html', true, true, 'Modules/TestQuestionPool');
+        $editorTpl = new ilTemplate('tpl.il_as_qpl_imagemap_question.html', true, true, 'components/ILIAS/TestQuestionPool');
 
         $coords = array();
         $mapcoords = $this->request->raw('image');
@@ -496,8 +496,8 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         }
 
         // generate the question output
-        $template = new ilTemplate("tpl.il_as_qpl_imagemap_question_output_solution.html", true, true, "Modules/TestQuestionPool");
-        $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "Modules/TestQuestionPool");
+        $template = new ilTemplate("tpl.il_as_qpl_imagemap_question_output_solution.html", true, true, "components/ILIAS/TestQuestionPool");
+        $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "components/ILIAS/TestQuestionPool");
         $questiontext = $this->object->getQuestion();
         if ($show_question_text == true) {
             $template->setVariable("QUESTIONTEXT", $this->object->prepareTextareaOutput($questiontext, true));
@@ -581,7 +581,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         }
 
         // generate the question output
-        $template = new ilTemplate("tpl.il_as_qpl_imagemap_question_output.html", true, true, "Modules/TestQuestionPool");
+        $template = new ilTemplate("tpl.il_as_qpl_imagemap_question_output.html", true, true, "components/ILIAS/TestQuestionPool");
 
         if ($this->getQuestionActionCmd() && !is_null($this->getTargetGuiClass())) {
             $hrefArea = $this->ctrl->getLinkTargetByClass($this->getTargetGuiClass(), $this->getQuestionActionCmd());
@@ -651,7 +651,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         }
 
         // generate the question output
-        $template = new ilTemplate("tpl.il_as_qpl_imagemap_question_output.html", true, true, "Modules/TestQuestionPool");
+        $template = new ilTemplate("tpl.il_as_qpl_imagemap_question_output.html", true, true, "components/ILIAS/TestQuestionPool");
         $this->ctrl->setParameterByClass($this->getTargetGuiClass(), "formtimestamp", time());
         $hrefArea = $this->ctrl->getLinkTargetByClass($this->getTargetGuiClass(), $this->getQuestionActionCmd());
         foreach ($this->object->answers as $answer_id => $answer) {
@@ -793,7 +793,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
     protected function renderAggregateView($answeringFequencies): string
     {
-        $tpl = new ilTemplate('tpl.il_as_aggregated_answers_table.html', true, true, "Modules/TestQuestionPool");
+        $tpl = new ilTemplate('tpl.il_as_aggregated_answers_table.html', true, true, "components/ILIAS/TestQuestionPool");
 
         $tpl->setCurrentBlock('headercell');
         $tpl->setVariable('HEADER', $this->lng->txt('tst_answer_aggr_answer_header'));
@@ -855,7 +855,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             $this->buildSelectionParameter($this->object->currentSolution, null)
         ));
 
-        $tpl = new ilTemplate('tpl.tst_question_additional_behaviour_checkbox.html', true, true, 'Modules/TestQuestionPool');
+        $tpl = new ilTemplate('tpl.tst_question_additional_behaviour_checkbox.html', true, true, 'components/ILIAS/TestQuestionPool');
         $tpl->setVariable('BUTTON', $button->render());
 
         return $tpl->get();

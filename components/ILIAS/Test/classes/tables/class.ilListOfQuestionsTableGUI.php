@@ -61,7 +61,7 @@ class ilListOfQuestionsTableGUI extends ilTable2GUI
         $this->setFormName('listofquestions');
         $this->setStyle('table', 'fullwidth');
 
-        $this->setRowTemplate("tpl.il_as_tst_list_of_questions_row.html", "Modules/Test");
+        $this->setRowTemplate("tpl.il_as_tst_list_of_questions_row.html", "components/ILIAS/Test");
 
         $this->setLimit(999);
 

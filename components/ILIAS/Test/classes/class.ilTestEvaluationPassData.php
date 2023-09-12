@@ -25,7 +25,7 @@
 *
 * @throws		ilTestEvaluationException
 *
-* @defgroup ModulesTest Modules/Test
+* @defgroup ModulesTest components/ILIAS/Test
 * @extends ilObject
 */
 

@@ -40,9 +40,9 @@ class ilCourseWaitingList extends ilWaitingList
         if (!parent::addToList($a_usr_id)) {
             return false;
         }
-        $this->logger->debug('Raise new event: Modules/Course addToList');
+        $this->logger->debug('Raise new event: components/ILIAS/Course addToList');
         $this->eventHandler->raise(
-            "Modules/Course",
+            "components/ILIAS/Course",
             'addToWaitingList',
             [
                 'obj_id' => $this->getObjId(),
@@ -57,9 +57,9 @@ class ilCourseWaitingList extends ilWaitingList
         if (!parent::removeFromList($a_usr_id)) {
             return false;
         }
-        $this->logger->debug('Raise new event: Modules/Course removeFromList');
+        $this->logger->debug('Raise new event: components/ILIAS/Course removeFromList');
         $this->eventHandler->raise(
-            "Modules/Course",
+            "components/ILIAS/Course",
             'removeFromWaitingList',
             [
                 'obj_id' => $this->getObjId(),

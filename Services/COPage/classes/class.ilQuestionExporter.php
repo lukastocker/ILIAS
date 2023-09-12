@@ -16,7 +16,7 @@
  *********************************************************************/
 
 
-require_once("./Modules/TestQuestionPool/classes/class.assQuestionGUI.php");
+require_once("./components/ILIAS/TestQuestionPool/classes/class.assQuestionGUI.php");
 
 /**
  * Scorm 2004 Question Exporter
