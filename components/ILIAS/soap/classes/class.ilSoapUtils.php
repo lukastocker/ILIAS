@@ -22,7 +22,7 @@ declare(strict_types=1);
  * Soap utitliy functions
  * @author Stefan Meyer <meyer@leifos.com>
  */
-include_once './webservice/soap/classes/class.ilSoapAdministration.php';
+include_once './components/ILIAS/soap/classes/class.ilSoapAdministration.php';
 
 class ilSoapUtils extends ilSoapAdministration
 {
@@ -269,7 +269,7 @@ class ilSoapUtils extends ilSoapAdministration
         } else {
             ilLoggerFactory::getLogger('obj')->warning('SOAP clone call failed. Calling clone method manually');
             $cp_options->read();
-            include_once('./webservice/soap/include/inc.soap_functions.php');
+            include_once('./components/ILIAS/soap/include/inc.soap_functions.php');
             $res = ilSoapFunctions::ilClone($sid, $cp_options->getCopyId());
         }
     }
@@ -289,7 +289,7 @@ class ilSoapUtils extends ilSoapAdministration
         } else {
             ilLoggerFactory::getLogger('obj')->warning('SOAP clone call failed. Calling clone method manually');
             $cp_options->read();
-            include_once('./webservice/soap/include/inc.soap_functions.php');
+            include_once('./components/ILIAS/soap/include/inc.soap_functions.php');
             $res = ilSoapFunctions::ilCloneDependencies($sid, $cp_options->getCopyId());
         }
     }

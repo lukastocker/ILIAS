@@ -12,7 +12,7 @@
 */
 
 chdir("../..");
-const ILIAS_MODULE = "webservice/soap";
+const ILIAS_MODULE = "components/ILIAS/soap";
 const IL_SOAPMODE_NUSOAP = 0;
 const IL_SOAPMODE_INTERNAL = 1;
 
@@ -37,7 +37,7 @@ if ($ilIliasIniFile->readVariable('https', 'auto_https_detect_enabled')) {
 
 if (IL_SOAPMODE === IL_SOAPMODE_INTERNAL && strcasecmp($_SERVER["REQUEST_METHOD"], "post") === 0) {
     // This is a SOAP request
-    include_once('webservice/soap/include/inc.soap_functions.php');
+    include_once('components/ILIAS/soap/include/inc.soap_functions.php');
     $uri = ilSoapFunctions::buildHTTPPath() . '/public/soap/server.php';
     if (isset($_GET['client_id'])) {
         $uri .= '?client_id=' . $_GET['client_id'];

@@ -29,7 +29,7 @@ declare(strict_types=1);
  * @author Stefan Meyer <meyer@leifos.com>
  */
 
-include_once './webservice/soap/lib/nusoap.php';
+include_once './components/ILIAS/soap/lib/nusoap.php';
 include_once("./components/ILIAS/Authentication/classes/class.ilAuthUtils.php");        // to get auth mode constants
 
 class ilSoapAdministration
@@ -252,7 +252,7 @@ class ilSoapAdministration
         ilInitialisation::initILIAS();
 
         $clientdirs = glob(ILIAS_WEB_DIR . "/*", GLOB_ONLYDIR);
-        require_once("webservice/soap/classes/class.ilSoapInstallationInfoXMLWriter.php");
+        require_once("components/ILIAS/soap/classes/class.ilSoapInstallationInfoXMLWriter.php");
         $writer = new ilSoapInstallationInfoXMLWriter();
         $writer->start();
         if (is_array($clientdirs)) {
@@ -276,7 +276,7 @@ class ilSoapAdministration
         ilInitialisation::initILIAS();
 
         $clientdir = ILIAS_WEB_DIR . "/" . $clientid;
-        require_once("webservice/soap/classes/class.ilSoapInstallationInfoXMLWriter.php");
+        require_once("components/ILIAS/soap/classes/class.ilSoapInstallationInfoXMLWriter.php");
         $writer = new ilSoapInstallationInfoXMLWriter();
         $writer->start();
         if (!$writer->addClient($clientdir)) {

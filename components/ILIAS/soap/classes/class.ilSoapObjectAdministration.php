@@ -28,7 +28,7 @@
  * @version $Id$
  * @package ilias
  */
-include_once './webservice/soap/classes/class.ilSoapAdministration.php';
+include_once './components/ILIAS/soap/classes/class.ilSoapAdministration.php';
 
 class ilSoapObjectAdministration extends ilSoapAdministration
 {
@@ -174,7 +174,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
         if (ilObject::_isInTrash($a_ref_id)) {
             return $this->raiseError("Object with ID $a_ref_id has been deleted.", 'Client');
         }
-        include_once './webservice/soap/classes/class.ilObjectXMLWriter.php';
+        include_once './components/ILIAS/soap/classes/class.ilObjectXMLWriter.php';
 
         $xml_writer = new ilObjectXMLWriter();
         $xml_writer->enablePermissionCheck(true);
@@ -247,7 +247,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
             return '';
         }
 
-        include_once './webservice/soap/classes/class.ilObjectXMLWriter.php';
+        include_once './components/ILIAS/soap/classes/class.ilObjectXMLWriter.php';
 
         $xml_writer = new ilObjectXMLWriter();
         $xml_writer->enablePermissionCheck(true);
@@ -363,7 +363,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
             return '';
         }
 
-        include_once './webservice/soap/classes/class.ilObjectXMLWriter.php';
+        include_once './components/ILIAS/soap/classes/class.ilObjectXMLWriter.php';
         $xml_writer = new ilObjectXMLWriter();
         if (ilSearchSettings::getInstance()->enabledLucene()) {
             $xml_writer->enableReferences(false);
@@ -431,7 +431,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
             }
         }
 
-        include_once './webservice/soap/classes/class.ilObjectXMLWriter.php';
+        include_once './components/ILIAS/soap/classes/class.ilObjectXMLWriter.php';
         $xml_writer = new ilObjectXMLWriter();
         $xml_writer->enablePermissionCheck(true);
         $xml_writer->setObjects($objs);
@@ -483,7 +483,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
             }
         }
 
-        include_once './webservice/soap/classes/class.ilObjectXMLWriter.php';
+        include_once './components/ILIAS/soap/classes/class.ilObjectXMLWriter.php';
         $xml_writer = new ilObjectXMLWriter();
         $xml_writer->enablePermissionCheck(true);
         $xml_writer->setObjects($nodes);
@@ -553,7 +553,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
             }
         }
 
-        include_once './webservice/soap/classes/class.ilObjectXMLParser.php';
+        include_once './components/ILIAS/soap/classes/class.ilObjectXMLParser.php';
 
         $xml_parser = new ilObjectXMLParser($a_xml, true);
         try {
@@ -930,7 +930,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
         $ilAccess = $DIC['ilAccess'];
         $objDefinition = $DIC['objDefinition'];
 
-        include_once './webservice/soap/classes/class.ilObjectXMLParser.php';
+        include_once './components/ILIAS/soap/classes/class.ilObjectXMLParser.php';
         $xml_parser = new ilObjectXMLParser($a_xml, true);
         try {
             $xml_parser->startParsing();
@@ -1048,7 +1048,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
             return $this->raiseError($this->getMessage(), $this->getMessageCode());
         }
 
-        include_once './webservice/soap/classes/class.ilSoapUtils.php';
+        include_once './components/ILIAS/soap/classes/class.ilSoapUtils.php';
         global $DIC;
 
         $rbacreview = $DIC['rbacreview'];
@@ -1116,7 +1116,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
             return $this->raiseError($this->getMessage(), $this->getMessageCode());
         }
 
-        include_once './webservice/soap/classes/class.ilSoapUtils.php';
+        include_once './components/ILIAS/soap/classes/class.ilSoapUtils.php';
         global $DIC;
 
         $rbacreview = $DIC['rbacreview'];
@@ -1125,7 +1125,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
         $lng = $DIC['lng'];
         $ilUser = $DIC['ilUser'];
 
-        include_once './webservice/soap/classes/class.ilCopyWizardSettingsXMLParser.php';
+        include_once './components/ILIAS/soap/classes/class.ilCopyWizardSettingsXMLParser.php';
         $xml_parser = new ilCopyWizardSettingsXMLParser($copy_settings_xml);
         try {
             $xml_parser->startParsing();
@@ -1231,8 +1231,8 @@ class ilSoapObjectAdministration extends ilSoapAdministration
         $lng = $DIC['lng'];
         $items = $tree->getPathFull($ref_id);
 
-        include_once 'webservice/soap/classes/class.ilXMLResultSet.php';
-        include_once 'webservice/soap/classes/class.ilXMLResultSetWriter.php';
+        include_once 'components/ILIAS/soap/classes/class.ilXMLResultSet.php';
+        include_once 'components/ILIAS/soap/classes/class.ilXMLResultSetWriter.php';
         include_once 'components/ILIAS/Course/classes/class.ilCourseXMLWriter.php';
 
         $xmlResultSet = new ilXMLResultSet();
@@ -1370,7 +1370,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
 
         foreach ($a_object_data['references'] as $ref_data) {
             if (isset($ref_data['time_target'])) {
-                include_once('./webservice/soap/classes/class.ilObjectXMLWriter.php');
+                include_once('./components/ILIAS/soap/classes/class.ilObjectXMLWriter.php');
                 include_once('./components/ILIAS/Object/classes/class.ilObjectActivation.php');
                 $old = ilObjectActivation::getItem($ref_data['ref_id']);
 
@@ -1425,7 +1425,7 @@ class ilSoapObjectAdministration extends ilSoapAdministration
                 $source->setPermissions($ref_data['parent_id']);
             }
             if (isset($ref_data['time_target']) /* and ($crs_ref_id = $tree->checkForParentType($new_ref_id,'crs')) */) {
-                include_once('./webservice/soap/classes/class.ilObjectXMLWriter.php');
+                include_once('./components/ILIAS/soap/classes/class.ilObjectXMLWriter.php');
                 include_once('./components/ILIAS/Object/classes/class.ilObjectActivation.php');
 
                 if (!isset($ref_data['time_target']['starting_time'])) {

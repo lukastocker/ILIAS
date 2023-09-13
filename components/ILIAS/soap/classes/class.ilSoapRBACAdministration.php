@@ -21,7 +21,7 @@
  +-----------------------------------------------------------------------------+
  */
 
-include_once './webservice/soap/classes/class.ilSoapAdministration.php';
+include_once './components/ILIAS/soap/classes/class.ilSoapAdministration.php';
 
 /**
  * Soap rbac administration methods
@@ -321,7 +321,7 @@ class ilSoapRBACAdministration extends ilSoapAdministration
             }
         }
         if (count($objs)) {
-            include_once './webservice/soap/classes/class.ilObjectXMLWriter.php';
+            include_once './components/ILIAS/soap/classes/class.ilObjectXMLWriter.php';
 
             $xml_writer = new ilObjectXMLWriter();
             $xml_writer->setObjects($objs);
@@ -362,7 +362,7 @@ class ilSoapRBACAdministration extends ilSoapAdministration
             }
         }
         if (count($objs)) {
-            include_once './webservice/soap/classes/class.ilObjectXMLWriter.php';
+            include_once './components/ILIAS/soap/classes/class.ilObjectXMLWriter.php';
 
             $xml_writer = new ilObjectXMLWriter();
             $xml_writer->setObjects($objs);
@@ -407,7 +407,7 @@ class ilSoapRBACAdministration extends ilSoapAdministration
             return $this->raiseError('Check access failed. No permission to create roles', 'Server');
         }
 
-        include_once 'webservice/soap/classes/class.ilObjectXMLParser.php';
+        include_once 'components/ILIAS/soap/classes/class.ilObjectXMLParser.php';
         $xml_parser = new ilObjectXMLParser($role_xml);
         $xml_parser->startParsing();
 
@@ -475,7 +475,7 @@ class ilSoapRBACAdministration extends ilSoapAdministration
             return $this->raiseError('Check access failed. No permission to create roles', 'Server');
         }
 
-        include_once 'webservice/soap/classes/class.ilObjectXMLParser.php';
+        include_once 'components/ILIAS/soap/classes/class.ilObjectXMLParser.php';
         $xml_parser = new ilObjectXMLParser($role_xml);
         $xml_parser->startParsing();
 
@@ -678,7 +678,7 @@ class ilSoapRBACAdministration extends ilSoapAdministration
             }
         }
 
-        include_once './webservice/soap/classes/class.ilSoapRoleObjectXMLWriter.php';
+        include_once './components/ILIAS/soap/classes/class.ilSoapRoleObjectXMLWriter.php';
 
         $xml_writer = new ilSoapRoleObjectXMLWriter();
         $xml_writer->setObjects($roles);
@@ -755,7 +755,7 @@ class ilSoapRBACAdministration extends ilSoapAdministration
             $roles = $rbacreview->getRolesForIDs($obj_ids, $role_type === "template");
         }
 
-        include_once './webservice/soap/classes/class.ilSoapRoleObjectXMLWriter.php';
+        include_once './components/ILIAS/soap/classes/class.ilSoapRoleObjectXMLWriter.php';
         $xml_writer = new ilSoapRoleObjectXMLWriter();
         $xml_writer->setObjects($roles);
         $xml_writer->setType($role_type);

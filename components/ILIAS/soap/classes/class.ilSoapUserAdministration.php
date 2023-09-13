@@ -27,7 +27,7 @@
  * @version $Id$
  * @package ilias
  */
-include_once './webservice/soap/classes/class.ilSoapAdministration.php';
+include_once './components/ILIAS/soap/classes/class.ilSoapAdministration.php';
 
 class ilSoapUserAdministration extends ilSoapAdministration
 {
@@ -593,8 +593,8 @@ class ilSoapUserAdministration extends ilSoapAdministration
      **/
     private function getImportProtocolAsXML(array $a_array): string
     {
-        include_once './webservice/soap/classes/class.ilXMLResultSet.php';
-        include_once './webservice/soap/classes/class.ilXMLResultSetWriter.php';
+        include_once './components/ILIAS/soap/classes/class.ilXMLResultSet.php';
+        include_once './components/ILIAS/soap/classes/class.ilXMLResultSetWriter.php';
 
         $xmlResultSet = new ilXMLResultSet();
         $xmlResultSet->addColumn("userid");
@@ -629,8 +629,8 @@ class ilSoapUserAdministration extends ilSoapAdministration
      */
     private function getUserMappingAsXML(array $a_array)
     {
-        include_once './webservice/soap/classes/class.ilXMLResultSet.php';
-        include_once './webservice/soap/classes/class.ilXMLResultSetWriter.php';
+        include_once './components/ILIAS/soap/classes/class.ilXMLResultSet.php';
+        include_once './components/ILIAS/soap/classes/class.ilXMLResultSetWriter.php';
 
         $xmlResultSet = new ilXMLResultSet();
         $xmlResultSet->addColumn("userid");

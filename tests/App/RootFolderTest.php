@@ -99,7 +99,6 @@ final class RootFolderTest extends TestCase
         'test',
         'tests',
         'vendor',
-        'webservice',
         'xml',
         '.settings'
     ];

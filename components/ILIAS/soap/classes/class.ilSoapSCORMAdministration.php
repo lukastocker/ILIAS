@@ -27,7 +27,7 @@
  * @version $Id: class.ilSoapExerciseAdministration.php 12992 2007-01-25 10:04:26Z rkuester $
  * @package ilias
  */
-include_once './webservice/soap/classes/class.ilSoapAdministration.php';
+include_once './components/ILIAS/soap/classes/class.ilSoapAdministration.php';
 
 class ilSoapSCORMAdministration extends ilSoapAdministration
 {

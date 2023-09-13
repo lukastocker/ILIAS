@@ -25,7 +25,7 @@
  * Soap file administration methods
  * @author Roland Küstermann <roland@kuestermann.com>
  */
-include_once './webservice/soap/classes/class.ilSoapAdministration.php';
+include_once './components/ILIAS/soap/classes/class.ilSoapAdministration.php';
 
 class ilSoapFileAdministration extends ilSoapAdministration
 {

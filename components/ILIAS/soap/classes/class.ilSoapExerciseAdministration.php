@@ -27,7 +27,7 @@ declare(strict_types=1);
  * Soap exercise administration methods
  * @author  Roland Küstermann <roland@kuestermann.com>
  */
-include_once './webservice/soap/classes/class.ilSoapAdministration.php';
+include_once './components/ILIAS/soap/classes/class.ilSoapAdministration.php';
 
 class ilSoapExerciseAdministration extends ilSoapAdministration
 {

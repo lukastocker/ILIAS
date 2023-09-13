@@ -69,19 +69,19 @@ class ilSoapStructureObjectFactory
         switch ($type) {
             case "glo":
             case "lm":
-                include_once "./webservice/soap/classes/class.ilSoapRepositoryStructureObject.php";
+                include_once "./components/ILIAS/soap/classes/class.ilSoapRepositoryStructureObject.php";
                 return "ilSoapRepositoryStructureObject";
             case "st":
-                include_once "./webservice/soap/classes/class.ilSoapLMChapterStructureObject.php";
+                include_once "./components/ILIAS/soap/classes/class.ilSoapLMChapterStructureObject.php";
                 return "ilSoapLMChapterStructureObject";
             case "pg":
-                include_once "./webservice/soap/classes/class.ilSoapLMPageStructureObject.php";
+                include_once "./components/ILIAS/soap/classes/class.ilSoapLMPageStructureObject.php";
                 return "ilSoapLMPageStructureObject";
             case "git":
-                include_once "./webservice/soap/classes/class.ilSoapGLOTermStructureObject.php";
+                include_once "./components/ILIAS/soap/classes/class.ilSoapGLOTermStructureObject.php";
                 return "ilSoapGLOTermStructureObject";
             case "term":
-                include_once "./webservice/soap/classes/class.ilSoapGLOTermDefinitionStructureObject.php";
+                include_once "./components/ILIAS/soap/classes/class.ilSoapGLOTermDefinitionStructureObject.php";
                 return "ilSoapGLOTermDefinitionStructureObject";
         }
 

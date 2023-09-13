@@ -24,8 +24,8 @@ declare(strict_types=1);
  +-----------------------------------------------------------------------------+
 */
 
-include_once './webservice/soap/classes/class.ilXMLResultSetColumn.php';
-include_once './webservice/soap/classes/class.ilXMLResultSetRow.php';
+include_once './components/ILIAS/soap/classes/class.ilXMLResultSetColumn.php';
+include_once './components/ILIAS/soap/classes/class.ilXMLResultSetRow.php';
 
 /**
  * Class to handle XML ResultSets

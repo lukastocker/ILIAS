@@ -27,7 +27,7 @@
  * @version $Id$
  * @package ilias
  */
-include_once './webservice/soap/classes/class.ilSoapAdministration.php';
+include_once './components/ILIAS/soap/classes/class.ilSoapAdministration.php';
 
 class ilSoapCourseAdministration extends ilSoapAdministration
 {
@@ -422,7 +422,7 @@ class ilSoapCourseAdministration extends ilSoapAdministration
         $ilObjDataCache = $DIC['ilObjDataCache'];
         $tree = $DIC['tree'];
 
-        include_once 'webservice/soap/classes/class.ilXMLResultSetParser.php';
+        include_once 'components/ILIAS/soap/classes/class.ilXMLResultSetParser.php';
         $parser = new ilXMLResultSetParser($parameters);
         try {
             $parser->startParsing();
@@ -507,7 +507,7 @@ class ilSoapCourseAdministration extends ilSoapAdministration
 
         $ref_ids = array_unique($ref_ids);
 
-        include_once 'webservice/soap/classes/class.ilXMLResultSetWriter.php';
+        include_once 'components/ILIAS/soap/classes/class.ilXMLResultSetWriter.php';
         include_once 'components/ILIAS/Course/classes/class.ilObjCourse.php';
         include_once 'components/ILIAS/Course/classes/class.ilCourseXMLWriter.php';
 

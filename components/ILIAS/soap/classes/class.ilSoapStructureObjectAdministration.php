@@ -21,7 +21,7 @@
  +-----------------------------------------------------------------------------+
 */
 
-include_once './webservice/soap/classes/class.ilSoapAdministration.php';
+include_once './components/ILIAS/soap/classes/class.ilSoapAdministration.php';
 
 /**
  * administration for structure objects
@@ -46,7 +46,7 @@ class ilSOAPStructureObjectAdministration extends ilSoapAdministration
         }
 
         $structureReaderClassname = "ilSoap" . strtoupper($target_obj->getType()) . "StructureReader";
-        $filename = "./webservice/soap/classes/class." . $structureReaderClassname . ".php";
+        $filename = "./components/ILIAS/soap/classes/class." . $structureReaderClassname . ".php";
 
         if (!file_exists($filename)) {
             return $this->raiseError("Object type '" . $target_obj->getType() . "'is not supported.", 'Client');
@@ -54,7 +54,7 @@ class ilSOAPStructureObjectAdministration extends ilSoapAdministration
 
         include_once $filename;
         $structureReader = new $structureReaderClassname($target_obj);
-        include_once './webservice/soap/classes/class.ilSoapStructureObjectXMLWriter.php';
+        include_once './components/ILIAS/soap/classes/class.ilSoapStructureObjectXMLWriter.php';
         $xml_writer = new ilSoapStructureObjectXMLWriter();
         $structureObject = &$structureReader->getStructureObject();
         $xml_writer->setStructureObject($structureObject);

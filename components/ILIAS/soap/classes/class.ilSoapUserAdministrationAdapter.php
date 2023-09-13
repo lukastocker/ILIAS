@@ -46,7 +46,7 @@ class ilSoapUserAdministrationAdapter
 
     private function registerMethods(): void
     {
-        include_once './webservice/soap/include/inc.soap_functions.php';
+        include_once './components/ILIAS/soap/include/inc.soap_functions.php';
 
         $this->server->addFunction(SOAP_FUNCTIONS_ALL);
     }

@@ -31,15 +31,15 @@
 * @package ilias
 */
 
-if (!defined('ILIAS_MODULE') || (defined('ILIAS_MODULE') && ILIAS_MODULE !== "webservice/soap")) {
+if (!defined('ILIAS_MODULE') || (defined('ILIAS_MODULE') && ILIAS_MODULE !== "components/ILIAS/soap")) {
     //direct call to this endpoint
     chdir("../..");
-    define("ILIAS_MODULE", "webservice/soap");
+    define("ILIAS_MODULE", "components/ILIAS/soap");
     define("IL_SOAPMODE_NUSOAP", 0);
     define("IL_SOAPMODE_INTERNAL", 1);
     define("IL_SOAPMODE", IL_SOAPMODE_NUSOAP);
 }
 
-include_once './webservice/soap/classes/class.ilNusoapUserAdministrationAdapter.php';
+include_once './components/ILIAS/soap/classes/class.ilNusoapUserAdministrationAdapter.php';
 $server = new ilNusoapUserAdministrationAdapter(true);
 $server->start();

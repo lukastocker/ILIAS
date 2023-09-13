@@ -21,7 +21,7 @@
  +-----------------------------------------------------------------------------+
 */
 
-include_once './webservice/soap/classes/class.ilSoapAdministration.php';
+include_once './components/ILIAS/soap/classes/class.ilSoapAdministration.php';
 
 /**
  * Soap grp administration methods
@@ -350,7 +350,7 @@ class ilSoapGroupAdministration extends ilSoapAdministration
         $ilObjDataCache = $DIC['ilObjDataCache'];
         $tree = $DIC['tree'];
 
-        include_once 'webservice/soap/classes/class.ilXMLResultSetParser.php';
+        include_once 'components/ILIAS/soap/classes/class.ilXMLResultSetParser.php';
         $parser = new ilXMLResultSetParser($parameters);
         try {
             $parser->startParsing();
@@ -428,7 +428,7 @@ class ilSoapGroupAdministration extends ilSoapAdministration
         }
         $ref_ids = array_unique($ref_ids);
 
-        include_once 'webservice/soap/classes/class.ilXMLResultSetWriter.php';
+        include_once 'components/ILIAS/soap/classes/class.ilXMLResultSetWriter.php';
         include_once 'components/ILIAS/Group/classes/class.ilObjGroup.php';
         include_once 'components/ILIAS/Group/classes/class.ilGroupXMLWriter.php';
 

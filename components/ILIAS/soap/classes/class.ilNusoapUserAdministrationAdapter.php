@@ -36,8 +36,8 @@ use ILIAS\OrgUnit\Webservices\SOAP\SuperiorPositionId;
 use ILIAS\OrgUnit\Webservices\SOAP\UserIdsOfPosition;
 use ILIAS\OrgUnit\Webservices\SOAP\UserIdsOfPositionAndOrgUnit;
 
-include_once './webservice/soap/lib/nusoap.php';
-include_once './webservice/soap/include/inc.soap_functions.php';
+include_once './components/ILIAS/soap/lib/nusoap.php';
+include_once './components/ILIAS/soap/include/inc.soap_functions.php';
 require_once('./components/ILIAS/WebServices/SOAP/classes/class.ilSoapHook.php');
 require_once('./components/ILIAS/Init/classes/class.ilInitialisation.php');
 
