@@ -70,7 +70,7 @@ class ilCmiXapiExporter extends ilXmlExporter
         return array(
             "5.1.0" => array(
                 "namespace" => "http://www.ilias.de/components/ILIAS/CmiXapi/cmix/5_1",
-                "xsd_file" => "xml/ilias_cmix_5_1.xsd",
+                "xsd_file" => "components/ILIAS/Export/xml/ilias_cmix_5_1.xsd",
                 "uses_dataset" => true,
                 "min" => "5.1.0",
                 "max" => "")

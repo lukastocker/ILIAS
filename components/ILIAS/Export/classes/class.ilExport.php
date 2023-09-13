@@ -70,7 +70,7 @@ class ilExport
 
         // create instance of export config object
         $comp_arr = explode("/", $a_comp);
-        $a_class = "il" . $comp_arr[1] . "ExportConfig";
+        $a_class = "il" . $comp_arr[2] . "ExportConfig";
         $exp_config = new $a_class();
         $this->configs[$a_comp] = $exp_config;
         return $exp_config;
@@ -432,7 +432,7 @@ class ilExport
 
         $comp = $a_component;
         $c = explode("/", $comp);
-        $class = "il" . $c[1] . "Exporter";
+        $class = "il" . $c[2] . "Exporter";
 
         // manifest writer
         $this->manifest_writer = new ilXmlWriter();
@@ -530,7 +530,7 @@ class ilExport
         $sequence = $exp->getXmlExportHeadDependencies($a_entity, $a_target_release, $a_id);
         foreach ($sequence as $s) {
             $comp = explode("/", $s["component"]);
-            $exp_class = "il" . $comp[1] . "Exporter";
+            $exp_class = "il" . $comp[2] . "Exporter";
             $s = $this->processExporter(
                 $s["component"],
                 $exp_class,
@@ -561,16 +561,16 @@ class ilExport
                          /* "TargetRelease" => $a_target_release, */
                          "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance",
                          "xmlns:exp" => "http://www.ilias.de/components/ILIAS/Export/exp/4_1",
-                         "xsi:schemaLocation" => "http://www.ilias.de/components/ILIAS/Export/exp/4_1 " . ILIAS_HTTP_PATH . "/xml/ilias_export_4_1.xsd"
+                         "xsi:schemaLocation" => "http://www.ilias.de/components/ILIAS/Export/exp/4_1 " . ILIAS_HTTP_PATH . "/components/ILIAS/Export/xml/ilias_export_4_1.xsd"
         );
         if ($sv["namespace"] != "" && $sv["xsd_file"] != "") {
             $attribs["xsi:schemaLocation"] .= " " . $sv["namespace"] . " " .
-                ILIAS_HTTP_PATH . "/xml/" . $sv["xsd_file"];
+                ILIAS_HTTP_PATH . "/components/ILIAS/Export/xml/" . $sv["xsd_file"];
             $attribs["xmlns"] = $sv["namespace"];
         }
         if ($sv["uses_dataset"]) {
             $attribs["xsi:schemaLocation"] .= " " .
-                "http://www.ilias.de/components/ILIAS/DataSet/ds/4_3 " . ILIAS_HTTP_PATH . "/xml/ilias_ds_4_3.xsd";
+                "http://www.ilias.de/components/ILIAS/DataSet/ds/4_3 " . ILIAS_HTTP_PATH . "/components/ILIAS/Export/xml/ilias_ds_4_3.xsd";
             $attribs["xmlns:ds"] = "http://www.ilias.de/components/ILIAS/DataSet/ds/4_3";
         }
         $export_writer->xmlStartTag('exp:Export', $attribs);
@@ -602,7 +602,7 @@ class ilExport
         $sequence = $exp->getXmlExportTailDependencies($a_entity, $a_target_release, $a_id);
         foreach ($sequence as $s) {
             $comp = explode("/", $s["component"]);
-            $exp_class = "il" . $comp[1] . "Exporter";
+            $exp_class = "il" . $comp[2] . "Exporter";
             $s = $this->processExporter(
                 $s["component"],
                 $exp_class,
