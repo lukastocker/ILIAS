@@ -35,7 +35,7 @@ class ilStudyProgrammeMembershipSourceReaderFactory
      *
      * @throws InvalidArgumentException if $src_type is not one of the constant types in ilStudyProgrammeAutoMembershipSource.
      */
-    public function getReaderFor(ilStudyProgrammeAutoMembershipSource $ams, int $exclude_id): ilStudyProgrammeMembershipSourceReader
+    public function getReaderFor(ilStudyProgrammeAutoMembershipSource $ams): ilStudyProgrammeMembershipSourceReader
     {
         $src_id = $ams->getSourceId();
         switch ($ams->getSourceType()) {
@@ -53,8 +53,7 @@ class ilStudyProgrammeMembershipSourceReaderFactory
                 return new ilStudyProgrammeMembershipSourceReaderOrgu(
                     ilObjOrgUnitTree::_getInstance(),
                     $src_id,
-                    $ams->isSearchRecursive(),
-                    $exclude_id
+                    $ams->isSearchRecursive()
                 );
 
             default:

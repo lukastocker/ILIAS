@@ -42,6 +42,7 @@ use DateTimeImmutable;
 use ILIAS\Data\Factory as DataFactory;
 use ilStartUpGUI;
 
+#[\AllowDynamicProperties]
 class Blocks
 {
     /**

@@ -32,13 +32,11 @@ class ilStudyProgrammeMembershipSourceReaderOrgu implements ilStudyProgrammeMemb
     public function __construct(
         ilObjOrgUnitTree $orgu_tree,
         int $src_id,
-        bool $search_recursive,
-        int $exclude_id
+        bool $search_recursive
     ) {
         $this->orgu_tree = $orgu_tree;
         $this->src_id = $src_id;
         $this->search_recursive = $search_recursive;
-        $this->exclude_id = $exclude_id;
 
         $dic = ilOrgUnitLocalDIC::dic();
         $this->assignmentRepo = $dic["repo.UserAssignments"];
@@ -52,9 +50,6 @@ class ilStudyProgrammeMembershipSourceReaderOrgu implements ilStudyProgrammeMemb
         $children[] = $this->src_id;
         if ($this->search_recursive) {
             $children = array_unique(array_merge($children, $this->orgu_tree->getAllChildren($this->src_id)));
-            if ($key = array_search($this->exclude_id, $children)) {
-                unset($children[$key]);
-            }
         }
         $assignees = $this->assignmentRepo::where(
             ['orgu_id' => $children]

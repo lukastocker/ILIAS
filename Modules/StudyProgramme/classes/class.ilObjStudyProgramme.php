@@ -1405,9 +1405,9 @@ class ilObjStudyProgramme extends ilContainer
      * @return int[]
      * @throws InvalidArgumentException if $src_type is not in AutoMembershipSource-types
      */
-    protected function getMembersOfMembershipSource(ilStudyProgrammeAutoMembershipSource $ams, int $exclude_id): array
+    protected function getMembersOfMembershipSource(ilStudyProgrammeAutoMembershipSource $ams): array
     {
-        $source_reader = $this->membersourcereader_factory->getReaderFor($ams, $exclude_id);
+        $source_reader = $this->membersourcereader_factory->getReaderFor($ams);
         return $source_reader->getMemberIds();
     }
 
@@ -1452,7 +1452,7 @@ class ilObjStudyProgramme extends ilContainer
         $assignment_repository = ilStudyProgrammeDIC::dic()['repo.assignment'];
         foreach (self::getProgrammesMonitoringMemberSource($src_type, $src_id) as $prg) {
             $assignments = $prg->getAssignmentsOfSingleProgramForUser($usr_id);
-            $next_membership_source = $prg->getApplicableMembershipSourceForUser($usr_id, $src_id);
+            $next_membership_source = $prg->getApplicableMembershipSourceForUser($usr_id);
 
             foreach ($assignments as $assignment) {
                 if (!$assignment->getProgressTree()->isInProgress()) {
@@ -1478,10 +1478,8 @@ class ilObjStudyProgramme extends ilContainer
     ): ?ilStudyProgrammeAutoMembershipSource {
         foreach ($this->getAutomaticMembershipSources() as $ams) {
             $src_id = $ams->getSourceId();
-            if ($src_id !== $exclude_id
-                && $ams->isEnabled()
-            ) {
-                $source_members = $this->getMembersOfMembershipSource($ams, $exclude_id);
+            if ($ams->isEnabled()) {
+                $source_members = $this->getMembersOfMembershipSource($ams);
                 if (in_array($usr_id, $source_members)) {
                     return $ams;
                 }

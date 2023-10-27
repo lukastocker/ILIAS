@@ -41,6 +41,7 @@ class ilObjStudyProgrammeAutoMembershipsGUI
 
     private const F_SOURCE_TYPE = 'f_st';
     private const F_SOURCE_ID = 'f_sid';
+    private const F_SEARCH_RECURSIVE = "f_search_recursive";
     private const F_ORIGINAL_SOURCE_TYPE = 'f_st_org';
     private const F_ORIGINAL_SOURCE_ID = 'f_sid_org';
 
@@ -194,10 +195,10 @@ class ilObjStudyProgrammeAutoMembershipsGUI
         foreach ($this->getObject()->getAutomaticMembershipSources() as $ams) {
             $title = $this->getTitleRepresentation($ams);
             $usr = $this->getUserRepresentation($ams->getLastEditorId());
-            $modal = $this->getModal($ams->getSourceType(), $ams->getSourceId());
+            $modal = $this->getModal($ams->getSourceType(), $ams->getSourceId(), $ams->isSearchRecursive());
             $collected_modals[] = $modal;
 
-            $src_id = $ams->getSourceType() . '-' . $ams->getSourceId();
+            $src_id = $ams->getSourceType() . '-' . $ams->getSourceId() . '-' . $ams->isSearchRecursive();
             $actions = $this->getItemAction(
                 $src_id,
                 $modal->getShowSignal(),
@@ -228,6 +229,7 @@ class ilObjStudyProgrammeAutoMembershipsGUI
         $form->setValuesByArray($post);
         $src_type = $post[self::F_SOURCE_TYPE];
         $src_id = $post[self::F_SOURCE_ID . $src_type];
+        $search_recursive = (bool) $post[self::F_SEARCH_RECURSIVE];
 
         if (
             (is_null($src_type) || $src_type === "") ||
@@ -237,6 +239,8 @@ class ilObjStudyProgrammeAutoMembershipsGUI
             $this->ctrl->redirect($this, self::CMD_VIEW);
             return;
         }
+
+        $this->getObject()->storeAutomaticMembershipSource($src_type, (int) $src_id, $search_recursive);
 
         if (in_array($src_type, self::$switch_to_ref_id)) {
             $refs = ilObject::_getAllReferences((int) $src_id);
@@ -332,8 +336,8 @@ class ilObjStudyProgrammeAutoMembershipsGUI
         $get = $this->request->getQueryParams();
         $field = self::CHECKBOX_SOURCE_IDS;
         if (array_key_exists($field, $get)) {
-            [$type, $id] = explode('-', $get[$field]);
-            $this->getObject()->enableAutomaticMembershipSource((string) $type, (int) $id);
+            [$type, $id, $search_recursive] = explode('-', $get[$field]);
+            $this->getObject()->enableAutomaticMembershipSource((string) $type, (int) $id, (bool) $search_recursive);
         }
         $this->ctrl->redirect($this, self::CMD_VIEW);
     }
@@ -346,8 +350,8 @@ class ilObjStudyProgrammeAutoMembershipsGUI
         $get = $this->request->getQueryParams();
         $field = self::CHECKBOX_SOURCE_IDS;
         if (array_key_exists($field, $get)) {
-            [$type, $id] = explode('-', $get[$field]);
-            $this->getObject()->disableAutomaticMembershipSource((string) $type, (int) $id);
+            [$type, $id, $search_recursive] = explode('-', $get[$field]);
+            $this->getObject()->disableAutomaticMembershipSource((string) $type, (int) $id, (bool) $search_recursive);
         }
         $this->ctrl->redirect($this, self::CMD_VIEW);
     }
@@ -381,13 +385,18 @@ class ilObjStudyProgrammeAutoMembershipsGUI
         return $this->object;
     }
 
-    protected function getModal(string $source_type = null, int $source_id = null): RoundTrip
-    {
+    protected function getModal(
+        string $source_type = null,
+        int $source_id = null,
+        bool $search_recursive = false
+    ): RoundTrip {
         $this->ctrl->setParameter($this, self::F_ORIGINAL_SOURCE_TYPE, $source_type);
         $this->ctrl->setParameter($this, self::F_ORIGINAL_SOURCE_ID, $source_id);
+        $this->ctrl->setParameter($this, self::F_SEARCH_RECURSIVE, $search_recursive);
         $link = $this->ctrl->getLinkTarget($this, "getAsynchModalOutput", "", true);
         $this->ctrl->setParameter($this, self::F_ORIGINAL_SOURCE_TYPE, null);
         $this->ctrl->setParameter($this, self::F_ORIGINAL_SOURCE_ID, null);
+        $this->ctrl->setParameter($this, self::F_SEARCH_RECURSIVE, null);
 
         return $this->ui_factory->modal()->roundtrip(
             '',
@@ -411,7 +420,14 @@ class ilObjStudyProgrammeAutoMembershipsGUI
             $current_src_id = $this->request_wrapper->retrieve(self::F_ORIGINAL_SOURCE_ID, $this->refinery->to()->string());
         }
 
-        $form = $this->getForm($current_src_type, $current_src_id);
+        $search_recursive = false;
+        if (
+            array_key_exists(self::F_SEARCH_RECURSIVE, $_GET) &&
+            !is_null($_GET[self::F_SEARCH_RECURSIVE])
+        ) {
+            $search_recursive = (bool) $_GET[self::F_SEARCH_RECURSIVE];
+        }
+        $form = $this->getForm($current_src_type, $current_src_id, $search_recursive);
         $form_id = "form_" . $form->getId();
 
         $modal = $this->ui_factory->modal()->roundtrip(
@@ -477,8 +493,11 @@ class ilObjStudyProgrammeAutoMembershipsGUI
         exit;
     }
 
-    protected function getForm(string $source_type = null, ?string $source_id = ''): ilPropertyFormGUI
-    {
+    protected function getForm(
+        string $source_type = null,
+        ?string $source_id = '',
+        bool $search_recursive = false
+    ): ilPropertyFormGUI {
         $form = new ilPropertyFormGUI();
 
         if (is_null($source_type)) {
@@ -541,6 +560,12 @@ class ilObjStudyProgrammeAutoMembershipsGUI
         $orgu->getExplorerGUI()->setRootId(ilObjOrgUnit::getRootOrgRefId());
         $orgu->getExplorerGUI()->setAjax(false);
         $radio_orgu->addSubItem($orgu);
+
+        $recurse = new ilCheckboxInputGUI($this->txt('search_for_orgu_members_recursive'), self::F_SEARCH_RECURSIVE);
+        $recurse->setValue("1");
+        $recurse->setChecked($search_recursive);
+        $radio_orgu->addSubItem($recurse);
+
         $rgroup->addOption($radio_orgu);
         if (
             !is_null($source_type) &&
