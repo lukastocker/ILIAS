@@ -257,7 +257,7 @@ class ilObjStudyProgrammeAutoMembershipsGUI
             );
         }
 
-        $this->getObject()->storeAutomaticMembershipSource($src_type, (int) $src_id);
+        $this->getObject()->storeAutomaticMembershipSource($src_type, (int) $src_id, $search_recursive);
         $this->tpl->setOnScreenMessage("success", $this->txt("auto_add_success"), true);
         $this->ctrl->redirect($this, self::CMD_VIEW);
     }
