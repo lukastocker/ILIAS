@@ -41,6 +41,9 @@ class ilStudyProgrammeUpdateAgent extends Setup\Agent\NullAgent
         $enable_pc_statusinfo = new ilDatabaseUpdateStepsExecutedObjective(
             new ilStudyProgrammePCStatusInfoUpdateSteps()
         );
+        $update_auto_membership = new ilDatabaseUpdateStepsExecutedObjective(
+            new ilStudyProgrammeAutoMembershipTableUpdateSteps()
+        );
 
         return new Setup\ObjectiveCollection(
             'Database is updated for Module/Studyprogramme',
@@ -49,7 +52,8 @@ class ilStudyProgrammeUpdateAgent extends Setup\Agent\NullAgent
             $update_assignments,
             $update_settings,
             $update_auto_category,
-            $enable_pc_statusinfo
+            $enable_pc_statusinfo,
+            $update_auto_membership
         );
     }
 

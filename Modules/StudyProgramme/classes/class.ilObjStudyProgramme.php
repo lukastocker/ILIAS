@@ -988,7 +988,7 @@ class ilObjStudyProgramme extends ilContainer
 
         $this->assignment_repository->delete($assignment);
 
-        $affected_node_ids = array_map(fn ($pgs) => $pgs->getNodeId(), $assignment->getProgresses());
+        $affected_node_ids = array_map(fn($pgs) => $pgs->getNodeId(), $assignment->getProgresses());
         foreach ($affected_node_ids as $node_obj_id) {
             $this->refreshLPStatus($assignment->getUserId(), $node_obj_id);
         }
@@ -1151,7 +1151,7 @@ class ilObjStudyProgramme extends ilContainer
         $assignments = $this->getAssignments();
         $relevant = array_filter(
             $assignments,
-            fn ($ass) => $ass->getProgressForNode($this->getId())->isRelevant()
+            fn($ass) => $ass->getProgressForNode($this->getId())->isRelevant()
         );
         return count($relevant) > 0;
     }
@@ -1159,7 +1159,7 @@ class ilObjStudyProgramme extends ilContainer
     public function getIdsOfUsersWithRelevantProgress(): array
     {
         return array_map(
-            fn ($ass) => $ass->getUserId(),
+            fn($ass) => $ass->getUserId(),
             $this->getAssignments()
         );
     }
@@ -1322,9 +1322,17 @@ class ilObjStudyProgramme extends ilContainer
     /**
      * Store a source to be monitored for automatic memberships.
      */
-    public function storeAutomaticMembershipSource(string $type, int $src_id): void
+    public function storeAutomaticMembershipSource(string $type, int $src_id, bool $search_recursive): void
     {
-        $ams = $this->auto_memberships_repository->create($this->getId(), $type, $src_id, false);
+        $ams = $this->auto_memberships_repository->create(
+            $this->getId(),
+            $type,
+            $src_id,
+            false,
+            null,
+            null,
+            $search_recursive
+        );
         $this->auto_memberships_repository->update($ams);
     }
 
@@ -1347,9 +1355,17 @@ class ilObjStudyProgramme extends ilContainer
     /**
      * Disable a membership source.
      */
-    public function disableAutomaticMembershipSource(string $type, int $src_id): void
+    public function disableAutomaticMembershipSource(string $type, int $src_id, bool $search_recursive): void
     {
-        $ams = $this->auto_memberships_repository->create($this->getId(), $type, $src_id, false);
+        $ams = $this->auto_memberships_repository->create(
+            $this->getId(),
+            $type,
+            $src_id,
+            false,
+            null,
+            null,
+            $search_recursive
+        );
         $this->auto_memberships_repository->update($ams);
     }
 
@@ -1357,8 +1373,12 @@ class ilObjStudyProgramme extends ilContainer
      * Enable a membership source.
      * @throws ilException
      */
-    public function enableAutomaticMembershipSource(string $type, int $src_id, bool $assign_now = false): void
-    {
+    public function enableAutomaticMembershipSource(
+        string $type,
+        int $src_id,
+        bool $search_recursive,
+        $assign_now = false
+    ): void {
         if ($assign_now) {
             $assigned_by = ilStudyProgrammeAutoMembershipSource::SOURCE_MAPPING[$type];
             $member_ids = $this->getMembersOfMembershipSource($type, $src_id);
@@ -1368,7 +1388,15 @@ class ilObjStudyProgramme extends ilContainer
                 }
             }
         }
-        $ams = $this->auto_memberships_repository->create($this->getId(), $type, $src_id, true);
+        $ams = $this->auto_memberships_repository->create(
+            $this->getId(),
+            $type,
+            $src_id,
+            true,
+            null,
+            null,
+            $search_recursive
+        );
         $this->auto_memberships_repository->update($ams);
     }
 
@@ -1377,9 +1405,9 @@ class ilObjStudyProgramme extends ilContainer
      * @return int[]
      * @throws InvalidArgumentException if $src_type is not in AutoMembershipSource-types
      */
-    protected function getMembersOfMembershipSource(string $src_type, int $src_id): array
+    protected function getMembersOfMembershipSource(ilStudyProgrammeAutoMembershipSource $ams, int $exclude_id): array
     {
-        $source_reader = $this->membersourcereader_factory->getReaderFor($src_type, $src_id);
+        $source_reader = $this->membersourcereader_factory->getReaderFor($ams, $exclude_id);
         return $source_reader->getMemberIds();
     }
 
@@ -1453,7 +1481,7 @@ class ilObjStudyProgramme extends ilContainer
             if ($src_id !== $exclude_id
                 && $ams->isEnabled()
             ) {
-                $source_members = $this->getMembersOfMembershipSource($ams->getSourceType(), $src_id);
+                $source_members = $this->getMembersOfMembershipSource($ams, $exclude_id);
                 if (in_array($usr_id, $source_members)) {
                     return $ams;
                 }
