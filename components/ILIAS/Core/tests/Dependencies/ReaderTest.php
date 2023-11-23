@@ -32,6 +32,10 @@ interface TestInterface2
 {
 }
 
+interface TestInterface3
+{
+}
+
 class ImplementsTestInterface implements TestInterface
 {
 }

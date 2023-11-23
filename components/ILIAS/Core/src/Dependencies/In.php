@@ -60,6 +60,11 @@ class In implements Dependency
         $out->addDependency($this);
     }
 
+    public function getDependant(): ?array
+    {
+        return $this->dependant;
+    }
+
     public function addResolution(Out $other): void
     {
         if ($this->type !== InType::SEEK && count($this->resolved_by) > 0) {

@@ -70,10 +70,10 @@ class Resolver
 
         $cycles = $this->findCycles(...$components);
         if (!empty($cycles)) {
-            throw new LogicException(
+            throw new \LogicException(
                 "Detected Cycles in Dependency Tree: " .
                 join("\n", array_map(
-                    fn($k, $v) => "$k: " . join(" -> ", (string) $c),
+                    fn($k, $v) => "$k: " . join(" -> ", [$v]),
                     array_keys($cycles),
                     $cycles,
                 ))
@@ -175,6 +175,51 @@ class Resolver
      */
     protected function findCycles(OfComponent ...$components): array
     {
-        // Hier bitte implementieren =)
+        $cycles = [];
+        $visited = [];
+        $record = [];
+
+        foreach ($components as $k => $component) {
+            $count = count($components);
+            foreach ($component->getInDependencies() as $dependency) {
+                for ($i = 0; $i < $count; $i++) {
+                    $visited[$i] = false;
+                    $record[$i] = false;
+                }
+
+                for ($i = 0; $i < $count; $i++) {
+                    if ($this->isCyclic($i, $visited, $record) && !empty($dependency->getDependant())) {
+                        $provide = array_keys($dependency->getDependant());
+                        $dependency_name[] = $dependency->getName();
+                        $cycles[$k] = array_shift($dependency_name) . ' -> ' . array_shift($provide);
+                    }
+                }
+            }
+        }
+
+        return $cycles;
+    }
+
+    protected function isCyclic(int $i, array $visited, array $record): bool
+    {
+        if ($record[$i]) {
+            return true;
+        }
+        if ($visited[$i]) {
+            return false;
+        }
+
+        $visited[$i] = true;
+        $record[$i] = true;
+
+        for ($c = 0; $c < $i; $c++) {
+            if ($this->isCyclic($i, $visited, $record)) {
+                return true;
+            }
+        }
+
+        $record[$i] = false;
+
+        return false;
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -18,10 +16,14 @@ declare(strict_types=1);
  *
  *********************************************************************/
 
+declare(strict_types=1);
+
 namespace ILIAS\Tests\Setup;
 
 use ILIAS\Setup;
 use PHPUnit\Framework\TestCase;
+
+require_once("./components/ILIAS/Setup/tests/Helper.php");
 
 class ObjectiveCollectionTest extends TestCase
 {
