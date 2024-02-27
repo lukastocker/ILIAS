@@ -21,6 +21,7 @@ declare(strict_types=1);
 namespace ILIAS\Component\Dependencies;
 
 use ILIAS\Component\Component;
+use PHPUnit\Framework\MockObject\Generator\Generator;
 
 class Reader
 {
@@ -352,12 +353,15 @@ class Reader
 
     protected function createMock(string $class_name): object
     {
-        $mock_builder = new \PHPUnit\Framework\MockObject\MockBuilder(new class () extends \PHPUnit\Framework\TestCase {}, $class_name);
-        return $mock_builder
-            ->disableOriginalConstructor()
-            ->disableOriginalClone()
-            ->disableArgumentCloning()
-            ->disallowMockingUnknownTypes()
-            ->getMock();
+        $mock = (new Generator())->testDouble(
+            $class_name,
+            true,
+            callOriginalConstructor: false,
+            callOriginalClone: false,
+            cloneArguments: false,
+            allowMockingUnknownTypes: false,
+        );
+
+        return $mock;
     }
 }

@@ -77,11 +77,12 @@
 		"mikey179/vfsstream": "^1.6",
 		"mockery/mockery": "^1.4",
 		"friendsofphp/php-cs-fixer": "^3.15",
-		"sebastian/environment": "^5.0",
+		"sebastian/environment": "^6.0",
 		"captainhook/captainhook": "^5.16",
 		"captainhook/plugin-composer": "^5.3",
 		"phpstan/phpstan": "^1.10",
-		"rector/rector": "^0.15.17"
+		"rector/rector": "^0.15.17",
+		"phpunit/phpunit": "10.05.11"
 	},
 	"autoload": {
 		"psr-4" : {

@@ -19,23 +19,15 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestSuite;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Runner\Filter\Factory as FilterFactory;
-use PHPUnit\Runner\Filter\ExcludeGroupFilterIterator as GroupExcludeFilter;
 
 class ILIASSuite extends TestSuite
 {
-    /**
-     * @var	string
-     */
-    public const PHP_UNIT_PARENT_CLASS = TestCase::class;
-
-    public const COMPONENTS_DIRECTORY = __DIR__ . "/../../components";
+    public const COMPONENTS_DIRECTORY = __DIR__ . "./../../components";
     public const TEST_DIRECTORY = "tests";
     public const REGEX_SUITE_FILENAME = "#^[^.]+Suite\.php$#";
     public const REGEX_TEST_FILENAME = "#^[^.]+Test\.php$#";
 
-    public static function suite()
+    public static function suite(): self
     {
         $ilias_suite = new ILIASSuite();
         echo "ILIAS PHPUnit-Tests need installed dev-requirements, please install 'composer install' in root directory if you didn't do so already...\n";
@@ -53,6 +45,8 @@ class ILIASSuite extends TestSuite
                 continue;
             }
             foreach ($suites as [$suite, $path]) {
+                var_dump("S*ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ");
+                die;
                 require_once($path);
                 $suite = $suite::suite();
                 echo "Adding tests from suite:  " . $path . "\n";
