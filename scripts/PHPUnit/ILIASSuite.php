@@ -45,7 +45,6 @@ class ILIASSuite extends TestSuite
                 continue;
             }
             foreach ($suites as [$suite, $path]) {
-                var_dump("S*ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ");
                 die;
                 require_once($path);
                 $suite = $suite::suite();
