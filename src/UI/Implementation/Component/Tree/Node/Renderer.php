@@ -47,6 +47,12 @@ class Renderer extends AbstractComponentRenderer
 
         $icon = $component->getIcon();
         $label = $component->getLabel();
+
+        if (!is_null($icon) && $icon->getLabel() === $label) {
+            // TODO: Label auf "" setzen oder erweitern
+            $icon->setLabel("");
+        }
+
         /** @var URI|null $link */
         $link = $component->getLink();
 
@@ -146,7 +152,7 @@ class Renderer extends AbstractComponentRenderer
         }
         $signals = json_encode($signals);
 
-        return $component->withAdditionalOnLoadCode(fn ($id) => "
+        return $component->withAdditionalOnLoadCode(fn($id) => "
 			$('#$id > span').click(function(e){
 				var node = $('#$id'),
 					signals = $signals;

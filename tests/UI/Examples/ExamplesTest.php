@@ -128,7 +128,7 @@ class ExamplesTest extends ILIAS_UI_TestBase
 
         include_once $example_path;
         try {
-            $this->assertIsString($example_function_name(), " Example $example_function_name does not render a string");
+            $this->assertIsString($example_function_name, " Example $example_function_name does not render a string");
         } catch (NotImplementedException $e) {
             $this->assertTrue(true);
         }

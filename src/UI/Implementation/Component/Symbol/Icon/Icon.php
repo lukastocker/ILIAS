@@ -61,6 +61,11 @@ abstract class Icon implements C\Symbol\Icon\Icon
         return $this->label;
     }
 
+    public function setLabel(string $label): void
+    {
+        $this->label = $label;
+    }
+
     /**
      * @inheritdoc
      */
