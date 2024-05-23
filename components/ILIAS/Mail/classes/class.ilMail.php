@@ -53,6 +53,7 @@ class ilMail
     private array $user_instances_by_id_map = [];
     private int $max_recipient_character_length = 998;
     private readonly Conductor $legal_documents;
+    protected ILIAS\Refinery\Factory $refinery;
 
     public function __construct(
         private int $a_user_id,
@@ -105,6 +106,7 @@ class ilMail
         $this->placeholder_to_empty_resolver = $placeholder_to_empty_resolver ?? $DIC->mail()->placeholderToEmptyResolver();
         $this->legal_documents = $legal_documents ?? $DIC['legalDocuments'];
         $this->signature_service = $signature_service ?? $DIC->mail()->signature();
+        $this->refinery = $DIC->refinery();
     }
 
     public function autoresponder(): AutoresponderService
@@ -1122,9 +1124,9 @@ class ilMail
                 $externalMailRecipientsCc,
                 $externalMailRecipientsBcc,
                 $mail_data->getSubject(),
-                $mail_data->isUsePlaceholder() ?
-                            $this->replacePlaceholders($mail_data->getMessage(), 0) :
-                    $mail_data->getMessage(),
+                $this->refinery->string()->markdown()->toHTML()->transform(
+                    $mail_data->isUsePlaceholder() ? $this->replacePlaceholders($mail_data->getMessage(), 0, false) : $mail_data->getMessage()
+                ),
                 $mail_data->getAttachments()
             );
         } else {
