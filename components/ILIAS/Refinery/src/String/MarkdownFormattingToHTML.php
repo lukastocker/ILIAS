@@ -38,8 +38,9 @@ class MarkdownFormattingToHTML
     public function __construct(bool $escape = true)
     {
         $config = [
-            'disallowed_raw_html' => [
-                'disallowed_tags' => ['title', 'textarea', 'style', 'xmp', 'iframe', 'noembed', 'noframes', 'script', 'plaintext'],
+            'html_input' => 'escape',
+            'renderer' => [
+                'soft_break' => "<br/>"
             ],
             'allow_unsafe_links' => false,
             'max_nesting_level' => 42 // https://commonmark.thephpleague.com/1.5/security/#nesting-level
@@ -51,7 +52,6 @@ class MarkdownFormattingToHTML
 
         $environment = new Environment($config);
         $environment->addExtension(new CommonMarkCoreExtension());
-        $environment->addExtension(new DisallowedRawHtmlExtension());
         $environment->addExtension(new UnderlineExtension());
 
         $this->converter = new MarkDownConverter($environment);

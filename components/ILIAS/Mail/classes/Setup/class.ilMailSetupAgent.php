@@ -63,7 +63,8 @@ class ilMailSetupAgent implements Setup\Agent
     public function getMigrations(): array
     {
         return [
-            new ilUpdateMailTemplatesForMustache()
+            new ilUpdateMailTemplatesForMustache(),
+            new ilMailTemplateConvertHtmlToMarkdown()
         ];
     }
 }
