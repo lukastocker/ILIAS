@@ -425,6 +425,11 @@ class Factory implements G\Factory
         return new Glyph(G\Glyph::LINK, "link_action", $action);
     }
 
+    public function underline(string $action = null): G\Glyph
+    {
+        return new Glyph(G\Glyph::UNDERLINE, "underline_action", $action);
+    }
+
     /**
      * @inheritdoc
      */
