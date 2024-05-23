@@ -24,6 +24,8 @@ use ILIAS\Data\DateFormat;
 use ILIAS\UI\Component;
 use ILIAS\UI\Implementation\Component\Input\Field as F;
 use ILIAS\UI\Component\Input\Field as FI;
+use ILIAS\UI\Implementation\DefaultRenderer;
+use ILIAS\UI\Implementation\Component\Signal;
 use ILIAS\UI\Component\Input\Container\Form\FormInput;
 use ILIAS\UI\Implementation\Render\AbstractComponentRenderer;
 use ILIAS\UI\Implementation\Render\ResourceRegistry;
@@ -44,7 +46,6 @@ use ILIAS\Data\FiveStarRatingScale;
 class Renderer extends AbstractComponentRenderer
 {
     public const DYNAMIC_INPUT_ID_PLACEHOLDER = 'DYNAMIC_INPUT_ID';
-
     public const DATETIME_DATEPICKER_MINMAX_FORMAT = 'Y-m-d\Th:m';
     public const DATE_DATEPICKER_MINMAX_FORMAT = 'Y-m-d';
     public const TYPE_DATE = 'date';
@@ -130,7 +131,7 @@ class Renderer extends AbstractComponentRenderer
                 return $this->renderMarkdownField($component, $default_renderer);
 
             case ($component instanceof F\Textarea):
-                return $this->renderTextareaField($component);
+                return $this->renderTextareaField($component, $default_renderer);
 
             case ($component instanceof F\Radio):
                 return $this->renderRadioField($component);
@@ -348,7 +349,7 @@ class Renderer extends AbstractComponentRenderer
             $tpl->setVariable("BYLINE", $group->getByline());
 
             if ($component->getValue() !== null) {
-                list($index, ) = $component->getValue();
+                list($index) = $component->getValue();
                 if ($index == $key) {
                     $tpl->setVariable("CHECKED", 'checked="checked"');
                 }
@@ -491,7 +492,18 @@ class Renderer extends AbstractComponentRenderer
             }
         );
 
-        $textarea_tpl = $this->getPreparedTextareaTemplate($component);
+        if ($component->isMustachable() && !$component->isDisabled()) {
+            $signal = $component->getInsertSignal();
+            $component = $component->withAdditionalOnLoadCode(
+                function ($id) use ($signal) {
+                    return "$(document).on('{$signal}', function(event, signalData) {
+                        il.UI.Input.markdown.get('{$id}').insertPlaceholder(signalData.options.text);
+                    });";
+                }
+            );
+        }
+
+        $textarea_tpl = $this->getPreparedTextareaTemplate($component, $default_renderer);
         $textarea_id = $this->bindJSandApplyId($component, $textarea_tpl);
 
         $markdown_tpl = $this->getTemplate("tpl.markdown.html", true, true);
@@ -520,6 +532,7 @@ class Renderer extends AbstractComponentRenderer
             'ACTION_LINK' => $this->getUIFactory()->symbol()->glyph()->link(),
             'ACTION_BOLD' => $this->getUIFactory()->symbol()->glyph()->bold(),
             'ACTION_ITALIC' => $this->getUIFactory()->symbol()->glyph()->italic(),
+            'ACTION_UNDERLINE' => $this->getUIFactory()->symbol()->glyph()->underline(),
             'ACTION_ORDERED_LIST' => $this->getUIFactory()->symbol()->glyph()->numberedlist(),
             'ACTION_UNORDERED_LIST' => $this->getUIFactory()->symbol()->glyph()->bulletlist()
         ];
@@ -542,24 +555,33 @@ class Renderer extends AbstractComponentRenderer
         return $this->wrapInFormContext($component, $markdown_tpl->get(), $textarea_id);
     }
 
-    protected function renderTextareaField(F\Textarea $component): string
+    protected function renderTextareaField(F\Textarea $component, RendererInterface $default_renderer): string
     {
         /** @var $component F\Textarea */
         $component = $component->withAdditionalOnLoadCode(
             static function ($id): string {
-                return "
-                    il.UI.Input.textarea.init('$id');
-                ";
+                return "il.UI.Input.textarea.init('$id');";
             }
         );
 
-        $tpl = $this->getPreparedTextareaTemplate($component);
+        if ($component->isMustachable() && !$component->isDisabled()) {
+            $signal = $component->getInsertSignal();
+            $component = $component->withAdditionalOnLoadCode(
+                function ($id) use ($signal) {
+                    return "$(document).on('{$signal}', function(event, signalData) {
+                        il.UI.Input.textarea.get('{$id}').insertPlaceholder(signalData.options.text);
+                        });";
+                }
+            );
+        }
+
+        $tpl = $this->getPreparedTextareaTemplate($component, $default_renderer);
         $id = $this->bindJSandApplyId($component, $tpl);
 
         return $this->wrapInFormContext($component, $tpl->get(), $id);
     }
 
-    protected function getPreparedTextareaTemplate(F\Textarea $component): Template
+    protected function getPreparedTextareaTemplate(F\Textarea $component, RendererInterface $default_renderer): Template
     {
         $tpl = $this->getTemplate("tpl.textarea.html", true, true);
 
@@ -573,8 +595,39 @@ class Renderer extends AbstractComponentRenderer
             $tpl->setVariable('MIN_LIMIT', $component->getMinLimit());
         }
 
+        if ($component->isMustachable() && count($component->getPlaceholderEntries()) > 0) {
+            if ($component->getPlaceholderAdvice() !== '') {
+                $tpl->setVariable('PLACEHOLDER_ADVICE', $component->getPlaceholderAdvice());
+            }
+
+            $entries = '';
+            foreach ($component->getPlaceholderEntries() as $ph_text => $ph_label) {
+                $signal = $component->getInsertSignal();
+                $signal->addOption('text', $ph_text);
+                $button = $this->getUIFactory()->button()->shy("&lcub;&lcub;" . $ph_text . "&rcub;&rcub;", '')->withOnClick($signal);
+                $entry = $this->getTemplate("tpl.textarea_placeholder.html", true, true);
+                $entry->setVariable('PLACEHOLDER_BUTTON', $default_renderer->render($button));
+                $entry->setVariable('PLACEHOLDER_LABEL', $ph_label);
+                $entries .= $entry->get();
+            }
+            if ($entries !== '') {
+                $tpl->setVariable('PLACEHOLDER_ENTRIES', $entries);
+            }
+        }
+
         $this->applyName($component, $tpl);
-        $this->applyValue($component, $tpl, $this->htmlEntities());
+        if ($component->isMustachable()) {
+            $this->applyValue(
+                $component,
+                $tpl,
+                function ($val) {
+                    $val = htmlentities((string) $val);
+                    return str_replace('{{', '&lcub;&lcub;', str_replace('}}', '&rcub;&rcub;', $val));
+                }
+            );
+        } else {
+            $this->applyValue($component, $tpl, $this->htmlEntities());
+        }
         $this->maybeDisable($component, $tpl);
 
         return $tpl;
@@ -1072,12 +1125,12 @@ class Renderer extends AbstractComponentRenderer
         foreach (range($option_count, 1, -1) as $option) {
             $tpl->setCurrentBlock('scaleoption');
             $tpl->setVariable('ARIALABEL', $this->txt($option . 'stars'));
-            $tpl->setVariable('OPT_VALUE', (string)$option);
+            $tpl->setVariable('OPT_VALUE', (string) $option);
             $tpl->setVariable('OPT_ID', $id . '-' . $option);
             $tpl->setVariable('NAME', $component->getName());
             $tpl->setVariable('DESCRIPTION_ID', $aria_description_id);
 
-            if ($component->getValue() === FiveStarRatingScale::from((int)$option)) {
+            if ($component->getValue() === FiveStarRatingScale::from((int) $option)) {
                 $tpl->setVariable("SELECTED", ' checked="checked"');
             }
             if ($component->isDisabled()) {
@@ -1111,7 +1164,6 @@ class Renderer extends AbstractComponentRenderer
             $tpl->setVariable('AVERAGE_VALUE', $average_title);
             $tpl->setVariable('AVERAGE_VALUE_PERCENT', $average / $option_count * self::CENTUM);
         }
-
 
         return $this->wrapInFormContext($component, $tpl->get());
     }

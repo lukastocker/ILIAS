@@ -32,7 +32,7 @@ class Standard extends Form implements C\Input\Container\Form\Standard
 {
     use HasPostURL;
 
-    protected ?string $submit_caption = null;
+    protected ?string $submit_label = null;
 
     public function __construct(
         FieldFactory $field_factory,
@@ -47,10 +47,10 @@ class Standard extends Form implements C\Input\Container\Form\Standard
     /**
      * @inheritDoc
      */
-    public function withSubmitLabel(string $caption): C\Input\Container\Form\Standard
+    public function withSubmitLabel(string $label): C\Input\Container\Form\Standard
     {
         $clone = clone $this;
-        $clone->submit_caption = $caption;
+        $clone->submit_label = $label;
         return $clone;
     }
 
@@ -59,6 +59,6 @@ class Standard extends Form implements C\Input\Container\Form\Standard
      */
     public function getSubmitLabel(): ?string
     {
-        return $this->submit_caption;
+        return $this->submit_label;
     }
 }

@@ -95,6 +95,7 @@ class GlyphTest extends ILIAS_UI_TestBase
         G\Glyph::ITALIC => "glyphicon glyphicon-italic",
         G\Glyph::BOLD => "glyphicon glyphicon-bold",
         G\Glyph::LINK => "glyphicon glyphicon-link",
+        G\Glyph::UNDERLINE => "glyphicon glyphicon-underline",
         G\Glyph::LAUNCH => "glyphicon glyphicon-launch"
     );
 
@@ -149,6 +150,7 @@ class GlyphTest extends ILIAS_UI_TestBase
         G\Glyph::ITALIC => "italic_action",
         G\Glyph::BOLD => "bold_action",
         G\Glyph::LINK => "link_action",
+        G\Glyph::UNDERLINE => "underline_action",
         G\Glyph::LAUNCH => "launch"
     );
 
