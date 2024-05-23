@@ -45,8 +45,24 @@ class ilMailTest extends ilMailBaseTest
     public function testExternalMailDeliveryToLocalRecipientsWorksAsExpected(): void
     {
         $refineryMock = $this->getMockBuilder(Factory::class)->disableOriginalConstructor()->getMock();
+        $refinery = $this->getMockBuilder('\ILIAS\Refinery\Factory')->disableOriginalConstructor()->getMock();
         $this->setGlobalVariable('refinery', $refineryMock);
-
+        $string = $this->getMockBuilder('\ILIAS\Refinery\String\Group')->disableOriginalConstructor()->getMock();
+        $markdown = $this->getMockBuilder('ILIAS\Refinery\String\MarkdownFormattingToHTML')->disableOriginalConstructor()->getMock();
+        $transformation = $this->getMockBuilder('\ILIAS\Refinery\Custom\Transformation')->disableOriginalConstructor()->getMock();
+        $transformation->expects($this->atLeastOnce())
+                       ->method("transform")
+                       ->with('Message')
+                       ->willReturn('Message');
+        $markdown->expects($this->atLeastOnce())
+                 ->method("toHTML")
+                 ->willReturn($transformation);
+        $string->expects($this->atLeastOnce())
+               ->method("markdown")
+               ->willReturn($markdown);
+        $refinery->expects($this->atLeastOnce())
+                 ->method("string")
+                 ->willReturn($string);
         $legal_documents = $this->createMock(Conductor::class);
         $this->setGlobalVariable('legalDocuments', $legal_documents);
 
