@@ -528,13 +528,13 @@ class Renderer extends AbstractComponentRenderer
 
         /** @var $markdown_actions_glyphs Component\Symbol\Glyph\Glyph[] */
         $markdown_actions_glyphs = [
-            'ACTION_HEADING' => $this->getUIFactory()->symbol()->glyph()->header(),
-            'ACTION_LINK' => $this->getUIFactory()->symbol()->glyph()->link(),
             'ACTION_BOLD' => $this->getUIFactory()->symbol()->glyph()->bold(),
             'ACTION_ITALIC' => $this->getUIFactory()->symbol()->glyph()->italic(),
             'ACTION_UNDERLINE' => $this->getUIFactory()->symbol()->glyph()->underline(),
             'ACTION_ORDERED_LIST' => $this->getUIFactory()->symbol()->glyph()->numberedlist(),
-            'ACTION_UNORDERED_LIST' => $this->getUIFactory()->symbol()->glyph()->bulletlist()
+            'ACTION_UNORDERED_LIST' => $this->getUIFactory()->symbol()->glyph()->bulletlist(),
+            'ACTION_LINK' => $this->getUIFactory()->symbol()->glyph()->link(),
+            'ACTION_HEADING' => $this->getUIFactory()->symbol()->glyph()->header()
         ];
 
         foreach ($markdown_actions_glyphs as $tpl_variable => $glyph) {

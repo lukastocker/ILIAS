@@ -22,6 +22,9 @@ use ILIAS\ResourceStorage\Stakeholder\AbstractResourceStakeholder;
 
 class ilMailAttachmentStakeholder extends AbstractResourceStakeholder
 {
+    public function __construct()
+    {
+    }
     /**
      * @inheritDoc
      */
@@ -34,4 +37,6 @@ class ilMailAttachmentStakeholder extends AbstractResourceStakeholder
     {
         return 74;
     }
+
+
 }

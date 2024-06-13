@@ -33,11 +33,13 @@ class ilMailTemplateContextAdapter
     protected array $contexts = [];
     protected array $context_parameter = [];
     protected ?ilObjUser $recipient = null;
+    protected bool $html_markup = false;
 
     public function __construct(
         array $contexts,
         array $context_parameters,
-        ilObjUser $recipient = null
+        ilObjUser $recipient = null,
+        bool $html_markup = false
     ) {
         $this->contexts = $contexts;
         $this->context_parameter = $context_parameters;
