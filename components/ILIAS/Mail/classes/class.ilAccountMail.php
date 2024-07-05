@@ -149,7 +149,6 @@ class ilAccountMail
 
     /**
      * @param array{lang?: string, subject?: string, body?: string, sal_f?: string, sal_g?: string, sal_m?: string, type?: string, att_file?: string} $mailData
-     * @return void
      * @throws \ILIAS\Filesystem\Exception\IOException
      */
     private function addAttachments(array $mailData): void
@@ -174,17 +173,16 @@ class ilAccountMail
      * It first tries to read the mail body, subject and sender address from posted named formular fields.
      * If no field values found the defaults are used.
      * Placehoders will be replaced by the appropriate data.
-     * @return bool
      * @throws RuntimeException
      */
     public function send(): bool
     {
         $user = $this->getUser();
-        if (null === $user) {
+        if (!$user instanceof ilObjUser) {
             throw new RuntimeException('A user instance must be passed when sending emails');
         }
 
-        if (!$user->getEmail()) {
+        if ($user->getEmail() === '') {
             return false;
         }
 
