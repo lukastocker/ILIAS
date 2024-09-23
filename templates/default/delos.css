@@ -4398,8 +4398,10 @@ hr.il-divider-with-label {
   color: white;
 }
 
-.c-field-markdown__preview {
-  min-height: 100px;
+
+.c-input-markdown__preview,
+.c-input-markdown .ui-input-textarea textarea {
+  min-height: 4.56rem;
   border: 1px solid #dddddd;
   display: inline-block;
   width: 100%;
@@ -10299,7 +10301,7 @@ div#agreement {
 
 .alert-dismissable,
 .alert-dismissible {
-  padding-right: 9px 15px20;
+  padding-right: 9px 15px;
 }
 .alert-dismissable .close,
 .alert-dismissible .close {

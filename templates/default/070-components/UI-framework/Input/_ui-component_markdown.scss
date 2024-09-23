@@ -23,7 +23,8 @@
   color: $il-text-color-invert;
 }
 
-.c-field-markdown__preview {
+.c-input-markdown__preview,
+.c-input-markdown .ui-input-textarea textarea{
   min-height: l-form.$il-textarea-height;
   border: $il-main-border;
   display: inline-block;
