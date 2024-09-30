@@ -68,9 +68,14 @@ class AsyncTaskManager extends BasicTaskManager
         );
 
         try {
-            $soap_client->call(self::CMD_START_WORKER, array(
+            $result = $soap_client->call(self::CMD_START_WORKER, array(
                 $session_id . '::' . $client_id,
             ));
+            if ($result === false) {
+                $DIC->logger()->root()->info("[BT] Calling Webserver returned false, fallback to sync version");
+                $sync_manager = new SyncTaskManager($this->persistence);
+                $sync_manager->run($bucket);
+            }
         } catch (\Throwable $t) {
             $DIC->logger()->bgtk()->warning($t->getMessage());
             $DIC->logger()->bgtk()->warning("Calling webserver failed, fallback to sync version");
