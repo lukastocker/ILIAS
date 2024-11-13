@@ -2787,11 +2787,11 @@ certificate#:#certificate_text_info#:#Bitte geben Sie hier den Text des Zertifik
 certificate#:#certificate_unit_description#:#Geben Sie Maße immer in der Form WERT[cm|mm|in|pt|pc|px|em] an, d.h. 10mm oder 3in
 certificate#:#certificate_usage#:#Bitte beachten Sie, dass die Verwendung und Erstellung von Zertifikaten nur möglich ist, wenn Sie den Java-Server von ILIAS verwenden. Der Java-Server wird in der Hauptseite der Administration in der Kategorie Web-Services konfiguriert und ist unter anderem für die Generierung von PDF-Dateien erforderlich.
 certificate#:#certificate_var_max_points#:#46
-certificate#:#certificate_var_result_mark_long#:#Gut
-certificate#:#certificate_var_result_mark_short#:#2
-certificate#:#certificate_var_result_passed#:#bestanden
-certificate#:#certificate_var_result_percent#:#83%
-certificate#:#certificate_var_result_points#:#38
+certificate#:#certificate_var_result_mark_long#:#Die offizielle Bezeichnung der erreichten Note wird angezeigt.
+certificate#:#certificate_var_result_mark_short#:#Die Kurzbereichnung der erreichten Note wird angezeigt. 
+certificate#:#certificate_var_result_passed#:#Angabe, ob der Test bestanden wurde oder nicht.
+certificate#:#certificate_var_result_percent#:#Angabe, wie viel Prozent im Test erreicht wurden.
+certificate#:#certificate_var_result_points#:#Angabe, wie viele Punkte im Test erreicht wurden.
 certificate#:#certificate_var_user_birthday#:#08.05.1977
 certificate#:#certificate_var_user_city#:#Köln
 certificate#:#certificate_var_user_country#:#Deutschland
