@@ -58,12 +58,15 @@ class StartUpMetaBarProvider extends AbstractStaticMetaBarProvider
         }
 
         $login_glyph = $factory->symbol()->glyph()->login();
+
+        $current_language = $this->dic->user()->getCurrentLanguage() ?: $this->dic->language()->getLangKey();
+
         $login = $this->meta_bar
             ->topLinkItem($if('login'))
             ->withAction(
                 'login.php?' . $target_str . 'client_id=' . rawurlencode(
                     CLIENT_ID
-                ) . '&cmd=force_login&lang=' . $this->dic->user()->getCurrentLanguage()
+                ) . '&cmd=force_login&lang=' . $current_language
             )
             ->withSymbol($login_glyph)
             ->withPosition(2)
