@@ -2790,7 +2790,7 @@ certificate#:#certificate_var_max_points#:#Maximale Punktzahl im verwendeten Tes
 certificate#:#certificate_var_result_mark_long#:#Erreichte Note in der Form 'Offizielle Bezeichnung'
 certificate#:#certificate_var_result_mark_short#:#Erreichte Note in der Form 'Kurzbezeichnung'
 certificate#:#certificate_var_result_passed#:#Angabe, ob der Test bestanden wurde oder nicht
-certificate#:#certificate_var_result_percent#:#Anzahl der erreichten Prozent im Test
+certificate#:#certificate_var_result_percent#:#Anzahl der erreichten Prozente im Test
 certificate#:#certificate_var_result_points#:#Anzahl der erreichten Punkte im Test
 certificate#:#certificate_var_user_birthday#:#08.05.1977
 certificate#:#certificate_var_user_city#:#Köln
