@@ -4621,10 +4621,6 @@ class ilObjTest extends ilObject implements ilMarkSchemaAware
             $this->getScoreSettings()->withTestId($new_obj->getTestId())
         );
 
-        $this->getMainSettings()->getIntroductionSettings()->withIntroductionPageId(
-            $this->cloneIntroduction()
-        );
-
         $new_obj->mark_schema = clone $this->mark_schema;
         $new_obj->setTemplate($this->getTemplate());
 
