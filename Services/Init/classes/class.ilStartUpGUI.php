@@ -300,6 +300,13 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
             $tpl->setVariable('LPE', $page_editor_html);
         }
 
+        if ($this->authSession->isExpired()) {
+            // The usr_id is is still the one of the former logged-in user, so we have to unset it
+            $this->authSession->setAuthenticated(false, ANONYMOUS_USER_ID);
+            $this->dic->user()->setId($this->authSession->getUserId());
+            $this->dic->user()->read();
+        }
+
         self::printToGlobalTemplate($tpl);
     }
 
