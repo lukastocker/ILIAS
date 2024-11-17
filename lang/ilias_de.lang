@@ -7370,6 +7370,7 @@ copg#:#copg_page_element_not_found#:#Unbekanntes Seitenelement.
 copg#:#copg_page_type_stys#:#Seitenlayout
 copg#:#copg_par_format_selection#:#Absatzformatauswahl
 copg#:#copg_pc_mob_does_not_exist#:#Das Medienobjekt wurde nicht gefunden.
+copg#:#copg_plugin_not_avail#:#Plugin %s nicht verfügbar.
 copg#:#copg_questions_not_supported_here#:#In diesem Kontext werden keine Fragen unterstützt.
 copg#:#copg_reload_page#:#Seite neu laden
 copg#:#copg_remove_formats#:#Zeichenformate entfernen
