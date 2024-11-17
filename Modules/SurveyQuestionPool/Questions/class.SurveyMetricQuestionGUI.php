@@ -140,7 +140,7 @@ class SurveyMetricQuestionGUI extends SurveyQuestionGUI
         $res = array();
 
         if (is_array($a_working_data)) {
-            $res[] = array("value" => $a_working_data[0]["value"]);
+            $res[] = array("value" => ($a_working_data[0]["value"] ?? null));
         }
 
         return $res;
