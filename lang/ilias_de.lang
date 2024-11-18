@@ -9714,7 +9714,7 @@ export#:#export_resource#:#Ressource
 export#:#export_save_selection#:#Export starten
 export#:#export_select_resources#:#Objekte auswählen
 export#:#no_file#:#Keine Datei
-file#:#action_download#:#Datei direkt herunterladen
+file#:#action_download#:#Datei herunterladen oder Inhalt anzeigen
 file#:#action_show#:#Zunächst Reiter „Info“ anzeigen
 file#:#add_icon#:#Icon hinzufügen
 file#:#amount_of_downloads#:#Downloads

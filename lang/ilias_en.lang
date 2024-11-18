@@ -9714,7 +9714,7 @@ export#:#export_resource#:#Resource
 export#:#export_save_selection#:#Start Export
 export#:#export_select_resources#:#Select Resources
 export#:#no_file#:#No file
-file#:#action_download#:#Download file
+file#:#action_download#:#Download file or view content
 file#:#action_show#:#Redirect user to the file’s ‘Info’ tab
 file#:#add_icon#:#Add Icon
 file#:#amount_of_downloads#:#Downloads
