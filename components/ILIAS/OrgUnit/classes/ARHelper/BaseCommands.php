@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -15,6 +16,8 @@
  *
  ********************************************************************
  */
+
+declare(strict_types=1);
 
 namespace ILIAS\components\OrgUnit\ARHelper;
 
@@ -209,7 +212,7 @@ abstract class BaseCommands
     {
         $ref_id = $this->http->request()->getQueryParams()["ref_id"];
 
-        return $ref_id;
+        return (int) $ref_id;
     }
 
     public function addSubTabs(): void
@@ -218,11 +221,17 @@ abstract class BaseCommands
 
     protected function getRowIdFromQuery(): int
     {
-        if($this->query->has($this->row_id_token->getName())) {
+        if ($this->query->has($this->row_id_token->getName())) {
             return $this->query->retrieve(
                 $this->row_id_token->getName(),
-                $this->refinery->custom()->transformation(fn($v) => (int)array_shift($v))
+                $this->refinery->custom()->transformation(fn($v) => (int) array_shift($v))
             );
+        } elseif ($_POST[self::AR_ID]) {
+            $id = $_POST[self::AR_ID] ?? [$_POST[self::AR_ID]];
+            if (is_array($id)) {
+                return (int) array_shift($id);
+            }
+            return (int) $id;
         }
         throw new \Exception('no position-id in query');
     }
