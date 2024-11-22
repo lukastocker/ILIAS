@@ -433,7 +433,7 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
      * Get the question solution output
      * @param integer $active_id             The active user id
      * @param integer $pass                  The test pass
-     * @param boolean $graphicalOutput       Show visual feedback for right/wrong answers
+     * @param boolean $graphical_output       Show visual feedback for right/wrong answers
      * @param boolean $result_output         Show the reached points for parts of the question
      * @param boolean $show_question_only    Show the question without the ILIAS content around
      * @param boolean $show_feedback         Show the question feedback
@@ -445,13 +445,13 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
     public function getSolutionOutput(
         $active_id,
         $pass = null,
-        $graphicalOutput = false,
-        $result_output = false,
-        $show_question_only = true,
-        $show_feedback = false,
-        $show_correct_solution = false,
-        $show_manual_scoring = false,
-        $show_question_text = true
+        bool $graphical_output = false,
+        bool $result_output = false,
+        bool $show_question_only = true,
+        bool $show_feedback = false,
+        bool $show_correct_solution = false,
+        bool $show_manual_scoring = false,
+        bool $show_question_text = true
     ): string {
         $solutionOrderingList = $this->object->getOrderingElementListForSolutionOutput(
             $show_correct_solution,
@@ -459,6 +459,41 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             $pass
         );
 
+        $show_inline_feedback = false;
+        return $this->renderSolutionOutput(
+            $solutionOrderingList,
+            $active_id,
+            $pass,
+            $graphical_output,
+            $result_output,
+            $show_question_only,
+            $show_feedback,
+            $show_correct_solution,
+            $show_manual_scoring,
+            $show_question_text,
+            false,
+            $show_inline_feedback,
+        );
+    }
+
+    public function renderSolutionOutput(
+        mixed $user_solutions,
+        int $active_id,
+        int $pass,
+        bool $graphical_output = false,
+        bool $result_output = false,
+        bool $show_question_only = true,
+        bool $show_feedback = false,
+        bool $show_correct_solution = false,
+        bool $show_manual_scoring = false,
+        bool $show_question_text = true,
+        bool $show_autosave_title = false,
+        bool $show_inline_feedback = false,
+    ): ?string {
+        $solutionOrderingList = ($user_solutions instanceof ilAssOrderingElementList) ?
+            $user_solutions : $this->object->getSolutionOrderingElementList(
+                $this->object->fetchIndexedValuesFromValuePairs($user_solutions)
+            );
         $answers_gui = $this->object->buildNestedOrderingElementInputGui();
 
         if ($show_correct_solution) {
@@ -469,7 +504,7 @@ class assOrderingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
         $answers_gui->setInteractionEnabled(false);
         $answers_gui->setElementList($solutionOrderingList);
-        if ($graphicalOutput) {
+        if ($graphical_output) {
             $answers_gui->setShowCorrectnessIconsEnabled(true);
         }
         $answers_gui->setCorrectnessTrueElementList(

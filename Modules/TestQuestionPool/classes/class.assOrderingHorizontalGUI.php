@@ -119,7 +119,7 @@ class assOrderingHorizontalGUI extends assQuestionGUI implements ilGuiQuestionSc
     * Get the question solution output
     * @param integer $active_id             The active user id
     * @param integer $pass                  The test pass
-    * @param boolean $graphicalOutput       Show visual feedback for right/wrong answers
+    * @param boolean $graphical_output       Show visual feedback for right/wrong answers
     * @param boolean $result_output         Show the reached points for parts of the question
     * @param boolean $show_question_only    Show the question without the ILIAS content around
     * @param boolean $show_feedback         Show the question feedback
@@ -130,43 +130,66 @@ class assOrderingHorizontalGUI extends assQuestionGUI implements ilGuiQuestionSc
     public function getSolutionOutput(
         $active_id,
         $pass = null,
-        $graphicalOutput = false,
-        $result_output = false,
-        $show_question_only = true,
-        $show_feedback = false,
-        $show_correct_solution = false,
-        $show_manual_scoring = false,
-        $show_question_text = true
+        bool $graphical_output = false,
+        bool $result_output = false,
+        bool $show_question_only = true,
+        bool $show_feedback = false,
+        bool $show_correct_solution = false,
+        bool $show_manual_scoring = false,
+        bool $show_question_text = true
     ): string {
-        // get the solution of the user for the active pass or from the last pass if allowed
-        $template = new ilTemplate("tpl.il_as_qpl_orderinghorizontal_output_solution.html", true, true, "Modules/TestQuestionPool");
 
+        $user_solutions = [];
         if (($active_id > 0) && (!$show_correct_solution)) {
-            $elements = [];
-            $solutions = $this->object->getSolutionValues($active_id, $pass);
+            $user_solutions = $this->object->getSolutionValues($active_id, $pass);
+        }
 
-            if (count($solutions) && strlen($solutions[0]["value1"])) {
-                $elements = explode("{::}", $solutions[0]["value1"]);
-            }
+        $show_inline_feedback = false;
+        return $this->renderSolutionOutput(
+            $user_solutions,
+            $active_id,
+            $pass,
+            $graphical_output,
+            $result_output,
+            $show_question_only,
+            $show_feedback,
+            $show_correct_solution,
+            $show_manual_scoring,
+            $show_question_text,
+            false,
+            $show_inline_feedback,
+        );
+    }
 
-            if (!count($elements)) {
-                $elements = $this->object->getRandomOrderingElements();
-            }
+    public function renderSolutionOutput(
+        mixed $user_solutions,
+        int $active_id,
+        int $pass,
+        bool $graphical_output = false,
+        bool $result_output = false,
+        bool $show_question_only = true,
+        bool $show_feedback = false,
+        bool $show_correct_solution = false,
+        bool $show_manual_scoring = false,
+        bool $show_question_text = true,
+        bool $show_autosave_title = false,
+        bool $show_inline_feedback = false,
+    ): ?string {
+        $elements = [];
+        if (count($user_solutions) && strlen($user_solutions[0]["value1"])) {
+            $elements = explode("{::}", $user_solutions[0]["value1"]);
+        }
 
-            foreach ($elements as $id => $element) {
-                $template->setCurrentBlock("element");
-                $template->setVariable("ELEMENT_ID", "sol_e_" . $this->object->getId() . "_$id");
-                $template->setVariable("ELEMENT_VALUE", ilLegacyFormElementsUtil::prepareFormOutput($element));
-                $template->parseCurrentBlock();
-            }
-        } else {
-            $elements = $this->object->getOrderingElements();
-            foreach ($elements as $id => $element) {
-                $template->setCurrentBlock("element");
-                $template->setVariable("ELEMENT_ID", "sol_e_" . $this->object->getId() . "_$id");
-                $template->setVariable("ELEMENT_VALUE", ilLegacyFormElementsUtil::prepareFormOutput($element));
-                $template->parseCurrentBlock();
-            }
+        if (!count($elements)) {
+            $elements = $show_correct_solution ? $this->object->getOrderingElements() : $this->object->getRandomOrderingElements();
+        }
+
+        $template = new ilTemplate("tpl.il_as_qpl_orderinghorizontal_output_solution.html", true, true, "Modules/TestQuestionPool");
+        foreach ($elements as $id => $element) {
+            $template->setCurrentBlock("element");
+            $template->setVariable("ELEMENT_ID", "sol_e_" . $this->object->getId() . "_$id");
+            $template->setVariable("ELEMENT_VALUE", ilLegacyFormElementsUtil::prepareFormOutput($element));
+            $template->parseCurrentBlock();
         }
 
         if (($active_id > 0) && (!$show_correct_solution)) {
@@ -175,7 +198,7 @@ class assOrderingHorizontalGUI extends assQuestionGUI implements ilGuiQuestionSc
             } else {
                 $reached_points = $this->object->calculateReachedPoints($active_id, $pass);
             }
-            if ($graphicalOutput) {
+            if ($graphical_output) {
                 $correctness_icon = $this->generateCorrectnessIconsForCorrectness(self::CORRECTNESS_NOT_OK);
                 if ($reached_points == $this->object->getMaximumPoints()) {
                     $correctness_icon = $this->generateCorrectnessIconsForCorrectness(self::CORRECTNESS_OK);

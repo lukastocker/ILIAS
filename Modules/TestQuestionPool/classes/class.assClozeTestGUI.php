@@ -937,7 +937,7 @@ JS;
      * Get the question solution output
      * @param integer $active_id             The active user id
      * @param integer $pass                  The test pass
-     * @param boolean $graphicalOutput       Show visual feedback for right/wrong answers
+     * @param boolean $graphical_output       Show visual feedback for right/wrong answers
      * @param boolean $result_output         Show the reached points for parts of the question
      * @param boolean $show_question_only    Show the question without the ILIAS content around
      * @param boolean $show_feedback         Show the question feedback
@@ -949,13 +949,13 @@ JS;
     public function getSolutionOutput(
         $active_id,
         $pass = null,
-        $graphicalOutput = false,
-        $result_output = false,
-        $show_question_only = true,
-        $show_feedback = false,
-        $show_correct_solution = false,
-        $show_manual_scoring = false,
-        $show_question_text = true
+        bool $graphical_output = false,
+        bool $result_output = false,
+        bool $show_question_only = true,
+        bool $show_feedback = false,
+        bool $show_correct_solution = false,
+        bool $show_manual_scoring = false,
+        bool $show_question_text = true
     ): string {
         // get the solution of the user for the active pass or from the last pass if allowed
         $user_solution = [];
@@ -967,6 +967,37 @@ JS;
             }
         }
 
+        return $this->renderSolutionOutput(
+            $user_solution,
+            $active_id,
+            $pass,
+            $graphical_output,
+            $result_output,
+            $show_question_only,
+            $show_feedback,
+            $show_correct_solution,
+            $show_manual_scoring,
+            $show_question_text,
+            false,
+            false
+        );
+    }
+
+    public function renderSolutionOutput(
+        mixed $user_solutions,
+        int $active_id,
+        int $pass,
+        bool $graphical_output = false,
+        bool $result_output = false,
+        bool $show_question_only = true,
+        bool $show_feedback = false,
+        bool $show_correct_solution = false,
+        bool $show_manual_scoring = false,
+        bool $show_question_text = true,
+        bool $show_autosave_title = false,
+        bool $show_inline_feedback = false,
+    ): ?string {
+
         $template = new ilTemplate("tpl.il_as_qpl_cloze_question_output_solution.html", true, true, "Modules/TestQuestionPool");
         $output = $this->object->getClozeTextForHTMLOutput();
         $assClozeGapCombinationObject = new assClozeGapCombination();
@@ -975,14 +1006,14 @@ JS;
         foreach ($this->object->getGaps() as $gap_index => $gap) {
             $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_output_solution_gap.html", true, true, "Modules/TestQuestionPool");
             $found = [];
-            foreach ($user_solution as $solutionarray) {
+            foreach ($user_solutions as $solutionarray) {
                 if ($solutionarray["value1"] == $gap_index) {
                     $found = $solutionarray;
                 }
             }
 
             if ($active_id) {
-                if ($graphicalOutput) {
+                if ($graphical_output) {
                     // output of ok/not ok icons for user entered solutions
                     $details = $this->object->calculateReachedPoints($active_id, $pass, true, true);
                     $check = $details[$gap_index] ?? [];
@@ -995,7 +1026,7 @@ JS;
                             foreach ($gaps_used_in_combination as $key => $value) {
                                 $a = 0;
                                 if ($value == $combination_id) {
-                                    foreach ($user_solution as $solution_key => $solution_value) {
+                                    foreach ($user_solutions as $solution_key => $solution_value) {
                                         if ($solution_value['value1'] == $key) {
                                             $result_row = [];
                                             $result_row['gap_id'] = $solution_value['value1'];
@@ -1115,7 +1146,7 @@ JS;
             }
 
             $fb = $this->getSpecificFeedbackOutput(
-                $this->object->fetchIndexedValuesFromValuePairs($user_solution)
+                $this->object->fetchIndexedValuesFromValuePairs($user_solutions)
             );
             $feedback .= strlen($fb) ? $fb : '';
         }
