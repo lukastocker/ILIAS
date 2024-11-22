@@ -1364,7 +1364,7 @@ assessment#:#tst_enable_questionlist#:#Fragenliste
 assessment#:#tst_enable_questionlist_description#:#Teilnehmer können sich links neben den Testfragen eine Fragenliste anzeigen lassen.
 assessment#:#tst_ending_time#:#Ende
 assessment#:#tst_ending_time_before_starting_time#:#Bitte geben Sie für das Ende des Tests ein Datum ein, das nach dem Startdatum liegt.
-assessment#:#tst_ending_time_desc#:#Zeitpunkt, ab dem Teilnehmer keine Antworten mehr abgeben können. <b>Wichtig</b>: Benutzen Sie diese Option <b>nicht</b> für E-Klausuren/Fernklausuren. Verwenden Sie stattdessen die Funktion „Bearbeitungsdauer begrenzen“, siehe unten. Nur dann wird der Test serverseitig beendet und die letzte Eingabe bei Freitext-Fragen jedes Teilnehmers automatisch als Auto-Save-Inhalt gespeichert.
+assessment#:#tst_ending_time_desc#:#Zeitpunkt, ab dem Teilnehmer keine Antworten mehr abgeben können. <strong>Wichtig</strong>: Benutzen Sie diese Option <strong>nicht</strong> für E-Klausuren/Fernklausuren. Verwenden Sie stattdessen die Funktion „Bearbeitungsdauer begrenzen“, siehe unten. Nur dann wird der Test serverseitig beendet und die letzte Eingabe bei Freitext-Fragen jedes Teilnehmers automatisch als Auto-Save-Inhalt gespeichert.
 assessment#:#tst_enter_questionpool#:#Bitte geben Sie den Namen eines Fragenpools an, in dem die neue Frage abgelegt werden soll
 assessment#:#tst_eval_question_points#:#Fragenergebnisse für Testdurchlauf %s
 assessment#:#tst_eval_results_by_pass#:#Liste der Antworten für Testdurchlauf %s

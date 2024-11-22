@@ -1364,7 +1364,7 @@ assessment#:#tst_enable_questionlist#:#Show 'List of Questions’
 assessment#:#tst_enable_questionlist_description#:#Participants can switch on a list of the test questions on the left of the actual question.
 assessment#:#tst_ending_time#:#Finishing Time
 assessment#:#tst_ending_time_before_starting_time#:#Please enter a date for the end of the test that is after the start date.
-assessment#:#tst_ending_time_desc#:#Time from which participants can no longer submit answers. <b>Important</b>: Do <b>not</b> use this option for e-exams/distance exams. Instead, use the function 'Limit Duration of Test' (see below). Only then will the test be ended on the server side and each participant's last entry in Essay-Questions automatically saved as auto-save-content.
+assessment#:#tst_ending_time_desc#:#Time from which participants can no longer submit answers. <strong>Important</strong>: Do <strong>not</strong> use this option for e-exams/distance exams. Instead, use the function 'Limit Duration of Test' (see below). Only then will the test be ended on the server side and each participant's last entry in Essay-Questions automatically saved as auto-save-content.
 assessment#:#tst_enter_questionpool#:#Please enter a question pool name where the new question will be stored
 assessment#:#tst_eval_question_points#:#Question Results for Pass %s
 assessment#:#tst_eval_results_by_pass#:#List of Answers for Pass %s
