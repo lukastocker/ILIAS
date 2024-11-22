@@ -503,14 +503,34 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
             $fields[self::PROP_AUTH_MODE] = $auth_mode;
         }
 
-        $fields = $fields + [
+        $fields += [
             self::PROP_USERNAME => $field_factory
                 ->text($this->lng->txt('username'))
-                ->withRequired(true),
+                ->withRequired(
+                    true,
+                    $this->refinery->custom()->constraint(
+                        static function (string $value): bool {
+                            return $value !== '';
+                        },
+                        static function (Closure $lng, string $value): string {
+                            return $lng('auth_required_username');
+                        }
+                    )
+                ),
             self::PROP_PASSWORD => $field_factory
                 ->password($this->lng->txt('password'))
                 ->withRevelation(true)
-                ->withRequired(true)
+                ->withRequired(
+                    true,
+                    $this->refinery->custom()->constraint(
+                        static function (string $value): bool {
+                            return $value !== '';
+                        },
+                        static function (Closure $lng, string $value): string {
+                            return $lng('auth_required_password');
+                        }
+                    )
+                )
                 ->withAdditionalTransformation(
                     $this->refinery->custom()->transformation(
                         static function (ILIAS\Data\Password $value): string {
