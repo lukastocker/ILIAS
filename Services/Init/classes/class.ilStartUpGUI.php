@@ -736,7 +736,6 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
         }
 
         if (!$form_valid) {
-            $this->mainTemplate->setOnScreenMessage('failure', $this->lng->txt('err_wrong_login'));
             $this->showLoginPage($form);
             return;
         }
