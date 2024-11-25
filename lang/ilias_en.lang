@@ -8560,6 +8560,9 @@ dcl#:#dcl_confirm_delete_table#:#Do you really want to delete this table with it
 dcl#:#dcl_confirm_storing_records#:#Please validate and confirm your input.
 dcl#:#dcl_confirm_storing_records_no_permission#:#You have no permission to change the record afterwards.
 dcl#:#dcl_copy#:#Copy Data Collection
+dcl#:#dcl_copy_field#:#Copy
+dcl#:#dcl_copy_field_desc#:#Field to copy options stored in a different field of a table.
+dcl#:#dcl_copy_title#:#Copy of table and field
 dcl#:#dcl_create_date#:#Creation Date
 dcl#:#dcl_create_entry_rules#:#Entry Creation
 dcl#:#dcl_create_field#:#Create Field
@@ -8584,6 +8587,7 @@ dcl#:#dcl_delete_tables_no_selection#:#Please select at least one table to delet
 dcl#:#dcl_delete_views#:#Delete Views
 dcl#:#dcl_delete_views_no_selection#:#Please select at least one view to delete
 dcl#:#dcl_deleted_records#:#Successfully deleted %s Entries
+dcl#:#dcl_deprecated_copy#:#(Deprecated)
 dcl#:#dcl_desc#:#Descending Order (DESC)
 dcl#:#dcl_description#:#Field Description
 dcl#:#dcl_detailed_view#:#Single
@@ -8702,6 +8706,7 @@ dcl#:#dcl_number#:#Integer
 dcl#:#dcl_number_desc#:#Field for integer values (max. 9 digits). No decimals or fractions.
 dcl#:#dcl_online_info#:#Only if the Data Collection is online, users are able to use the Data Collection.
 dcl#:#dcl_order#:#Order
+dcl#:#dcl_origin_not_found#:#Origin field was not found!
 dcl#:#dcl_own_entries#:#Only own entries
 dcl#:#dcl_owner#:#Owner
 dcl#:#dcl_owner_description#:#The owner of the entry.
