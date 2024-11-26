@@ -16418,6 +16418,10 @@ p#copg-auto-save {
   color: #6f6f6f;
   padding: 20px;
 }
+.copg-new-content-placeholder .icon,
+.copg-content-placeholder-lso-curriculum .icon {
+  filter: invert(50%);
+}
 
 .il-copg-drag {
   width: 40px;
