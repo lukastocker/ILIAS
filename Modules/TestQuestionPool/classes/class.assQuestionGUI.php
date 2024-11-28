@@ -1231,7 +1231,7 @@ abstract class assQuestionGUI
                 $file->enableFileNameSelection("filename");
 
                 //$file->setSuffixes(array("doc","xls","png","jpg","gif","pdf"));
-                if ($_FILES && $_FILES["file"]["tmp_name"] && $file->checkInput()) {
+                if ($save && $_FILES && $_FILES["file"]["tmp_name"] && $file->checkInput()) {
                     if (!file_exists($this->object->getSuggestedSolutionPath())) {
                         ilFileUtils::makeDirParents($this->object->getSuggestedSolutionPath());
                     }
