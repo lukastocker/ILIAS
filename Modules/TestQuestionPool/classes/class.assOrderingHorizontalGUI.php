@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -119,7 +120,7 @@ class assOrderingHorizontalGUI extends assQuestionGUI implements ilGuiQuestionSc
     * Get the question solution output
     * @param integer $active_id             The active user id
     * @param integer $pass                  The test pass
-    * @param boolean $graphical_output       Show visual feedback for right/wrong answers
+    * @param boolean $graphicalOutput       Show visual feedback for right/wrong answers
     * @param boolean $result_output         Show the reached points for parts of the question
     * @param boolean $show_question_only    Show the question without the ILIAS content around
     * @param boolean $show_feedback         Show the question feedback
@@ -130,13 +131,13 @@ class assOrderingHorizontalGUI extends assQuestionGUI implements ilGuiQuestionSc
     public function getSolutionOutput(
         $active_id,
         $pass = null,
-        bool $graphical_output = false,
-        bool $result_output = false,
-        bool $show_question_only = true,
-        bool $show_feedback = false,
-        bool $show_correct_solution = false,
-        bool $show_manual_scoring = false,
-        bool $show_question_text = true
+        $graphicalOutput = false,
+        $result_output = false,
+        $show_question_only = true,
+        $show_feedback = false,
+        $show_correct_solution = false,
+        $show_manual_scoring = false,
+        $show_question_text = true
     ): string {
 
         $user_solutions = [];
@@ -149,7 +150,7 @@ class assOrderingHorizontalGUI extends assQuestionGUI implements ilGuiQuestionSc
             $user_solutions,
             $active_id,
             $pass,
-            $graphical_output,
+            $graphicalOutput,
             $result_output,
             $show_question_only,
             $show_feedback,

@@ -1734,13 +1734,13 @@ abstract class assQuestionGUI
     abstract public function getSolutionOutput(
         $active_id,
         $pass = null,
-        bool $graphical_output = false,
-        bool $result_output = false,
-        bool $show_question_only = true,
-        bool $show_feedback = false,
-        bool $show_correct_solution = false,
-        bool $show_manual_scoring = false,
-        bool $show_question_text = true
+        $graphicalOutput = false,
+        $result_output = false,
+        $show_question_only = true,
+        $show_feedback = false,
+        $show_correct_solution = false,
+        $show_manual_scoring = false,
+        $show_question_text = true
     ): string;
 
     public function renderSolutionOutput(

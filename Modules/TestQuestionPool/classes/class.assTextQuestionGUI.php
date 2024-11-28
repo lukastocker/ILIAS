@@ -138,7 +138,7 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
     * Get the question solution output
     * @param integer $active_id             The active user id
     * @param integer $pass                  The test pass
-    * @param boolean $graphical_output       Show visual feedback for right/wrong answers
+    * @param boolean $graphicalOutput       Show visual feedback for right/wrong answers
     * @param boolean $result_output         Show the reached points for parts of the question
     * @param boolean $show_question_only    Show the question without the ILIAS content around
     * @param boolean $show_feedback         Show the question feedback
@@ -149,7 +149,7 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
     public function getSolutionOutput(
         $active_id,
         $pass = null,
-        $graphical_output = false,
+        $graphicalOutput = false,
         $result_output = false,
         $show_question_only = true,
         $show_feedback = false,
@@ -168,7 +168,7 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
             $solution,
             $active_id,
             $pass,
-            $graphical_output,
+            $graphicalOutput,
             $result_output,
             $show_question_only,
             $show_feedback,
@@ -281,7 +281,7 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
     *
     * @param integer $active_id The active user id
     * @param integer $pass The test pass
-    * @param boolean $graphical_output Show visual feedback for right/wrong answers
+    * @param boolean $graphicalOutput Show visual feedback for right/wrong answers
     * @param boolean $result_output Show the reached points for parts of the question
     * @param boolean $show_question_only Show the question without the ILIAS content around
     * @param boolean $show_feedback Show the question feedback

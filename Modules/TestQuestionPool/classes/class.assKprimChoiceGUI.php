@@ -556,13 +556,13 @@ class assKprimChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringAd
     public function getSolutionOutput(
         $active_id,
         $pass = null,
-        bool $graphical_output = false,
-        bool $result_output = false,
-        bool $show_question_only = true,
-        bool $show_feedback = false,
-        bool $show_correct_solution = false,
-        bool $show_manual_scoring = false,
-        bool $show_question_text = true
+        $graphicalOutput = false,
+        $result_output = false,
+        $show_question_only = true,
+        $show_feedback = false,
+        $show_correct_solution = false,
+        $show_manual_scoring = false,
+        $show_question_text = true
     ): string {
         $user_solution = [];
 
@@ -590,7 +590,7 @@ class assKprimChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringAd
             $user_solution,
             $active_id,
             $pass,
-            $graphical_output,
+            $graphicalOutput,
             $result_output,
             $show_question_only,
             $show_feedback,
