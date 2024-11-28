@@ -443,7 +443,7 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         $user_solution = "";
         $solutions = $this->object->getSolutionValues($active_id, $pass);
         foreach ($solutions as $idx => $solution_value) {
-            $user_solution = $solution_value["value1"];
+            $user_solution = $solution_value['value1'];
         }
         return $user_solution;
     }
@@ -503,7 +503,7 @@ class assTextQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         if ($active_id) {
             $solutions = $this->object->getUserSolutionPreferingIntermediate($active_id, $pass);
             foreach ($solutions as $idx => $solution_value) {
-                $user_solution = $solution_value["value1"];
+                $user_solution = $solution_value['value1'];
             }
 
             if ($this->tiny_mce_enabled) {

@@ -241,7 +241,7 @@ class assErrorTextGUI extends assQuestionGUI implements ilGuiQuestionScoringAdju
      * current errorText question object.
      * @param	integer		$active_id             The active test id
      * @param	integer		$pass                  The test pass counter
-     * @param	boolean		$graphical_output       Show visual feedback for right/wrong answers
+     * @param	boolean		$graphicalOutput       Show visual feedback for right/wrong answers
      * @param	boolean		$result_output         Show the reached points for parts of the question
      * @param	boolean		$show_question_only    Show the question without the ILIAS content around
      * @param	boolean		$show_feedback         Show the question feedback

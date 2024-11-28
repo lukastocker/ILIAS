@@ -52,26 +52,6 @@ class assLongMenuGUI extends assQuestionGUI implements ilGuiQuestionScoringAdjus
 
     }
 
-    /**
-     * @param $active_id
-     * @param $pass
-     * @return array
-     */
-    /*
-    protected function getUserSolution($active_id, $pass): array
-    {
-        $user_solution = array();
-        if ($active_id) {
-            $solutions = $this->object->getSolutionValues($active_id, $pass, true);
-            // hey.
-            foreach ($solutions as $idx => $solution_value) {
-                $user_solution[$solution_value["value1"]] = $solution_value["value2"];
-            }
-            return $user_solution;
-        }
-        return $user_solution;
-    }*/
-
     public function getCommand($cmd)
     {
         return $cmd;
@@ -410,7 +390,7 @@ class assLongMenuGUI extends assQuestionGUI implements ilGuiQuestionScoringAdjus
 
         $user_solution = [];
         foreach ($user_solutions as $idx => $solution_value) {
-            $user_solution[$solution_value["value1"]] = $solution_value["value2"];
+            $user_solution[$solution_value['value1']] = $solution_value['value2'];
         }
 
 
@@ -479,7 +459,7 @@ class assLongMenuGUI extends assQuestionGUI implements ilGuiQuestionScoringAdjus
         if ($active_id) {
             $solutions = $this->object->getUserSolutionPreferingIntermediate($active_id, $pass);
             foreach ($solutions as $idx => $solution_value) {
-                $user_solution[$solution_value["value1"]] = $solution_value["value2"];
+                $user_solution[$solution_value['value1']] = $solution_value['value2'];
             }
         }
 

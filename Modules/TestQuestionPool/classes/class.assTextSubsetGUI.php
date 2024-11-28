@@ -217,12 +217,12 @@ class assTextSubsetGUI extends assQuestionGUI implements ilGuiQuestionScoringAdj
         $solutiontemplate = new ilTemplate("tpl.il_as_tst_solution_output.html", true, true, "Modules/TestQuestionPool");
         $available_answers = &$this->object->getAvailableAnswers();
         for ($i = 0; $i < $this->object->getCorrectAnswers(); $i++) {
-            if (!array_key_exists($i, $user_solutions) || (strcmp($user_solutions[$i]["value1"], "") == 0)) {
+            if (!array_key_exists($i, $user_solutions) || (strcmp($user_solutions[$i]['value1'], "") == 0)) {
             } else {
                 if (($active_id > 0) && (!$show_correct_solution)) {
                     if ($graphical_output) {
                         // output of ok/not ok icons for user entered solutions
-                        $index = $this->object->isAnswerCorrect($available_answers, $user_solutions[$i]["value1"]);
+                        $index = $this->object->isAnswerCorrect($available_answers, $user_solutions[$i]['value1']);
                         $correct = false;
                         if ($index !== false) {
                             unset($available_answers[$index]);
@@ -239,7 +239,7 @@ class assTextSubsetGUI extends assQuestionGUI implements ilGuiQuestionScoringAdj
                     }
                 }
                 $template->setCurrentBlock("textsubset_row");
-                $template->setVariable("SOLUTION", $this->escapeTemplatePlaceholders($user_solutions[$i]["value1"]));
+                $template->setVariable("SOLUTION", $this->escapeTemplatePlaceholders($user_solutions[$i]['value1']));
                 $template->setVariable("COUNTER", $i + 1);
                 if ($result_output) {
                     $points = $user_solutions[$i]["points"];
@@ -316,7 +316,7 @@ class assTextSubsetGUI extends assQuestionGUI implements ilGuiQuestionScoringAdj
             foreach ($solutions as $idx => $solution_value) {
                 if ($idx == $i) {
                     $template->setVariable("TEXTFIELD_VALUE", " value=\""
-                        . $this->escapeTemplatePlaceholders($solution_value["value1"])
+                        . $this->escapeTemplatePlaceholders($solution_value['value1'])
                         . "\"");
                 }
             }

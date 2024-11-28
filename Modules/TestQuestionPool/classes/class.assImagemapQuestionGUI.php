@@ -397,8 +397,8 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         $info = $this->object->getTestOutputSolutions($active_id, $pass);
 
         if (count($info)) {
-            if ($info[0]["value1"] !== "") {
-                $formAction .= "&selImage=" . $info[0]["value1"];
+            if ($info[0]['value1'] !== "") {
+                $formAction .= "&selImage=" . $info[0]['value1'];
             }
         }
 
@@ -496,7 +496,7 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
         if (is_array($user_solutions)) {
             $preview = new ilImagemapPreview($this->object->getImagePath() . $this->object->getImageFilename());
             foreach ($user_solutions as $idx => $solution_value) {
-                $value1 = $solution_value["value1"];
+                $value1 = $solution_value['value1'];
                 if (
                     $value1 === '' ||
                     !isset($this->object->answers[$value1])
@@ -667,9 +667,9 @@ class assImagemapQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
             $preview = new ilImagemapPreview($this->object->getImagePath() . $this->object->getImageFilename());
 
             foreach ($solutions as $idx => $solution_value) {
-                if ($solution_value["value1"] !== null) {
-                    $preview->addArea($solution_value["value1"], $this->object->answers[$solution_value["value1"]]->getArea(), $this->object->answers[$solution_value["value1"]]->getCoords(), $this->object->answers[$solution_value["value1"]]->getAnswertext(), "", "", true, $this->linecolor);
-                    $userSelection[$selectionIndex] = $solution_value["value1"];
+                if ($solution_value['value1'] !== null) {
+                    $preview->addArea($solution_value['value1'], $this->object->answers[$solution_value['value1']]->getArea(), $this->object->answers[$solution_value['value1']]->getCoords(), $this->object->answers[$solution_value['value1']]->getAnswertext(), "", "", true, $this->linecolor);
+                    $userSelection[$selectionIndex] = $solution_value['value1'];
 
                     $selectionIndex = $this->object->getIsMultipleChoice() ? ++$selectionIndex : $selectionIndex;
                 }

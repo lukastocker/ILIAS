@@ -177,8 +177,8 @@ class assOrderingHorizontalGUI extends assQuestionGUI implements ilGuiQuestionSc
         bool $show_inline_feedback = false,
     ): ?string {
         $elements = [];
-        if (count($user_solutions) && strlen($user_solutions[0]["value1"])) {
-            $elements = explode("{::}", $user_solutions[0]["value1"]);
+        if (count($user_solutions) && strlen($user_solutions[0]['value1'])) {
+            $elements = explode("{::}", $user_solutions[0]['value1']);
         }
 
         if (!count($elements)) {
@@ -331,7 +331,7 @@ JS;
             $solutions = $this->object->getTestOutputSolutions($active_id, $pass);
             // hey.
             if (is_array($solutions) && count($solutions) == 1) {
-                $elements = explode("{::}", $solutions[0]["value1"]);
+                $elements = explode("{::}", $solutions[0]['value1']);
             }
         }
         if (!is_array($solutions) || count($solutions) == 0) {

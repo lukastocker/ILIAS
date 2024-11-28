@@ -1007,7 +1007,7 @@ JS;
             $gaptemplate = new ilTemplate("tpl.il_as_qpl_cloze_question_output_solution_gap.html", true, true, "Modules/TestQuestionPool");
             $found = [];
             foreach ($user_solutions as $solutionarray) {
-                if ($solutionarray["value1"] == $gap_index) {
+                if ($solutionarray['value1'] == $gap_index) {
                     $found = $solutionarray;
                 }
             }
@@ -1083,12 +1083,12 @@ JS;
                 case CLOZE_TEXT:
                     $solutiontext = "";
                     if (($active_id > 0) && (!$show_correct_solution)) {
-                        if ((count($found) == 0) || (strlen(trim($found["value2"])) == 0)) {
+                        if ((count($found) == 0) || (strlen(trim($found['value2'])) == 0)) {
                             for ($chars = 0; $chars < $gap->getMaxWidth(); $chars++) {
                                 $solutiontext .= "&nbsp;";
                             }
                         } else {
-                            $solutiontext = ilLegacyFormElementsUtil::prepareFormOutput($found["value2"]);
+                            $solutiontext = ilLegacyFormElementsUtil::prepareFormOutput($found['value2']);
                         }
                     } else {
                         $solutiontext = $this-> getBestSolutionText($gap, $gap_index, $check_for_gap_combinations);
@@ -1101,12 +1101,12 @@ JS;
                 case CLOZE_SELECT:
                     $solutiontext = "";
                     if (($active_id > 0) && (!$show_correct_solution)) {
-                        if ((count($found) == 0) || (strlen(trim($found["value2"])) == 0)) {
+                        if ((count($found) == 0) || (strlen(trim($found['value2'])) == 0)) {
                             for ($chars = 0; $chars < $gap->getMaxWidth(); $chars++) {
                                 $solutiontext .= "&nbsp;";
                             }
                         } else {
-                            $item = $gap->getItem($found["value2"]);
+                            $item = $gap->getItem($found['value2']);
                             if (is_object($item)) {
                                 $solutiontext = ilLegacyFormElementsUtil::prepareFormOutput($item->getAnswertext());
                             } else {
@@ -1251,9 +1251,9 @@ JS;
 
                     $gaptemplate->setVariable("GAP_COUNTER", $gap_index);
                     foreach ($user_solution as $solution) {
-                        if (strcmp($solution["value1"], $gap_index) == 0) {
+                        if (strcmp($solution['value1'], $gap_index) == 0) {
                             $gaptemplate->setVariable("VALUE_GAP", " value=\"" . ilLegacyFormElementsUtil::prepareFormOutput(
-                                $solution["value2"]
+                                $solution['value2']
                             ) . "\"");
                         }
                     }
@@ -1271,8 +1271,8 @@ JS;
                             ilLegacyFormElementsUtil::prepareFormOutput($item->getAnswerText())
                         );
                         foreach ($user_solution as $solution) {
-                            if (strcmp($solution["value1"], $gap_index) == 0) {
-                                if (strcmp($solution["value2"], $item->getOrder()) == 0) {
+                            if (strcmp($solution['value1'], $gap_index) == 0) {
+                                if (strcmp($solution['value2'], $item->getOrder()) == 0) {
                                     $gaptemplate->setVariable("SELECT_GAP_SELECTED", " selected=\"selected\"");
                                 }
                             }
@@ -1295,9 +1295,9 @@ JS;
 
                     $gaptemplate->setVariable("GAP_COUNTER", $gap_index);
                     foreach ($user_solution as $solution) {
-                        if (strcmp($solution["value1"], $gap_index) == 0) {
+                        if (strcmp($solution['value1'], $gap_index) == 0) {
                             $gaptemplate->setVariable("VALUE_GAP", " value=\"" . ilLegacyFormElementsUtil::prepareFormOutput(
-                                $solution["value2"]
+                                $solution['value2']
                             ) . "\"");
                         }
                     }

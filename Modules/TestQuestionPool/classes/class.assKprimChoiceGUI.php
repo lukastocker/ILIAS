@@ -569,7 +569,6 @@ class assKprimChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringAd
         if (($active_id > 0) && (!$show_correct_solution)) {
             $solutions = $this->object->getSolutionValues($active_id, $pass);
             foreach ($solutions as $idx => $solution_value) {
-                //$user_solution[$solution_value['value1']] = $solution_value['value2'];
                 $user_solution[] = [
                     'value1' => $solution_value['value1'],
                     'value2' => $solution_value['value2']
@@ -578,7 +577,6 @@ class assKprimChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringAd
         } else {
             // take the correct solution instead of the user solution
             foreach ($this->object->getAnswers() as $answer) {
-                //$user_solution[$answer->getPosition()] = $answer->getCorrectness();
                 $user_solution[] = [
                     'value1' => $answer->getPosition(),
                     'value2' => $answer->getCorrectness()

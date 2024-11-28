@@ -296,7 +296,7 @@ class assSingleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringA
     ): ?string {
         $user_solution = '';
         foreach ($user_solutions as $idx => $solution_value) {
-            $user_solution = $solution_value["value1"];
+            $user_solution = $solution_value['value1'];
         }
 
         $keys = $this->getChoiceKeys();
@@ -476,7 +476,7 @@ class assSingleChoiceGUI extends assQuestionGUI implements ilGuiQuestionScoringA
         if ($active_id) {
             $solutions = $this->object->getTestOutputSolutions($active_id, $pass);
             foreach ($solutions as $idx => $solution_value) {
-                $user_solution = $solution_value["value1"];
+                $user_solution = $solution_value['value1'];
             }
         }
 

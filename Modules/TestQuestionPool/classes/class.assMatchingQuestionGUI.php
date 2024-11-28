@@ -866,10 +866,10 @@ class assMatchingQuestionGUI extends assQuestionGUI implements ilGuiQuestionScor
 
             $counter = 0;
             foreach ($solutions as $idx => $solution_value) {
-                if (($solution_value["value2"] > -1) && ($solution_value["value1"] > -1)) {
+                if (($solution_value['value2'] > -1) && ($solution_value['value1'] > -1)) {
                     $template->setCurrentBlock("matching_data");
-                    $template->setVariable("TERM_ID", $solution_value["value1"]);
-                    $template->setVariable("DEFINITION_ID", $solution_value["value2"]);
+                    $template->setVariable("TERM_ID", $solution_value['value1']);
+                    $template->setVariable("DEFINITION_ID", $solution_value['value2']);
                     $template->parseCurrentBlock();
                 }
 
