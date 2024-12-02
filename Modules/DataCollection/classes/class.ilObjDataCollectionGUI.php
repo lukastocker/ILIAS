@@ -117,8 +117,7 @@ class ilObjDataCollectionGUI extends ilObject2GUI
         global $DIC;
 
         $ilNavigationHistory = $DIC['ilNavigationHistory'];
-        $ilHelp = $DIC['ilHelp'];
-        $ilHelp->setScreenIdComponent('bibl');
+        $DIC->help()->setScreenIdComponent('dcl');
 
         // Navigation History
         $link = $this->ctrl->getLinkTarget($this, "render");
