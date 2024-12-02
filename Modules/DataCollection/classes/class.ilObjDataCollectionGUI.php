@@ -208,7 +208,6 @@ class ilObjDataCollectionGUI extends ilObject2GUI
                 $this->prepareOutput();
                 $recordview_gui = new ilDclDetailedViewGUI($this, $this->getTableViewId());
                 $this->ctrl->forwardCommand($recordview_gui);
-                $this->tabs->clearTargets();
                 $this->tabs->setBackTarget(
                     $this->lng->txt("back"),
                     $this->ctrl->getLinkTargetByClass(
