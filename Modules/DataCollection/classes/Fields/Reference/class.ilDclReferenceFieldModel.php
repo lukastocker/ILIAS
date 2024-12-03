@@ -34,7 +34,7 @@ class ilDclReferenceFieldModel extends ilDclBaseFieldModel
         if (
             $this->hasProperty(self::PROP_N_REFERENCE) ||
             $this->getProperty(self::PROP_REFERENCE) === null ||
-            ilDclCache::getFieldCache($this->getProperty(self::PROP_REFERENCE))->getTableId() === 0
+            ilDclCache::getFieldCache((int) $this->getProperty(self::PROP_REFERENCE))->getTableId() === 0
         ) {
             return null;
         }
