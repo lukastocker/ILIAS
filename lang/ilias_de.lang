@@ -11441,7 +11441,7 @@ mail#:#mail_orphaned_mails#:#Löschen alter oder verwaister Mails
 mail#:#mail_orphaned_mails_desc#:#Löscht verwaiste Mails und Mails die älter sind als der eingestellte Schwellenwert (einstellbar über den „Bearbeiten“-Link in der „Aktionen“-Spalte dieses Cron-Jobs).
 mail#:#mail_recipient_not_found#:#%1$s – Bitte korrigieren Sie die Angaben im „An”-Feld.###Modified as part of gender mainstreaming activities for ILIAS 8
 mail#:#mail_rename_folder#:#Ordner umbenennen
-mail#:#mail_roles#:#alle Personen mit folgenden lokalen Rollen
+mail#:#mail_roles#:#Alle Personen mit folgenden lokalen Rollen
 mail#:#mail_s#:#Mails
 mail#:#mail_salutation_anonymous#:#Hallo
 mail#:#mail_salutation_f#:#Sehr geehrte Frau
