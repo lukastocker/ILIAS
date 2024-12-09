@@ -16,11 +16,11 @@
  *
  *********************************************************************/
 
+declare(strict_types=1);
+
 use ILIAS\Filesystem\Stream\Streams;
 use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
-
-declare(strict_types=1);
 
 /**
  * Class ilObjLTIConsumer
