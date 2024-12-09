@@ -126,7 +126,7 @@ class ilDashboardRecommendedContentGUI extends ilDashboardBlockGUI
 
     public function removeMultipleEnabled(): bool
     {
-        return true;
+        return false;
     }
 
     public function getRemoveMultipleActionText(): string
