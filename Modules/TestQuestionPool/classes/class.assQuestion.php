@@ -1639,8 +1639,8 @@ abstract class assQuestion
                     $resolved_link = ilInternalLink::_getIdForImportId("MediaObject", $internal_link);
                     break;
             }
-            if ($resolved_link !== null) {
-                $resolved_link = $internal_link;
+            if ($resolved_link === null | $resolved_link === 0) {
+                $resolved_link = "il__{$matches[2]}_{$matches[3]}";
             }
         } else {
             $resolved_link = $internal_link;
