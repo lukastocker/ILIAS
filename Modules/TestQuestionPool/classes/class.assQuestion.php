@@ -305,12 +305,6 @@ abstract class assQuestion
         $import_mapping = $import->fromXML($item, $questionpool_id, $tst_id, $tst_object, $question_counter, $import_mapping);
 
         foreach ($solutionhints as $hint) {
-            $h = new ilAssQuestionHint();
-            $h->setQuestionId($import->getQuestionId());
-            $h->setIndex($hint['index'] ?? "");
-            $h->setPoints($hint['points'] ?? "");
-            $h->setText($hint['txt'] ?? "");
-            $h->save();
             $this->importHint($import->getQuestionId(), $hint);
         }
         return $import_mapping;
