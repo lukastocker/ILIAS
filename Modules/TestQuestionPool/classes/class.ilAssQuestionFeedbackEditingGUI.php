@@ -160,11 +160,7 @@ class ilAssQuestionFeedbackEditingGUI
                 break;
 
             default:
-                if ($this->questionOBJ->selfassessmenteditingmode) {
-                    $this->tabs->setTabActive('feedback');
-                } else {
-                    $this->tabs->setTabActive('tst_feedback');
-                }
+                $this->tabs->setTabActive('feedback');
                 $cmd .= 'Cmd';
                 $this->$cmd();
                 break;
