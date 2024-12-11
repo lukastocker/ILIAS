@@ -283,7 +283,7 @@ final class ilEmployeeTalkTableGUI extends ilTable2GUI
         }
 
         $offset = $this->getOffset();
-        $limit = $this->getLimit() + 1;
+        $limit = $this->getLimit();
 
         $this->setMaxCount(count($data));
 
