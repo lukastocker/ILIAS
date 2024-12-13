@@ -2723,6 +2723,9 @@ class ilObjTest extends ilObject implements ilMarkSchemaAware
                         $questionsequence = unserialize($seqrow["sequence"]);
 
                         foreach ($questionsequence as $sidx => $seq) {
+                            if (!isset($questionsbysequence[$seq])) {
+                                continue;
+                            }
                             $data->getParticipant($active_id)->addQuestion(
                                 $questionsbysequence[$seq]['original_id'] ?? 0,
                                 $questionsbysequence[$seq]['question_fi'],
