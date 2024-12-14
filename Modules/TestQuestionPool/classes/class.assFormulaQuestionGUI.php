@@ -783,6 +783,15 @@ class assFormulaQuestionGUI extends assQuestionGUI
         $user_solution = [];
         if ($pass !== null) {
             $user_solution = $this->object->getVariableSolutionValuesForPass($active_id, $pass);
+        } else {
+            $user_solution = array_reduce(
+                $this->object->fetchAllVariables($this->object->getQuestion()),
+                static function (array $c, assFormulaQuestionVariable $v): array {
+                    $c[$v->getVariable()] = $v->getVariable();
+                    return $c;
+                },
+                []
+            );
         }
 
         if (($active_id > 0) && (!$show_correct_solution)) {
