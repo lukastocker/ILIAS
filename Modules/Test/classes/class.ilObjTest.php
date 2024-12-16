@@ -8109,6 +8109,10 @@ class ilObjTest extends ilObject implements ilMarkSchemaAware
                     [$active_id]
                 );
 
+                if ($reached < 0.0) {
+                    $reached = 0.0;
+                }
+
                 $mark_short_name = $mark->getShortName();
                 if ($mark_short_name === '') {
                     $mark_short_name = ' ';
@@ -8205,7 +8209,8 @@ class ilObjTest extends ilObject implements ilMarkSchemaAware
 
             $row = $this->db->fetchAssoc($result);
 
-            if ($row['reachedpoints'] === null) {
+            if ($row['reachedpoints'] === null
+                || $row['reachedpoints'] < 0.0) {
                 $row['reachedpoints'] = 0.0;
             }
             if ($row['hint_count'] === null) {
@@ -8225,7 +8230,7 @@ class ilObjTest extends ilObject implements ilMarkSchemaAware
                         'pass' => ['integer', $pass]
                     ],
                     [
-                        'points' => ['float', $row['reachedpoints'] ?: 0],
+                        'points' => ['float', $row['reachedpoints']],
                         'maxpoints' => ['float', $data['points']],
                         'questioncount' => ['integer', $data['count']],
                         'answeredquestions' => ['integer', $row['answeredquestions']],
@@ -8251,10 +8256,10 @@ class ilObjTest extends ilObject implements ilMarkSchemaAware
         return [
             'active_fi' => $active_id,
             'pass' => $pass,
-            'points' => $row["reachedpoints"] ?? 0.0,
-            'maxpoints' => $data["points"],
-            'questioncount' => $data["count"],
-            'answeredquestions' => $row["answeredquestions"],
+            'points' => $row['reachedpoints'],
+            'maxpoints' => $data['points'],
+            'questioncount' => $data['count'],
+            'answeredquestions' => $row['answeredquestions'],
             'workingtime' => $time,
             'tstamp' => time(),
             'hint_count' => $row['hint_count'],
