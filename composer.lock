@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2caf80f1f38cbe25daa5384519ad9f5",
+    "content-hash": "51e64f75858b4bfd28bfcbe787e3d33e",
     "packages": [
         {
             "name": "brick/math",
@@ -213,16 +213,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.8.3",
+            "version": "2.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "2a7c71266b2545a3bed9f4860734081963f6e688"
+                "reference": "112e37d1dca22b3fdb81cf3524ab4994f47fdb8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/2a7c71266b2545a3bed9f4860734081963f6e688",
-                "reference": "2a7c71266b2545a3bed9f4860734081963f6e688",
+                "url": "https://api.github.com/repos/composer/composer/zipball/112e37d1dca22b3fdb81cf3524ab4994f47fdb8c",
+                "reference": "112e37d1dca22b3fdb81cf3524ab4994f47fdb8c",
                 "shasum": ""
             },
             "require": {
@@ -307,7 +307,7 @@
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
                 "security": "https://github.com/composer/composer/security/policy",
-                "source": "https://github.com/composer/composer/tree/2.8.3"
+                "source": "https://github.com/composer/composer/tree/2.8.4"
             },
             "funding": [
                 {
@@ -323,7 +323,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-17T12:13:04+00:00"
+            "time": "2024-12-11T10:57:47+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -4850,26 +4850,26 @@
         },
         {
             "name": "simplesamlphp/composer-module-installer",
-            "version": "v1.4.0",
+            "version": "v1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplesamlphp/composer-module-installer.git",
-                "reference": "edb2155d200e2a208816d06f42cfa78bfd9e7cf4"
+                "reference": "7bf413c2d28e48dff6755d74a7e45087cf144604"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/composer-module-installer/zipball/edb2155d200e2a208816d06f42cfa78bfd9e7cf4",
-                "reference": "edb2155d200e2a208816d06f42cfa78bfd9e7cf4",
+                "url": "https://api.github.com/repos/simplesamlphp/composer-module-installer/zipball/7bf413c2d28e48dff6755d74a7e45087cf144604",
+                "reference": "7bf413c2d28e48dff6755d74a7e45087cf144604",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^2.6",
-                "php": "^8.1",
-                "simplesamlphp/assert": "^1.6"
+                "composer-plugin-api": "^1.1 || ^2.0",
+                "php": "^7.4 || ^8.0",
+                "simplesamlphp/assert": "^0.8.0 || ^1.0"
             },
             "require-dev": {
-                "composer/composer": "^2.8.3",
-                "simplesamlphp/simplesamlphp-test-framework": "^1.8.0"
+                "composer/composer": "^2.4",
+                "simplesamlphp/simplesamlphp-test-framework": "^1.2.1"
             },
             "type": "composer-plugin",
             "extra": {
@@ -4887,9 +4887,9 @@
             "description": "A Composer plugin that allows installing SimpleSAMLphp modules through Composer.",
             "support": {
                 "issues": "https://github.com/simplesamlphp/composer-module-installer/issues",
-                "source": "https://github.com/simplesamlphp/composer-module-installer/tree/v1.4.0"
+                "source": "https://github.com/simplesamlphp/composer-module-installer/tree/v1.3.5"
             },
-            "time": "2024-12-08T16:57:03+00:00"
+            "time": "2024-11-16T09:42:27+00:00"
         },
         {
             "name": "simplesamlphp/saml2",
@@ -7994,16 +7994,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.17.0",
+            "version": "v3.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "d3a64b742a5e74c57e3964d766e1032982145872"
+                "reference": "677ef8da6497a03048192aeeb5aa3018e379ac71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/d3a64b742a5e74c57e3964d766e1032982145872",
-                "reference": "d3a64b742a5e74c57e3964d766e1032982145872",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/677ef8da6497a03048192aeeb5aa3018e379ac71",
+                "reference": "677ef8da6497a03048192aeeb5aa3018e379ac71",
                 "shasum": ""
             },
             "require": {
@@ -8058,7 +8058,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.17.0"
+                "source": "https://github.com/twigphp/Twig/tree/v3.17.1"
             },
             "funding": [
                 {
@@ -8070,7 +8070,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-10T15:19:11+00:00"
+            "time": "2024-12-12T09:58:10+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -11431,5 +11431,5 @@
         "ext-mbstring": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
