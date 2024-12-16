@@ -104,14 +104,14 @@ class ilTestEvaluationFactory
                     usr_data.title,
                     usr_data.login
 
-        FROM        tst_test_result, qpl_questions, tst_active
+        FROM        tst_active
 
+        LEFT JOIN tst_test_result ON tst_active.active_id = tst_test_result.active_fi
         LEFT JOIN tst_pass_result ON tst_active.active_id = tst_pass_result.active_fi
+        LEFT JOIN qpl_questions ON qpl_questions.question_id = tst_test_result.question_fi
         LEFT JOIN usr_data ON tst_active.user_fi = usr_data.usr_id
 
-        WHERE       tst_active.active_id = tst_test_result.active_fi
-        AND         qpl_questions.question_id = tst_test_result.question_fi
-        AND         tst_active.test_fi = %s
+        WHERE       tst_active.test_fi = %s
         AND         %s
 
         ORDER BY    tst_active.active_id ASC, tst_test_result.pass ASC, tst_test_result.tstamp DESC
@@ -185,14 +185,16 @@ class ilTestEvaluationFactory
                 $pass->setDeductedHintPoints($row['hint_points']);
             }
 
-            $pass->addAnsweredQuestion(
-                $row["question_fi"],
-                $row["qpl_maxpoints"],
-                $row["result_points"],
-                (bool) $row['answered'],
-                null,
-                $row['manual']
-            );
+            if ($row['question_fi'] !== null) {
+                $pass->addAnsweredQuestion(
+                    $row["question_fi"],
+                    $row["qpl_maxpoints"],
+                    $row["result_points"],
+                    (bool) $row['answered'],
+                    null,
+                    $row['manual']
+                );
+            }
 
             $user_eval_data->addPass($row['pass'], $pass);
 
