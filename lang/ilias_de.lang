@@ -3966,8 +3966,8 @@ common#:#enable_export_scorm_desc#:#Anzeige persönlicher Daten in den Protokoll
 common#:#enable_fora_statistics#:#Forenstatistik aktivieren
 common#:#enable_fora_statistics_desc#:#Nur wenn diese aktiviert ist, kann auf die Forenstatistik zugegriffen werden.
 common#:#enable_hide_user_toggle#:#Mitglied darf Benachrichtigung nicht deaktivieren
-common#:#enable_hist_user_comments#:#Überarbeitungskommentare###Modified as part of gender mainstreaming activities for ILIAS 8
-common#:#enable_hist_user_comments_desc#:#Sie können Überarbeitungskommentare zu Seiten hinterlegen. Die Kommentare werden im Reiter „Inhalt“, Unterreiter „Verlauf“ des Lernmoduls angezeigt und unterstützen gemeinsames Editieren.###Modified as part of gender mainstreaming activities for ILIAS 8
+common#:#enable_hist_user_comments#:#Überarbeitungskommentare
+common#:#enable_hist_user_comments_desc#:#Personen mit Schreibrecht können Kommentare zu überarbeiteten Seiten hinzufügen. Die Kommentare werden im Reiter „Inhalt“, Unterreiter „Verlauf“ des Lernmoduls angezeigt.
 common#:#enable_multi_download#:#„Mehrere Objekte herunterladen“ aktivieren
 common#:#enable_multi_download_info#:#Wenn aktiviert, können mehrere Ordner bzw. Dateien gleichzeitig ausgewählt werden, um sie dann als Zip-Archiv herunterzuladen.
 common#:#enable_password_assistance#:#Passwort-Unterstützung aktivieren

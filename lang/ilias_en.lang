@@ -3966,8 +3966,8 @@ common#:#enable_export_scorm_desc#:#Display of Personal Data in the Protocol Dat
 common#:#enable_fora_statistics#:#Enable Statistics in Forum
 common#:#enable_fora_statistics_desc#:#If disabled, nobody is able to access the forum statistics.
 common#:#enable_hide_user_toggle#:#Member is not allowed to deactivate
-common#:#enable_hist_user_comments#:#Enable user comments in history
-common#:#enable_hist_user_comments_desc#:#Give authors the opportunity to add comments to the history log of pages.
+common#:#enable_hist_user_comments#:#Revision Comments
+common#:#enable_hist_user_comments_desc#:#Allows users with edit permission to add comments to revised pages. The comments are shown in tab 'Content', sub-tab 'History'.
 common#:#enable_multi_download#:#'Download of multiple objects' enabled
 common#:#enable_multi_download_info#:#Multiple folders/files can be selected and downloaded as zip archive.
 common#:#enable_password_assistance#:#Enable Password Assistance
@@ -6161,7 +6161,7 @@ content#:#cont_active_from#:#Activation Start
 content#:#cont_active_to#:#Activation End
 content#:#cont_add_area#:#Add Area
 content#:#cont_add_cell#:#Add Column
-content#:#cont_add_change_comment#:#Add change comment
+content#:#cont_add_change_comment#:#Add Revision Comment
 content#:#cont_add_definition#:#Add Definition
 content#:#cont_add_elements#:#<b>Click</b> on a plus symbol to <b>add</b> a new element.
 content#:#cont_add_file#:#Add File
