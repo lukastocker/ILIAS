@@ -32,7 +32,7 @@ class ilContentStyle9Migration implements Migration
 
     public function getDefaultAmountOfStepsPerRun(): int
     {
-        return 1000;
+        return 50000;
     }
 
     public function getPreconditions(Environment $environment): array
@@ -76,7 +76,6 @@ class ilContentStyle9Migration implements Migration
             ["text_block", "div"]
         );
         if ($rec = $this->db->fetchAssoc($set)) {
-
             // check, if a similar parameter is not already been set
             $set2 = $this->db->queryF(
                 "SELECT * FROM style_parameter " .
@@ -103,6 +102,13 @@ class ilContentStyle9Migration implements Migration
                     [    // where
                         "id" => ["integer", $rec["style_id"]]
                     ]
+                );
+            } else {
+                $this->db->manipulateF(
+                    "DELETE FROM style_parameter WHERE " .
+                    " id = %s",
+                    ["integer"],
+                    [$rec["id"]]
                 );
             }
         }
