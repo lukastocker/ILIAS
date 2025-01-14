@@ -18,8 +18,6 @@
 
 declare(strict_types=1);
 
-declare(strict_types=1);
-
 /**
  * class ilRbacReview
  *  Contains Review functions of core Rbac.
@@ -857,7 +855,7 @@ class ilRbacReview
             // all (assignable) roles
             case self::FILTER_ALL:
                 yield from $this->getAssignableRolesGenerator(true, true, $title_filter);
-
+                return;
                 // all (assignable) global roles
                 // no break
             case self::FILTER_ALL_GLOBAL:
