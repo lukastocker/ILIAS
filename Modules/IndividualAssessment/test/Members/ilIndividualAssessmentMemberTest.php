@@ -169,24 +169,6 @@ class ilIndividualAssessmentMemberTest extends TestCase
         $this->assertEquals('2021-11-25', $obj->changeTime()->format('Y-m-d'));
     }
 
-    public function test_notify(): void
-    {
-        $this->grading
-            ->expects($this->once())
-            ->method("isNotify")
-            ->willReturn(true)
-        ;
-
-        $obj = new ilIndividualAssessmentMember(
-            $this->iass_object,
-            $this->obj_user,
-            $this->grading,
-            22222
-        );
-
-        $this->assertTrue($obj->notify());
-    }
-
     public function test_maybeSendNotification_not_finalized(): void
     {
         $notificator = $this->createMock(ilIndividualAssessmentNotificator::class);
@@ -217,11 +199,6 @@ class ilIndividualAssessmentMemberTest extends TestCase
             ->expects($this->once())
             ->method("isFinalized")
             ->willReturn(true)
-        ;
-        $this->grading
-            ->expects($this->once())
-            ->method("isNotify")
-            ->willReturn(false)
         ;
 
         $obj = new ilIndividualAssessmentMember(
@@ -668,23 +645,6 @@ class ilIndividualAssessmentMemberTest extends TestCase
         $this->assertEquals("file_name", $obj->fileName());
     }
 
-    public function test_viewFile(): void
-    {
-        $this->grading
-            ->expects($this->once())
-            ->method("isFileVisible")
-            ->willReturn(true)
-        ;
-
-        $obj = new ilIndividualAssessmentMember(
-            $this->iass_object,
-            $this->obj_user,
-            $this->grading,
-            22222
-        );
-
-        $this->assertTrue($obj->viewFile());
-    }
 
     public function test_getGrading(): void
     {

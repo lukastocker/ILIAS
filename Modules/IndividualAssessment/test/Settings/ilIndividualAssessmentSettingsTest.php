@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use ILIAS\UI\Component\Input\Field\Section;
@@ -35,6 +35,8 @@ class ilIndividualAssessmentSettingsTest extends TestCase
         $record_remplate = 'You should ask these things';
         $event_time_place_required = true;
         $file_required = false;
+        $file_visible = false;
+        $result_visible = false;
 
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
@@ -43,7 +45,9 @@ class ilIndividualAssessmentSettingsTest extends TestCase
             $content,
             $record_remplate,
             $event_time_place_required,
-            $file_required
+            $file_required,
+            $file_visible,
+            $result_visible
         );
         $this->assertEquals($obj_id, $settings->getObjId());
         $this->assertEquals($title, $settings->getTitle());
@@ -52,6 +56,8 @@ class ilIndividualAssessmentSettingsTest extends TestCase
         $this->assertEquals($record_remplate, $settings->getRecordTemplate());
         $this->assertTrue($settings->isEventTimePlaceRequired());
         $this->assertFalse($settings->isFileRequired());
+        $this->assertFalse($settings->isFileVisible());
+        $this->assertFalse($settings->isResultVisible());
     }
 
     public function test_to_form_input()
@@ -79,6 +85,8 @@ class ilIndividualAssessmentSettingsTest extends TestCase
         $record_remplate = 'You should ask these things';
         $event_time_place_required = true;
         $file_required = false;
+        $file_visible = false;
+        $result_visible = false;
 
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
@@ -87,7 +95,9 @@ class ilIndividualAssessmentSettingsTest extends TestCase
             $content,
             $record_remplate,
             $event_time_place_required,
-            $file_required
+            $file_required,
+            $file_visible,
+            $result_visible
         );
 
         $input = $settings->toFormInput(

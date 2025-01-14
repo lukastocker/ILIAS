@@ -55,8 +55,9 @@ class ilIndividualAssessmentMember
         if (!$this->finalized()) {
             throw new ilIndividualAssessmentException('must finalize before notification');
         }
-        if ($this->notify()) {
-            $notificator = (string) $this->LPStatus() === (string) ilLPStatus::LP_STATUS_COMPLETED_NUM ?
+
+        if ($this->iass->getSettings()->isResultVisible()) {
+            $notificator = (string) $this->LPStatus() === (string) ilIndividualAssessmentMembers::LP_COMPLETED ?
                 $notificator->withOccasionCompleted() :
                 $notificator->withOccasionFailed();
             $notificator->withReceiver($this)->send();
@@ -150,7 +151,13 @@ class ilIndividualAssessmentMember
 
     public function viewFile(): bool
     {
+        throw new \Exception('viewFile from Member/Grading');
         return $this->grading->isFileVisible();
+    }
+    public function notify(): bool
+    {
+        throw new \Exception('notify from Member/Grading');
+        return $this->grading->isNotify();
     }
 
     public function LPStatus(): int
@@ -166,11 +173,6 @@ class ilIndividualAssessmentMember
     public function eventTime(): ?DateTimeImmutable
     {
         return $this->grading->getEventTime();
-    }
-
-    public function notify(): bool
-    {
-        return $this->grading->isNotify();
     }
 
     public function finalized(): bool

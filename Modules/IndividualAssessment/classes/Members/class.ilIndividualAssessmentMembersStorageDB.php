@@ -144,11 +144,9 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             (string) $record[ilIndividualAssessmentMembers::FIELD_RECORD],
             (string) $record[ilIndividualAssessmentMembers::FIELD_INTERNAL_NOTE],
             (string) $record[ilIndividualAssessmentMembers::FIELD_FILE_NAME],
-            (bool) $record[ilIndividualAssessmentMembers::FIELD_USER_VIEW_FILE],
             (int) $record[ilIndividualAssessmentMembers::FIELD_LEARNING_PROGRESS],
             (string) $record[ilIndividualAssessmentMembers::FIELD_PLACE],
             $event_time,
-            (bool) $record[ilIndividualAssessmentMembers::FIELD_NOTIFY],
             (bool) $record[ilIndividualAssessmentMembers::FIELD_FINALIZED]
         );
     }
@@ -175,11 +173,9 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             ilIndividualAssessmentMembers::FIELD_INTERNAL_NOTE => ["text", $member->internalNote()],
             ilIndividualAssessmentMembers::FIELD_PLACE => ["text", $member->place()],
             ilIndividualAssessmentMembers::FIELD_EVENTTIME => ["integer", $event_time],
-            ilIndividualAssessmentMembers::FIELD_NOTIFY => ["integer", $member->notify()],
             ilIndividualAssessmentMembers::FIELD_FINALIZED => ["integer", $member->finalized()],
             ilIndividualAssessmentMembers::FIELD_NOTIFICATION_TS => ["integer", $member->notificationTS()],
             ilIndividualAssessmentMembers::FIELD_FILE_NAME => ["text", $member->fileName()],
-            ilIndividualAssessmentMembers::FIELD_USER_VIEW_FILE => ["integer", $member->viewFile()],
             ilIndividualAssessmentMembers::FIELD_CHANGER_ID => ["integer", $member->changerId()],
             ilIndividualAssessmentMembers::FIELD_CHANGE_TIME => ["string", $this->getActualDateTime()]
         ];
@@ -219,8 +215,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             $obj->getId()
         );
     }
-
-
 
     protected function loadMemberQuery(): string
     {
@@ -286,10 +280,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
                 "text",
                 $record[ilIndividualAssessmentMembers::FIELD_LEARNING_PROGRESS]
             ],
-            ilIndividualAssessmentMembers::FIELD_NOTIFY => [
-                "integer",
-                $record[ilIndividualAssessmentMembers::FIELD_NOTIFY] ?? 0
-            ],
             ilIndividualAssessmentMembers::FIELD_FINALIZED => [
                 "integer",
                 0
@@ -340,13 +330,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
                 [
                     "text",
                     $record[ilIndividualAssessmentMembers::FIELD_FILE_NAME]
-                ];
-        }
-        if (isset($record[ilIndividualAssessmentMembers::FIELD_USER_VIEW_FILE])) {
-            $values[ilIndividualAssessmentMembers::FIELD_USER_VIEW_FILE] =
-                [
-                    "integer",
-                    $record[ilIndividualAssessmentMembers::FIELD_USER_VIEW_FILE]
                 ];
         }
         if (isset($record[ilIndividualAssessmentMembers::FIELD_CHANGER_ID])) {

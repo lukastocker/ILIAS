@@ -383,10 +383,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ilIndividualAssessmentMembers::FIELD_RECORD => "record",
             ilIndividualAssessmentMembers::FIELD_INTERNAL_NOTE => "internal_note",
             ilIndividualAssessmentMembers::FIELD_FILE_NAME => "file_name",
-            ilIndividualAssessmentMembers::FIELD_USER_VIEW_FILE => true,
             ilIndividualAssessmentMembers::FIELD_LEARNING_PROGRESS => 33,
             ilIndividualAssessmentMembers::FIELD_PLACE => "place",
-            ilIndividualAssessmentMembers::FIELD_NOTIFY => true,
             ilIndividualAssessmentMembers::FIELD_FINALIZED => true
         ];
 
@@ -404,9 +402,7 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
         $this->assertEquals("record", $member->record());
         $this->assertEquals("internal_note", $member->internalNote());
         $this->assertEquals("file_name", $member->fileName());
-        $this->assertTrue($member->viewFile());
         $this->assertEquals(33, $member->LPStatus());
-        $this->assertTrue($member->notify());
         $this->assertTrue($member->finalized());
     }
 
@@ -458,11 +454,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
         ;
         $member
             ->expects($this->once())
-            ->method("notify")
-            ->willReturn(true)
-        ;
-        $member
-            ->expects($this->once())
             ->method("finalized")
             ->willReturn(true)
         ;
@@ -475,11 +466,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ->expects($this->once())
             ->method("fileName")
             ->willReturn("fileName")
-        ;
-        $member
-            ->expects($this->once())
-            ->method("viewFile")
-            ->willReturn(true)
         ;
         $member
             ->expects($this->once())
@@ -502,11 +488,9 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ilIndividualAssessmentMembers::FIELD_INTERNAL_NOTE => ["text", "internalNote"],
             ilIndividualAssessmentMembers::FIELD_PLACE => ["text", "place"],
             ilIndividualAssessmentMembers::FIELD_EVENTTIME => ["integer", $timestamp],
-            ilIndividualAssessmentMembers::FIELD_NOTIFY => ["integer", true],
             ilIndividualAssessmentMembers::FIELD_FINALIZED => ["integer", true],
             ilIndividualAssessmentMembers::FIELD_NOTIFICATION_TS => ["integer", $timestamp],
             ilIndividualAssessmentMembers::FIELD_FILE_NAME => ["text", "fileName"],
-            ilIndividualAssessmentMembers::FIELD_USER_VIEW_FILE => ["integer", true],
             ilIndividualAssessmentMembers::FIELD_CHANGER_ID => ["integer", 55],
             ilIndividualAssessmentMembers::FIELD_CHANGE_TIME => ["string", $obj->getActualDateTime()]
         ];
@@ -578,11 +562,9 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ilIndividualAssessmentMembers::FIELD_INTERNAL_NOTE => "internalNote",
             ilIndividualAssessmentMembers::FIELD_PLACE => "place",
             ilIndividualAssessmentMembers::FIELD_EVENTTIME => $timestamp,
-            ilIndividualAssessmentMembers::FIELD_NOTIFY => true,
             ilIndividualAssessmentMembers::FIELD_FINALIZED => 0,
             ilIndividualAssessmentMembers::FIELD_NOTIFICATION_TS => -1,
             ilIndividualAssessmentMembers::FIELD_FILE_NAME => "fileName",
-            ilIndividualAssessmentMembers::FIELD_USER_VIEW_FILE => true,
             ilIndividualAssessmentMembers::FIELD_CHANGER_ID => 55,
             ilIndividualAssessmentMembers::FIELD_CHANGE_TIME => $obj->getActualDateTime()
         ];
@@ -591,7 +573,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             "obj_id" => ["integer", 11],
             ilIndividualAssessmentMembers::FIELD_USR_ID => ["integer", 22],
             ilIndividualAssessmentMembers::FIELD_LEARNING_PROGRESS => ["text", 33],
-            ilIndividualAssessmentMembers::FIELD_NOTIFY => ["integer", true],
             ilIndividualAssessmentMembers::FIELD_FINALIZED => ["integer", 0],
             ilIndividualAssessmentMembers::FIELD_NOTIFICATION_TS => ["integer", -1],
             ilIndividualAssessmentMembers::FIELD_EXAMINER_ID => ["integer", 44],
@@ -600,7 +581,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ilIndividualAssessmentMembers::FIELD_PLACE => ["text", "place"],
             ilIndividualAssessmentMembers::FIELD_EVENTTIME => ["integer", $timestamp],
             ilIndividualAssessmentMembers::FIELD_FILE_NAME => ["text", "fileName"],
-            ilIndividualAssessmentMembers::FIELD_USER_VIEW_FILE => ["integer", true],
             ilIndividualAssessmentMembers::FIELD_CHANGER_ID => ["integer", 55],
             ilIndividualAssessmentMembers::FIELD_CHANGE_TIME => ["text", $obj->getActualDateTime()]
         ];

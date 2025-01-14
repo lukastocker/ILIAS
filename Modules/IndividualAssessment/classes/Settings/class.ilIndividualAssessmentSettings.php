@@ -27,30 +27,17 @@ use ILIAS\Refinery\Factory as Refinery;
  */
 class ilIndividualAssessmentSettings
 {
-    protected int $obj_id;
-    protected string $title;
-    protected string $description;
-    protected string $content;
-    protected string $record_template;
-    protected bool $event_time_place_required;
-    protected bool $file_required;
-
     public function __construct(
-        int $obj_id,
-        string $title,
-        string $description,
-        string $content,
-        string $record_template,
-        bool $event_time_place_required,
-        bool $file_required
+        protected int $obj_id,
+        protected string $title,
+        protected string $description,
+        protected string $content,
+        protected string $record_template,
+        protected bool $event_time_place_required,
+        protected bool $file_required,
+        protected bool $file_visible,
+        protected bool $result_visible
     ) {
-        $this->obj_id = $obj_id;
-        $this->title = $title;
-        $this->description = $description;
-        $this->content = $content;
-        $this->record_template = $record_template;
-        $this->event_time_place_required = $event_time_place_required;
-        $this->file_required = $file_required;
     }
 
     /**
@@ -110,6 +97,16 @@ class ilIndividualAssessmentSettings
         return $this->file_required;
     }
 
+    public function isFileVisible(): bool
+    {
+        return $this->file_visible;
+    }
+
+    public function isResultVisible(): bool
+    {
+        return $this->result_visible;
+    }
+
     public function toFormInput(
         Field\Factory $input,
         ilLanguage $lng,
@@ -129,7 +126,11 @@ class ilIndividualAssessmentSettings
                 $input->checkbox($lng->txt("iass_event_time_place_required"), $lng->txt("iass_event_time_place_required_info"))
                     ->withValue($this->isEventTimePlaceRequired()),
                 $input->checkbox($lng->txt("iass_file_required"), $lng->txt("iass_file_required_info"))
-                    ->withValue($this->isFileRequired())
+                    ->withValue($this->isFileRequired()),
+                $input->checkbox($lng->txt("iass_file_visible_examinee"), '')
+                    ->withValue($this->isFileVisible()),
+                $input->checkbox($lng->txt("iass_notify"), $lng->txt("iass_notify_explanation"))
+                    ->withValue($this->isResultVisible()),
             ],
             $lng->txt("settings")
         )->withAdditionalTransformation(

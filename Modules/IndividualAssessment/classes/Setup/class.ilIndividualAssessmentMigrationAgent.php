@@ -58,13 +58,14 @@ class ilIndividualAssessmentMigrationAgent implements Setup\Agent
 
     public function getStatusObjective(Setup\Metrics\Storage $storage): Setup\Objective
     {
-        return new Setup\Objective\NullObjective();
+        return new ilIndAssSettingsMigrationMetricsCollectedObjective($storage);
     }
 
     public function getMigrations(): array
     {
         return [
-            new IndAssStorageMigration()
+            new IndAssStorageMigration(),
+            new IndAssSettingsMigration(),
         ];
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
@@ -39,6 +39,8 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
         $record_remplate = 'You should ask these things';
         $event_time_place_required = true;
         $file_required = false;
+        $file_visible = false;
+        $result_visible = false;
 
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
@@ -47,7 +49,9 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
             $content,
             $record_remplate,
             $event_time_place_required,
-            $file_required
+            $file_required,
+            $file_visible,
+            $result_visible
         );
 
         $values1 = [
@@ -55,7 +59,9 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
             "content" => ["text", $content],
             "record_template" => ["text", $record_remplate],
             "event_time_place_required" => ["integer", $event_time_place_required],
-            "file_required" => ["integer", $file_required]
+            "file_required" => ["integer", $file_required],
+            "file_visible" => ["integer", $file_visible],
+            "result_visible" => ["integer", $result_visible]
         ];
 
         $values2 = [
@@ -85,6 +91,8 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
         $record_remplate = 'You should ask these things';
         $event_time_place_required = true;
         $file_required = false;
+        $file_visible = true;
+        $result_visible = true;
 
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
@@ -93,14 +101,18 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
             $content,
             $record_remplate,
             $event_time_place_required,
-            $file_required
+            $file_required,
+            $file_visible,
+            $result_visible
         );
 
         $values = [
             "content" => ["text", $content],
             "record_template" => ["text", $record_remplate],
             "event_time_place_required" => ["integer", $event_time_place_required],
-            "file_required" => ["integer", $file_required]
+            "file_required" => ["integer", $file_required],
+            "file_visible" => ["integer", $file_visible],
+            "result_visible" => ["integer", $result_visible]
         ];
 
         $where = [

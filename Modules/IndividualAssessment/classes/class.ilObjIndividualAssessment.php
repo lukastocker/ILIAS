@@ -74,6 +74,8 @@ class ilObjIndividualAssessment extends ilObject
             '',
             '',
             false,
+            false,
+            false,
             false
         );
         $this->settings_storage->createSettings($this->settings);
@@ -229,7 +231,9 @@ class ilObjIndividualAssessment extends ilObject
             $settings->getContent(),
             $settings->getRecordTemplate(),
             $settings->isEventTimePlaceRequired(),
-            $settings->isFileRequired()
+            $settings->isFileRequired(),
+            $settings->isFileVisible(),
+            $settings->isResultVisible()
         );
         $new_obj->settings = $new_settings;
 

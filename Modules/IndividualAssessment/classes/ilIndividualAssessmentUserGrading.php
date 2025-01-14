@@ -33,11 +33,9 @@ class ilIndividualAssessmentUserGrading
         protected string $record,
         protected string $internal_note,
         protected ?string $file,
-        protected bool $is_file_visible,
         protected int $learning_progress,
         protected string $place,
         protected ?DateTimeImmutable $event_time,
-        protected bool $notify,
         protected bool $finalized = false
     ) {
     }
@@ -67,11 +65,6 @@ class ilIndividualAssessmentUserGrading
         return !empty($this->file);
     }
 
-    public function isFileVisible(): bool
-    {
-        return $this->is_file_visible;
-    }
-
     public function getLearningProgress(): int
     {
         return $this->learning_progress;
@@ -87,10 +80,6 @@ class ilIndividualAssessmentUserGrading
         return $this->event_time;
     }
 
-    public function isNotify(): bool
-    {
-        return $this->notify;
-    }
 
     public function isFinalized(): bool
     {
@@ -162,12 +151,6 @@ class ilIndividualAssessmentUserGrading
             ->withRequired($file_required)
         ;
 
-        $file_visible = $input
-            ->checkbox($lng->txt('iass_file_visible_examinee'))
-            ->withValue($this->isFileVisible())
-            ->withDisabled(!$may_be_edited)
-        ;
-
         $learning_progress = $input
             ->select($lng->txt('learning_progress'), $grading_options)
             ->withValue($this->getLearningProgress() ?: ilLPStatus::LP_STATUS_IN_PROGRESS_NUM)
@@ -196,13 +179,6 @@ class ilIndividualAssessmentUserGrading
             );
         }
 
-        $notify = $input
-            ->checkbox($lng->txt('iass_notify'), $lng->txt('iass_notify_explanation'))
-            ->withValue($this->isNotify())
-            ->withDisabled(!$may_be_edited)
-        ;
-
-
         $custom = [];
         $custom_fields = $this->custom_fields;
         foreach ($custom_fields as $cf) {
@@ -214,12 +190,10 @@ class ilIndividualAssessmentUserGrading
             'record' => $record,
             'internal_note' => $internal_note,
             'file' => $file,
-            'file_visible' => $file_visible,
-            'place' => $place,
-            'event_time' => $event_time,
             'custom' => $input->group($custom),
             'learning_progress' => $learning_progress,
-            'notify' => $notify
+            'place' => $place,
+            'event_time' => $event_time,
         ];
 
         if (!$amend) {
@@ -260,11 +234,9 @@ class ilIndividualAssessmentUserGrading
                     $values['record'],
                     $values['internal_note'],
                     $file,
-                    $values['file_visible'],
                     (int) $values['learning_progress'],
                     $values['place'],
                     $values['event_time'],
-                    $values['notify'],
                     $finalized
                 ))
                 ->withCustomFields($updated_custom);

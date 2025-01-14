@@ -207,13 +207,15 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
     protected function addMemberDataToInfo(ilInfoScreenGUI $info): ilInfoScreenGUI
     {
         $member = $this->object->membersStorage()->loadMember($this->object, $this->usr);
+        $settings = $this->object->getSettings();
+        $finalized = $member->getGrading()->isFinalized();
         $info->addSection($this->txt('grading_info'));
-        if ($member->finalized()) {
-            $info->addProperty($this->txt('learning_progress'), $this->getEntryForStatus($member->LPStatus()));
+        if ($finalized) {
+            $info->addProperty($this->txt('grading'), $this->getEntryForStatus($member->LPStatus()));
         }
-        if ($member->notify() && $member->finalized()) {
+        if ($settings->isResultVisible() && $finalized) {
             $info->addProperty($this->txt('grading_record'), nl2br($member->record()));
-            if (($member->viewFile()) && $member->fileName() && $member->fileName() != "") {
+            if (($settings->isFileVisible()) && $member->fileName() && $member->fileName() != "") {
                 $tpl = new ilTemplate("tpl.iass_user_file_download.html", true, true, "Modules/IndividualAssessment");
                 $tpl->setVariable("FILE_NAME", $member->fileName());
                 $tpl->setVariable("HREF", $this->ctrl->getLinkTarget($this, "downloadFile"));
@@ -227,11 +229,12 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
     protected function downloadFileObject(): void
     {
         $member = $this->object->membersStorage()->loadMember($this->object, $this->usr);
+        $settings = $this->object->getSettings();
         if (
             $member
-            && $member->notify()
+            && $settings->isResultVisible()
+            && $settings->isFileVisible()
             && $member->finalized()
-            && $member->viewFile()
             && $member->fileName()
             && $member->fileName() != ""
         ) {

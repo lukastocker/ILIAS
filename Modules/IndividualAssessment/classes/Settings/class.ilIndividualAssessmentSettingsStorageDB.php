@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 /**
  * A settings storage handler to write iass settings to db.
@@ -43,7 +43,9 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
             "content" => ["text", $settings->getContent()],
             "record_template" => ["text", $settings->getRecordTemplate()],
             "event_time_place_required" => ["integer", $settings->isEventTimePlaceRequired()],
-            "file_required" => ["integer", $settings->isFileRequired()]
+            "file_required" => ["integer", $settings->isFileRequired()],
+            "file_visible" => ["integer", $settings->isFileVisible()],
+            "result_visible" => ["integer", $settings->isResultVisible()]
         ];
 
         $this->db->insert(self::IASS_SETTINGS_TABLE, $values);
@@ -65,12 +67,14 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
                 '',
                 '',
                 false,
-                false
+                false,
+                false,
+                false,
             );
         }
 
         $sql =
-             "SELECT content, record_template, event_time_place_required, file_required" . PHP_EOL
+             "SELECT content, record_template, event_time_place_required, file_required, file_visible, result_visible" . PHP_EOL
             . "FROM " . self::IASS_SETTINGS_TABLE . PHP_EOL
             . "WHERE obj_id = " . $this->db->quote($obj->getId(), 'integer') . PHP_EOL
         ;
@@ -90,7 +94,9 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
             $row["content"],
             $row["record_template"],
             (bool) $row["event_time_place_required"],
-            (bool) $row['file_required']
+            (bool) $row['file_required'],
+            (bool) $row["file_visible"],
+            (bool) $row['result_visible']
         );
     }
 
@@ -105,7 +111,9 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
             "content" => ["text", $settings->getContent()],
             "record_template" => ["text", $settings->getRecordTemplate()],
             "event_time_place_required" => ["integer", $settings->isEventTimePlaceRequired()],
-            "file_required" => ["integer", $settings->isFileRequired()]
+            "file_required" => ["integer", $settings->isFileRequired()],
+            "file_visible" => ["integer", $settings->isFileVisible()],
+            "result_visible" => ["integer", $settings->isResultVisible()]
         ];
 
         $this->db->update(self::IASS_SETTINGS_TABLE, $values, $where);

@@ -58,7 +58,14 @@ class ilIndividualAssessmentSetupAgent implements Setup\Agent
             'Indivial Asessment',
             true,
             new ilDatabaseUpdateStepsExecutedObjective(
-                new ilIndividualAssessmentRectifyMembersTableDBUpdateSteps(),
+                new ilIndividualAssessmentRectifyMembersTableDBUpdateSteps()
+            ),
+            new ilDatabaseUpdateStepsExecutedObjective(
+                new IndAssSettingsTableDBUpdateSteps()
+            ),
+            new IndAssMembersTableDBAfterMigrationObjective(
+                new IndAssmembersTableDBUpdateSteps(),
+                new IndAssSettingsMigration()
             ),
             ...$this->getPermissionObjectives()
         );
@@ -79,7 +86,12 @@ class ilIndividualAssessmentSetupAgent implements Setup\Agent
      */
     public function getStatusObjective(Setup\Metrics\Storage $storage): Setup\Objective
     {
-        return new ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new ilIndividualAssessmentRectifyMembersTableDBUpdateSteps());
+        return new Setup\ObjectiveCollection(
+            'Component Individual Assessment ',
+            true,
+            new ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new ilIndividualAssessmentRectifyMembersTableDBUpdateSteps()),
+            new ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new IndAssSettingsTableDBUpdateSteps())
+        );
     }
 
     /**
