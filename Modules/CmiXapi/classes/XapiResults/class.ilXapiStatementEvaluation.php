@@ -88,10 +88,12 @@ class ilXapiStatementEvaluation
     {
         $cmixUser = null;
         if ($this->object->getContentType() == ilObjCmiXapi::CONT_TYPE_CMI5) {
-            $cmixUser = ilCmiXapiUser::getInstanceByObjectIdAndUsrIdent(
-                $this->object->getId(),
-                $xapiStatement->actor->account->name
-            );
+            if (isset($xapiStatement->actor->account->name)) {
+                $cmixUser = ilCmiXapiUser::getInstanceByObjectIdAndUsrIdent(
+                    $this->object->getId(),
+                    $xapiStatement->actor->account->name
+                );
+            }
         } else {
             $cmixUser = ilCmiXapiUser::getInstanceByObjectIdAndUsrIdent(
                 $this->object->getId(),
