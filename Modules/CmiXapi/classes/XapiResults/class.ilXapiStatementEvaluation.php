@@ -75,16 +75,18 @@ class ilXapiStatementEvaluation
             $xapiStatement = json_decode(json_encode($xapiStatement));
             $cmixUser = $this->getCmixUser($xapiStatement);
 
-            $this->evaluateStatement($xapiStatement, $cmixUser->getUsrId());
+            if ($cmixUser != null) {
+                $this->evaluateStatement($xapiStatement, $cmixUser->getUsrId());
 
-            $this->log->debug('update lp for object (' . $this->object->getId() . ')');
-            if ($cmixUser->getUsrId() != ANONYMOUS_USER_ID) {
-                ilLPStatusWrapper::_updateStatus($this->object->getId(), $cmixUser->getUsrId());
+                $this->log->debug('update lp for object (' . $this->object->getId() . ')');
+                if ($cmixUser->getUsrId() != ANONYMOUS_USER_ID) {
+                    ilLPStatusWrapper::_updateStatus($this->object->getId(), $cmixUser->getUsrId());
+                }
             }
         }
     }
 
-    public function getCmixUser(object $xapiStatement): \ilCmiXapiUser
+    public function getCmixUser(object $xapiStatement): ?\ilCmiXapiUser
     {
         $cmixUser = null;
         if ($this->object->getContentType() == ilObjCmiXapi::CONT_TYPE_CMI5) {
@@ -137,9 +139,11 @@ class ilXapiStatementEvaluation
                     if (($xapiVerb == ilCmiXapiVerbList::COMPLETED || $xapiVerb == ilCmiXapiVerbList::PASSED) && $this->isLpModeInterestedInResultStatus($newResultStatus, false)) {
                         // it is possible to check against authToken usrId!
                         $cmixUser = $this->getCmixUser($xapiStatement);
-                        $cmixUser->setSatisfied(true);
-                        $cmixUser->save();
-                        $this->sendSatisfiedStatement($cmixUser);
+                        if ($cmixUser != null) {
+                            $cmixUser->setSatisfied(true);
+                            $cmixUser->save();
+                            $this->sendSatisfiedStatement($cmixUser);
+                        }
                     }
                 }
             }
