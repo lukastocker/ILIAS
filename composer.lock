@@ -213,16 +213,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.8.4",
+            "version": "2.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "112e37d1dca22b3fdb81cf3524ab4994f47fdb8c"
+                "reference": "ae208dc1e182bd45d99fcecb956501da212454a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/112e37d1dca22b3fdb81cf3524ab4994f47fdb8c",
-                "reference": "112e37d1dca22b3fdb81cf3524ab4994f47fdb8c",
+                "url": "https://api.github.com/repos/composer/composer/zipball/ae208dc1e182bd45d99fcecb956501da212454a1",
+                "reference": "ae208dc1e182bd45d99fcecb956501da212454a1",
                 "shasum": ""
             },
             "require": {
@@ -307,7 +307,7 @@
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
                 "security": "https://github.com/composer/composer/security/policy",
-                "source": "https://github.com/composer/composer/tree/2.8.4"
+                "source": "https://github.com/composer/composer/tree/2.8.5"
             },
             "funding": [
                 {
@@ -323,7 +323,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-11T10:57:47+00:00"
+            "time": "2025-01-21T14:23:40+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -4766,26 +4766,26 @@
         },
         {
             "name": "simplesamlphp/composer-module-installer",
-            "version": "v1.4.0",
+            "version": "v1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplesamlphp/composer-module-installer.git",
-                "reference": "edb2155d200e2a208816d06f42cfa78bfd9e7cf4"
+                "reference": "7bf413c2d28e48dff6755d74a7e45087cf144604"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/composer-module-installer/zipball/edb2155d200e2a208816d06f42cfa78bfd9e7cf4",
-                "reference": "edb2155d200e2a208816d06f42cfa78bfd9e7cf4",
+                "url": "https://api.github.com/repos/simplesamlphp/composer-module-installer/zipball/7bf413c2d28e48dff6755d74a7e45087cf144604",
+                "reference": "7bf413c2d28e48dff6755d74a7e45087cf144604",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^2.6",
-                "php": "^8.1",
-                "simplesamlphp/assert": "^1.6"
+                "composer-plugin-api": "^1.1 || ^2.0",
+                "php": "^7.4 || ^8.0",
+                "simplesamlphp/assert": "^0.8.0 || ^1.0"
             },
             "require-dev": {
-                "composer/composer": "^2.8.3",
-                "simplesamlphp/simplesamlphp-test-framework": "^1.8.0"
+                "composer/composer": "^2.4",
+                "simplesamlphp/simplesamlphp-test-framework": "^1.2.1"
             },
             "type": "composer-plugin",
             "extra": {
@@ -4803,9 +4803,9 @@
             "description": "A Composer plugin that allows installing SimpleSAMLphp modules through Composer.",
             "support": {
                 "issues": "https://github.com/simplesamlphp/composer-module-installer/issues",
-                "source": "https://github.com/simplesamlphp/composer-module-installer/tree/v1.4.0"
+                "source": "https://github.com/simplesamlphp/composer-module-installer/tree/v1.3.5"
             },
-            "time": "2024-12-08T16:57:03+00:00"
+            "time": "2024-11-16T09:42:27+00:00"
         },
         {
             "name": "simplesamlphp/saml2",
@@ -8050,16 +8050,16 @@
     "packages-dev": [
         {
             "name": "captainhook/captainhook",
-            "version": "5.24.2",
+            "version": "5.24.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/captainhookphp/captainhook.git",
-                "reference": "3e0915ff063a14d745c78e0181868e79c596b7e0"
+                "reference": "00acb745e6132dcffe3e9bd45e1fe27934a134c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/3e0915ff063a14d745c78e0181868e79c596b7e0",
-                "reference": "3e0915ff063a14d745c78e0181868e79c596b7e0",
+                "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/00acb745e6132dcffe3e9bd45e1fe27934a134c7",
+                "reference": "00acb745e6132dcffe3e9bd45e1fe27934a134c7",
                 "shasum": ""
             },
             "require": {
@@ -8070,7 +8070,7 @@
                 "php": ">=8.0",
                 "sebastianfeldmann/camino": "^0.9.2",
                 "sebastianfeldmann/cli": "^3.3",
-                "sebastianfeldmann/git": "^3.10",
+                "sebastianfeldmann/git": "^3.12",
                 "symfony/console": "^2.7 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
                 "symfony/filesystem": "^2.7 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
                 "symfony/process": "^2.7 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0"
@@ -8122,7 +8122,7 @@
             ],
             "support": {
                 "issues": "https://github.com/captainhookphp/captainhook/issues",
-                "source": "https://github.com/captainhookphp/captainhook/tree/5.24.2"
+                "source": "https://github.com/captainhookphp/captainhook/tree/5.24.3"
             },
             "funding": [
                 {
@@ -8130,7 +8130,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-11T12:52:49+00:00"
+            "time": "2025-01-16T11:37:53+00:00"
         },
         {
             "name": "captainhook/plugin-composer",
@@ -8487,16 +8487,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.68.0",
+            "version": "v3.68.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "73f78d8b2b34a0dd65fedb434a602ee4c2c8ad4c"
+                "reference": "b9db2b2ea3cdba7201067acee46f984ef2397cff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/73f78d8b2b34a0dd65fedb434a602ee4c2c8ad4c",
-                "reference": "73f78d8b2b34a0dd65fedb434a602ee4c2c8ad4c",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/b9db2b2ea3cdba7201067acee46f984ef2397cff",
+                "reference": "b9db2b2ea3cdba7201067acee46f984ef2397cff",
                 "shasum": ""
             },
             "require": {
@@ -8578,7 +8578,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.68.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.68.1"
             },
             "funding": [
                 {
@@ -8586,7 +8586,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-13T17:01:01+00:00"
+            "time": "2025-01-17T09:20:36+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -9012,16 +9012,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.15",
+            "version": "1.12.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "c91d4e8bc056f46cf653656e6f71004b254574d1"
+                "reference": "e0bb5cb78545aae631220735aa706eac633a6be9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c91d4e8bc056f46cf653656e6f71004b254574d1",
-                "reference": "c91d4e8bc056f46cf653656e6f71004b254574d1",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e0bb5cb78545aae631220735aa706eac633a6be9",
+                "reference": "e0bb5cb78545aae631220735aa706eac633a6be9",
                 "shasum": ""
             },
             "require": {
@@ -9066,7 +9066,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-05T16:40:22+00:00"
+            "time": "2025-01-21T14:50:05+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -11083,16 +11083,16 @@
         },
         {
             "name": "sebastianfeldmann/git",
-            "version": "3.11.1",
+            "version": "3.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianfeldmann/git.git",
-                "reference": "96b9f384d45106f757df98a74c11b42b393ff18f"
+                "reference": "db9c089a28a00c5348c9bc8789c2597259d83bd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianfeldmann/git/zipball/96b9f384d45106f757df98a74c11b42b393ff18f",
-                "reference": "96b9f384d45106f757df98a74c11b42b393ff18f",
+                "url": "https://api.github.com/repos/sebastianfeldmann/git/zipball/db9c089a28a00c5348c9bc8789c2597259d83bd8",
+                "reference": "db9c089a28a00c5348c9bc8789c2597259d83bd8",
                 "shasum": ""
             },
             "require": {
@@ -11133,7 +11133,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianfeldmann/git/issues",
-                "source": "https://github.com/sebastianfeldmann/git/tree/3.11.1"
+                "source": "https://github.com/sebastianfeldmann/git/tree/3.12.1"
             },
             "funding": [
                 {
@@ -11141,7 +11141,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-26T18:37:20+00:00"
+            "time": "2025-01-20T11:17:18+00:00"
         },
         {
             "name": "symfony/options-resolver",
@@ -11343,5 +11343,5 @@
         "ext-mbstring": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
