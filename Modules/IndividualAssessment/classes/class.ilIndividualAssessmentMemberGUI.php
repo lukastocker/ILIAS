@@ -73,6 +73,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         protected FieldBuilder $field_builder,
     ) {
         parent::__construct();
+        $this->lng->loadLanguageModule('trac');
     }
 
     public function executeCommand(): void
@@ -326,9 +327,9 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
     protected function getPossibleLPStates(): array
     {
         return [
-            ilIndividualAssessmentMembers::LP_IN_PROGRESS => $this->lng->txt('iass_status_pending'),
-            ilIndividualAssessmentMembers::LP_COMPLETED => $this->lng->txt('iass_status_completed'),
-            ilIndividualAssessmentMembers::LP_FAILED => $this->lng->txt('iass_status_failed')
+            ilLPStatus::LP_STATUS_IN_PROGRESS_NUM => $this->lng->txt(ilLPStatus::LP_STATUS_IN_PROGRESS),
+            ilLPStatus::LP_STATUS_COMPLETED_NUM => $this->lng->txt(ilLPStatus::LP_STATUS_COMPLETED),
+            ilLPStatus::LP_STATUS_FAILED_NUM => $this->lng->txt(ilLPStatus::LP_STATUS_FAILED)
         ];
     }
 

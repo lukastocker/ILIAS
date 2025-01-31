@@ -659,19 +659,19 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
     {
         return [
             [
-                ilIndividualAssessmentMembers::LP_ASSESSMENT_NOT_COMPLETED,
+                ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM,
                 "      AND finalized = 0 AND examiner_id IS NULL\n"
             ],
             [
-                ilIndividualAssessmentMembers::LP_IN_PROGRESS,
+                ilLPStatus::LP_STATUS_IN_PROGRESS_NUM,
                 "      AND finalized = 0 AND examiner_id IS NOT NULL\n"
             ],
             [
-                ilIndividualAssessmentMembers::LP_COMPLETED,
+                ilLPStatus::LP_STATUS_COMPLETED_NUM,
                 "      AND finalized = 1 AND learning_progress = 2\n"
             ],
             [
-                ilIndividualAssessmentMembers::LP_FAILED,
+                ilLPStatus::LP_STATUS_FAILED_NUM,
                 "      AND finalized = 1 AND learning_progress = 3\n"
             ],
             [

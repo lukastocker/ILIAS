@@ -39,7 +39,7 @@ class ilIndividualAssessmentUserGradingTest extends TestCase
         $internal_note = 'This is a node just for me.';
         $file = null;
         $is_file_visible = false;
-        $learning_progress = ilIndividualAssessmentMembers::LP_IN_PROGRESS;
+        $learning_progress = ilLPStatus::LP_STATUS_IN_PROGRESS_NUM;
         $place = 'Area 51';
         $event_time = new DateTimeImmutable();
         $notify = true;
@@ -77,7 +77,7 @@ class ilIndividualAssessmentUserGradingTest extends TestCase
         $internal_note = 'This is a node just for me.';
         $file = 'report.pdf';
         $is_file_visible = true;
-        $learning_progress = ilIndividualAssessmentMembers::LP_IN_PROGRESS;
+        $learning_progress = ilLPStatus::LP_STATUS_IN_PROGRESS_NUM;
         $place = 'Area 51 Underground';
         $event_time = new DateTimeImmutable();
         $notify = false;
@@ -145,7 +145,7 @@ class ilIndividualAssessmentUserGradingTest extends TestCase
         $internal_note = 'This is a node just for me.';
         $file = 'report.pdf';
         $is_file_visible = true;
-        $learning_progress = ilIndividualAssessmentMembers::LP_IN_PROGRESS;
+        $learning_progress = ilLPStatus::LP_STATUS_IN_PROGRESS_NUM;
         $place = 'Area 51 Underground';
         $event_time = new DateTimeImmutable();
         $notify = false;
@@ -174,9 +174,9 @@ class ilIndividualAssessmentUserGradingTest extends TestCase
             $df->dateFormat()->standard(),
             $field_builder,
             [
-                ilIndividualAssessmentMembers::LP_IN_PROGRESS,
-                ilIndividualAssessmentMembers::LP_FAILED,
-                ilIndividualAssessmentMembers::LP_COMPLETED
+                ilLPStatus::LP_STATUS_IN_PROGRESS_NUM,
+                ilLPStatus::LP_STATUS_FAILED_NUM,
+                ilLPStatus::LP_STATUS_COMPLETED_NUM
             ]
         );
 

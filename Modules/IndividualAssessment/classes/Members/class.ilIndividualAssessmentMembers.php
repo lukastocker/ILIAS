@@ -46,11 +46,11 @@ class ilIndividualAssessmentMembers implements Iterator, Countable
     public const FIELD_FILE_NAME = "file_name";
     public const FIELD_USER_VIEW_FILE = "user_view_file";
 
-    public const LP_NOT_ATTEMPTED = ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM;
-    public const LP_IN_PROGRESS = ilLPStatus::LP_STATUS_IN_PROGRESS_NUM;
-    public const LP_COMPLETED = ilLPStatus::LP_STATUS_COMPLETED_NUM;
-    public const LP_FAILED = ilLPStatus::LP_STATUS_FAILED_NUM;
-    public const LP_ASSESSMENT_NOT_COMPLETED = "not_completed";
+    public const LP_NOT_ATTEMPTED = \ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM;
+    public const LP_IN_PROGRESS = \ilLPStatus::LP_STATUS_IN_PROGRESS_NUM;
+    public const LP_COMPLETED = \ilLPStatus::LP_STATUS_COMPLETED_NUM;
+    public const LP_FAILED = \ilLPStatus::LP_STATUS_FAILED_NUM;
+    public const LP_ASSESSMENT_NOT_COMPLETED = \ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM;
 
     protected array $member_records = array();
     protected int $position = 0;

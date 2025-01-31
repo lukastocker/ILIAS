@@ -340,14 +340,14 @@ class ilIndividualAssessmentMembersGUI
         $ret[$this->txt("iass_filter_all")] = $this->getLinkForStatusFilter(null);
 
         if ($this->iass_access->mayViewAnyUser()) {
-            $ret[$this->txt("iass_filter_not_started")] =
-                $this->getLinkForStatusFilter(ilIndividualAssessmentMembers::LP_ASSESSMENT_NOT_COMPLETED);
-            $ret[$this->txt("iass_filter_not_finalized")] =
-                $this->getLinkForStatusFilter(ilIndividualAssessmentMembers::LP_IN_PROGRESS);
-            $ret[$this->txt("iass_filter_finalized")] =
-                $this->getLinkForStatusFilter(ilIndividualAssessmentMembers::LP_COMPLETED);
-            $ret[$this->txt("iass_filter_failed")] =
-                $this->getLinkForStatusFilter(ilIndividualAssessmentMembers::LP_FAILED);
+            $ret[$this->txt(ilLPStatus::LP_STATUS_NOT_ATTEMPTED)] =
+                $this->getLinkForStatusFilter(ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM);
+            $ret[$this->txt(ilLPStatus::LP_STATUS_IN_PROGRESS)] =
+                $this->getLinkForStatusFilter(ilLPStatus::LP_STATUS_IN_PROGRESS_NUM);
+            $ret[$this->txt(ilLPStatus::LP_STATUS_COMPLETED)] =
+                $this->getLinkForStatusFilter(ilLPStatus::LP_STATUS_COMPLETED_NUM);
+            $ret[$this->txt(ilLPStatus::LP_STATUS_FAILED)] =
+                $this->getLinkForStatusFilter(ilLPStatus::LP_STATUS_FAILED_NUM);
         }
         return $ret;
     }
@@ -358,14 +358,14 @@ class ilIndividualAssessmentMembersGUI
     protected function getActiveLabelForModeByFilter($filter): string
     {
         switch ($filter) {
-            case ilIndividualAssessmentMembers::LP_ASSESSMENT_NOT_COMPLETED:
-                return $this->txt("iass_filter_not_started");
-            case ilIndividualAssessmentMembers::LP_IN_PROGRESS:
-                return $this->txt("iass_filter_not_finalized");
-            case ilIndividualAssessmentMembers::LP_COMPLETED:
-                return $this->txt("iass_filter_finalized");
-            case ilIndividualAssessmentMembers::LP_FAILED:
-                return $this->txt("iass_filter_failed");
+            case ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_NOT_ATTEMPTED);
+            case ilLPStatus::LP_STATUS_IN_PROGRESS_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_IN_PROGRESS);
+            case ilLPStatus::LP_STATUS_COMPLETED_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_COMPLETED);
+            case ilLPStatus::LP_STATUS_FAILED_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_FAILED);
             default:
                 return $this->txt("iass_filter_all");
         }
@@ -394,10 +394,10 @@ class ilIndividualAssessmentMembersGUI
             in_array(
                 $this->request_wrapper->retrieve(self::F_STATUS, $this->refinery->kindlyTo()->string()),
                 [
-                    ilIndividualAssessmentMembers::LP_ASSESSMENT_NOT_COMPLETED,
-                    ilIndividualAssessmentMembers::LP_IN_PROGRESS,
-                    ilIndividualAssessmentMembers::LP_COMPLETED,
-                    ilIndividualAssessmentMembers::LP_FAILED
+                    ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM,
+                    ilLPStatus::LP_STATUS_IN_PROGRESS_NUM,
+                    ilLPStatus::LP_STATUS_COMPLETED_NUM,
+                    ilLPStatus::LP_STATUS_FAILED_NUM
                 ]
             )
         ) {

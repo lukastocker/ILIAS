@@ -26,40 +26,20 @@ use ILIAS\IndividualAssessmentFormPool\FieldBuilder;
 
 class ilIndividualAssessmentUserGrading
 {
-    protected string $name;
-    protected string $record;
-    protected string $internal_note;
-    protected ?string $file;
-    protected bool $is_file_visible;
-    protected int $learning_progress;
-    protected string $place;
-    protected ?DateTimeImmutable $event_time;
-    protected bool $notify;
-    protected bool $finalized;
     protected array $custom_fields = [];
 
     public function __construct(
-        string $name,
-        string $record,
-        string $internal_note,
-        ?string $file,
-        bool $is_file_visible,
-        int $learning_progress,
-        string $place,
-        ?DateTimeImmutable $event_time,
-        bool $notify,
-        bool $finalized = false
+        protected string $name,
+        protected string $record,
+        protected string $internal_note,
+        protected ?string $file,
+        protected bool $is_file_visible,
+        protected int $learning_progress,
+        protected string $place,
+        protected ?DateTimeImmutable $event_time,
+        protected bool $notify,
+        protected bool $finalized = false
     ) {
-        $this->name = $name;
-        $this->record = $record;
-        $this->internal_note = $internal_note;
-        $this->file = $file;
-        $this->is_file_visible = $is_file_visible;
-        $this->learning_progress = $learning_progress;
-        $this->place = $place;
-        $this->event_time = $event_time;
-        $this->notify = $notify;
-        $this->finalized = $finalized;
     }
 
     public function getName(): string
@@ -189,8 +169,8 @@ class ilIndividualAssessmentUserGrading
         ;
 
         $learning_progress = $input
-            ->select($lng->txt('grading'), $grading_options)
-            ->withValue($this->getLearningProgress() ?: ilIndividualAssessmentMembers::LP_IN_PROGRESS)
+            ->select($lng->txt('learning_progress'), $grading_options)
+            ->withValue($this->getLearningProgress() ?: ilLPStatus::LP_STATUS_IN_PROGRESS_NUM)
             ->withDisabled(!$may_be_edited)
             ->withRequired(true)
         ;

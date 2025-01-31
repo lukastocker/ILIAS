@@ -209,7 +209,7 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
         $member = $this->object->membersStorage()->loadMember($this->object, $this->usr);
         $info->addSection($this->txt('grading_info'));
         if ($member->finalized()) {
-            $info->addProperty($this->txt('grading'), $this->getEntryForStatus($member->LPStatus()));
+            $info->addProperty($this->txt('learning_progress'), $this->getEntryForStatus($member->LPStatus()));
         }
         if ($member->notify() && $member->finalized()) {
             $info->addProperty($this->txt('grading_record'), nl2br($member->record()));
@@ -410,12 +410,12 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
     protected function getEntryForStatus(int $status): string
     {
         switch ($status) {
-            case ilIndividualAssessmentMembers::LP_IN_PROGRESS:
-                return $this->txt('iass_status_pending');
-            case ilIndividualAssessmentMembers::LP_COMPLETED:
-                return $this->txt('iass_status_completed');
-            case ilIndividualAssessmentMembers::LP_FAILED:
-                return $this->txt('iass_status_failed');
+            case ilLPStatus::LP_STATUS_IN_PROGRESS_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_IN_PROGRESS);
+            case ilLPStatus::LP_STATUS_COMPLETED_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_COMPLETED);
+            case ilLPStatus::LP_STATUS_FAILED_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_FAILED);
             default:
                 throw new ilIndividualAssessmentException("Status for id $status not found!");
         }

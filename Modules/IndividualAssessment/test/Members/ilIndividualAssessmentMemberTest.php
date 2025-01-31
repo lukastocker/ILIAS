@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -345,8 +345,8 @@ class ilIndividualAssessmentMemberTest extends TestCase
     public function positiveLPStatusDataProvider(): array
     {
         return [
-            [ilIndividualAssessmentMembers::LP_COMPLETED],
-            [ilIndividualAssessmentMembers::LP_FAILED]
+            [ilLPStatus::LP_STATUS_COMPLETED_NUM],
+            [ilLPStatus::LP_STATUS_FAILED_NUM]
         ];
     }
 
@@ -407,7 +407,7 @@ class ilIndividualAssessmentMemberTest extends TestCase
         $this->grading
             ->expects($this->once())
             ->method("getLearningProgress")
-            ->willReturn(ilIndividualAssessmentMembers::LP_COMPLETED)
+            ->willReturn(ilLPStatus::LP_STATUS_COMPLETED_NUM)
         ;
         $this->grading
             ->expects($this->once())
@@ -428,8 +428,8 @@ class ilIndividualAssessmentMemberTest extends TestCase
     public function negativeLPStatusDataProvider(): array
     {
         return [
-            [ilIndividualAssessmentMembers::LP_NOT_ATTEMPTED],
-            [ilIndividualAssessmentMembers::LP_IN_PROGRESS]
+            [ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM],
+            [ilLPStatus::LP_STATUS_IN_PROGRESS_NUM]
         ];
     }
 
@@ -589,7 +589,7 @@ class ilIndividualAssessmentMemberTest extends TestCase
         $this->grading
             ->expects($this->once())
             ->method("getLearningProgress")
-            ->willReturn(ilIndividualAssessmentMembers::LP_COMPLETED)
+            ->willReturn(ilLPStatus::LP_STATUS_COMPLETED_NUM)
         ;
 
         $obj = new ilIndividualAssessmentMember(
@@ -599,7 +599,7 @@ class ilIndividualAssessmentMemberTest extends TestCase
             22222
         );
 
-        $this->assertEquals(ilIndividualAssessmentMembers::LP_COMPLETED, $obj->LPStatus());
+        $this->assertEquals(ilLPStatus::LP_STATUS_COMPLETED_NUM, $obj->LPStatus());
     }
 
     public function test_notificationTS(): void

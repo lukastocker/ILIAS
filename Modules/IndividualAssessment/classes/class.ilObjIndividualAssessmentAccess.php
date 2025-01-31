@@ -53,10 +53,10 @@ class ilObjIndividualAssessmentAccess extends ilObjectAccess implements ilCondit
         switch ($a_operator) {
             case ilConditionHandler::OPERATOR_PASSED:
                 return ilIndividualAssessmentLPInterface::determineStatusOfMember($a_trigger_obj_id, $a_usr_id)
-                    == ilIndividualAssessmentMembers::LP_COMPLETED;
+                    == ilLPStatus::LP_STATUS_COMPLETED_NUM;
             case ilConditionHandler::OPERATOR_FAILED:
                 return ilIndividualAssessmentLPInterface::determineStatusOfMember($a_trigger_obj_id, $a_usr_id)
-                    == ilIndividualAssessmentMembers::LP_FAILED;
+                    == ilLPStatus::LP_STATUS_FAILED_NUM;
             default:
                 return false;
         }

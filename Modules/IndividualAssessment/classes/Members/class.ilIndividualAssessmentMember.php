@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 /**
  * Edit the record of a user, set LP.
@@ -56,7 +56,7 @@ class ilIndividualAssessmentMember
             throw new ilIndividualAssessmentException('must finalize before notification');
         }
         if ($this->notify()) {
-            $notificator = (string) $this->LPStatus() === (string) ilIndividualAssessmentMembers::LP_COMPLETED ?
+            $notificator = (string) $this->LPStatus() === (string) ilLPStatus::LP_STATUS_COMPLETED_NUM ?
                 $notificator->withOccasionCompleted() :
                 $notificator->withOccasionFailed();
             $notificator->withReceiver($this)->send();
@@ -73,8 +73,8 @@ class ilIndividualAssessmentMember
         return in_array(
             $this->LPStatus(),
             [
-                    ilIndividualAssessmentMembers::LP_COMPLETED,
-                    ilIndividualAssessmentMembers::LP_FAILED
+                    ilLPStatus::LP_STATUS_COMPLETED_NUM,
+                    ilLPStatus::LP_STATUS_FAILED_NUM
                 ]
         ) &&
             !$this->finalized();

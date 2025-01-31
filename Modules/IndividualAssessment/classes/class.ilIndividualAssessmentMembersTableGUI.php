@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 use ILIAS\UI\Factory;
 use ILIAS\UI\Renderer;
@@ -67,7 +67,7 @@ class ilIndividualAssessmentMembersTableGUI
     {
         $this->data = array_filter(
             $data,
-            fn ($record) =>
+            fn($record) =>
                  $this->iass_access->mayEditMembers()
                  || $this->iass_access->mayGradeUser($record->id())
                  || $this->iass_access->mayViewUser($record->id())
@@ -123,7 +123,7 @@ class ilIndividualAssessmentMembersTableGUI
         }
 
         $examiner_id = $record->examinerId();
-        return $this->txt("grading") . ": " . $this->getStatus($record->finalized(), $record->LPStatus(), $examiner_id);
+        return $this->txt("learning_progress") . ": " . $this->getEntryForStatus($record->LPStatus());
     }
 
     /**
@@ -239,7 +239,7 @@ class ilIndividualAssessmentMembersTableGUI
         }
 
         return array_merge(
-            $record->LPStatus() ? [$this->txt("grading") . ":" => $this->getEntryForStatus($record->LPStatus())] : [],
+            $record->LPStatus() ? [$this->txt("learning_progress") . ":" => $this->getEntryForStatus($record->LPStatus())] : [],
             $this->getImportantInfos($record, false),
             $this->getLocationInfos(
                 $record->finalized(),
@@ -288,22 +288,6 @@ class ilIndividualAssessmentMembersTableGUI
         $this->ctrl->setParameterByClass('ilIndividualAssessmentMemberGUI', 'usr_id', null);
 
         return $ui_factory->dropdown()->standard($items)->withLabel($this->txt("actions"));
-    }
-
-    /**
-     * Returns readable status
-     */
-    protected function getStatus(bool $finalized, int $status, int $examiner_id = null): string
-    {
-        if ($status == 0) {
-            $status = ilIndividualAssessmentMembers::LP_IN_PROGRESS;
-        }
-
-        if (!$finalized && !is_null($examiner_id)) {
-            return $this->txt('iass_assessment_not_completed');
-        }
-
-        return $this->getEntryForStatus($status);
     }
 
     /**
@@ -427,12 +411,14 @@ class ilIndividualAssessmentMembersTableGUI
     protected function getEntryForStatus(int $a_status): string
     {
         switch ($a_status) {
-            case ilIndividualAssessmentMembers::LP_IN_PROGRESS:
-                return $this->txt('iass_status_pending');
-            case ilIndividualAssessmentMembers::LP_COMPLETED:
-                return $this->txt('iass_status_completed');
-            case ilIndividualAssessmentMembers::LP_FAILED:
-                return $this->txt('iass_status_failed');
+            case ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_NOT_ATTEMPTED);
+            case ilLPStatus::LP_STATUS_IN_PROGRESS_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_IN_PROGRESS);
+            case ilLPStatus::LP_STATUS_COMPLETED_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_COMPLETED);
+            case ilLPStatus::LP_STATUS_FAILED_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_FAILED);
             default:
                 throw new ilIndividualAssessmentException("Invalid status: " . $a_status);
         }
