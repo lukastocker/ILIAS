@@ -10439,7 +10439,6 @@ iafp#:#tab_forms#:#Forms
 iafp#:#with_notes#:#Notes
 iass#:#download_assessment_paper#:#Prüfungsblatt herunterladen
 iass#:#general#:#Allgemein
-iass#:#grading#:#Bewertung
 iass#:#grading_info#:#Bewertungsinformationen
 iass#:#grading_record#:#Bewertungszusammenfassung
 iass#:#iass_add#:#Individuelle Bewertung anlegen
@@ -10447,7 +10446,6 @@ iass#:#iass_add_user_failure#:#Einer oder mehrere Benutzer konnten nicht hinzuge
 iass#:#iass_add_user_success#:#Benutzer als Teilnehmer hinzugefügt.
 iass#:#iass_added#:#Individuelle Bewertung hinzugefügt
 iass#:#iass_amend_saved#:#Geänderte Prüfungsdaten wurden gespeichert.
-iass#:#iass_assessment_not_completed#:#Noch nicht abgeschlossen
 iass#:#iass_cancel#:#Abbrechen
 iass#:#iass_changed_by#:#Nachträglich geändert
 iass#:#iass_confirm_finalize#:#Abschließen und veröffentlichen
@@ -10470,11 +10468,7 @@ iass#:#iass_file_required#:#Pflichtangabe Prüfungsblatt
 iass#:#iass_file_required_info#:#Ein Prüfungsblatt muss hochgeladen werden.
 iass#:#iass_file_visible_examinee#:#Datei für Teilnehmer sichtbar
 iass#:#iass_filter_all#:#Alle
-iass#:#iass_filter_failed#:#Nur nicht bestanden
-iass#:#iass_filter_finalized#:#Nur bestandene
-iass#:#iass_filter_not_finalized#:#Nur nicht abgeschlossene
-iass#:#iass_filter_not_started#:#Nur nicht bewertete
-iass#:#iass_finalize#:#Abschließen und veröffentlichen
+iass#:#iass_finalize#:#Abschließen
 iass#:#iass_finalize_info#:#Die Individuelle Bewertung wird abgeschlossen.
 iass#:#iass_finalize_user_qst#:#Soll die Bewertung des Teilnehmers wirklich final abgeschlossen werden? Änderungen an der Bewertung sind hinterher nicht mehr möglich.
 iass#:#iass_further_field_headline#:#Detaillierte Informationen
@@ -10508,9 +10502,6 @@ iass#:#iass_sort_examiner_login_asc#:#Bewertet von → aufsteigend###Modified as
 iass#:#iass_sort_examiner_login_desc#:#Bewertet von → absteigend###Modified as part of gender mainstreaming activities for ILIAS 8
 iass#:#iass_sort_name_asc#:#Anmeldename → aufsteigend###Modified as part of gender mainstreaming activities for ILIAS 8
 iass#:#iass_sort_name_desc#:#Anmeldename → absteigend###Modified as part of gender mainstreaming activities for ILIAS 8
-iass#:#iass_status_completed#:#Bestanden
-iass#:#iass_status_failed#:#Nicht bestanden
-iass#:#iass_status_pending#:#Noch nicht bewertet
 iass#:#iass_subj_notification_completed#:#%s: Individuelle Bewertung wurde erfolgreich abgeschlossen.
 iass#:#iass_subj_notification_failed#:#%s: Individuelle Bewertung wurde nicht erfolgreich abgeschlossen.
 iass#:#iass_upload_file#:#Prüfungsblatt

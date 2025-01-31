@@ -10439,7 +10439,6 @@ iafp#:#tab_forms#:#Forms
 iafp#:#with_notes#:#Notes
 iass#:#download_assessment_paper#:#Download Record file
 iass#:#general#:#General Information
-iass#:#grading#:#Grading
 iass#:#grading_info#:#Grading info
 iass#:#grading_record#:#Grading record
 iass#:#iass_add#:#Create Individual Assessment
@@ -10447,7 +10446,6 @@ iass#:#iass_add_user_failure#:#One or more user could not be added.
 iass#:#iass_add_user_success#:#User added as participant.
 iass#:#iass_added#:#Individual Assessment added
 iass#:#iass_amend_saved#:#Amended record has been saved.
-iass#:#iass_assessment_not_completed#:#Not completed yet
 iass#:#iass_cancel#:#Cancel
 iass#:#iass_changed_by#:#Changed after finalization
 iass#:#iass_confirm_finalize#:#Publish and freeze
@@ -10470,13 +10468,9 @@ iass#:#iass_file_required#:#Record file required
 iass#:#iass_file_required_info#:#A record file has to be uploaded to each participant record.
 iass#:#iass_file_visible_examinee#:#File visible for participant
 iass#:#iass_filter_all#:#All
-iass#:#iass_filter_failed#:#Failed only
-iass#:#iass_filter_finalized#:#Completed only
-iass#:#iass_filter_not_finalized#:#Drafts only
-iass#:#iass_filter_not_started#:#Not started only
-iass#:#iass_finalize#:#Publish and freeze
-iass#:#iass_finalize_info#:#Individual Assessment will be published and frozen.
-iass#:#iass_finalize_user_qst#:#Should the participant's status really be published? No changes possible thereafter.
+iass#:#iass_finalize#:#Finalize
+iass#:#iass_finalize_info#:#Individual Assessment will be finalized.
+iass#:#iass_finalize_user_qst#:#Should the participant's status really be finalised? No changes possible thereafter.
 iass#:#iass_further_field_headline#:#Detailed Information
 iass#:#iass_graded_by#:#Graded by
 iass#:#iass_info_emails_expl#:#You may provide several addresses separated by comma.
@@ -10508,9 +10502,6 @@ iass#:#iass_sort_examiner_login_asc#:#Examiner ascending
 iass#:#iass_sort_examiner_login_desc#:#Examiner descending
 iass#:#iass_sort_name_asc#:#Username ascending
 iass#:#iass_sort_name_desc#:#Username descending
-iass#:#iass_status_completed#:#Completed
-iass#:#iass_status_failed#:#Failed
-iass#:#iass_status_pending#:#Status pending
 iass#:#iass_subj_notification_completed#:#%s: Individual Assessment is completed.
 iass#:#iass_subj_notification_failed#:#%s: Individual Assessment is failed.
 iass#:#iass_upload_file#:#Record file
