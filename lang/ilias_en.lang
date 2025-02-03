@@ -4299,6 +4299,7 @@ common#:#http_not_possible#:#This server is not supporting http requests.
 common#:#http_path#:#HTTP Path
 common#:#https_not_possible#:#This server is not supporting HTTPS connections.
 common#:#i2passwd#:#ILIAS 2 password
+common#:#iafp_new#:#Add Individual Assessment Form Pool
 common#:#iass_import#:#Import Individual Assessment
 common#:#iass_new#:#Create Individual Assessment
 common#:#icon#:#Icon
@@ -4928,6 +4929,7 @@ common#:#obj_hlps#:#Help System
 common#:#obj_hlps_desc#:#Settings for the online help
 common#:#obj_htlm#:#Learning Module HTML
 common#:#obj_htlm_duplicate#:#Copy HTML Learning Module
+common#:#obj_iafp#:#Individual Assessment Form Pool
 common#:#obj_iass#:#Individual Assessment
 common#:#obj_iass_duplicate#:#Copy Individual Assessment
 common#:#obj_iass_select#:#-- Please select one individual assessment --
@@ -5136,6 +5138,7 @@ common#:#objs_glo#:#Glossaries
 common#:#objs_grp#:#Groups
 common#:#objs_grpr#:#Group Links
 common#:#objs_htlm#:#HTML Learning Modules
+common#:#objs_iafp#:#Individual Assessment Form Pool
 common#:#objs_iass#:#Individual Assessments
 common#:#objs_itgr#:#Item Groups
 common#:#objs_lm#:#ILIAS Learning Modules
@@ -10388,6 +10391,52 @@ help#:#help_tooltips_and_help#:#Tooltips and Workflow Help
 help#:#help_tooltips_only#:#Tooltips Only
 help#:#help_topcis#:#Topics
 help#:#help_tt_text#:#Text
+iafp#:#_settings_saved#:#Settings saved.
+iafp#:#add_fields#:#Add Fields to the Form
+iafp#:#available_for_examiners#:#available for examiners
+iafp#:#confirm_cancel#:#Cancel
+iafp#:#confirm_delete#:#Delete
+iafp#:#default_value#:#Default Value
+iafp#:#field_available_for_examiners#:#Available for Examiners
+iafp#:#field_available_for_examiners_byline#:#should the field be available for examiners?
+iafp#:#field_default_value#:#Default Value
+iafp#:#field_default_value_byline#:#default/initial value
+iafp#:#field_description#:#Description
+iafp#:#field_description_byline#:#description of the field
+iafp#:#field_label#:#Label
+iafp#:#field_label_byline#:#label for the field
+iafp#:#field_name_byline#:#name for the field
+iafp#:#field_options#:#Options
+iafp#:#field_options_byline#:#add options the user may choose from
+iafp#:#field_section_byline#:#configure the field
+iafp#:#field_section_create#:#Edit new Field
+iafp#:#field_section_edit#:#Edit Field
+iafp#:#field_type_byline#:#type of the field
+iafp#:#field_with_notes#:#With Notes
+iafp#:#field_with_notes_byline#:#add a textarea for notes?
+iafp#:#fields#:#Fields in this Form
+iafp#:#fields_added#:#Fields added.
+iafp#:#fields_byline#:#Unselect and save to remove a field
+iafp#:#fields_count#:#amount of fields
+iafp#:#form_description#:#Description
+iafp#:#form_description_byline#:#description of the form
+iafp#:#form_name#:#Name
+iafp#:#form_name_byline#:#name of the form
+iafp#:#form_section_byline#:#configure the form
+iafp#:#form_section_create#:#Edit new Form
+iafp#:#form_section_edit#:#Edit Form
+iafp#:#iafp_fields#:#Fields
+iafp#:#iafp_forms#:#Forms
+iafp#:#iafp_settings#:#Settings
+iafp#:#iafp_settings_availability#:#Availability
+iafp#:#label#:#label
+iafp#:#new_field#:#Add a new Field
+iafp#:#new_form#:#Add a new Form
+iafp#:#object_saved#:#Saved.
+iafp#:#pick_fields#:#Select Fields
+iafp#:#tab_fields#:#Fields
+iafp#:#tab_forms#:#Forms
+iafp#:#with_notes#:#Notes
 iass#:#download_assessment_paper#:#Download Record file
 iass#:#general#:#General Information
 iass#:#grading#:#Grading
@@ -14051,6 +14100,12 @@ rbac#:#htlm_read#:#User can read HTML learning module
 rbac#:#htlm_read_learning_progress#:#User can view learning progress of other users
 rbac#:#htlm_visible#:#HTML learning module is visible
 rbac#:#htlm_write#:#User can edit content and settings of HTML learning module
+rbac#:#iafp_copy#:#Copy an Individual Assessment Form Pool
+rbac#:#iafp_delete#:#Delete an Individual Assessment Form Pool
+rbac#:#iafp_edit_permission#:#Edit permissions of an Individual Assessment Form Pool
+rbac#:#iafp_read#:#Read content of an Individual Assessment Form Pool
+rbac#:#iafp_visible#:#Individual Assessment Form Pool is visible
+rbac#:#iafp_write#:#Edit an Individual Assessment  Form Pool
 rbac#:#iass_amend_grading#:#Amend gradings in an Individual Assessment
 rbac#:#iass_copy#:#Copy an Individual Assessment
 rbac#:#iass_delete#:#Delete an Individual Assessment

@@ -102,10 +102,19 @@ trait ilIndividualAssessmentDIC
                 $dic->http()->wrapper()->query(),
                 $c['helper.dateformat'],
                 $dic['resource_storage'],
-                $stakeholder = $c['irss.stakeholder']
+                $stakeholder = $c['irss.stakeholder'],
+                $c['iafp.fieldbuilder']
             );
         };
 
+        $container['iafp.fieldbuilder'] = static fn(): ILIAS\IndividualAssessmentFormPool\FieldBuilder =>
+            new ILIAS\IndividualAssessmentFormPool\FieldBuilder(
+                $dic['ui.factory']->input()->field(),
+                $dic['refinery'],
+                $dic['lng'],
+                new \ilUIDemoFileUploadHandlerGUI(),
+                new \ilUIMarkdownPreviewGUI()
+            );
         $container['ilIndividualAssessmentCommonSettingsGUI'] = function ($c) use ($object, $dic) {
             return new ilIndividualAssessmentCommonSettingsGUI(
                 $object,
@@ -126,8 +135,13 @@ trait ilIndividualAssessmentDIC
             new ilIndividualAssessmentMembersStorageDB(
                 $dic['ilDB'],
                 $dic['resource_storage'],
-                $stakeholder = $c['irss.stakeholder']
+                $stakeholder = $c['irss.stakeholder'],
+                $c['iass.member.custom_storage'],
             );
+
+        $container['iass.member.custom_storage'] = static fn($c): SpecifiedFormStorage =>
+            new SpecifiedFormStorageDB($dic['ilDB']);
+
         $container['iass.accesshandler'] = static fn($c): ilIndividualAssessmentAccessHandler =>
             new ilIndividualAssessmentAccessHandler(
                 $object,

@@ -31,7 +31,8 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
     public function __construct(
         protected ilDBInterface $db,
         protected IRSS $irss,
-        protected ilIndividualAssessmentGradingStakeholder $stakeholder
+        protected ilIndividualAssessmentGradingStakeholder $stakeholder,
+        protected SpecifiedFormStorage $specified_form_storage
     ) {
     }
 
@@ -71,7 +72,7 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
         }
         $res = $this->db->query($sql);
         while ($rec = $this->db->fetchAssoc($res)) {
-            $usr = new ilObjUser((int)$rec["usr_id"]);
+            $usr = new ilObjUser((int) $rec["usr_id"]);
             $members[] = $this->createAssessmentMember($obj, $usr, $rec);
         }
         return $members;
@@ -114,10 +115,14 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
         if (!is_null($examiner_id)) {
             $examiner_id = (int) $examiner_id;
         }
+
+        $custom_fields = $this->specified_form_storage->getSpecifiedFormFields($obj->getId(), $usr->getId());
+
         return new ilIndividualAssessmentMember(
             $obj,
             $usr,
-            $this->createGrading($record, $usr->getFullname()),
+            $this->createGrading($record, $usr->getFullname())
+                ->withCustomFields($custom_fields),
             (int) $record[ilIndividualAssessmentMembers::FIELD_NOTIFICATION_TS],
             $examiner_id,
             $changer_id,
@@ -133,6 +138,7 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             $event_time = new DateTimeImmutable();
             $event_time = $event_time->setTimestamp((int) $event_time_db);
         }
+
         return new ilIndividualAssessmentUserGrading(
             $user_fullname,
             (string) $record[ilIndividualAssessmentMembers::FIELD_RECORD],
@@ -179,6 +185,7 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
         ];
 
         $this->db->update(self::MEMBERS_TABLE, $values, $where);
+        $this->specified_form_storage->storeSpecifiedUserValues(...$member->getGrading()->getCustomFields());
     }
 
     protected function getActualDateTime(): string
@@ -191,16 +198,29 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
      */
     public function deleteMembers(ilObjIndividualAssessment $obj): void
     {
-        foreach($this->loadMembers($obj) as $member) {
-            if($identifier = $member[ilIndividualAssessmentMembers::FIELD_FILE_NAME]) {
+        foreach ($this->loadMembers($obj) as $member) {
+            if ($identifier = $member[ilIndividualAssessmentMembers::FIELD_FILE_NAME]) {
                 $resource_id = $this->irss->manage()->find($identifier);
-                $this->irss->manage()->remove($resource_id, $this->stakeholder);
+                if ($resource_id) {
+                    $this->irss->manage()->remove($resource_id, $this->stakeholder);
+                }
             }
         }
 
         $sql = "DELETE FROM " . self::MEMBERS_TABLE . " WHERE obj_id = " . $this->db->quote($obj->getId(), 'integer');
         $this->db->manipulate($sql);
     }
+
+    public function deleteCustomFieldsForObj(ilObjIndividualAssessment $obj): void
+    {
+        $this->specified_form_storage->deleteAllUserValuesAndFields(
+            $this->irss,
+            $this->stakeholder,
+            $obj->getId()
+        );
+    }
+
+
 
     protected function loadMemberQuery(): string
     {
@@ -352,8 +372,7 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
      */
     public function removeMembersRecord(ilObjIndividualAssessment $iass, array $record): void
     {
-
-        if(array_key_exists(ilIndividualAssessmentMembers::FIELD_FILE_NAME, $record)
+        if (array_key_exists(ilIndividualAssessmentMembers::FIELD_FILE_NAME, $record)
             && $identifier = $record[ilIndividualAssessmentMembers::FIELD_FILE_NAME]) {
             $resource_id = $this->irss->manage()->find($identifier);
             $this->irss->manage()->remove($resource_id, $this->stakeholder);
@@ -366,6 +385,12 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
         ;
 
         $this->db->manipulate($sql);
+        $this->specified_form_storage->deleteSpecifiedUserValues(
+            $this->irss,
+            $this->stakeholder,
+            $iass->getId(),
+            $record[ilIndividualAssessmentMembers::FIELD_USR_ID]
+        );
     }
 
     /**

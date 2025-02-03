@@ -33,6 +33,7 @@ use ILIAS\UI\Renderer;
 use ILIAS\Data;
 use ILIAS\Refinery;
 use ILIAS\ResourceStorage\Services as IRSS;
+use ILIAS\IndividualAssessmentFormPool\FieldBuilder;
 
 class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
 {
@@ -69,6 +70,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         protected ilIndividualAssessmentDateFormatter $date_formatter,
         protected IRSS $irss,
         protected ilIndividualAssessmentGradingStakeholder $stakeholder,
+        protected FieldBuilder $field_builder,
     ) {
         parent::__construct();
     }
@@ -177,7 +179,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
     {
         $identifier = $this->getMember()->getGrading()->getFile();
         $resource_id = $this->irss->manage()->find($identifier);
-        if($resource_id) {
+        if ($resource_id) {
             $this->irss->consume()->download($resource_id)->run();
         }
     }
@@ -220,6 +222,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
             $this->refinery_factory,
             $this,
             $this->user->getDateFormat(),
+            $this->field_builder,
             $this->getPossibleLPStates(),
             $may_be_edited,
             $this->getObject()->getSettings()->isEventTimePlaceRequired(),
@@ -353,7 +356,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
     protected function getRemoveResult(string $identifier): HandlerResult
     {
         $resource_id = $this->irss->manage()->find($identifier);
-        if($resource_id) {
+        if ($resource_id) {
             $this->irss->manage()->remove($resource_id, $this->stakeholder);
             $status = HandlerResult::STATUS_OK;
             $message = $this->lng->txt('iass_file_deleted');
@@ -368,7 +371,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
     public function getInfoResult(string $identifier): ?FileInfoResult
     {
         $resource_id = $this->irss->manage()->find($identifier);
-        if(! $resource_id) {
+        if (! $resource_id) {
             return null;
         }
         $resource = $this->irss->manage()->getResource($resource_id);
@@ -388,7 +391,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         $file_ids = array_filter($file_ids, fn($id) => $id !== "");
         return array_map(function ($id) {
             $resource_id = $this->irss->manage()->find($identifier);
-            if(! $resource_id) {
+            if (! $resource_id) {
                 return null;
             }
             $resource = $this->irss->manage()->getResource($resource_id);

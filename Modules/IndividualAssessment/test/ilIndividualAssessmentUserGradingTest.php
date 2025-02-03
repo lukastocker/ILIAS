@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -18,15 +16,22 @@ declare(strict_types=1);
  *
  *********************************************************************/
 
+declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
 use ILIAS\UI\Component\Input\Field\Section;
 use ILIAS\FileUpload\Handler\AbstractCtrlAwareUploadHandler;
+use ILIAS\IndividualAssessmentFormPool\Testing\FieldBuilderMockFactory;
+
+require_once(__DIR__ . "/../../IndividualAssessmentFormPool/test/FieldBuilderMockFactory.php");
 
 /**
  * @backupGlobals disabled
  */
 class ilIndividualAssessmentUserGradingTest extends TestCase
 {
+    use FieldBuilderMockFactory;
+
     public function test_create_instance()
     {
         $name = 'Hans Günther';
@@ -158,6 +163,8 @@ class ilIndividualAssessmentUserGradingTest extends TestCase
             $finalized
         );
 
+        $field_builder = $this->getFieldBuilder();
+
         $input = $grading->toFormInput(
             $f,
             $df,
@@ -165,6 +172,7 @@ class ilIndividualAssessmentUserGradingTest extends TestCase
             $refinery,
             $file_handler,
             $df->dateFormat()->standard(),
+            $field_builder,
             [
                 ilIndividualAssessmentMembers::LP_IN_PROGRESS,
                 ilIndividualAssessmentMembers::LP_FAILED,

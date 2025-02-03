@@ -157,7 +157,7 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
                         $cmd = 'members';
                     }
                 }
-                if($cmd === 'edit' && $this->object->accessHandler()->simulateMember()) {
+                if ($cmd === 'edit' && $this->object->accessHandler()->simulateMember()) {
                     $cmd = 'view';
                 }
 
@@ -237,7 +237,7 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
         ) {
             $identifier = $member->getGrading()->getFile();
             $resource_id = $this->irss->manage()->find($identifier);
-            if($resource_id) {
+            if ($resource_id) {
                 $this->irss->consume()->download($resource_id)->run();
             }
         }
@@ -421,8 +421,20 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
         }
     }
 
+    protected function addDidacticTemplateOptions(array &$a_options): void
+    {
+        $collector = \ilObjIndividualAssessmentFormPool::getRepository();
+        $a_options = $collector->getFormsSelection();
+    }
+
     protected function afterSave(ilObject $new_object): void
     {
+        if ($form_id = $this->getDidacticTemplateVar("iass")) {
+            $collector = \ilObjIndividualAssessmentFormPool::getRepository();
+            $collector->copyFieldsToIASS($form_id, $new_object->getId());
+        }
+
+
         $this->tpl->setOnScreenMessage("success", $this->txt("iass_added"), true);
         $this->ctrl->setParameter($this, "ref_id", $new_object->getRefId());
         $this->ctrl->redirectToUrl($this->ctrl->getLinkTargetByClass(
@@ -449,4 +461,5 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
     {
         return $this->lng->txt($code);
     }
+
 }

@@ -22,6 +22,7 @@ use ILIAS\UI\Component\Input\Field;
 use ILIAS\Refinery\Factory as Refinery;
 use ILIAS\Data\Factory as DataFactory;
 use ILIAS\FileUpload\Handler\AbstractCtrlAwareUploadHandler;
+use ILIAS\IndividualAssessmentFormPool\FieldBuilder;
 
 class ilIndividualAssessmentUserGrading
 {
@@ -35,6 +36,7 @@ class ilIndividualAssessmentUserGrading
     protected ?DateTimeImmutable $event_time;
     protected bool $notify;
     protected bool $finalized;
+    protected array $custom_fields = [];
 
     public function __construct(
         string $name,
@@ -129,6 +131,18 @@ class ilIndividualAssessmentUserGrading
         return $clone;
     }
 
+    public function getCustomFields(): array
+    {
+        return $this->custom_fields;
+    }
+
+    public function withCustomFields(array $custom_fields): self
+    {
+        $clone = clone $this;
+        $clone->custom_fields = $custom_fields;
+        return $clone;
+    }
+
     public function toFormInput(
         Field\Factory $input,
         DataFactory $data_factory,
@@ -136,12 +150,14 @@ class ilIndividualAssessmentUserGrading
         Refinery $refinery,
         AbstractCtrlAwareUploadHandler $file_handler,
         \ILIAS\Data\DateFormat\DateFormat $date_format,
+        FieldBuilder $field_builder,
         array $grading_options,
         bool $may_be_edited = true,
         bool $place_required = false,
         bool $file_required = false,
         bool $amend = false
     ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
+
         $name = $input
             ->text($lng->txt('name'), '')
             ->withDisabled(true)
@@ -206,15 +222,23 @@ class ilIndividualAssessmentUserGrading
             ->withDisabled(!$may_be_edited)
         ;
 
+
+        $custom = [];
+        $custom_fields = $this->custom_fields;
+        foreach ($custom_fields as $cf) {
+            $custom[$cf->getFieldId()] = $cf->toFormInput($input, $refinery, $file_handler, $field_builder);
+        }
+
         $fields = [
             'name' => $name,
             'record' => $record,
             'internal_note' => $internal_note,
             'file' => $file,
             'file_visible' => $file_visible,
-            'learning_progress' => $learning_progress,
             'place' => $place,
             'event_time' => $event_time,
+            'custom' => $input->group($custom),
+            'learning_progress' => $learning_progress,
             'notify' => $notify
         ];
 
@@ -232,7 +256,7 @@ class ilIndividualAssessmentUserGrading
             $fields,
             $lng->txt('iass_edit_record')
         )->withAdditionalTransformation(
-            $refinery->custom()->transformation(function ($values) use ($amend) {
+            $refinery->custom()->transformation(function ($values) use ($amend, $custom_fields) {
                 $finalized = $this->isFinalized();
                 if (!$amend) {
                     $finalized = $values['finalized'];
@@ -246,7 +270,12 @@ class ilIndividualAssessmentUserGrading
                     $file = $values['file'][0];
                 }
 
-                return new ilIndividualAssessmentUserGrading(
+                $updated_custom = [];
+                foreach ($custom_fields as $cf) {
+                    $updated_custom[] = $cf->withValue($values['custom'][$cf->getFieldId()]);
+                }
+
+                return (new ilIndividualAssessmentUserGrading(
                     $values['name'],
                     $values['record'],
                     $values['internal_note'],
@@ -257,7 +286,8 @@ class ilIndividualAssessmentUserGrading
                     $values['event_time'],
                     $values['notify'],
                     $finalized
-                );
+                ))
+                ->withCustomFields($updated_custom);
             })
         );
     }

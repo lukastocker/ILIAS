@@ -169,6 +169,7 @@ class ilObjIndividualAssessment extends ilObject
         $this->deleteMetaData();
         $this->settings_storage->deleteSettings($this);
         $this->members_storage->deleteMembers($this);
+        $this->members_storage->deleteCustomFieldsForObj($this);
         return parent::delete();
     }
 
@@ -245,6 +246,7 @@ class ilObjIndividualAssessment extends ilObject
         $new_obj->settings_storage->updateSettings($new_settings);
         $new_obj->settings_storage->updateInfoSettings($new_info_settings);
 
+        (new IAFPCollector())->cloneFields($this->getId(), $new_obj->getId());
         return $new_obj;
     }
 

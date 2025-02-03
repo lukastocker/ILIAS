@@ -61,7 +61,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
         return new ilIndividualAssessmentMembersStorageDBWrapper(
             $db,
             $irss,
-            $stakeholder
+            $stakeholder,
+            $this->createMock(SpecifiedFormStorage::class)
         );
     }
 
@@ -72,7 +73,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
         $obj = new ilIndividualAssessmentMembersStorageDB(
             $db,
             $irss,
-            new ilIndividualAssessmentGradingStakeholder()
+            new ilIndividualAssessmentGradingStakeholder(),
+            $this->createMock(SpecifiedFormStorage::class)
         );
         $this->assertInstanceOf(ilIndividualAssessmentMembersStorageDB::class, $obj);
     }
@@ -129,7 +131,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
         $obj = new ilIndividualAssessmentMembersStorageDB(
             $db,
             $this->createMock(IRSS::class),
-            new ilIndividualAssessmentGradingStakeholder()
+            new ilIndividualAssessmentGradingStakeholder(),
+            $this->createMock(SpecifiedFormStorage::class)
         );
 
         $result = $obj->loadMembers($iass);
@@ -193,7 +196,12 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
         $irss = $this->createMock(IRSS::class);
         $stakeholder = new ilIndividualAssessmentGradingStakeholder();
-        $obj = new ilIndividualAssessmentMembersStorageDB($db, $irss, $stakeholder);
+        $obj = new ilIndividualAssessmentMembersStorageDB(
+            $db,
+            $irss,
+            $stakeholder,
+            $this->createMock(SpecifiedFormStorage::class)
+        );
         $result = $obj->loadMembersAsSingleObjects($iass);
 
         $this->assertIsArray($result);
@@ -265,7 +273,12 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
         $irss = $this->createMock(IRSS::class);
         $stakeholder = new ilIndividualAssessmentGradingStakeholder();
-        $obj = new ilIndividualAssessmentMembersStorageDB($db, $irss, $stakeholder);
+        $obj = new ilIndividualAssessmentMembersStorageDB(
+            $db,
+            $irss,
+            $stakeholder,
+            $this->createMock(SpecifiedFormStorage::class)
+        );
 
         $this->expectException(ilIndividualAssessmentException::class);
         $this->expectExceptionMessage("invalid usr-obj combination");
@@ -337,7 +350,12 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
         $irss = $this->createMock(IRSS::class);
         $stakeholder = new ilIndividualAssessmentGradingStakeholder();
-        $obj = new ilIndividualAssessmentMembersStorageDB($db, $irss, $stakeholder);
+        $obj = new ilIndividualAssessmentMembersStorageDB(
+            $db,
+            $irss,
+            $stakeholder,
+            $this->createMock(SpecifiedFormStorage::class)
+        );
 
         $this->expectException(ilIndividualAssessmentException::class);
         $this->expectExceptionMessage("invalid usr-obj combination");
@@ -529,7 +547,12 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
         $irss = $this->createMock(IRSS::class);
         $stakeholder = new ilIndividualAssessmentGradingStakeholder();
-        $obj = new ilIndividualAssessmentMembersStorageDB($db, $irss, $stakeholder);
+        $obj = new ilIndividualAssessmentMembersStorageDB(
+            $db,
+            $irss,
+            $stakeholder,
+            $this->createMock(SpecifiedFormStorage::class)
+        );
         $obj->deleteMembers($iass);
     }
 
@@ -595,7 +618,7 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
     {
         $iass = $this->createMock(ilObjIndividualAssessment::class);
         $iass
-            ->expects($this->once())
+            ->expects($this->exactly(2))
             ->method("getId")
             ->willReturn(11)
         ;
@@ -623,7 +646,12 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
         $irss = $this->createMock(IRSS::class);
         $stakeholder = new ilIndividualAssessmentGradingStakeholder();
-        $obj = new ilIndividualAssessmentMembersStorageDB($db, $irss, $stakeholder);
+        $obj = new ilIndividualAssessmentMembersStorageDB(
+            $db,
+            $irss,
+            $stakeholder,
+            $this->createMock(SpecifiedFormStorage::class)
+        );
         $obj->removeMembersRecord($iass, $record);
     }
 
