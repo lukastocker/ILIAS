@@ -10450,7 +10450,7 @@ iass#:#iass_amend_saved#:#Amended record has been saved.
 iass#:#iass_assessment_not_completed#:#Not completed yet
 iass#:#iass_cancel#:#Cancel
 iass#:#iass_changed_by#:#Changed after finalization
-iass#:#iass_confirm_finalize#:#Finalize
+iass#:#iass_confirm_finalize#:#Publish and freeze
 iass#:#iass_consultation_hours#:#Consultation hours
 iass#:#iass_contact#:#Name
 iass#:#iass_contact_info#:#Contact information
@@ -10474,9 +10474,9 @@ iass#:#iass_filter_failed#:#Failed only
 iass#:#iass_filter_finalized#:#Completed only
 iass#:#iass_filter_not_finalized#:#Drafts only
 iass#:#iass_filter_not_started#:#Not started only
-iass#:#iass_finalize#:#Finalize
-iass#:#iass_finalize_info#:#Individual Assessment will be finalized.
-iass#:#iass_finalize_user_qst#:#Should the participant's status really be finalised? No changes possible thereafter.
+iass#:#iass_finalize#:#Publish and freeze
+iass#:#iass_finalize_info#:#Individual Assessment will be published and frozen.
+iass#:#iass_finalize_user_qst#:#Should the participant's status really be published? No changes possible thereafter.
 iass#:#iass_further_field_headline#:#Detailed Information
 iass#:#iass_graded_by#:#Graded by
 iass#:#iass_info_emails_expl#:#You may provide several addresses separated by comma.
@@ -10485,8 +10485,8 @@ iass#:#iass_internal_note_info#:#Internal notes are only visible for tutors but 
 iass#:#iass_location#:#Location
 iass#:#iass_mails#:#E-Mail
 iass#:#iass_may_not_finalize#:#Examinee may not be finalised. Please grade the user first.
-iass#:#iass_membership_finalized#:#Record finalised
-iass#:#iass_membership_saved#:#Record saved, not yet finalised
+iass#:#iass_membership_finalized#:#Record published and frozen
+iass#:#iass_membership_saved#:#Record saved, not yet published
 iass#:#iass_mess_notification_completed#:#You passed the assessment <i>%s</i>. Please check the following grading record for details:
 iass#:#iass_mess_notification_failed#:#You failed the assessment <i>%s</i>. Please check the following grading record for details:
 iass#:#iass_notify#:#Make Result available to Participant
@@ -12975,6 +12975,8 @@ orgu#:#org_op_edit_individual_plan#:#Edit Individual Plan
 orgu#:#org_op_edit_submissions_grades#:#Edit submissions of other users
 orgu#:#org_op_manage_members#:#Manage Members
 orgu#:#org_op_manage_participants#:#Manage Participants
+orgu#:#org_op_ou_create_records#:#Create Records for Users
+orgu#:#org_op_ou_publish_records#:#Publish and freeze Records
 orgu#:#org_op_read_employee_talk#:#Read access talk appointments
 orgu#:#org_op_read_learning_progress#:#View learning progress of other users
 orgu#:#org_op_score_participants#:#Score Participants
@@ -14245,6 +14247,7 @@ rbac#:#nwss_edit_permission#:#User can change permission settings in News and We
 rbac#:#nwss_read#:#User has read access to ews and Web Feeds administration
 rbac#:#nwss_visible#:#News and Web Feeds administration is visible
 rbac#:#nwss_write#:#User can edit settings in News and Web Feeds administration
+rbac#:#obj_records#:#Create Records for Users
 rbac#:#obj_skee#:#Competence Tree
 rbac#:#org_op_access_results#:#Access Results of Subordinated Users
 rbac#:#org_op_edit_submissions_grades#:#Edit submissions of other users
@@ -14329,6 +14332,7 @@ rbac#:#ps_export_member_data#:#User can export member data in courses and groups
 rbac#:#ps_read#:#User has read access to Privacy/Security administration
 rbac#:#ps_visible#:#Privacy/Security administration is visible
 rbac#:#ps_write#:#User can edit settings in Privacy/Security administration
+rbac#:#publish_records#:#Publish and freeze Records
 rbac#:#push_desktop_items#:#Recommend Content
 rbac#:#qpl_copy#:#User can copy question pool for tests
 rbac#:#qpl_delete#:#User can move or delete question pool

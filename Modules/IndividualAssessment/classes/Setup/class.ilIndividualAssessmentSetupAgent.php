@@ -54,9 +54,16 @@ class ilIndividualAssessmentSetupAgent implements Setup\Agent
      */
     public function getUpdateObjective(Setup\Config $config = null): Setup\Objective
     {
-        return new ilDatabaseUpdateStepsExecutedObjective(
-            new ilIndividualAssessmentRectifyMembersTableDBUpdateSteps()
+        return new Setup\ObjectiveCollection(
+            'Indivial Asessment',
+            true,
+            new ilDatabaseUpdateStepsExecutedObjective(
+                new ilIndividualAssessmentRectifyMembersTableDBUpdateSteps(),
+            ),
+            ...$this->getPermissionObjectives()
         );
+
+
     }
 
     /**
@@ -82,4 +89,36 @@ class ilIndividualAssessmentSetupAgent implements Setup\Agent
     {
         return [];
     }
+
+
+    protected function getPermissionObjectives(): array
+    {
+        return [
+            new ilAccessCustomRBACOperationAddedObjective(
+                ilIndividualAssessmentAccessHandler::RBAC_OP_CREATE_RECORDS,
+                "Create Records for Users",
+                "object",
+                9010,
+                ["iass"]
+            ),
+            new \ilOrgUnitOperationRegisteredObjective(
+                ilIndividualAssessmentAccessHandler::ORGU_OP_CREATE_RECORDS,
+                'Create Records for Users',
+                ilOrgUnitOperationContext::CONTEXT_IASS
+            ),
+            new ilAccessCustomRBACOperationAddedObjective(
+                ilIndividualAssessmentAccessHandler::RBAC_OP_PUBLISH_RECORDS,
+                "Publish Records",
+                "object",
+                9020,
+                ["iass"]
+            ),
+            new \ilOrgUnitOperationRegisteredObjective(
+                ilIndividualAssessmentAccessHandler::ORGU_OP_PUBLISH_RECORDS,
+                'Publish Records',
+                ilOrgUnitOperationContext::CONTEXT_IASS
+            )
+        ];
+    }
+
 }

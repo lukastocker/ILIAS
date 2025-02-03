@@ -25,6 +25,11 @@ class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessH
 {
     public const DEFAULT_ROLE = 'il_iass_member';
 
+    public const RBAC_OP_CREATE_RECORDS = 'create_records';
+    public const ORGU_OP_CREATE_RECORDS = 'ou_create_records';
+    public const RBAC_OP_PUBLISH_RECORDS = 'publish_records';
+    public const ORGU_OP_PUBLISH_RECORDS = 'ou_publish_records';
+
     protected ilObjIndividualAssessment $iass;
     protected ilAccessHandler $handler;
     protected ilRbacAdmin $admin;
@@ -50,7 +55,7 @@ class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessH
      */
     public function checkRBACAccessToObj(string $operation): bool
     {
-        if($this->simulateMember()) {
+        if ($this->simulateMember()) {
             return $this->checkMemberRoleForPermission($operation);
         } else {
             return $this->isSystemAdmin() ||
@@ -72,6 +77,7 @@ class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessH
             );
         }
 
+        /*
         if ($operation == "write_learning_progress") {
             return $this->handler->checkRbacOrPositionPermissionAccess(
                 // This feels super odd, but this is actually ok because we do not have
@@ -82,6 +88,7 @@ class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessH
                 $this->iass->getRefId()
             );
         }
+        */
 
         throw new \LogicException("Unknown rbac/position-operation: $operation");
     }
@@ -100,13 +107,13 @@ class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessH
             $this->review->getParentRoleIds($ref_id),
             static fn(array $role): bool => str_starts_with($role['title'], 'il_crs_member_')
         );
-        if($roles === []) {
+        if ($roles === []) {
             return false;
         }
         $role = array_shift($roles);
         $active_ops = $this->review->getActiveOperationsOfRole($ref_id, $role['rol_id']);
-        foreach($active_ops as $op) {
-            if($this->review->getOperation($op)['operation'] === $operation) {
+        foreach ($active_ops as $op) {
+            if ($this->review->getOperation($op)['operation'] === $operation) {
                 return true;
             }
         }
@@ -189,7 +196,13 @@ class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessH
 
     public function mayGradeAnyUser(): bool
     {
-        return $this->checkRBACOrPositionAccessToObj('write_learning_progress');
+        //return $this->checkRBACOrPositionAccessToObj('write_learning_progress');
+        return $this->handler->checkRbacOrPositionPermissionAccess(
+            self::RBAC_OP_CREATE_RECORDS,
+            self::ORGU_OP_CREATE_RECORDS,
+            $this->iass->getRefId()
+        );
+
     }
 
     public function mayGradeUser(int $user_id): bool
@@ -197,11 +210,8 @@ class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessH
         return
             (count(
                 $this->handler->filterUserIdsByRbacOrPositionOfCurrentUser(
-                    // This feels super odd, but this is actually ok because we do not have
-                    // a dedicated RBAC permission to write_learning_progress.
-                    // See: https://mantis.ilias.de/view.php?id=36056#c89865
-                    "read_learning_progress",
-                    "write_learning_progress",
+                    self::RBAC_OP_CREATE_RECORDS,
+                    self::ORGU_OP_CREATE_RECORDS,
                     $this->iass->getRefId(),
                     [$user_id]
                 )

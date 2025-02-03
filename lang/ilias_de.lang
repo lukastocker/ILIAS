@@ -10450,7 +10450,7 @@ iass#:#iass_amend_saved#:#Geänderte Prüfungsdaten wurden gespeichert.
 iass#:#iass_assessment_not_completed#:#Noch nicht abgeschlossen
 iass#:#iass_cancel#:#Abbrechen
 iass#:#iass_changed_by#:#Nachträglich geändert
-iass#:#iass_confirm_finalize#:#Abschließen
+iass#:#iass_confirm_finalize#:#Abschließen und veröffentlichen
 iass#:#iass_consultation_hours#:#Sprechstunden
 iass#:#iass_contact#:#Name
 iass#:#iass_contact_info#:#Kontaktinformationen
@@ -10474,7 +10474,7 @@ iass#:#iass_filter_failed#:#Nur nicht bestanden
 iass#:#iass_filter_finalized#:#Nur bestandene
 iass#:#iass_filter_not_finalized#:#Nur nicht abgeschlossene
 iass#:#iass_filter_not_started#:#Nur nicht bewertete
-iass#:#iass_finalize#:#Abschließen
+iass#:#iass_finalize#:#Abschließen und veröffentlichen
 iass#:#iass_finalize_info#:#Die Individuelle Bewertung wird abgeschlossen.
 iass#:#iass_finalize_user_qst#:#Soll die Bewertung des Teilnehmers wirklich final abgeschlossen werden? Änderungen an der Bewertung sind hinterher nicht mehr möglich.
 iass#:#iass_further_field_headline#:#Detaillierte Informationen
@@ -10485,8 +10485,8 @@ iass#:#iass_internal_note_info#:#Dieser Text ist nur für Personen sichtbar, die
 iass#:#iass_location#:#Ort
 iass#:#iass_mails#:#E-Mail
 iass#:#iass_may_not_finalize#:#Prüfung kann noch nicht abschließend bewertet werden. Bitte geben Sie eine Bewertung ab.
-iass#:#iass_membership_finalized#:#Bewertung abgeschlossen.
-iass#:#iass_membership_saved#:#Bewertung wurde gespeichert aber noch nicht final abgeschlossen.
+iass#:#iass_membership_finalized#:#Bewertung veröffentlicht.
+iass#:#iass_membership_saved#:#Bewertung wurde gespeichert aber noch nicht veröffentlicht.
 iass#:#iass_mess_notification_completed#:#Sie haben die Prüfung „%s“ bestanden. Beachten Sie bitte auch die folgende Notiz zur Prüfung.
 iass#:#iass_mess_notification_failed#:#Sie haben die Prüfung „%s“ leider nicht bestanden. Beachten Sie bitte auch die folgende Notiz zur Prüfung.
 iass#:#iass_notify#:#Ergebnis dem Teilnehmer zugänglich machen
@@ -12975,6 +12975,8 @@ orgu#:#org_op_edit_individual_plan#:#Individuellen Plan bearbeiten
 orgu#:#org_op_edit_submissions_grades#:#Abgaben von anderen Benutzern bearbeiten
 orgu#:#org_op_manage_members#:#Mitglieder bearbeiten
 orgu#:#org_op_manage_participants#:#Teilnehmer verwalten
+orgu#:#org_op_ou_create_records#:#Bewertungen vornehmen
+orgu#:#org_op_ou_publish_records#:#Bewertungen veröffentlichen und abschließen
 orgu#:#org_op_read_employee_talk#:#Auf Gespräche lesend zugreifen
 orgu#:#org_op_read_learning_progress#:#Lernfortschritt von anderen Benutzern einsehen
 orgu#:#org_op_score_participants#:#Teilnehmer bewerten
@@ -14245,6 +14247,7 @@ rbac#:#nwss_edit_permission#:#Rechteeinstellungen in der News- und Webfeeds-Admi
 rbac#:#nwss_read#:#Lesezugriff auf News- und Webfeeds-Administration
 rbac#:#nwss_visible#:#News- und Webfeeds-Administration ist sichtbar
 rbac#:#nwss_write#:#Einstellungen in der News- und Webfeeds-Administration bearbeiten
+rbac#:#obj_records#:#Bewertungen vornehmen
 rbac#:#obj_skee#:#Kompetenzbaum
 rbac#:#org_op_access_results#:#Zugriff auf Ergebnisse untergeordneter Benutzer
 rbac#:#org_op_edit_submissions_grades#:#Abgaben von anderen Benutzern bearbeiten
@@ -14329,6 +14332,7 @@ rbac#:#ps_export_member_data#:#Export von Mitgliederdaten in Gruppen und Kursen 
 rbac#:#ps_read#:#Lesezugriff auf Datenschutz- und Sicherheitseinstellungen
 rbac#:#ps_visible#:#Datenschutz- und Sicherheitseinstellungen sind sichtbar
 rbac#:#ps_write#:#Bearbeiten der Datenschutz- und Sicherheitseinstellungen erlauben
+rbac#:#publish_records#:#Bewertungen veröffentlichen und abschließen
 rbac#:#push_desktop_items#:#Inhalte empfehlen
 rbac#:#qpl_copy#:#Fragenpool kopieren
 rbac#:#qpl_delete#:#Fragenpool löschen oder verschieben
