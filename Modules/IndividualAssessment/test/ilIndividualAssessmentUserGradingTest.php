@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -18,51 +16,64 @@ declare(strict_types=1);
  *
  *********************************************************************/
 
+declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
 use ILIAS\UI\Component\Input\Field\Section;
 use ILIAS\FileUpload\Handler\AbstractCtrlAwareUploadHandler;
+// cat-tms-patch start iassfeatures
+use ILIAS\IndividualAssessmentFormPool\Testing\FieldBuilderMockFactory;
+
+require_once(__DIR__ . "/../../IndividualAssessmentFormPool/test/FieldBuilderMockFactory.php");
+// cat-tms-patch end iassfeatures
 
 /**
  * @backupGlobals disabled
  */
 class ilIndividualAssessmentUserGradingTest extends TestCase
 {
+    // cat-tms-patch start iassfeatures
+    use FieldBuilderMockFactory;
+    // cat-tms-patch end iassfeatures
+
     public function test_create_instance()
     {
         $name = 'Hans Günther';
         $record = 'The guy was really good';
         $internal_note = 'This is a node just for me.';
         $file = null;
-        $is_file_visible = false;
-        $learning_progress = ilIndividualAssessmentMembers::LP_IN_PROGRESS;
+        // cat-tms-patch start iassfeatures
+        $learning_progress = ilLPStatus::LP_STATUS_IN_PROGRESS_NUM;
+        // cat-tms-patch end iassfeatures
         $place = 'Area 51';
         $event_time = new DateTimeImmutable();
-        $notify = true;
+        // cat-tms-patch start iassfeatures
         $finalized = false;
         $grading = new ilIndividualAssessmentUserGrading(
             $name,
             $record,
             $internal_note,
             $file,
-            $is_file_visible,
-            $learning_progress,
             $place,
             $event_time,
-            $notify,
+            $learning_progress,
             $finalized
         );
+        // cat-tms-patch end iassfeatures
 
         $this->assertInstanceOf(ilIndividualAssessmentUserGrading::class, $grading);
         $this->assertEquals($name, $grading->getName());
         $this->assertEquals($record, $grading->getRecord());
         $this->assertEquals($internal_note, $grading->getInternalNote());
+        // cat-tms-patch start iassfeatures
         $this->assertNull($grading->getFile());
-        $this->assertFalse($grading->isFileVisible());
         $this->assertEquals($learning_progress, $grading->getLearningProgress());
+        // cat-tms-patch end iassfeatures
         $this->assertEquals($place, $grading->getPlace());
+        // cat-tms-patch start iassfeatures
         $this->assertEquals($event_time, $grading->getEventTime());
-        $this->assertTrue($grading->isNotify());
         $this->assertFalse($grading->isFinalized());
+        // cat-tms-patch end iassfeatures
     }
 
     public function test_with_finalized_changed()
@@ -71,47 +82,47 @@ class ilIndividualAssessmentUserGradingTest extends TestCase
         $record = 'The guy was really good';
         $internal_note = 'This is a node just for me.';
         $file = 'report.pdf';
-        $is_file_visible = true;
-        $learning_progress = ilIndividualAssessmentMembers::LP_IN_PROGRESS;
+        // cat-tms-patch start iassfeatures
+        $learning_progress = ilLPStatus::LP_STATUS_IN_PROGRESS_NUM;
+        // cat-tms-patch end iassfeatures
         $place = 'Area 51 Underground';
         $event_time = new DateTimeImmutable();
-        $notify = false;
+        // cat-tms-patch start iassfeatures
         $finalized = false;
         $grading = new ilIndividualAssessmentUserGrading(
             $name,
             $record,
             $internal_note,
             $file,
-            $is_file_visible,
-            $learning_progress,
             $place,
             $event_time,
-            $notify,
+            $learning_progress,
             $finalized
         );
+        // cat-tms-patch end iassfeatures
 
         $this->assertInstanceOf(ilIndividualAssessmentUserGrading::class, $grading);
         $this->assertEquals($name, $grading->getName());
         $this->assertEquals($record, $grading->getRecord());
         $this->assertEquals($internal_note, $grading->getInternalNote());
+        // cat-tms-patch start iassfeatures
         $this->assertEquals($file, $grading->getFile());
-        $this->assertTrue($grading->isFileVisible());
         $this->assertEquals($learning_progress, $grading->getLearningProgress());
+        // cat-tms-patch end iassfeatures
         $this->assertEquals($place, $grading->getPlace());
         $this->assertEquals($event_time, $grading->getEventTime());
-        $this->assertFalse($grading->isNotify());
         $this->assertFalse($grading->isFinalized());
 
         $n_grading = $grading->withFinalized(true);
         $this->assertEquals($name, $n_grading->getName());
         $this->assertEquals($record, $n_grading->getRecord());
         $this->assertEquals($internal_note, $n_grading->getInternalNote());
+        // cat-tms-patch start iassfeatures
         $this->assertEquals($file, $n_grading->getFile());
-        $this->assertTrue($n_grading->isFileVisible());
         $this->assertEquals($learning_progress, $n_grading->getLearningProgress());
+        // cat-tms-patch end iassfeatures
         $this->assertEquals($place, $n_grading->getPlace());
         $this->assertEquals($event_time, $n_grading->getEventTime());
-        $this->assertFalse($n_grading->isNotify());
         $this->assertTrue($n_grading->isFinalized());
 
         $this->assertNotSame($n_grading, $grading);
@@ -139,25 +150,27 @@ class ilIndividualAssessmentUserGradingTest extends TestCase
         $record = 'The guy was really good';
         $internal_note = 'This is a node just for me.';
         $file = 'report.pdf';
-        $is_file_visible = true;
-        $learning_progress = ilIndividualAssessmentMembers::LP_IN_PROGRESS;
+        // cat-tms-patch start iassfeatures
+        $learning_progress = ilLPStatus::LP_STATUS_IN_PROGRESS_NUM;
+        // cat-tms-patch end iassfeatures
         $place = 'Area 51 Underground';
         $event_time = new DateTimeImmutable();
-        $notify = false;
+        // cat-tms-patch start iassfeatures
         $finalized = false;
+        $may_publish = true;
         $grading = new ilIndividualAssessmentUserGrading(
             $name,
             $record,
             $internal_note,
             $file,
-            $is_file_visible,
-            $learning_progress,
             $place,
             $event_time,
-            $notify,
+            $learning_progress,
             $finalized
         );
 
+        $field_builder = $this->getFieldBuilder();
+        // cat-tms-patch end iassfeatures
         $input = $grading->toFormInput(
             $f,
             $df,
@@ -165,11 +178,16 @@ class ilIndividualAssessmentUserGradingTest extends TestCase
             $refinery,
             $file_handler,
             $df->dateFormat()->standard(),
+            // cat-tms-patch start iassfeatures
+            $field_builder,
             [
-                ilIndividualAssessmentMembers::LP_IN_PROGRESS,
-                ilIndividualAssessmentMembers::LP_FAILED,
-                ilIndividualAssessmentMembers::LP_COMPLETED
-            ]
+                ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM,
+                ilLPStatus::LP_STATUS_IN_PROGRESS_NUM,
+                ilLPStatus::LP_STATUS_FAILED_NUM,
+                ilLPStatus::LP_STATUS_COMPLETED_NUM
+            ],
+            $may_publish
+            // cat-tms-patch end iassfeatures
         );
 
         $this->assertInstanceOf(Section::class, $input);

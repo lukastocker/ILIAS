@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -18,6 +16,8 @@ declare(strict_types=1);
  *
  *********************************************************************/
 
+declare(strict_types=1);
+
 use ILIAS\UI\Factory;
 use ILIAS\UI\Renderer;
 use ILIAS\UI\Component\Table\PresentationRow;
@@ -28,37 +28,21 @@ use ILIAS\UI\Component\Dropdown\Dropdown;
  */
 class ilIndividualAssessmentMembersTableGUI
 {
-    protected ilIndividualAssessmentMembersGUI $parent;
-    protected ilLanguage $lng;
-    protected ilCtrl $ctrl;
-    protected IndividualAssessmentAccessHandler $iass_access;
-    protected Factory $factory;
-    protected Renderer $renderer;
-    protected int $current_user_id;
-    protected ilObjUser $current_user;
-    protected ilIndividualAssessmentDateFormatter $date_formatter;
     protected array $data = [];
 
+    // cat-tms-patch start iassfeatures
     public function __construct(
-        ilIndividualAssessmentMembersGUI $parent,
-        ilLanguage $lng,
-        ilCtrl $ctrl,
-        IndividualAssessmentAccessHandler $iass_access,
-        Factory $factory,
-        Renderer $renderer,
-        ilObjUser $current_user,
-        ilIndividualAssessmentDateFormatter $date_formatter
+        protected ilLanguage $lng,
+        protected ilCtrl $ctrl,
+        protected IndividualAssessmentAccessHandler $iass_access,
+        protected Factory $factory,
+        protected Renderer $renderer,
+        protected ilObjUser $current_user,
+        protected ilIndividualAssessmentDateFormatter $date_formatter,
+        protected IASSCustomFieldValueRenderer $value_renderer
     ) {
-        $this->parent = $parent;
-        $this->lng = $lng;
-        $this->ctrl = $ctrl;
-        $this->iass_access = $iass_access;
-        $this->factory = $factory;
-        $this->renderer = $renderer;
-        $this->current_user_id = $current_user->getId();
-        $this->current_user = $current_user;
-        $this->date_formatter = $date_formatter;
     }
+    // cat-tms-patch end iassfeatures
 
     /**
      * Set data to show in table
@@ -67,23 +51,24 @@ class ilIndividualAssessmentMembersTableGUI
     {
         $this->data = array_filter(
             $data,
-            fn ($record) =>
+            fn($record) =>
                  $this->iass_access->mayEditMembers()
                  || $this->iass_access->mayGradeUser($record->id())
                  || $this->iass_access->mayViewUser($record->id())
         );
     }
 
+    // cat-tms-patch start iassfeatures
     /**
      * Renders the presentation table
      *
-     * @param 	ILIAS\UI\Component\Component[] 	$view_constrols
+     * @param 	ILIAS\UI\Component\Component[] 	$view_controls
      */
-    public function render(array $view_constrols, int $offset = 0, int $limit = null): string
+    public function render(array $view_controls, int $offset = 0, int $limit = null): string
     {
         $ptable = $this->factory->table()->presentation(
             "",
-            $view_constrols,
+            $view_controls,
             function (
                 PresentationRow $row,
                 ilIndividualAssessmentMember $record,
@@ -100,7 +85,7 @@ class ilIndividualAssessmentMembersTableGUI
                     ->withAction($this->getAction($record, $ui));
             }
         );
-
+        // cat-tms-patch end iassfeatures
         $data = array_slice($this->data, $offset, $limit);
         return $this->renderer->render($ptable->withData($data));
     }
@@ -123,7 +108,9 @@ class ilIndividualAssessmentMembersTableGUI
         }
 
         $examiner_id = $record->examinerId();
-        return $this->txt("grading") . ": " . $this->getStatus($record->finalized(), $record->LPStatus(), $examiner_id);
+        // cat-tms-patch start iassfeatures
+        return $this->txt("learning_progress") . ": " . $this->getEntryForStatus($record->LPStatus());
+        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -208,23 +195,28 @@ class ilIndividualAssessmentMembersTableGUI
 
         $usr_id = $record->id();
 
+        // cat-tms-patch start iassfeatures
         if (
             !$this->iass_access->mayViewUser($usr_id)
             && !$record->finalized()
-            && $examiner_id !== $this->current_user_id
+            && $examiner_id !== $this->current_user->getId()
         ) {
             return [];
         }
+        // cat-tms-patch end iassfeatures
 
         $file_name = $record->fileName();
 
+        // cat-tms-patch start iassfeatures
         return array_merge(
             $this->getRecordNote($record->record()),
             $this->getInternalRecordNote($record->internalNote()),
             $this->checkDownloadFile($usr_id, $file_name)
                 ? $this->getFileDownloadLink($usr_id)
-                : []
+                : [],
+            $this->getCustomInfos($record->getGrading())
         );
+        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -238,8 +230,9 @@ class ilIndividualAssessmentMembersTableGUI
             return [];
         }
 
+        // cat-tms-patch start iassfeatures
         return array_merge(
-            $record->LPStatus() ? [$this->txt("grading") . ":" => $this->getEntryForStatus($record->LPStatus())] : [],
+            $record->LPStatus() ? [$this->txt("learning_progress") . ":" => $this->getEntryForStatus($record->LPStatus())] : [],
             $this->getImportantInfos($record, false),
             $this->getLocationInfos(
                 $record->finalized(),
@@ -248,7 +241,19 @@ class ilIndividualAssessmentMembersTableGUI
                 $record->examinerId()
             )
         );
+        // cat-tms-patch end iassfeatures
     }
+
+    // cat-tms-patch start iassfeatures
+    private function getCustomInfos(ilIndividualAssessmentUserGrading $grading): array
+    {
+        $ret = [];
+        foreach ($grading->getCustomFields() as $cf) {
+            $ret[$cf->getConfig()->getLabel()] = $this->value_renderer->render($cf);
+        }
+        return $ret;
+    }
+    // cat-tms-patch end iassfeatures
 
     /**
      * Return the ui control with executable actions
@@ -291,22 +296,6 @@ class ilIndividualAssessmentMembersTableGUI
     }
 
     /**
-     * Returns readable status
-     */
-    protected function getStatus(bool $finalized, int $status, int $examiner_id = null): string
-    {
-        if ($status == 0) {
-            $status = ilIndividualAssessmentMembers::LP_IN_PROGRESS;
-        }
-
-        if (!$finalized && !is_null($examiner_id)) {
-            return $this->txt('iass_assessment_not_completed');
-        }
-
-        return $this->getEntryForStatus($status);
-    }
-
-    /**
      * Returns information about the grading
      *
      * @return string[]
@@ -335,7 +324,9 @@ class ilIndividualAssessmentMembersTableGUI
 
     protected function getProfileLink(string $full_name, int $user_id): string
     {
-        $back_url = $this->ctrl->getLinkTarget($this->parent, "view");
+        // cat-tms-patch start iassfeatures
+        $back_url = $this->ctrl->getLinkTargetByClass(ilIndividualAssessmentMembersGUI::class, "view");
+        // cat-tms-patch end iassfeatures
         $this->ctrl->setParameterByClass('ilpublicuserprofilegui', 'user_id', $user_id);
         $this->ctrl->setParameterByClass('ilpublicuserprofilegui', "back_url", rawurlencode($back_url));
         $link = $this->ctrl->getLinkTargetByClass('ilpublicuserprofilegui', 'getHTML');
@@ -427,12 +418,16 @@ class ilIndividualAssessmentMembersTableGUI
     protected function getEntryForStatus(int $a_status): string
     {
         switch ($a_status) {
-            case ilIndividualAssessmentMembers::LP_IN_PROGRESS:
-                return $this->txt('iass_status_pending');
-            case ilIndividualAssessmentMembers::LP_COMPLETED:
-                return $this->txt('iass_status_completed');
-            case ilIndividualAssessmentMembers::LP_FAILED:
-                return $this->txt('iass_status_failed');
+            // cat-tms-patch start iassfeatures
+            case ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_NOT_ATTEMPTED);
+            case ilLPStatus::LP_STATUS_IN_PROGRESS_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_IN_PROGRESS);
+            case ilLPStatus::LP_STATUS_COMPLETED_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_COMPLETED);
+            case ilLPStatus::LP_STATUS_FAILED_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_FAILED);
+                // cat-tms-patch end iassfeatures
             default:
                 throw new ilIndividualAssessmentException("Invalid status: " . $a_status);
         }
@@ -459,12 +454,9 @@ class ilIndividualAssessmentMembersTableGUI
             return false;
         }
 
-        return
-            (
-                $this->iass_access->mayGradeUser($usr_id)
-                &&
-                $this->wasEditedByViewer($examiner_id)
-            );
+        // cat-tms-patch start iassfeatures
+        return $this->iass_access->mayGradeUser($usr_id);
+        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -511,11 +503,6 @@ class ilIndividualAssessmentMembersTableGUI
     protected function userMayDownloadAttachment(int $usr_id): bool
     {
         return $this->iass_access->mayViewUser($usr_id) || $this->iass_access->mayGradeUser($usr_id);
-    }
-
-    protected function wasEditedByViewer(int $examiner_id = null): bool
-    {
-        return $examiner_id === $this->current_user_id || null === $examiner_id;
     }
 
     protected function txt(string $code): string

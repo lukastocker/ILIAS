@@ -1,0 +1,100 @@
+<?php
+
+/**
+ * This file is part of ILIAS, a powerful learning management system
+ * published by ILIAS open source e-Learning e.V.
+ *
+ * ILIAS is licensed with the GPL-3.0,
+ * see https://www.gnu.org/licenses/gpl-3.0.en.html
+ * You should have received a copy of said license along with the
+ * source code, too.
+ *
+ * If this is not the case or you just want to try ILIAS, you'll find
+ * us at:
+ * https://www.ilias.de
+ * https://github.com/ILIAS-eLearning
+ *
+ *********************************************************************/
+
+declare(strict_types=1);
+
+class IndAssSettingsTableDBUpdateSteps implements \ilDatabaseUpdateSteps
+{
+    private const TABLE_NAME = "iass_settings";
+
+    protected \ilDBInterface $db;
+
+    public function prepare(\ilDBInterface $db): void
+    {
+        $this->db = $db;
+    }
+
+    public function step_1(): void
+    {
+        if (!$this->db->tableColumnExists(self::TABLE_NAME, 'file_visible')) {
+            $this->db->addTableColumn(
+                self::TABLE_NAME,
+                'file_visible',
+                [
+                    "type" => "integer",
+                    "length" => 1,
+                    "notnull" => true,
+                    "default" => 0
+                ]
+            );
+        }
+    }
+
+    public function step_2(): void
+    {
+        if (!$this->db->tableColumnExists(self::TABLE_NAME, 'result_visible')) {
+            $this->db->addTableColumn(
+                self::TABLE_NAME,
+                'result_visible',
+                [
+                    "type" => "integer",
+                    "length" => 1,
+                    "notnull" => true,
+                    "default" => 0
+                ]
+            );
+        }
+    }
+
+    public function step_3(): void
+    {
+        if (!$this->db->tableColumnExists(self::TABLE_NAME, 'report')) {
+            $this->db->addTableColumn(
+                self::TABLE_NAME,
+                'report',
+                [
+                    "type" => "integer",
+                    "length" => 1,
+                    "notnull" => true,
+                    "default" => 1
+                ]
+            );
+        }
+        if (!$this->db->tableColumnExists(self::TABLE_NAME, 'report_from')) {
+            $this->db->addTableColumn(
+                self::TABLE_NAME,
+                'report_from',
+                [
+                    "type" => "timestamp",
+                    "notnull" => false
+                ]
+            );
+        }
+        if (!$this->db->tableColumnExists(self::TABLE_NAME, 'report_to')) {
+            $this->db->addTableColumn(
+                self::TABLE_NAME,
+                'report_to',
+                [
+                    "type" => "timestamp",
+                    "notnull" => false
+                ]
+            );
+        }
+    }
+
+}

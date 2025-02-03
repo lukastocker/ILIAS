@@ -19,6 +19,7 @@
 use ILIAS\GlobalScreen\ScreenContext\ContextServices;
 use ILIAS\Repository\StandardGUIRequest;
 
+// cat-tms-patch start iassfeatures
 /**
  * Class ilRepositoryGUI
  *
@@ -41,8 +42,11 @@ use ILIAS\Repository\StandardGUIRequest;
  * @ilCtrl_Calls ilRepositoryGUI: ilObjLTIConsumerGUI
  * @ilCtrl_Calls ilRepositoryGUI: ilObjCmiXapiGUI
  * @ilCtrl_Calls ilRepositoryGUI: ilPermissionGUI
+ * @ilCtrl_Calls ilRepositoryGUI: ilObjIndividualAssessmentFormPoolGUI
+ * @ilCtrl_Calls ilRepositoryGUI: ilObjIndividualAssessmentReportGUI
  *
  */
+// cat-tms-patch end iassfeatures
 class ilRepositoryGUI implements ilCtrlBaseClassInterface
 {
     protected ilObjectDefinition $objDefinition;

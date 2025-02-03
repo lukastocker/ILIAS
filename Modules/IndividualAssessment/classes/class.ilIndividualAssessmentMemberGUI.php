@@ -33,6 +33,10 @@ use ILIAS\UI\Renderer;
 use ILIAS\Data;
 use ILIAS\Refinery;
 use ILIAS\ResourceStorage\Services as IRSS;
+// cat-tms-patch start iassfeatures
+use ILIAS\IndividualAssessmentFormPool\FieldBuilder;
+
+// cat-tms-patch end iassfeatures
 
 class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
 {
@@ -44,6 +48,10 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
     public const CMD_AMEND = 'amend';
     public const CMD_SAVE_AMEND = "saveAmend";
     public const CMD_DOWNLOAD_FILE = "downloadFile";
+    // cat-tms-patch start iassfeatures
+    public const CMD_DOWNLOAD_CUST_FILE = "downCustFile";
+    public const F_CUST_FILE_RID = "crid";
+    // cat-tms-patch end iassfeatures
 
     protected ?ilIndividualAssessmentAccessHandler $iass_access = null;
 
@@ -69,8 +77,14 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         protected ilIndividualAssessmentDateFormatter $date_formatter,
         protected IRSS $irss,
         protected ilIndividualAssessmentGradingStakeholder $stakeholder,
+        // cat-tms-patch start iassfeatures
+        protected FieldBuilder $field_builder,
+        // cat-tms-patch end iassfeatures
     ) {
         parent::__construct();
+        // cat-tms-patch start iassfeatures
+        $this->lng->loadLanguageModule('trac');
+        // cat-tms-patch end iassfeatures
     }
 
     public function executeCommand(): void
@@ -88,6 +102,15 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
             case self::CMD_DOWNLOAD_FILE:
                 $this->$cmd();
                 break;
+                // cat-tms-patch start iassfeatures
+            case self::CMD_DOWNLOAD_CUST_FILE:
+                $resource_id = $this->request_wrapper->retrieve(
+                    self::F_CUST_FILE_RID,
+                    $this->refinery->kindlyTo()->string()
+                );
+                $this->downloadCustomFile($resource_id);
+                break;
+                // cat-tms-patch end iassfeatures
             case AbstractCtrlAwareUploadHandler::CMD_UPLOAD:
             case AbstractCtrlAwareUploadHandler::CMD_REMOVE:
             case AbstractCtrlAwareUploadHandler::CMD_INFO:
@@ -177,10 +200,18 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
     {
         $identifier = $this->getMember()->getGrading()->getFile();
         $resource_id = $this->irss->manage()->find($identifier);
-        if($resource_id) {
+        if ($resource_id) {
             $this->irss->consume()->download($resource_id)->run();
         }
     }
+
+    // cat-tms-patch start iassfeatures
+    protected function downloadCustomFile(string $resource_id): void
+    {
+        $resource_id = $this->irss->manage()->find($resource_id);
+        $this->irss->consume()->download($resource_id)->run();
+    }
+    // cat-tms-patch end iassfeatures
 
     protected function saveAmend(): void
     {
@@ -213,6 +244,9 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         bool $may_be_edited,
         bool $amend = false
     ): ILIAS\UI\Component\Input\Container\Form\Form {
+        // cat-tms-patch start iassfeatures
+        $may_publish = $this->userMayPublish();
+        // cat-tms-patch end iassfeatures
         $section = $this->getMember()->getGrading()->toFormInput(
             $this->input_factory->field(),
             $this->data_factory,
@@ -220,11 +254,16 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
             $this->refinery_factory,
             $this,
             $this->user->getDateFormat(),
+            $this->field_builder,
             $this->getPossibleLPStates(),
+            $may_publish,
             $may_be_edited,
             $this->getObject()->getSettings()->isEventTimePlaceRequired(),
             $this->getObject()->getSettings()->isFileRequired(),
-            $amend
+            // cat-tms-patch start iassfeatures
+            $amend,
+            $this->isManualGradingActive()
+            // cat-tms-patch end iassfeatures
         );
 
         $form = $this->input_factory->container()->form()->standard($form_action, [$section]);
@@ -245,7 +284,9 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         }
 
         $member = $this->getMember();
-        if (!$member->mayBeFinalized()) {
+        // cat-tms-patch start iassfeatures
+        if (!$member->mayBeFinalized() && $this->isManualGradingActive()) {
+            // cat-tms-patch end iassfeatures
             $this->tpl->setOnScreenMessage("failure", $this->lng->txt('iass_may_not_finalize'), true);
             $this->redirect('edit');
             return;
@@ -322,11 +363,14 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
 
     protected function getPossibleLPStates(): array
     {
+        // cat-tms-patch start iassfeatures
         return [
-            ilIndividualAssessmentMembers::LP_IN_PROGRESS => $this->lng->txt('iass_status_pending'),
-            ilIndividualAssessmentMembers::LP_COMPLETED => $this->lng->txt('iass_status_completed'),
-            ilIndividualAssessmentMembers::LP_FAILED => $this->lng->txt('iass_status_failed')
+            ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM => $this->lng->txt(ilLPStatus::LP_STATUS_NOT_ATTEMPTED),
+            ilLPStatus::LP_STATUS_IN_PROGRESS_NUM => $this->lng->txt(ilLPStatus::LP_STATUS_IN_PROGRESS),
+            ilLPStatus::LP_STATUS_COMPLETED_NUM => $this->lng->txt(ilLPStatus::LP_STATUS_COMPLETED),
+            ilLPStatus::LP_STATUS_FAILED_NUM => $this->lng->txt(ilLPStatus::LP_STATUS_FAILED)
         ];
+        // cat-tms-patch end iassfeatures
     }
 
     protected function getUploadResult(): HandlerResult
@@ -353,7 +397,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
     protected function getRemoveResult(string $identifier): HandlerResult
     {
         $resource_id = $this->irss->manage()->find($identifier);
-        if($resource_id) {
+        if ($resource_id) {
             $this->irss->manage()->remove($resource_id, $this->stakeholder);
             $status = HandlerResult::STATUS_OK;
             $message = $this->lng->txt('iass_file_deleted');
@@ -368,7 +412,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
     public function getInfoResult(string $identifier): ?FileInfoResult
     {
         $resource_id = $this->irss->manage()->find($identifier);
-        if(! $resource_id) {
+        if (! $resource_id) {
             return null;
         }
         $resource = $this->irss->manage()->getResource($resource_id);
@@ -388,7 +432,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         $file_ids = array_filter($file_ids, fn($id) => $id !== "");
         return array_map(function ($id) {
             $resource_id = $this->irss->manage()->find($identifier);
-            if(! $resource_id) {
+            if (! $resource_id) {
                 return null;
             }
             $resource = $this->irss->manage()->getResource($resource_id);
@@ -508,10 +552,12 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
 
     protected function userMayGrade(): bool
     {
+        // cat-tms-patch start iassfeatures
         return
             $this->getAccessHandler()->isSystemAdmin() ||
-            (!$this->targetWasEditedByOtherUser($this->getMember()) && $this->getAccessHandler()->mayGradeUser($this->getMember()->id()))
+            ($this->getAccessHandler()->mayGradeUser($this->getMember()->id()))
         ;
+        // cat-tms-patch end iassfeatures
     }
 
     protected function userMayView(): bool
@@ -524,13 +570,14 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         return $this->getAccessHandler()->mayAmendAllUsers();
     }
 
-    protected function targetWasEditedByOtherUser(ilIndividualAssessmentMember $member): bool
+    // cat-tms-patch start iassfeatures
+    protected function userMayPublish(): bool
     {
         return
-            (int) $member->examinerId() !== $this->user->getId() &&
-            0 !== (int) $member->examinerId()
-        ;
+            $this->getAccessHandler()->isSystemAdmin() ||
+            ($this->getAccessHandler()->mayPublishUser($this->getMember()->id()) && ($this->userMayGrade() || $this->userMayView()));
     }
+    // cat-tms-patch end iassfeatures
 
     protected function isFinalized(): bool
     {
@@ -541,4 +588,11 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
     {
         $this->error_object->raiseError($this->lng->txt("msg_no_perm_read"), $this->error_object->WARNING);
     }
+
+    // cat-tms-patch start iassfeatures
+    public function isManualGradingActive(): bool
+    {
+        return ilIndividualAssessmentLP::getInstance($this->getObject()->getId())->isActive();
+    }
+    // cat-tms-patch end iassfeatures
 }

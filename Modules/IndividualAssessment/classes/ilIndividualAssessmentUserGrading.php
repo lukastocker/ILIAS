@@ -22,72 +22,55 @@ use ILIAS\UI\Component\Input\Field;
 use ILIAS\Refinery\Factory as Refinery;
 use ILIAS\Data\Factory as DataFactory;
 use ILIAS\FileUpload\Handler\AbstractCtrlAwareUploadHandler;
+// cat-tms-patch start iassfeatures
+use ILIAS\IndividualAssessmentFormPool\FieldBuilder;
+
+// cat-tms-patch end iassfeatures
 
 class ilIndividualAssessmentUserGrading
 {
-    protected string $name;
-    protected string $record;
-    protected string $internal_note;
-    protected ?string $file;
-    protected bool $is_file_visible;
-    protected int $learning_progress;
-    protected string $place;
-    protected ?DateTimeImmutable $event_time;
-    protected bool $notify;
-    protected bool $finalized;
+    // cat-tms-patch start iassfeatures
+    protected array $custom_fields = [];
 
     public function __construct(
-        string $name,
-        string $record,
-        string $internal_note,
-        ?string $file,
-        bool $is_file_visible,
-        int $learning_progress,
-        string $place,
-        ?DateTimeImmutable $event_time,
-        bool $notify,
-        bool $finalized = false
+        protected string $name,
+        protected ?string $record = null,
+        protected ?string $internal_note = null,
+        protected ?string $file = null,
+        protected ?string $place = null,
+        protected ?DateTimeImmutable $event_time = null,
+        protected int $learning_progress = 0,
+        protected bool $finalized = false
     ) {
-        $this->name = $name;
-        $this->record = $record;
-        $this->internal_note = $internal_note;
-        $this->file = $file;
-        $this->is_file_visible = $is_file_visible;
-        $this->learning_progress = $learning_progress;
-        $this->place = $place;
-        $this->event_time = $event_time;
-        $this->notify = $notify;
-        $this->finalized = $finalized;
     }
+    // cat-tms-patch end iassfeatures
 
-    public function getName(): string
+    // cat-tms-patch start iassfeatures
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function getRecord(): string
+    public function getRecord(): ?string
     {
         return $this->record;
     }
 
-    public function getInternalNote(): string
+    public function getInternalNote(): ?string
     {
         return $this->internal_note;
     }
+    // cat-tms-patch end iassfeatures
 
     public function getFile(): ?string
     {
         return $this->file;
     }
 
+    // cat-tms-patch start iassfeatures
     public function hasFile(): bool
     {
         return !empty($this->file);
-    }
-
-    public function isFileVisible(): bool
-    {
-        return $this->is_file_visible;
     }
 
     public function getLearningProgress(): int
@@ -95,7 +78,7 @@ class ilIndividualAssessmentUserGrading
         return $this->learning_progress;
     }
 
-    public function getPlace(): string
+    public function getPlace(): ?string
     {
         return $this->place;
     }
@@ -105,15 +88,12 @@ class ilIndividualAssessmentUserGrading
         return $this->event_time;
     }
 
-    public function isNotify(): bool
-    {
-        return $this->notify;
-    }
 
     public function isFinalized(): bool
     {
         return $this->finalized;
     }
+    // cat-tms-patch end iassfeatures
 
     public function withFinalized(bool $finalize): ilIndividualAssessmentUserGrading
     {
@@ -129,6 +109,21 @@ class ilIndividualAssessmentUserGrading
         return $clone;
     }
 
+    // cat-tms-patch start iassfeatures
+    public function getCustomFields(): array
+    {
+        return $this->custom_fields;
+    }
+
+    public function withCustomFields(array $custom_fields): self
+    {
+        $clone = clone $this;
+        $clone->custom_fields = $custom_fields;
+        return $clone;
+    }
+    // cat-tms-patch end iassfeatures
+
+    // cat-tms-patch start iassfeatures
     public function toFormInput(
         Field\Factory $input,
         DataFactory $data_factory,
@@ -136,12 +131,16 @@ class ilIndividualAssessmentUserGrading
         Refinery $refinery,
         AbstractCtrlAwareUploadHandler $file_handler,
         \ILIAS\Data\DateFormat\DateFormat $date_format,
+        FieldBuilder $field_builder,
         array $grading_options,
+        bool $may_publish,
         bool $may_be_edited = true,
         bool $place_required = false,
         bool $file_required = false,
-        bool $amend = false
+        bool $amend = false,
+        bool $manual_grading = false
     ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
+        // cat-tms-patch end iassfeatures
         $name = $input
             ->text($lng->txt('name'), '')
             ->withDisabled(true)
@@ -166,18 +165,14 @@ class ilIndividualAssessmentUserGrading
             ->withRequired($file_required)
         ;
 
-        $file_visible = $input
-            ->checkbox($lng->txt('iass_file_visible_examinee'))
-            ->withValue($this->isFileVisible())
-            ->withDisabled(!$may_be_edited)
-        ;
-
+        // cat-tms-patch start iassfeatures
         $learning_progress = $input
-            ->select($lng->txt('grading'), $grading_options)
-            ->withValue($this->getLearningProgress() ?: ilIndividualAssessmentMembers::LP_IN_PROGRESS)
+            ->select($lng->txt('learning_progress'), $grading_options)
+            ->withValue($this->getLearningProgress() ?: ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM)
             ->withDisabled(!$may_be_edited)
             ->withRequired(true)
         ;
+        // cat-tms-patch end iassfeatures
 
         $place = $input
             ->text($lng->txt('iass_place'))
@@ -194,37 +189,64 @@ class ilIndividualAssessmentUserGrading
             ->withDisabled(!$may_be_edited)
         ;
 
+        // cat-tms-patch start iassfeatures
+        $finalized = $input
+            ->checkbox($lng->txt('iass_finalize'), $lng->txt('iass_finalize_info'))
+            ->withValue($this->isFinalized())
+            ->withDisabled(!$may_be_edited)
+        ;
+        // cat-tms-patch end iassfeatures
+
         if (!is_null($this->getEventTime())) {
             $event_time = $event_time->withValue(
                 $this->getEventTime()
             );
         }
 
-        $notify = $input
-            ->checkbox($lng->txt('iass_notify'), $lng->txt('iass_notify_explanation'))
-            ->withValue($this->isNotify())
-            ->withDisabled(!$may_be_edited)
-        ;
+        // cat-tms-patch start iassfeatures
+        $custom = [];
+        $custom_fields = $this->custom_fields;
+        foreach ($custom_fields as $cf) {
+            $custom[$cf->getFieldId()] = $cf->toFormInput($input, $refinery, $file_handler, $field_builder);
+        }
 
-        $fields = [
-            'name' => $name,
-            'record' => $record,
-            'internal_note' => $internal_note,
-            'file' => $file,
-            'file_visible' => $file_visible,
-            'learning_progress' => $learning_progress,
-            'place' => $place,
-            'event_time' => $event_time,
-            'notify' => $notify
-        ];
+        $fields = [$name];
+        if ($custom_fields === []) {
+            $fields['standard_fields'] = $input->group([
+                $record,
+                $internal_note,
+                $file,
+                $place,
+                $event_time
+            ])->withAdditionalTransformation(
+                $refinery->custom()->transformation(function ($values) {
+                    $values[2] = ($values[2] != []) ? $values[2][0] : null;
+                    return $values;
+                })
+            );
+        } else {
+            $fields['custom'] = $input->group($custom)->withAdditionalTransformation(
+                $refinery->custom()->transformation(function ($values) use ($custom_fields) {
+                    $updated_custom = [];
+                    foreach ($custom_fields as $cf) {
+                        $value = $values[$cf->getFieldId()];
+                        if ($cf->hasNotes()) {
+                            list($value, $note) = $value;
+                            $cf = $cf->withNote($note);
+                        }
+                        $updated_custom[] = $cf->withValue($value);
+                    }
+                    return $updated_custom;
+                })
+            );
+        }
 
-        if (!$amend) {
-            $finalized = $input
-                ->checkbox($lng->txt('iass_finalize'), $lng->txt('iass_finalize_info'))
-                ->withValue($this->isFinalized())
-                ->withDisabled(!$may_be_edited)
-            ;
+        if ($manual_grading) {
+            $fields['learning_progress'] = $learning_progress;
+        }
 
+        if (!$amend && $may_publish) {
+            // cat-tms-patch end iassfeatures
             $fields['finalized'] = $finalized;
         }
 
@@ -232,33 +254,26 @@ class ilIndividualAssessmentUserGrading
             $fields,
             $lng->txt('iass_edit_record')
         )->withAdditionalTransformation(
-            $refinery->custom()->transformation(function ($values) use ($amend) {
-                $finalized = $this->isFinalized();
-                if (!$amend) {
-                    $finalized = $values['finalized'];
-                }
+            // cat-tms-patch start iassfeatures
+            $refinery->custom()->transformation(function ($values) {
+                $vals = [$values[0]];
 
-                $file = null;
-                if (
-                    isset($values['file'][0]) &&
-                    trim($values['file'][0]) != ''
-                ) {
-                    $file = $values['file'][0];
-                }
+                $vals = array_key_exists('standard_fields', $values)
+                    ? array_merge($vals, $values['standard_fields'])
+                    : array_merge($vals, [null, null, null, null, null]);
 
-                return new ilIndividualAssessmentUserGrading(
-                    $values['name'],
-                    $values['record'],
-                    $values['internal_note'],
-                    $file,
-                    $values['file_visible'],
-                    (int) $values['learning_progress'],
-                    $values['place'],
-                    $values['event_time'],
-                    $values['notify'],
-                    $finalized
-                );
+                array_key_exists('learning_progress', $values)
+                    ? array_push($vals, (int) $values['learning_progress'])
+                    : array_push($vals, $this->getLearningProgress());
+
+                array_key_exists('finalized', $values)
+                    ? array_push($vals, (bool) $values['finalized'])
+                    : array_push($vals, $this->isFinalized());
+
+                $result = new ilIndividualAssessmentUserGrading(...array_values($vals));
+                return array_key_exists('custom', $values) ? $result->withCustomFields($values['custom']) : $result;
             })
+            // cat-tms-patch end iassfeatures
         );
     }
 }

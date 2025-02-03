@@ -52,11 +52,15 @@ class ilObjIndividualAssessmentAccess extends ilObjectAccess implements ilCondit
     {
         switch ($a_operator) {
             case ilConditionHandler::OPERATOR_PASSED:
+                // cat-tms-patch start iassfeatures
                 return ilIndividualAssessmentLPInterface::determineStatusOfMember($a_trigger_obj_id, $a_usr_id)
-                    == ilIndividualAssessmentMembers::LP_COMPLETED;
+                    == ilLPStatus::LP_STATUS_COMPLETED_NUM;
+                // cat-tms-patch end iassfeatures
             case ilConditionHandler::OPERATOR_FAILED:
+                // cat-tms-patch start iassfeatures
                 return ilIndividualAssessmentLPInterface::determineStatusOfMember($a_trigger_obj_id, $a_usr_id)
-                    == ilIndividualAssessmentMembers::LP_FAILED;
+                    == ilLPStatus::LP_STATUS_FAILED_NUM;
+                // cat-tms-patch end iassfeatures
             default:
                 return false;
         }

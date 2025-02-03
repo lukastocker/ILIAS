@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
@@ -39,7 +39,12 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
         $record_remplate = 'You should ask these things';
         $event_time_place_required = true;
         $file_required = false;
+        // cat-tms-patch start iassfeatures
+        $file_visible = false;
+        $result_visible = false;
+        // cat-tms-patch end iassfeatures
 
+        // cat-tms-patch start iassfeatures
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
             $title,
@@ -47,15 +52,22 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
             $content,
             $record_remplate,
             $event_time_place_required,
-            $file_required
+            $file_required,
+            $file_visible,
+            $result_visible
         );
+        // cat-tms-patch end iassfeatures
 
         $values1 = [
             "obj_id" => ["integer", $obj_id],
             "content" => ["text", $content],
             "record_template" => ["text", $record_remplate],
             "event_time_place_required" => ["integer", $event_time_place_required],
-            "file_required" => ["integer", $file_required]
+            // cat-tms-patch start iassfeatures
+            "file_required" => ["integer", $file_required],
+            "file_visible" => ["integer", $file_visible],
+            "result_visible" => ["integer", $result_visible]
+            // cat-tms-patch end iassfeatures
         ];
 
         $values2 = [
@@ -82,26 +94,46 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
         $title = 'My iass';
         $description = 'Special iass for members';
         $content = 'Everything you have learned';
-        $record_remplate = 'You should ask these things';
+        // cat-tms-patch start iassfeatures
+        $record_template = 'You should ask these things';
+        // cat-tms-patch end iassfeatures
         $event_time_place_required = true;
         $file_required = false;
+        // cat-tms-patch start iassfeatures
+        $file_visible = true;
+        $result_visible = true;
+        $report = 1;
+        $report_from = '1747827313';
+        $report_to = '1747913713';
+        // cat-tms-patch end iassfeatures
 
+        // cat-tms-patch start iassfeatures
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
             $title,
             $description,
             $content,
-            $record_remplate,
+            $record_template,
             $event_time_place_required,
-            $file_required
+            $file_required,
+            $file_visible,
+            $result_visible
         );
+        // cat-tms-patch end iassfeatures
 
+        // cat-tms-patch start iassfeatures
         $values = [
             "content" => ["text", $content],
-            "record_template" => ["text", $record_remplate],
+            "record_template" => ["text", $record_template],
             "event_time_place_required" => ["integer", $event_time_place_required],
-            "file_required" => ["integer", $file_required]
+            "file_required" => ["integer", $file_required],
+            "file_visible" => ["integer", $file_visible],
+            "result_visible" => ["integer", $result_visible],
+            "report" => ["integer", $report],
+            "report_from" => ["timestamp", \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $report_from)],
+            "report_to" => ["timestamp", \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $report_to)]
         ];
+        // cat-tms-patch end iassfeatures
 
         $where = [
             "obj_id" => ["integer", $obj_id]

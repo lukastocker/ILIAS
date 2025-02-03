@@ -38,20 +38,18 @@ class ilIndividualAssessmentMembers implements Iterator, Countable
     public const FIELD_CHANGE_TIME = "change_time";
     public const FIELD_RECORD = 'record';
     public const FIELD_INTERNAL_NOTE = 'internal_note';
-    public const FIELD_NOTIFY = 'notify';
     public const FIELD_FINALIZED = 'finalized';
     public const FIELD_NOTIFICATION_TS = 'notification_ts';
     public const FIELD_PLACE = "place";
     public const FIELD_EVENTTIME = "event_time";
     public const FIELD_FILE_NAME = "file_name";
-    public const FIELD_USER_VIEW_FILE = "user_view_file";
-
-    public const LP_NOT_ATTEMPTED = ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM;
-    public const LP_IN_PROGRESS = ilLPStatus::LP_STATUS_IN_PROGRESS_NUM;
-    public const LP_COMPLETED = ilLPStatus::LP_STATUS_COMPLETED_NUM;
-    public const LP_FAILED = ilLPStatus::LP_STATUS_FAILED_NUM;
-    public const LP_ASSESSMENT_NOT_COMPLETED = "not_completed";
-
+    // cat-tms-patch start iassfeatures
+    public const LP_NOT_ATTEMPTED = \ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM;
+    public const LP_IN_PROGRESS = \ilLPStatus::LP_STATUS_IN_PROGRESS_NUM;
+    public const LP_COMPLETED = \ilLPStatus::LP_STATUS_COMPLETED_NUM;
+    public const LP_FAILED = \ilLPStatus::LP_STATUS_FAILED_NUM;
+    public const LP_ASSESSMENT_NOT_COMPLETED = \ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM;
+    // cat-tms-patch end iassfeatures
     protected array $member_records = array();
     protected int $position = 0;
     protected ilObjIndividualAssessment $iass;
@@ -191,10 +189,10 @@ class ilIndividualAssessmentMembers implements Iterator, Countable
 
     protected function buildNewRecordOfUser(ilObjUser $usr): array
     {
+        // cat-tms-patch start iassfeatures
         return [
             self::FIELD_USR_ID => $usr->getId(),
             self::FIELD_RECORD => $this->iass->getSettings()->getRecordTemplate(),
-            self::FIELD_NOTIFY => 0,
             self::FIELD_FIRSTNAME => $usr->getFirstname(),
             self::FIELD_LASTNAME => $usr->getLastname(),
             self::FIELD_LOGIN => $usr->getLogin(),
@@ -204,12 +202,12 @@ class ilIndividualAssessmentMembers implements Iterator, Countable
             self::FIELD_EXAMINER_LASTNAME => null,
             self::FIELD_INTERNAL_NOTE => null,
             self::FIELD_FILE_NAME => null,
-            self::FIELD_USER_VIEW_FILE => false,
             self::FIELD_FINALIZED => 0,
             self::FIELD_CHANGER_ID => null,
             self::FIELD_CHANGER_FIRSTNAME => null,
             self::FIELD_CHANGER_LASTNAME => null
         ];
+        // cat-tms-patch end iassfeatures
     }
 
     /**

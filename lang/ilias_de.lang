@@ -727,9 +727,9 @@ assessment#:#filter_show_question_types#:#Zeige folgende Fragetypen
 assessment#:#filter_show_questionpools#:#Zeige folgende Fragenpools
 assessment#:#final_statement#:#Abschließende Bemerkung
 assessment#:#final_statement_show_desc#:#Zeigt die Abschließende Bemerkung nach Abgabe des Tests an.
-assessment#:#finalized_by#:#Bewertung abgeschlossen von
+assessment#:#finalized_by#:#Bewertung veröffentlicht von
 assessment#:#finalized_evaluation#:#Endgültig bewertet
-assessment#:#finalized_on#:#Bewertung abgeschlossen am
+assessment#:#finalized_on#:#Bewertung veröffentlicht am
 assessment#:#finish_all_user_passes#:#Alle Testdurchläufe beenden
 assessment#:#finish_pass_for_all_users#:#Wollen Sie wirklich die Test Durchläufe für alle Benutzer beenden?
 assessment#:#finish_pass_for_all_users_in_processing_time#:#Sie können die Durchläufe aller Benutzer nicht gemeinsam beenden, da für mindestens einen Benutzer die Bearbeitungszeit noch nicht vorbei ist.
@@ -3498,6 +3498,7 @@ common#:#ass_log_delete_entries#:#Protokolleinträge löschen
 common#:#ass_log_delete_no_selection#:#Bitte wählen Sie mindestens einen Test aus, dessen Protokolleinträge Sie löschen wollen!
 common#:#ass_log_deleted#:#Die Protokolleinträge für die ausgewählten Tests wurden gelöscht!
 common#:#ass_log_output#:#Ausgabe der Protokolldaten
+common#:#assessment#:#Bewertung
 common#:#assessment_imap_line_color#:#Imagemap Linienfarbe
 common#:#assessment_log#:#Test und Assessment-Aktivitäten für eine bestimmte Zeitperiode protokollieren
 common#:#assessment_log_datetime#:#Datum/Uhrzeit
@@ -3847,6 +3848,7 @@ common#:#database_version#:#Ihre Datenbankversion
 common#:#dataset#:#Eintrag
 common#:#date#:#Datum
 common#:#dateplaner#:#Kalender
+common#:#datetime#:#Datum und Uhrzeit
 common#:#day#:#Tag
 common#:#days#:#Tage
 common#:#db_host#:#Datenbank-Host
@@ -4300,8 +4302,15 @@ common#:#http_not_possible#:#Dieser Server unterstützt keine HTTP-Anfragen.
 common#:#http_path#:#HTTP-Pfad
 common#:#https_not_possible#:#Dieser Server unterstützt keine HTTPS-Verbindungen.
 common#:#i2passwd#:#ILIAS_2-Passwort
+common#:#iafp_added#:#Formularpool hinzugefügt.
+common#:#iafp_new#:#Formularpool für Individuelle Bewertung hinzufügen
+common#:#iarp_add#:#Report für Individuelle Bewertungen hinzufügen
+common#:#iarp_added#:#Report für Individuelle Bewertungen hinzugefügt.
+common#:#iarp_new#:#Report für Individuelle Bewertungen hinzufügen
 common#:#iass_import#:#Individuelle Bewertung importieren
 common#:#iass_new#:#Neue Individuelle Bewertung anlegen
+common#:#iass_no_form_pool#:#Kein Formular aus dem Bewertungspool
+common#:#iass_std_form#:#Standard Formular
 common#:#icon#:#Symbol
 common#:#icon_settings#:#Icon
 common#:#id#:#ID
@@ -4582,6 +4591,7 @@ common#:#main_menu#:#Hauptmenü
 common#:#mainbar_aria_label#:#Hauptleiste
 common#:#mainbar_more_label#:#Mehr
 common#:#manage_members#:#Mitglieder verwalten
+common#:#markdown#:#Markdown
 common#:#marked_entries#:#Markierte Einträge
 common#:#matriculation#:#Matrikelnummer
 common#:#max_previews_per_object#:#Anzahl Vorschaubilder
@@ -4805,6 +4815,8 @@ common#:#no_accessibility_control_concept_description#:#Aktuell wird in dieser I
 common#:#no_checkbox#:#Sie haben keine Auswahl getroffen.
 common#:#no_condition_selected#:#Sie haben keine Vorbedingung ausgewählt.
 common#:#no_date#:#Kein Datum
+common#:#no_entries_deleted#:#Kein(e) Feld(er) gelöscht
+common#:#no_export_for_custom_forms#:#Ein Export von benutzerdefinierten Formularen ist derzeit nicht möglich. Diese Funktion wird in einer zukünftigen Implementierung hinzugefügt.
 common#:#no_gallery_users_available#:#Aktuell befinden sich keine Benutzer in der Galerie.
 common#:#no_global_role_left#:#Jeder Benutzer muss mindestens einer globalen Rolle zugeordnet sein.
 common#:#no_import_file_found#:#Keine Importdatei gefunden
@@ -4930,6 +4942,8 @@ common#:#obj_hlps#:#Online-Hilfe
 common#:#obj_hlps_desc#:#Einstellungen der Online-Hilfe
 common#:#obj_htlm#:#Lernmodul HTML
 common#:#obj_htlm_duplicate#:#HTML Lernmodul kopieren
+common#:#obj_iafp#:#Formularpool für individuelle Bewertung
+common#:#obj_iarp#:#Report für Individuelle Bewertung
 common#:#obj_iass#:#Individuelle Bewertung
 common#:#obj_iass_duplicate#:#Individuelle Bewertung kopieren
 common#:#obj_iass_select#:#-- Wählen Sie eine Individuelle Bewertung aus --
@@ -5138,6 +5152,8 @@ common#:#objs_glo#:#Glossare
 common#:#objs_grp#:#Gruppen
 common#:#objs_grpr#:#Gruppenlinks
 common#:#objs_htlm#:#HTML-Lernmodule
+common#:#objs_iafp#:#Individuelle Bewertung - Form Pools
+common#:#objs_iarp#:#Reports für Individuelle Bewertungen
 common#:#objs_iass#:#Individuelle Bewertungen
 common#:#objs_itgr#:#Objekteblöcke
 common#:#objs_lm#:#ILIAS-Lernmodule
@@ -5364,6 +5380,7 @@ common#:#question#:#Frage
 common#:#question_message#:#Frage
 common#:#quit#:#Logout
 common#:#quote#:#Zitat
+common#:#rating#:#5-Sterne-Bewertung
 common#:#reached_session_limit#:#Die maximale Anzahl von Benutzern, die online sind, ist erreicht. Bitte versuchen Sie es später noch einmal.
 common#:#read#:#Lesezugriff
 common#:#readcount_anonymous_users#:#Lesezugriffe anonymer Benutzer
@@ -5634,6 +5651,7 @@ common#:#show_users_online#:#Aktive Benutzer anzeigen
 common#:#show_who_is_online#:#Zeig wer online ist
 common#:#side_frame#:#Rahmen Baumansicht
 common#:#signature#:#Signatur
+common#:#singleselect#:#Einfachauswahl
 common#:#size#:#Größe
 common#:#skills#:#Kompetenzen
 common#:#skin_style#:#Standard-Skin/-Style
@@ -5709,6 +5727,7 @@ common#:#systemcheck_cron#:#System Check per Cron-Job
 common#:#systemcheck_cronform#:#Aktivierung des System Checks im Cron-Job
 common#:#table_mail_import#:#Import von Mails
 common#:#tabs#:#Reiter
+common#:#tag#:#Schlagwort
 common#:#tagging_my_tags#:#Meine Tags
 common#:#tags#:#Tags
 common#:#take_over_structure#:#Ordnerstruktur des Archivs übernehmen
@@ -10393,9 +10412,65 @@ help#:#help_tooltips_and_help#:#Tooltips und Handlungsanweisungen
 help#:#help_tooltips_only#:#Nur Tooltips
 help#:#help_topcis#:#Themen
 help#:#help_tt_text#:#Text
+iafp#:#_settings_saved#:#Einstellugen gespeichert.
+iafp#:#add_fields#:#Felder hinzufügen
+iafp#:#available_for_examiners#:#Intern / Nur für für Bewertende verfügbar
+iafp#:#cannot_delete_because_used#:#Folgende Felder können nicht gelöscht werden, das sie in Formularen verwendet werden:
+iafp#:#confirm_cancel#:#Abbrechen
+iafp#:#confirm_delete#:#Löschen
+iafp#:#default_value#:#Voreingestellter Wert
+iafp#:#field_available_for_examiners#:#Intern / Nur für für Bewertende verfügbar
+iafp#:#field_available_for_examiners_byline#:#Dieses Feld steht nur für Bewertende zur Verfügung
+iafp#:#field_default_value#:#Voreingestellter Wert
+iafp#:#field_default_value_byline#:#Dieser Wert wird initial angezeigt, solange kein expliziter Wert gesetzt wurde.
+iafp#:#field_description#:#Beschreibung
+iafp#:#field_description_byline#:#Die Beschreibung wird unterhalb des Feldes im Formular angezeigt.
+iafp#:#field_label#:#Bezeichnung
+iafp#:#field_label_byline#:#Unter dieser Bezeichnung wird das Feld im Formular angezeigt.
+iafp#:#field_name_byline#:#Name des Feldes (dient zur Indentifikation)
+iafp#:#field_options#:#Optionen
+iafp#:#field_options_byline#:#Fügen Sie Optionen hinzu, unter denen Benutzerinnen auswählen können. Die maximale Anzahl an Zeichen pro Option beträgt 512.
+iafp#:#field_section_byline#:#Feld konfigurieren
+iafp#:#field_section_create#:#Neues Feld bearbeiten
+iafp#:#field_section_edit#:#Feld bearbeiten
+iafp#:#field_type_byline#:#Wählen Sie den Typen des neuen Feldes
+iafp#:#field_with_notes#:#Mit zusätzlichen Notizen
+iafp#:#field_with_notes_byline#:#Fügt ein Textfeld (zusätzlich zu diesem Feld) hinzu.
+iafp#:#fields#:#Felder im Formular
+iafp#:#fields_added#:#Felder hinzugefügt.
+iafp#:#fields_byline#:#Wählen Sie ein oder mehrerer Felder ab und speichern Sie, um Felder aus dem Formular zu entfernen.
+iafp#:#fields_count#:#Anzahl Felder
+iafp#:#fields_deleted#:#Feld(er) gelöscht
+iafp#:#form_description#:#Beschreibung
+iafp#:#form_description_byline#:#weitere Beschreibung des Formulars (wird in der Auswahl bei Anlage einer Individuellen Bewertung angezeigt)
+iafp#:#form_name#:#Name
+iafp#:#form_name_byline#:#Name des Formulars (wird in der Auswahl bei Anlage einer Individuellen Bewertung angezeigt)
+iafp#:#form_section_byline#:#configure the form
+iafp#:#form_section_create#:#Neues Formular anlegen
+iafp#:#form_section_edit#:#Formular bearbeiten
+iafp#:#forms_deleted#:#Formular(e) gelöscht
+iafp#:#iafp_add#:#Formularpool hinzufügen
+iafp#:#iafp_fields#:#Felder
+iafp#:#iafp_forms#:#Formulare
+iafp#:#iafp_import#:#Import Formulare
+iafp#:#iafp_settings#:#Einstellungen
+iafp#:#iafp_settings_availability#:#Verfügbarkeit
+iafp#:#label#:#Bezeichnung
+iafp#:#new_field#:#Feld hinzufügen
+iafp#:#new_form#:#Formular hinzufügen
+iafp#:#object_saved#:#Gespeichert.
+iafp#:#pick_fields#:#Felder auswählen
+iafp#:#tab_fields#:#Felder
+iafp#:#tab_forms#:#Formulare
+iafp#:#with_notes#:#Notizen
+iarp#:#iarp_global#:#Globaler Report
+iarp#:#iarp_global_desc#:#Ist dies deaktiviert werden nur Individuelle Bewertungen in und unterhalb des aktuellen Ordners angezeigt.
+iarp#:#iarp_settings#:#Einstellungen
+iarp#:#iarp_settings_availability#:#Verfügbarkeit
+iarp#:#report#:#Report
+iarp#:#view_participant_record#:#Ergebnis anzeigen
 iass#:#download_assessment_paper#:#Prüfungsblatt herunterladen
 iass#:#general#:#Allgemein
-iass#:#grading#:#Bewertung
 iass#:#grading_info#:#Bewertungsinformationen
 iass#:#grading_record#:#Bewertungszusammenfassung
 iass#:#iass_add#:#Individuelle Bewertung anlegen
@@ -10403,10 +10478,9 @@ iass#:#iass_add_user_failure#:#Einer oder mehrere Benutzer konnten nicht hinzuge
 iass#:#iass_add_user_success#:#Benutzer als Teilnehmer hinzugefügt.
 iass#:#iass_added#:#Individuelle Bewertung hinzugefügt
 iass#:#iass_amend_saved#:#Geänderte Prüfungsdaten wurden gespeichert.
-iass#:#iass_assessment_not_completed#:#Noch nicht abgeschlossen
 iass#:#iass_cancel#:#Abbrechen
 iass#:#iass_changed_by#:#Nachträglich geändert
-iass#:#iass_confirm_finalize#:#Abschließen
+iass#:#iass_confirm_finalize#:#Abschließen und veröffentlichen
 iass#:#iass_consultation_hours#:#Sprechstunden
 iass#:#iass_contact#:#Name
 iass#:#iass_contact_info#:#Kontaktinformationen
@@ -10426,13 +10500,9 @@ iass#:#iass_file_required#:#Pflichtangabe Prüfungsblatt
 iass#:#iass_file_required_info#:#Ein Prüfungsblatt muss hochgeladen werden.
 iass#:#iass_file_visible_examinee#:#Datei für Teilnehmer sichtbar
 iass#:#iass_filter_all#:#Alle
-iass#:#iass_filter_failed#:#Nur nicht bestanden
-iass#:#iass_filter_finalized#:#Nur bestandene
-iass#:#iass_filter_not_finalized#:#Nur nicht abgeschlossene
-iass#:#iass_filter_not_started#:#Nur nicht bewertete
-iass#:#iass_finalize#:#Abschließen
-iass#:#iass_finalize_info#:#Die Individuelle Bewertung wird abgeschlossen.
-iass#:#iass_finalize_user_qst#:#Soll die Bewertung des Teilnehmers wirklich final abgeschlossen werden? Änderungen an der Bewertung sind hinterher nicht mehr möglich.
+iass#:#iass_finalize#:#Veröffentlichen
+iass#:#iass_finalize_info#:#Die Individuelle Bewertung wird veröffentlicht.
+iass#:#iass_finalize_user_qst#:#Soll die Bewertung des Teilnehmers wirklich final veröffentlicht werden? Änderungen an der Bewertung sind hinterher nicht mehr möglich.
 iass#:#iass_further_field_headline#:#Detaillierte Informationen
 iass#:#iass_graded_by#:#Bewertet von
 iass#:#iass_info_emails_expl#:#Sie können mehrere Adressen mit einem Komma getrennt angeben.
@@ -10440,9 +10510,9 @@ iass#:#iass_internal_note#:#Interne Anmerkungen zur Prüfung
 iass#:#iass_internal_note_info#:#Dieser Text ist nur für Personen sichtbar, die Prüfungsdaten einsehen können. Teilnehmerinnen und Teilnehmer sehen die interne Anmerkung zur Prüfung nicht.
 iass#:#iass_location#:#Ort
 iass#:#iass_mails#:#E-Mail
-iass#:#iass_may_not_finalize#:#Prüfung kann noch nicht abschließend bewertet werden. Bitte geben Sie eine Bewertung ab.
-iass#:#iass_membership_finalized#:#Bewertung abgeschlossen.
-iass#:#iass_membership_saved#:#Bewertung wurde gespeichert aber noch nicht final abgeschlossen.
+iass#:#iass_may_not_finalize#:#Prüfung kann noch nicht abschließend bewertet werden. Bitte geben Sie eine Bewertung im Lernfortschritt ab.
+iass#:#iass_membership_finalized#:#Bewertung veröffentlicht.
+iass#:#iass_membership_saved#:#Bewertung wurde gespeichert aber noch nicht veröffentlicht.
 iass#:#iass_mess_notification_completed#:#Sie haben die Prüfung „%s“ bestanden. Beachten Sie bitte auch die folgende Notiz zur Prüfung.
 iass#:#iass_mess_notification_failed#:#Sie haben die Prüfung „%s“ leider nicht bestanden. Beachten Sie bitte auch die folgende Notiz zur Prüfung.
 iass#:#iass_notify#:#Ergebnis dem Teilnehmer zugänglich machen
@@ -10464,9 +10534,6 @@ iass#:#iass_sort_examiner_login_asc#:#Bewertet von → aufsteigend###Modified as
 iass#:#iass_sort_examiner_login_desc#:#Bewertet von → absteigend###Modified as part of gender mainstreaming activities for ILIAS 8
 iass#:#iass_sort_name_asc#:#Anmeldename → aufsteigend###Modified as part of gender mainstreaming activities for ILIAS 8
 iass#:#iass_sort_name_desc#:#Anmeldename → absteigend###Modified as part of gender mainstreaming activities for ILIAS 8
-iass#:#iass_status_completed#:#Bestanden
-iass#:#iass_status_failed#:#Nicht bestanden
-iass#:#iass_status_pending#:#Noch nicht bewertet
 iass#:#iass_subj_notification_completed#:#%s: Individuelle Bewertung wurde erfolgreich abgeschlossen.
 iass#:#iass_subj_notification_failed#:#%s: Individuelle Bewertung wurde nicht erfolgreich abgeschlossen.
 iass#:#iass_upload_file#:#Prüfungsblatt
@@ -10478,8 +10545,12 @@ iass#:#iass_usr_remove#:#Entfernen
 iass#:#iass_usr_view#:#Prüfungsdaten
 iass#:#il_iass_member#:#Teilnehmer
 iass#:#il_iass_members#:#Teilnehmer
-iass#:#lp_inactive#:#Beachten Sie: die Lernfortschrittsbestimmung für dieses Objekt ist deaktiviert. Daher können Teilnahmen nicht finalisiert werden.
+iass#:#lp_inactive#:#Beachten Sie: die Lernfortschrittsbestimmung für dieses Objekt ist deaktiviert. Daher können Teilnahmen nicht veröffentlicht werden.
 iass#:#save_amend#:#Geänderte Prüfungsdaten speichern
+iass#:#setting_report_availability_byline#:#Wird in Reports gefunden
+iass#:#setting_report_availability_label#:#Sichtbar in Reports
+iass#:#setting_report_availability_period_byline#:#Wird nur innerhalb dieses Zeitraums in Reports gefunden
+iass#:#setting_report_availability_period_label#:#Zeitliche Sichtbarkeit in Reports
 impr#:#impr_page_type_impr#:#Impressum
 init#:#init_error_authentication_fail#:#Authentifizierung fehlgeschlagen.
 init#:#init_error_maintenance#:#Der Server ist aufgrund von Wartungsarbeiten aktuell nicht verf&uuml;gbar. Wir bitten um Verst&auml;ndnis. Versuchen Sie es sp&auml;ter noch einmal.
@@ -12933,6 +13004,12 @@ orgu#:#org_op_edit_individual_plan#:#Individuellen Plan bearbeiten
 orgu#:#org_op_edit_submissions_grades#:#Abgaben von anderen Benutzern bearbeiten
 orgu#:#org_op_manage_members#:#Mitglieder bearbeiten
 orgu#:#org_op_manage_participants#:#Teilnehmer verwalten
+orgu#:#org_op_ou_create_records#:#Bewertungen vornehmen
+orgu#:#org_op_ou_publish_records#:#Bewertungen veröffentlichen und abschließen
+orgu#:#org_op_ou_view_full_record#:#Gesamtes (nicht spezifisches) Ergebnis (anderer Benutzer) einsehen
+orgu#:#org_op_ou_view_general_status#:#Andere Benutzer einsehen
+orgu#:#org_op_ou_view_results#:#Lernfortschritt/Bearbeitungsstatus (anderer Benutzer) einsehen
+orgu#:#org_op_ou_view_specific_records#:#Spezifisches Ergebnis (anderer Benutzer) einsehen
 orgu#:#org_op_read_employee_talk#:#Auf Gespräche lesend zugreifen
 orgu#:#org_op_read_learning_progress#:#Lernfortschritt von anderen Benutzern einsehen
 orgu#:#org_op_score_participants#:#Teilnehmer bewerten
@@ -14059,12 +14136,33 @@ rbac#:#htlm_read#:#HTML-Lernmodul lesen
 rbac#:#htlm_read_learning_progress#:#Benutzer kann Lernfortschritt anderer Benutzer einsehen
 rbac#:#htlm_visible#:#HTML-Lernmodul ist sichtbar
 rbac#:#htlm_write#:#HTML-Lernmodul bearbeiten
-rbac#:#iass_amend_grading#:#Finalisierte Bewertung der Individuellen Bewertung ändern
+rbac#:#iafp_copy#:#Kopieren eines individuellen Bewertung Form Pools
+rbac#:#iafp_delete#:#Löschen eines individuellen Bewertung Form Pools
+rbac#:#iafp_edit_permission#:#Rechteeinstellungen eines individuellen Bewertung Form Pools ändern
+rbac#:#iafp_read#:#Lesezugriff auf ein individuellen Bewertung Form Pool
+rbac#:#iafp_visible#:#Individuelle Bewertung Form Pool ist sichtbar
+rbac#:#iafp_write#:#Ändern eines individuellen Bewertung Form Pools
+rbac#:#iarp_copy#:#Report kopieren
+rbac#:#iarp_delete#:#Report löschen
+rbac#:#iarp_edit_permission#:#Rechteeinstellungen ändern
+rbac#:#iarp_iarp_view_full_record#:#Gesamtes (nicht spezifisches) Ergebnis (anderer Benutzer) einsehen
+rbac#:#iarp_iarp_view_general_status#:#Andere Benutzer einsehen
+rbac#:#iarp_iarp_view_results#:#Lernfortschritt/Bearbeitungsstatus (anderer Benutzer) einsehen
+rbac#:#iarp_iarp_view_specific_records#:#Spezifisches Ergebnis (anderer Benutzer) einsehen
+rbac#:#iarp_read#:#Lesezugriff auf Report
+rbac#:#iarp_view_full_record#:#Gesamtes (nicht spezifisches) Ergebnis anderer Benutzer einsehen
+rbac#:#iarp_view_general_status#:#Andere Benutzer einsehen
+rbac#:#iarp_view_results#:#Lernfortschritt/Bearbeitungsstatus (anderer Benutzer) einsehen
+rbac#:#iarp_view_specific_records#:#Spezifisches Ergebnis (anderer Benutzer) einsehen
+rbac#:#iarp_visible#:#Report ist sichtbar
+rbac#:#iarp_write#:#Einstellungen des Reports bearbeiten
+rbac#:#iass_amend_grading#:#Veröffentlichte Bewertung der Individuellen Bewertung ändern
 rbac#:#iass_copy#:#Individuelle Bewertung kopieren
 rbac#:#iass_delete#:#Individuelle Bewertung löschen
 rbac#:#iass_edit_learning_progress#:#Lernfortschritt in Individuellen Bewertung bearbeiten
 rbac#:#iass_edit_members#:#Teilnehmer einer Individuellen Bewertung bearbeiten
 rbac#:#iass_edit_permission#:#Rechteeinstellungen ändern
+rbac#:#iass_publish_records#:#Bewertungen veröffentlichen und abschließen
 rbac#:#iass_read#:#Lesezugriff auf Individuelle Bewertung
 rbac#:#iass_read_learning_progress#:#Lernfortschritt in Individuellen Bewertung einsehen
 rbac#:#iass_visible#:#Individuelle Bewertung ist sichtbar
@@ -14198,6 +14296,7 @@ rbac#:#nwss_edit_permission#:#Rechteeinstellungen in der News- und Webfeeds-Admi
 rbac#:#nwss_read#:#Lesezugriff auf News- und Webfeeds-Administration
 rbac#:#nwss_visible#:#News- und Webfeeds-Administration ist sichtbar
 rbac#:#nwss_write#:#Einstellungen in der News- und Webfeeds-Administration bearbeiten
+rbac#:#obj_records#:#Bewertungen vornehmen
 rbac#:#obj_skee#:#Kompetenzbaum
 rbac#:#org_op_access_results#:#Zugriff auf Ergebnisse untergeordneter Benutzer
 rbac#:#org_op_edit_submissions_grades#:#Abgaben von anderen Benutzern bearbeiten
@@ -14282,6 +14381,7 @@ rbac#:#ps_export_member_data#:#Export von Mitgliederdaten in Gruppen und Kursen 
 rbac#:#ps_read#:#Lesezugriff auf Datenschutz- und Sicherheitseinstellungen
 rbac#:#ps_visible#:#Datenschutz- und Sicherheitseinstellungen sind sichtbar
 rbac#:#ps_write#:#Bearbeiten der Datenschutz- und Sicherheitseinstellungen erlauben
+rbac#:#publish_records#:#Bewertungen veröffentlichen und abschließen
 rbac#:#push_desktop_items#:#Inhalte empfehlen
 rbac#:#qpl_copy#:#Fragenpool kopieren
 rbac#:#qpl_delete#:#Fragenpool löschen oder verschieben
@@ -14347,6 +14447,7 @@ rbac#:#rbac_create_prgr#:#Link zu Studienprogramm anlegen
 rbac#:#rbac_create_prtt#:#Portfoliovorlage anlegen
 rbac#:#rbac_create_qpl#:#Fragenpool für Tests anlegen
 rbac#:#rbac_create_rcrs#:#ECS-Kurs anlegen
+rbac#:#rbac_create_records#:#Bewertungen vornehmen
 rbac#:#rbac_create_role#:#Rolle anlegen
 rbac#:#rbac_create_rolt#:#Rollenvorlage anlegen
 rbac#:#rbac_create_sahs#:#SCORM-Lernmodul anlegen

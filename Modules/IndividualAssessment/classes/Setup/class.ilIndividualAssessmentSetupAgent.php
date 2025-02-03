@@ -54,9 +54,23 @@ class ilIndividualAssessmentSetupAgent implements Setup\Agent
      */
     public function getUpdateObjective(Setup\Config $config = null): Setup\Objective
     {
-        return new ilDatabaseUpdateStepsExecutedObjective(
-            new ilIndividualAssessmentRectifyMembersTableDBUpdateSteps()
+        // cat-tms-patch start iassfeatures
+        return new Setup\ObjectiveCollection(
+            'Individual Assessment',
+            true,
+            new ilDatabaseUpdateStepsExecutedObjective(
+                new ilIndividualAssessmentRectifyMembersTableDBUpdateSteps()
+            ),
+            new ilDatabaseUpdateStepsExecutedObjective(
+                new IndAssSettingsTableDBUpdateSteps()
+            ),
+            new IndAssMembersTableDBAfterMigrationObjective(
+                new IndAssmembersTableDBUpdateSteps(),
+                new IndAssSettingsMigration()
+            ),
+            ...$this->getPermissionObjectives()
         );
+        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -72,7 +86,14 @@ class ilIndividualAssessmentSetupAgent implements Setup\Agent
      */
     public function getStatusObjective(Setup\Metrics\Storage $storage): Setup\Objective
     {
-        return new ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new ilIndividualAssessmentRectifyMembersTableDBUpdateSteps());
+        // cat-tms-patch start iassfeatures
+        return new Setup\ObjectiveCollection(
+            'Component Individual Assessment ',
+            true,
+            new ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new ilIndividualAssessmentRectifyMembersTableDBUpdateSteps()),
+            new ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new IndAssSettingsTableDBUpdateSteps())
+        );
+        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -82,4 +103,36 @@ class ilIndividualAssessmentSetupAgent implements Setup\Agent
     {
         return [];
     }
+
+    // cat-tms-patch start iassfeatures
+    protected function getPermissionObjectives(): array
+    {
+        return [
+            new ilAccessCustomRBACOperationAddedObjective(
+                ilIndividualAssessmentAccessHandler::RBAC_OP_CREATE_RECORDS,
+                "Create Records for Users",
+                "object",
+                9010,
+                ["iass"]
+            ),
+            new \ilOrgUnitOperationRegisteredObjective(
+                ilIndividualAssessmentAccessHandler::ORGU_OP_CREATE_RECORDS,
+                'Create Records for Users',
+                ilOrgUnitOperationContext::CONTEXT_IASS
+            ),
+            new ilAccessCustomRBACOperationAddedObjective(
+                ilIndividualAssessmentAccessHandler::RBAC_OP_PUBLISH_RECORDS,
+                "Publish Records",
+                "object",
+                9020,
+                ["iass"]
+            ),
+            new \ilOrgUnitOperationRegisteredObjective(
+                ilIndividualAssessmentAccessHandler::ORGU_OP_PUBLISH_RECORDS,
+                'Publish Records',
+                ilOrgUnitOperationContext::CONTEXT_IASS
+            )
+        ];
+    }
+    // cat-tms-patch end iassfeatures
 }

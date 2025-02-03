@@ -38,6 +38,7 @@ trait ilIndividualAssessmentDIC
             return new ilIndividualAssessmentPrimitiveInternalNotificator();
         };
 
+        // cat-tms-patch start iassfeatures
         $container['ilIndividualAssessmentSettingsGUI'] = function ($c) use ($object, $dic) {
             return new ilIndividualAssessmentSettingsGUI(
                 $object,
@@ -50,9 +51,11 @@ trait ilIndividualAssessmentDIC
                 $dic['ui.renderer'],
                 $dic['http']->request(),
                 $dic['ilErr'],
-                $c['ilIndividualAssessmentCommonSettingsGUI']
+                $c['ilIndividualAssessmentCommonSettingsGUI'],
+                $c['iass.member.custom_storage']->checkForAvailableFormFields($object->getId())
             );
         };
+        // cat-tms-patch end iassfeatures
 
         $container['ilIndividualAssessmentMembersGUI'] = function ($c) use ($object, $dic) {
             return new ilIndividualAssessmentMembersGUI(
@@ -68,11 +71,36 @@ trait ilIndividualAssessmentDIC
                 $dic['ui.renderer'],
                 $dic['ilErr'],
                 $c['ilIndividualAssessmentMemberGUI'],
+                $c['ilIndividualAssessmentMembersTableGUI'],
                 $dic->refinery(),
                 $dic->http()->wrapper(),
-                $c['helper.dateformat']
             );
         };
+
+        // cat-tms-patch start iassfeatures
+        $container['ilIndividualAssessmentMembersTableGUI'] = static fn($c): ilIndividualAssessmentMembersTableGUI =>
+            new ilIndividualAssessmentMembersTableGUI(
+                $dic['lng'],
+                $dic['ilCtrl'],
+                $c['iass.accesshandler'],
+                $dic['ui.factory'],
+                $dic['ui.renderer'],
+                $dic['ilUser'],
+                $c['helper.dateformat'],
+                $c['iass.valuerenderer']
+            );
+
+        $container['iass.valuerenderer'] = static fn($c): IASSCustomFieldValueRenderer =>
+            new IASSCustomFieldValueRenderer(
+                $dic['ilUser'],
+                $c['helper.dateformat'],
+                $dic['refinery'],
+                $dic->resourceStorage(),
+                $dic['ui.factory'],
+                $dic['ui.renderer'],
+                $dic['ilCtrl'],
+            );
+        // cat-tms-patch end iassfeatures
 
         $container['irss.stakeholder'] = static fn($c): ResourceStakeholder =>
             new ilIndividualAssessmentGradingStakeholder(
@@ -102,9 +130,21 @@ trait ilIndividualAssessmentDIC
                 $dic->http()->wrapper()->query(),
                 $c['helper.dateformat'],
                 $dic['resource_storage'],
-                $stakeholder = $c['irss.stakeholder']
+                $stakeholder = $c['irss.stakeholder'],
+                $c['iafp.fieldbuilder']
             );
         };
+
+        // cat-tms-patch start iassfeatures
+        $container['iafp.fieldbuilder'] = static fn(): ILIAS\IndividualAssessmentFormPool\FieldBuilder =>
+            new ILIAS\IndividualAssessmentFormPool\FieldBuilder(
+                $dic['ui.factory']->input()->field(),
+                $dic['refinery'],
+                $dic['lng'],
+                new \ilUIDemoFileUploadHandlerGUI(),
+                new \ilUIMarkdownPreviewGUI()
+            );
+        // cat-tms-patch end iassfeatures
 
         $container['ilIndividualAssessmentCommonSettingsGUI'] = function ($c) use ($object, $dic) {
             return new ilIndividualAssessmentCommonSettingsGUI(
@@ -122,12 +162,19 @@ trait ilIndividualAssessmentDIC
             );
         };
 
+        // cat-tms-patch start iassfeatures
         $container['iass.member.storage'] = static fn($c): ilIndividualAssessmentMembersStorageDB =>
             new ilIndividualAssessmentMembersStorageDB(
                 $dic['ilDB'],
                 $dic['resource_storage'],
-                $stakeholder = $c['irss.stakeholder']
+                $stakeholder = $c['irss.stakeholder'],
+                $c['iass.member.custom_storage'],
             );
+
+        $container['iass.member.custom_storage'] = static fn($c): SpecifiedFormStorage =>
+            new SpecifiedFormStorageDB($dic['ilDB']);
+        // cat-tms-patch end iassfeatures
+
         $container['iass.accesshandler'] = static fn($c): ilIndividualAssessmentAccessHandler =>
             new ilIndividualAssessmentAccessHandler(
                 $object,

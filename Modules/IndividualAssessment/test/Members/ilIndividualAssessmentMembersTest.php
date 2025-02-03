@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -307,9 +307,10 @@ class ilIndividualAssessmentMembersTest extends TestCase
         $record = $records[23];
 
         $this->assertEquals(23, $record[ilIndividualAssessmentMembers::FIELD_USR_ID]);
+        // cat-tms-patch start iassfeatures
         $this->assertEquals("", $record[ilIndividualAssessmentMembers::FIELD_RECORD]);
-        $this->assertEquals(0, $record[ilIndividualAssessmentMembers::FIELD_NOTIFY]);
         $this->assertEquals("Firstname", $record[ilIndividualAssessmentMembers::FIELD_FIRSTNAME]);
+        // cat-tms-patch end iassfeatures
         $this->assertEquals("Lastname", $record[ilIndividualAssessmentMembers::FIELD_LASTNAME]);
         $this->assertEquals("Firstname Lastname", $record[ilIndividualAssessmentMembers::FIELD_LOGIN]);
         $this->assertEquals(0, $record[ilIndividualAssessmentMembers::FIELD_LEARNING_PROGRESS]);
@@ -317,9 +318,10 @@ class ilIndividualAssessmentMembersTest extends TestCase
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_EXAMINER_FIRSTNAME]);
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_EXAMINER_LASTNAME]);
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_INTERNAL_NOTE]);
+        // cat-tms-patch start iassfeatures
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_FILE_NAME]);
-        $this->assertFalse($record[ilIndividualAssessmentMembers::FIELD_USER_VIEW_FILE]);
         $this->assertEquals(0, $record[ilIndividualAssessmentMembers::FIELD_FINALIZED]);
+        // cat-tms-patch end iassfeatures
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_CHANGER_ID]);
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_CHANGER_FIRSTNAME]);
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_CHANGER_LASTNAME]);

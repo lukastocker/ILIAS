@@ -27,31 +27,23 @@ use ILIAS\Refinery\Factory as Refinery;
  */
 class ilIndividualAssessmentSettings
 {
-    protected int $obj_id;
-    protected string $title;
-    protected string $description;
-    protected string $content;
-    protected string $record_template;
-    protected bool $event_time_place_required;
-    protected bool $file_required;
-
+    // cat-tms-patch start iassfeatures
     public function __construct(
-        int $obj_id,
-        string $title,
-        string $description,
-        string $content,
-        string $record_template,
-        bool $event_time_place_required,
-        bool $file_required
+        protected int $obj_id,
+        protected string $title,
+        protected string $description,
+        protected string $content,
+        protected string $record_template = '',
+        protected bool $event_time_place_required = false,
+        protected bool $file_required = false,
+        protected bool $file_visible = false,
+        protected bool $result_visible = false,
+        protected bool $available_in_report = true,
+        protected ?\DateTimeImmutable $available_in_report_from = null,
+        protected ?\DateTimeImmutable $available_in_report_to = null
     ) {
-        $this->obj_id = $obj_id;
-        $this->title = $title;
-        $this->description = $description;
-        $this->content = $content;
-        $this->record_template = $record_template;
-        $this->event_time_place_required = $event_time_place_required;
-        $this->file_required = $file_required;
     }
+    // cat-tms-patch end iassfeatures
 
     /**
      * Get the id of corresponding iass-object
@@ -110,35 +102,153 @@ class ilIndividualAssessmentSettings
         return $this->file_required;
     }
 
+    // cat-tms-patch start iassfeatures
+    public function isFileVisible(): bool
+    {
+        return $this->file_visible;
+    }
+
+    public function isResultVisible(): bool
+    {
+        return $this->result_visible;
+    }
+
     public function toFormInput(
         Field\Factory $input,
         ilLanguage $lng,
-        Refinery $refinery
+        Refinery $refinery,
+        bool $specified_form
     ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
+        $common = $input->group([
+            $input->text($lng->txt("title"))
+               ->withValue($this->getTitle())
+               ->withRequired(true),
+            $input->textarea($lng->txt("description"))
+                ->withValue($this->getDescription()),
+             $input->textarea($lng->txt("iass_content"), $lng->txt("iass_content_explanation"))
+                ->withValue($this->getContent())
+        ]);
+
+        $fields = [
+            'common' => $common
+        ];
+
+        if (!$specified_form) {
+            $standard_field_config = $input->group([
+                $input->textarea(
+                    $lng->txt("iass_record_template"),
+                    $lng->txt("iass_record_template_explanation")
+                )
+                ->withValue($this->getRecordTemplate()),
+                $input->checkbox(
+                    $lng->txt("iass_event_time_place_required"),
+                    $lng->txt("iass_event_time_place_required_info")
+                )
+                ->withValue($this->isEventTimePlaceRequired()),
+                $input->checkbox(
+                    $lng->txt("iass_file_required"),
+                    $lng->txt("iass_file_required_info")
+                )
+                ->withValue($this->isFileRequired()),
+                $input->checkbox($lng->txt("iass_file_visible_examinee"), '')
+                    ->withValue($this->isFileVisible())
+            ]);
+
+            $fields['standard_form'] = $standard_field_config;
+        }
+
         return $input->section(
-            [
-                $input->text($lng->txt("title"))
-                    ->withValue($this->getTitle())
-                    ->withRequired(true),
-                $input->textarea($lng->txt("description"))
-                    ->withValue($this->getDescription()),
-                $input->textarea($lng->txt("iass_content"), $lng->txt("iass_content_explanation"))
-                    ->withValue($this->getContent()),
-                $input->textarea($lng->txt("iass_record_template"), $lng->txt("iass_record_template_explanation"))
-                    ->withValue($this->getRecordTemplate()),
-                $input->checkbox($lng->txt("iass_event_time_place_required"), $lng->txt("iass_event_time_place_required_info"))
-                    ->withValue($this->isEventTimePlaceRequired()),
-                $input->checkbox($lng->txt("iass_file_required"), $lng->txt("iass_file_required_info"))
-                    ->withValue($this->isFileRequired())
-            ],
+            $fields,
             $lng->txt("settings")
         )->withAdditionalTransformation(
-            $refinery->custom()->transformation(function ($value) {
+            $refinery->custom()->transformation(function ($values) {
+                $values = array_merge(
+                    [$this->getObjId()],
+                    $values['common'],
+                    array_key_exists('standard_form', $values) ?
+                        $values['standard_form'] : ['', false, false, false]
+                );
                 return new ilIndividualAssessmentSettings(
-                    $this->getObjId(),
-                    ...$value
+                    ...array_values($values)
                 );
             })
         );
     }
+
+    public function userAvailabilitySettingsToForm(
+        Field\Factory $input,
+        ilLanguage $lng,
+        Refinery $refinery
+    ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
+        return $input->group([
+            $input->checkbox(
+                $lng->txt("iass_notify"),
+                $lng->txt("iass_notify_explanation")
+            )
+            ->withValue($this->isResultVisible())
+        ]);
+    }
+
+    public function withUserAvailabilitySettings(bool $result_visible): self
+    {
+        $clone = clone $this;
+        $clone->result_visible = $result_visible;
+        return $clone;
+    }
+
+    public function withReportSettings(
+        bool $available = true,
+        ?\DateTimeImmutable $from = null,
+        ?\DateTimeImmutable $to = null
+    ): self {
+        $clone = clone $this;
+        $clone->available_in_report = $available;
+        $clone->available_in_report_from = $from;
+        $clone->available_in_report_to = $to;
+        return $clone;
+    }
+
+    public function getReportSettings(): array
+    {
+        return [
+            $this->available_in_report,
+            $this->available_in_report_from,
+            $this->available_in_report_to
+        ];
+    }
+
+    public function reportSettingsToForm(
+        Field\Factory $input,
+        ilLanguage $lng,
+        Refinery $refinery
+    ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
+        $val = [$this->available_in_report_from, $this->available_in_report_to];
+        $period = $input->duration(
+            $lng->txt("setting_report_availability_period_label"),
+            $lng->txt("setting_report_availability_period_byline"),
+        );
+
+        $notification = $input->checkbox(
+            $lng->txt("iass_notify"),
+            $lng->txt("iass_notify_explanation")
+        )
+        ->withValue($this->isResultVisible());
+
+        return $input->optionalGroup(
+            [$period],
+            $lng->txt("setting_report_availability_label"),
+            $lng->txt("setting_report_availability_byline")
+        )->withValue(
+            $this->available_in_report ? [$val] : null
+        )
+        ->withAdditionalTransformation(
+            $refinery->custom()->transformation(function ($value) {
+                $available = $value !== null;
+                $to = $value[0]['start'] ?? null;
+                $from = $value[0]['end'] ?? null;
+                return [$available, $to, $from];
+            })
+        );
+    }
+    // cat-tms-patch end iassfeatures
 }

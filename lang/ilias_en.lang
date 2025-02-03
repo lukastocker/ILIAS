@@ -3498,6 +3498,7 @@ common#:#ass_log_delete_entries#:#Delete Log Entries
 common#:#ass_log_delete_no_selection#:#Please select at least one test to delete the Log Data
 common#:#ass_log_deleted#:#The Log Data for the selected tests has been deleted
 common#:#ass_log_output#:#Log Data Output
+common#:#assessment#:#Assessment
 common#:#assessment_imap_line_color#:#Image Map Line Color
 common#:#assessment_log#:#Create a Test and Assessment log for a specific time period
 common#:#assessment_log_datetime#:#Date/Time
@@ -3847,6 +3848,7 @@ common#:#database_version#:#Current Database Version
 common#:#dataset#:#Item
 common#:#date#:#Date
 common#:#dateplaner#:#Calendar
+common#:#datetime#:#Date and Time
 common#:#day#:#Day
 common#:#days#:#Days
 common#:#db_host#:#Database Host
@@ -4300,8 +4302,14 @@ common#:#http_not_possible#:#This server is not supporting http requests.
 common#:#http_path#:#HTTP Path
 common#:#https_not_possible#:#This server is not supporting HTTPS connections.
 common#:#i2passwd#:#ILIAS 2 password
+common#:#iafp_new#:#Add Individual Assessment Form Pool
+common#:#iarp_add#:#Add Individual Assessment Report
+common#:#iarp_added#:#Individual Assessment Report added.
+common#:#iarp_new#:#Add Individual Assessment Report
 common#:#iass_import#:#Import Individual Assessment
 common#:#iass_new#:#Create Individual Assessment
+common#:#iass_no_form_pool#:#No Assessment Pool Formular
+common#:#iass_std_form#:#Standard Form
 common#:#icon#:#Icon
 common#:#icon_settings#:#Custom Icons
 common#:#id#:#ID
@@ -4582,6 +4590,7 @@ common#:#main_menu#:#Main Menu
 common#:#mainbar_aria_label#:#Mainbar
 common#:#mainbar_more_label#:#More
 common#:#manage_members#:#Manage Members
+common#:#markdown#:#Markdown
 common#:#marked_entries#:#Marked Entries
 common#:#matriculation#:#Matriculation number
 common#:#max_previews_per_object#:#Number of preview images per file
@@ -4805,6 +4814,8 @@ common#:#no_accessibility_control_concept_description#:#There is currently no Ac
 common#:#no_checkbox#:#You did not select any item.
 common#:#no_condition_selected#:#Please select one precondition.
 common#:#no_date#:#No date
+common#:#no_entries_deleted#:#No entry/entries deleted
+common#:#no_export_for_custom_forms#:#Export for custom forms is currently not possible. This feature will be implemented in the future.
 common#:#no_gallery_users_available#:#There are currently no users in the gallery.
 common#:#no_global_role_left#:#Every user has to be assigned to one role.
 common#:#no_import_file_found#:#No import file found
@@ -4930,6 +4941,8 @@ common#:#obj_hlps#:#Help System
 common#:#obj_hlps_desc#:#Settings for the online help
 common#:#obj_htlm#:#Learning Module HTML
 common#:#obj_htlm_duplicate#:#Copy HTML Learning Module
+common#:#obj_iafp#:#Form Pool for Individual Assessment
+common#:#obj_iarp#:#Individual Assessment Report
 common#:#obj_iass#:#Individual Assessment
 common#:#obj_iass_duplicate#:#Copy Individual Assessment
 common#:#obj_iass_select#:#-- Please select one individual assessment --
@@ -5138,6 +5151,8 @@ common#:#objs_glo#:#Glossaries
 common#:#objs_grp#:#Groups
 common#:#objs_grpr#:#Group Links
 common#:#objs_htlm#:#HTML Learning Modules
+common#:#objs_iafp#:#Individual Assessment Form Pool
+common#:#objs_iarp#:#Individual Assessment Reports
 common#:#objs_iass#:#Individual Assessments
 common#:#objs_itgr#:#Item Groups
 common#:#objs_lm#:#ILIAS Learning Modules
@@ -5364,6 +5379,7 @@ common#:#question#:#Question
 common#:#question_message#:#Question
 common#:#quit#:#Quit
 common#:#quote#:#Quote
+common#:#rating#:#5-Star-Rating
 common#:#reached_session_limit#:#The limit of online users is reached. Please try again later.
 common#:#read#:#Read
 common#:#readcount_anonymous_users#:#Number of anonymous read accesses
@@ -5634,6 +5650,7 @@ common#:#show_users_online#:#Show active users
 common#:#show_who_is_online#:#Show who is online
 common#:#side_frame#:#Side Frame
 common#:#signature#:#Signature
+common#:#singleselect#:#Single Select
 common#:#size#:#Size
 common#:#skills#:#Competences
 common#:#skin_style#:#Default Skin / Style
@@ -5709,6 +5726,7 @@ common#:#systemcheck_cron#:#Process System Check in Cron Job
 common#:#systemcheck_cronform#:#Activation of System Check in Cron Job
 common#:#table_mail_import#:#Mail import
 common#:#tabs#:#Tabs
+common#:#tag#:#Tag
 common#:#tagging_my_tags#:#My Tags
 common#:#tags#:#Tags
 common#:#take_over_structure#:#Adopt Structure
@@ -10393,9 +10411,63 @@ help#:#help_tooltips_and_help#:#Tooltips and Workflow Help
 help#:#help_tooltips_only#:#Tooltips Only
 help#:#help_topcis#:#Topics
 help#:#help_tt_text#:#Text
+iafp#:#_settings_saved#:#Settings saved.
+iafp#:#add_fields#:#Add Fields to the Form
+iafp#:#available_for_examiners#:#Exclusively available for examiners
+iafp#:#confirm_cancel#:#Cancel
+iafp#:#confirm_delete#:#Delete
+iafp#:#default_value#:#Default Value
+iafp#:#field_available_for_examiners#:#Exclusively available for examiners
+iafp#:#field_available_for_examiners_byline#:#mark as internal: this field is available for examiners only
+iafp#:#field_default_value#:#Default Value
+iafp#:#field_default_value_byline#:#default/initial value
+iafp#:#field_description#:#Description
+iafp#:#field_description_byline#:#description of the field
+iafp#:#field_label#:#Label
+iafp#:#field_label_byline#:#label for the field
+iafp#:#field_name_byline#:#name for the field
+iafp#:#field_options#:#Options
+iafp#:#field_options_byline#:#add options the user may choose from. The maximum of allowed characters for each option is 512.
+iafp#:#field_section_byline#:#configure the field
+iafp#:#field_section_create#:#Edit new Field
+iafp#:#field_section_edit#:#Edit Field
+iafp#:#field_type_byline#:#type of the field
+iafp#:#field_with_notes#:#With Notes
+iafp#:#field_with_notes_byline#:#add a textarea for notes?
+iafp#:#fields#:#Fields in this Form
+iafp#:#fields_added#:#Fields added.
+iafp#:#fields_byline#:#Unselect and save to remove a field
+iafp#:#fields_count#:#amount of fields
+iafp#:#fields_deleted#:#Field(s) deleted
+iafp#:#form_description#:#Description
+iafp#:#form_description_byline#:#description of the form
+iafp#:#form_name#:#Name
+iafp#:#form_name_byline#:#name of the form
+iafp#:#form_section_byline#:#configure the form
+iafp#:#form_section_create#:#Edit new Form
+iafp#:#form_section_edit#:#Edit Form
+iafp#:#forms_deleted#:#Form(s) deleted
+iafp#:#iafp_fields#:#Fields
+iafp#:#iafp_forms#:#Forms
+iafp#:#iafp_import#:#Import Forms
+iafp#:#iafp_settings#:#Settings
+iafp#:#iafp_settings_availability#:#Availability
+iafp#:#label#:#label
+iafp#:#new_field#:#Add a new Field
+iafp#:#new_form#:#Add a new Form
+iafp#:#object_saved#:#Saved.
+iafp#:#pick_fields#:#Select Fields
+iafp#:#tab_fields#:#Fields
+iafp#:#tab_forms#:#Forms
+iafp#:#with_notes#:#Notes
+iarp#:#iarp_global#:#Global Report
+iarp#:#iarp_global_desc#:#If this is disabled assessments in or below this folder are included only.
+iarp#:#iarp_settings#:#Settings
+iarp#:#iarp_settings_availability#:#Availability
+iarp#:#report#:#Report
+iarp#:#view_participant_record#:#View Record
 iass#:#download_assessment_paper#:#Download Record file
 iass#:#general#:#General Information
-iass#:#grading#:#Grading
 iass#:#grading_info#:#Grading info
 iass#:#grading_record#:#Grading record
 iass#:#iass_add#:#Create Individual Assessment
@@ -10403,10 +10475,9 @@ iass#:#iass_add_user_failure#:#One or more user could not be added.
 iass#:#iass_add_user_success#:#User added as participant.
 iass#:#iass_added#:#Individual Assessment added
 iass#:#iass_amend_saved#:#Amended record has been saved.
-iass#:#iass_assessment_not_completed#:#Not completed yet
 iass#:#iass_cancel#:#Cancel
 iass#:#iass_changed_by#:#Changed after finalization
-iass#:#iass_confirm_finalize#:#Finalize
+iass#:#iass_confirm_finalize#:#Publish and freeze
 iass#:#iass_consultation_hours#:#Consultation hours
 iass#:#iass_contact#:#Name
 iass#:#iass_contact_info#:#Contact information
@@ -10426,13 +10497,9 @@ iass#:#iass_file_required#:#Record file required
 iass#:#iass_file_required_info#:#A record file has to be uploaded to each participant record.
 iass#:#iass_file_visible_examinee#:#File visible for participant
 iass#:#iass_filter_all#:#All
-iass#:#iass_filter_failed#:#Failed only
-iass#:#iass_filter_finalized#:#Completed only
-iass#:#iass_filter_not_finalized#:#Drafts only
-iass#:#iass_filter_not_started#:#Not started only
-iass#:#iass_finalize#:#Finalize
-iass#:#iass_finalize_info#:#Individual Assessment will be finalized.
-iass#:#iass_finalize_user_qst#:#Should the participant's status really be finalised? No changes possible thereafter.
+iass#:#iass_finalize#:#Publish and freeze
+iass#:#iass_finalize_info#:#Individual Assessment will be published.
+iass#:#iass_finalize_user_qst#:#Should the participant's status really be published? No changes possible thereafter.
 iass#:#iass_further_field_headline#:#Detailed Information
 iass#:#iass_graded_by#:#Graded by
 iass#:#iass_info_emails_expl#:#You may provide several addresses separated by comma.
@@ -10440,12 +10507,12 @@ iass#:#iass_internal_note#:#Internal record note
 iass#:#iass_internal_note_info#:#Internal notes are only visible for tutors but not for participants.
 iass#:#iass_location#:#Location
 iass#:#iass_mails#:#E-Mail
-iass#:#iass_may_not_finalize#:#Examinee may not be finalised. Please grade the user first.
-iass#:#iass_membership_finalized#:#Record finalised
-iass#:#iass_membership_saved#:#Record saved, not yet finalised
+iass#:#iass_may_not_finalize#:#Examinee may not be published. Please grade the user in the learning progress first.
+iass#:#iass_membership_finalized#:#Record published and frozen
+iass#:#iass_membership_saved#:#Record saved, not yet published
 iass#:#iass_mess_notification_completed#:#You passed the assessment <i>%s</i>. Please check the following grading record for details:
 iass#:#iass_mess_notification_failed#:#You failed the assessment <i>%s</i>. Please check the following grading record for details:
-iass#:#iass_notify#:#Make Result available to Participant
+iass#:#iass_notify#:#Make Records available to Participant
 iass#:#iass_notify_explanation#:#The participant will be notified via e-mail after finalisation and will get access to her or his record on the Info screen.
 iass#:#iass_phone#:#Phone
 iass#:#iass_place#:#Place of assessment
@@ -10464,9 +10531,6 @@ iass#:#iass_sort_examiner_login_asc#:#Examiner ascending
 iass#:#iass_sort_examiner_login_desc#:#Examiner descending
 iass#:#iass_sort_name_asc#:#Username ascending
 iass#:#iass_sort_name_desc#:#Username descending
-iass#:#iass_status_completed#:#Completed
-iass#:#iass_status_failed#:#Failed
-iass#:#iass_status_pending#:#Status pending
 iass#:#iass_subj_notification_completed#:#%s: Individual Assessment is completed.
 iass#:#iass_subj_notification_failed#:#%s: Individual Assessment is failed.
 iass#:#iass_upload_file#:#Record file
@@ -10478,8 +10542,12 @@ iass#:#iass_usr_remove#:#Remove Participant from Assessment
 iass#:#iass_usr_view#:#Participant Record
 iass#:#il_iass_member#:#Participant
 iass#:#il_iass_members#:#Participants
-iass#:#lp_inactive#:#Note: the learning progress for this object is inactive. Thus memberships may not be finalised.
+iass#:#lp_inactive#:#Note: the learning progress for this object is inactive. Thus memberships may not be published.
 iass#:#save_amend#:#Save Amended Record
+iass#:#setting_report_availability_byline#:#If enabled, this object is included in reports.
+iass#:#setting_report_availability_label#:#Visible in Reports
+iass#:#setting_report_availability_period_byline#:#Visible in Reports for this period of time
+iass#:#setting_report_availability_period_label#:#Period of visibility in reports
 impr#:#impr_page_type_impr#:#Imprint
 init#:#init_error_authentication_fail#:#Authentication failed.
 init#:#init_error_maintenance#:#The server is not available due to maintenance. We apologise for any inconvenience.
@@ -12933,6 +13001,12 @@ orgu#:#org_op_edit_individual_plan#:#Edit Individual Plan
 orgu#:#org_op_edit_submissions_grades#:#Edit submissions of other users
 orgu#:#org_op_manage_members#:#Manage Members
 orgu#:#org_op_manage_participants#:#Manage Participants
+orgu#:#org_op_ou_create_records#:#Create Records for Users
+orgu#:#org_op_ou_publish_records#:#Publish and freeze Records
+orgu#:#org_op_ou_view_full_record#:#View whole (not specific) result of other users
+orgu#:#org_op_ou_view_general_status#:#View other users
+orgu#:#org_op_ou_view_results#:#View learning progress of other users
+orgu#:#org_op_ou_view_specific_records#:#View specific result of other users
 orgu#:#org_op_read_employee_talk#:#Read access talk appointments
 orgu#:#org_op_read_learning_progress#:#View learning progress of other users
 orgu#:#org_op_score_participants#:#Score Participants
@@ -13760,7 +13834,7 @@ rbac#:#adve_edit_permission#:#User can change permission settings of Editing adm
 rbac#:#adve_read#:#User has read access to Editing Administration
 rbac#:#adve_visible#:#Editing Administration is visible
 rbac#:#adve_write#:#User can edit settings of Editing Administration
-rbac#:#amend_grading#:#Amend finalized grading
+rbac#:#amend_grading#:#Amend published grading
 rbac#:#assf_edit_permission#:#User can change permission settings of Test and Assessment administration
 rbac#:#assf_read#:#User has read access Test and Assessment Administration
 rbac#:#assf_visible#:#Test and Assessment administration is visible
@@ -14059,12 +14133,33 @@ rbac#:#htlm_read#:#User can read HTML learning module
 rbac#:#htlm_read_learning_progress#:#User can view learning progress of other users
 rbac#:#htlm_visible#:#HTML learning module is visible
 rbac#:#htlm_write#:#User can edit content and settings of HTML learning module
+rbac#:#iafp_copy#:#Copy an Individual Assessment Form Pool
+rbac#:#iafp_delete#:#Delete an Individual Assessment Form Pool
+rbac#:#iafp_edit_permission#:#Edit permissions of an Individual Assessment Form Pool
+rbac#:#iafp_read#:#Read content of an Individual Assessment Form Pool
+rbac#:#iafp_visible#:#Individual Assessment Form Pool is visible
+rbac#:#iafp_write#:#Edit an Individual Assessment  Form Pool
+rbac#:#iarp_copy#:#Copy an Individual Assessment Report
+rbac#:#iarp_delete#:#Delete an Individual Assessment Report
+rbac#:#iarp_edit_permission#:#Edit permissions of an Individual Assessment Report
+rbac#:#iarp_iarp_view_full_record#:#View whole (not specific) result of other users
+rbac#:#iarp_iarp_view_general_status#:#View other users
+rbac#:#iarp_iarp_view_results#:#View learning progress of other users
+rbac#:#iarp_iarp_view_specific_records#:#View specific results of other users
+rbac#:#iarp_read#:#Read content of an Individual Assessment Report
+rbac#:#iarp_view_full_record#:#View whole (not specific) result of other users
+rbac#:#iarp_view_general_status#:#View other users
+rbac#:#iarp_view_results#:#View learning progress of other users
+rbac#:#iarp_view_specific_records#:#View specific results of other users
+rbac#:#iarp_visible#:#Individual Assessment Report is visible
+rbac#:#iarp_write#:#Edit an Individual Assessment Report
 rbac#:#iass_amend_grading#:#Amend gradings in an Individual Assessment
 rbac#:#iass_copy#:#Copy an Individual Assessment
 rbac#:#iass_delete#:#Delete an Individual Assessment
 rbac#:#iass_edit_learning_progress#:#Edit learning progress information of an Individual Assessment
 rbac#:#iass_edit_members#:#Edit members of an Individual Assessment
 rbac#:#iass_edit_permission#:#Edit permissions of an Individual Assessment
+rbac#:#iass_publish_records#:#Publish and freeze Records
 rbac#:#iass_read#:#Read content of an Individual Assessment
 rbac#:#iass_read_learning_progress#:#View learning progress information of an Individual Assessment
 rbac#:#iass_visible#:#Individual Assessment is visible
@@ -14198,6 +14293,7 @@ rbac#:#nwss_edit_permission#:#User can change permission settings in News and We
 rbac#:#nwss_read#:#User has read access to ews and Web Feeds administration
 rbac#:#nwss_visible#:#News and Web Feeds administration is visible
 rbac#:#nwss_write#:#User can edit settings in News and Web Feeds administration
+rbac#:#obj_records#:#Bewertungen vornehmen
 rbac#:#obj_skee#:#Competence Tree
 rbac#:#org_op_access_results#:#Access Results of Subordinated Users
 rbac#:#org_op_edit_submissions_grades#:#Edit submissions of other users
@@ -14282,6 +14378,7 @@ rbac#:#ps_export_member_data#:#User can export member data in courses and groups
 rbac#:#ps_read#:#User has read access to Privacy/Security administration
 rbac#:#ps_visible#:#Privacy/Security administration is visible
 rbac#:#ps_write#:#User can edit settings in Privacy/Security administration
+rbac#:#publish_records#:#Publish and freeze Records
 rbac#:#push_desktop_items#:#Recommend Content
 rbac#:#qpl_copy#:#User can copy question pool for tests
 rbac#:#qpl_delete#:#User can move or delete question pool
@@ -14347,6 +14444,7 @@ rbac#:#rbac_create_prgr#:#Create link to study programme
 rbac#:#rbac_create_prtt#:#Create Portfolio Template
 rbac#:#rbac_create_qpl#:#Create Question Pool Test
 rbac#:#rbac_create_rcrs#:#Create ECS Course
+rbac#:#rbac_create_records#:#Create Records for Users
 rbac#:#rbac_create_role#:#Create new Role
 rbac#:#rbac_create_rolt#:#Create new Role Template
 rbac#:#rbac_create_sahs#:#Create SCORM Learning Module
@@ -17061,7 +17159,7 @@ trac#:#trac_mode_event_info#:#Tutors monitor whether or not participants attend 
 trac#:#trac_mode_exercise_returned#:#Tutors Monitor and Set Status
 trac#:#trac_mode_exercise_returned_info#:#Tutors decide if users have accomplished the excercise. Tutors manually set the overall status i.e. ‘Completed’ or ‘Failed’.
 trac#:#trac_mode_individual_assessment#:#Graded manually by tutor or trainer
-trac#:#trac_mode_individual_assessment_info#:#The record of a user has to be finalized by the tutor in order to complete individual assessment.
+trac#:#trac_mode_individual_assessment_info#:#The record of a user has to be published by the tutor in order to complete individual assessment.
 trac#:#trac_mode_lti_outcome#:#Mastery Score Must be reached
 trac#:#trac_mode_lti_outcome_info#:#The Learning Progress will be evaluated from the LTI outcome and the mastery score threshold.
 trac#:#trac_mode_manual#:#Users Monitor and Set Status Themselves (Complete Module)

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 /**
  * Edit the record of a user, set LP.
@@ -55,7 +55,9 @@ class ilIndividualAssessmentMember
         if (!$this->finalized()) {
             throw new ilIndividualAssessmentException('must finalize before notification');
         }
-        if ($this->notify()) {
+        // cat-tms-patch start iassfeatures
+        if ($this->iass->getSettings()->isResultVisible()) {
+            // cat-tms-patch end iassfeatures
             $notificator = (string) $this->LPStatus() === (string) ilIndividualAssessmentMembers::LP_COMPLETED ?
                 $notificator->withOccasionCompleted() :
                 $notificator->withOccasionFailed();
@@ -70,14 +72,16 @@ class ilIndividualAssessmentMember
         if ($this->iass->getSettings()->isFileRequired() && (string) $this->fileName() === '') {
             return false;
         }
+        // cat-tms-patch start iassfeatures
         return in_array(
             $this->LPStatus(),
             [
-                    ilIndividualAssessmentMembers::LP_COMPLETED,
-                    ilIndividualAssessmentMembers::LP_FAILED
+                    ilLPStatus::LP_STATUS_COMPLETED_NUM,
+                    ilLPStatus::LP_STATUS_FAILED_NUM
                 ]
         ) &&
             !$this->finalized();
+        // cat-tms-patch end iassfeatures
     }
 
     public function notificationTS(): int
@@ -133,12 +137,12 @@ class ilIndividualAssessmentMember
         return $clone;
     }
 
-    public function record(): string
+    public function record(): ?string
     {
         return $this->grading->getRecord();
     }
 
-    public function internalNote(): string
+    public function internalNote(): ?string
     {
         return $this->grading->getInternalNote();
     }
@@ -150,15 +154,24 @@ class ilIndividualAssessmentMember
 
     public function viewFile(): bool
     {
+        throw new \Exception('viewFile from Member/Grading');
         return $this->grading->isFileVisible();
     }
+    // cat-tms-patch start iassfeatures
+    public function notify(): bool
+    {
+        throw new \Exception('notify from Member/Grading');
+        return $this->grading->isNotify();
+    }
+    // cat-tms-patch end iassfeatures
 
     public function LPStatus(): int
     {
         return $this->grading->getLearningProgress();
     }
 
-    public function place(): string
+    // cat-tms-patch start iassfeatures
+    public function place(): ?string
     {
         return $this->grading->getPlace();
     }
@@ -168,15 +181,11 @@ class ilIndividualAssessmentMember
         return $this->grading->getEventTime();
     }
 
-    public function notify(): bool
-    {
-        return $this->grading->isNotify();
-    }
-
     public function finalized(): bool
     {
         return $this->grading->isFinalized();
     }
+    // cat-tms-patch end iassfeatures
 
     public function assessment(): ilObjIndividualAssessment
     {

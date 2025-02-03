@@ -50,10 +50,12 @@ class ilIndividualAssessmentLPInterface
             if ($member->finalized()) {
                 return $member->LPStatus();
             } elseif (
+                // cat-tms-patch start iassfeatures
                 in_array($member->LPStatus(), [
-                    ilIndividualAssessmentMembers::LP_FAILED,
-                    ilIndividualAssessmentMembers::LP_COMPLETED
+                    ilLPStatus::LP_STATUS_FAILED_NUM,
+                    ilLPStatus::LP_STATUS_COMPLETED_NUM
                 ])
+                // cat-tms-patch end iassfeatures
             ) {
                 return ilLPStatus::LP_STATUS_IN_PROGRESS_NUM;
             }
