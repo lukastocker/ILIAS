@@ -53,7 +53,7 @@ class ilAccountMail
         $this->refinery = $DIC->refinery();
         $this->settings = $DIC->settings();
         $this->repositoryTree = $DIC->repositoryTree();
-        $this->senderFactory = $DIC->mail()->mime()->senderFactory();
+        $this->senderFactory = $DIC['mail.mime.sender.factory'];
     }
 
     public function useLangVariablesAsFallback(bool $a_status): void
@@ -182,7 +182,7 @@ class ilAccountMail
             throw new RuntimeException('A user instance must be passed when sending emails');
         }
 
-        if ($user->getEmail() === '') {
+        if (!$user->getEmail()) {
             return false;
         }
 
@@ -252,7 +252,8 @@ class ilAccountMail
         global $DIC;
         $tree = $DIC->repositoryTree();
         $ilSetting = $DIC->settings();
-        $mustache_factory = $DIC->mail()->mustacheFactory();
+        /** @var ilMustacheFactory $mustache_factory */
+        $mustache_factory = $DIC["mail.mustache.factory"];
 
         $replacements = [];
 
@@ -291,8 +292,8 @@ class ilAccountMail
             $this->http->wrapper()->query()->retrieve('target', $this->refinery->kindlyTo()->string()) !== ''
         ) {
             $target = $this->http->wrapper()->query()->retrieve('target', $this->refinery->kindlyTo()->string());
-            $tarr = explode('_', (string) $target);
-            if ($this->repositoryTree->isInTree((int) $tarr[1])) {
+            $tarr = explode("_", $target);
+            if ($tree->isInTree((int) $tarr[1])) {
                 $obj_id = ilObject::_lookupObjId((int) $tarr[1]);
                 $type = ilObject::_lookupType($obj_id);
                 if ($type === $tarr[0]) {

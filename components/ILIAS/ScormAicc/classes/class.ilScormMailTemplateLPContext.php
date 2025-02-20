@@ -123,12 +123,17 @@ class ilScormMailTemplateLPContext extends ilMailTemplateContext
     }
 
     /**
+     * @param string         $placeholder_id
+     * @param array          $context_parameters
+     * @param ilObjUser|null $recipient
+     * @param bool           $html_markup
      * @throws ilDateTimeException
      */
     public function resolveSpecificPlaceholder(
         string $placeholder_id,
         array $context_parameters,
-        ?ilObjUser $recipient = null
+        ?ilObjUser $recipient = null,
+        bool $html_markup = false
     ): string {
         /**
          * @var $ilObjDataCache ilObjectDataCache

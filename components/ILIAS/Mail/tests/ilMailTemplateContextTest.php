@@ -56,7 +56,8 @@ class ilMailTemplateContextTest extends ilMailBaseTestCase
             public function resolveSpecificPlaceholder(
                 string $placeholder_id,
                 array $context_parameters,
-                ?ilObjUser $recipient = null
+                ?ilObjUser $recipient = null,
+                bool $html_markup = false
             ): string {
                 return '';
             }

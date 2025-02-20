@@ -60,6 +60,9 @@ class ilMailMimeTest extends ilMailBaseTestCase
         ])->getMock();
         $this->setGlobalVariable('ilSetting', $settings);
 
+        $refinery = $this->getMockBuilder('\ILIAS\Refinery\Factory')->disableOriginalConstructor()->getMock();
+        $this->setGlobalVariable('refinery', $refinery);
+
         $mail = new ilMimeMail();
         $mail->Send($transport);
     }
@@ -85,6 +88,9 @@ class ilMailMimeTest extends ilMailBaseTestCase
         ])->getMock();
         $this->setGlobalVariable('ilSetting', $settings);
 
+        $refinery = $this->getMockBuilder('\ILIAS\Refinery\Factory')->disableOriginalConstructor()->getMock();
+        $this->setGlobalVariable('refinery', $refinery);
+
         $mail = new ilMimeMail();
         $mail->Send();
     }
@@ -99,7 +105,7 @@ class ilMailMimeTest extends ilMailBaseTestCase
             'get',
         ])->getMock();
         $settings->method('get')->willReturnCallback(static function ($key): ?string {
-            return (string) ('mail_allow_external' !== $key);
+            return (string) !('mail_allow_external' === $key);
         });
         $this->setGlobalVariable('ilSetting', $settings);
 
