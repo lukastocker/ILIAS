@@ -69,7 +69,7 @@ class ilMailTaskProcessorTest extends ilMailBaseTestCase
     }
 
     /**
-     * @throws ilMailException
+     * @throws ilException
      * @throws ReflectionException
      */
     public function testOneTask(): void
@@ -102,13 +102,13 @@ class ilMailTaskProcessorTest extends ilMailBaseTestCase
 
 
         $worker = new ilMassMailTaskProcessor(
-            self::SOME_USER_ID,
             $taskManager,
             $taskFactory,
             $this->languageMock,
             $this->loggerMock,
             $this->dicMock,
-            new ilMailValueObjectJsonService()
+            new ilMailValueObjectJsonService(),
+            self::SOME_USER_ID
         );
 
         $mailValueObject = new ilMailValueObject(
@@ -138,7 +138,7 @@ class ilMailTaskProcessorTest extends ilMailBaseTestCase
     }
 
     /**
-     * @throws ilMailException
+     * @throws ilException
      * @throws ReflectionException
      */
     public function testRunTwoTasks(): void
@@ -171,13 +171,13 @@ class ilMailTaskProcessorTest extends ilMailBaseTestCase
             ->willReturn($backgroundTask);
 
         $worker = new ilMassMailTaskProcessor(
-            self::SOME_USER_ID,
             $taskManager,
             $taskFactory,
             $this->languageMock,
             $this->loggerMock,
             $this->dicMock,
-            new ilMailValueObjectJsonService()
+            new ilMailValueObjectJsonService(),
+            self::SOME_USER_ID
         );
 
         $mailValueObjects = [];
@@ -215,7 +215,7 @@ class ilMailTaskProcessorTest extends ilMailBaseTestCase
     }
 
     /**
-     * @throws ilMailException
+     * @throws ilException
      * @throws ReflectionException
      */
     public function testRunThreeTasksInDifferentBuckets(): void
@@ -248,13 +248,13 @@ class ilMailTaskProcessorTest extends ilMailBaseTestCase
             ->willReturn($backgroundTask);
 
         $worker = new ilMassMailTaskProcessor(
-            self::SOME_USER_ID,
             $taskManager,
             $taskFactory,
             $this->languageMock,
             $this->loggerMock,
             $this->dicMock,
-            new ilMailValueObjectJsonService()
+            new ilMailValueObjectJsonService(),
+            self::SOME_USER_ID
         );
 
         $mailValueObjects = [];
@@ -304,11 +304,11 @@ class ilMailTaskProcessorTest extends ilMailBaseTestCase
 
     /**
      * @throws ReflectionException
-     * @throws ilMailException
+     * @throws ilException
      */
     public function testRunHasWrongTypeAndWillResultInException(): void
     {
-        $this->expectException(ilMailException::class);
+        $this->expectException(ilException::class);
 
         $taskManager = $this->getMockBuilder(BasicTaskManager::class)
             ->onlyMethods(['run'])
@@ -338,13 +338,13 @@ class ilMailTaskProcessorTest extends ilMailBaseTestCase
             ->willReturn($backgroundTask);
 
         $worker = new ilMassMailTaskProcessor(
-            self::SOME_USER_ID,
             $taskManager,
             $taskFactory,
             $this->languageMock,
             $this->loggerMock,
             $this->dicMock,
-            new ilMailValueObjectJsonService()
+            new ilMailValueObjectJsonService(),
+            self::SOME_USER_ID
         );
 
         $mailValueObjects = [];

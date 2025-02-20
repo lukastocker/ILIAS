@@ -38,7 +38,11 @@ class Standard extends Form implements C\Input\Container\Form\Standard, IsPrompt
     use HasPostURL;
     use JavaScriptBindableTrait;
 
-    protected ?string $submit_caption = null;
+    protected ?string $submit_label = null;
+    /**
+     * @var array $additional_submit_buttons [ $label => $action ]
+     */
+    protected array $additional_submit_buttons = [];
     protected Signal $submit_signal;
 
     public function __construct(
@@ -59,7 +63,7 @@ class Standard extends Form implements C\Input\Container\Form\Standard, IsPrompt
     public function withSubmitLabel(string $label): C\Input\Container\Form\Standard
     {
         $clone = clone $this;
-        $clone->submit_caption = $label;
+        $clone->submit_label = $label;
         return $clone;
     }
 
@@ -68,7 +72,7 @@ class Standard extends Form implements C\Input\Container\Form\Standard, IsPrompt
      */
     public function getSubmitLabel(): ?string
     {
-        return $this->submit_caption;
+        return $this->submit_label;
     }
 
     public function getPromptButtons(): array
@@ -84,5 +88,17 @@ class Standard extends Form implements C\Input\Container\Form\Standard, IsPrompt
     public function getSubmitSignal(): Signal
     {
         return $this->submit_signal;
+    }
+
+    public function withAdditionalSubmitButton(string $label, string $action): self
+    {
+        $clone = clone $this;
+        $clone->additional_submit_buttons[$label] = $action;
+        return $clone;
+    }
+
+    public function getAdditionalSubmitButtons(): array
+    {
+        return $this->additional_submit_buttons;
     }
 }

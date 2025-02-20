@@ -33,7 +33,8 @@ class ilMailTemplateContextAdapter
         /** @var ilMailTemplateContext[] $contexts */
         protected array $contexts,
         protected array $context_parameter,
-        protected ?ilObjUser $recipient = null
+        protected ?ilObjUser $recipient = null,
+        protected bool $html_markup = false
     ) {
     }
 
@@ -64,7 +65,7 @@ class ilMailTemplateContextAdapter
     public function __get(string $name): string
     {
         foreach ($this->contexts as $context) {
-            $ret = $context->resolvePlaceholder($name, $this->context_parameter, $this->recipient);
+            $ret = $context->resolvePlaceholder($name, $this->context_parameter, $this->recipient, $this->html_markup);
             if ($ret !== '') {
                 return $ret;
             }

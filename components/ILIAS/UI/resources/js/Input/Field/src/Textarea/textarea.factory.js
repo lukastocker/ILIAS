@@ -1,4 +1,4 @@
-import Textarea from "./textarea.class";
+import Textarea from './textarea.class.js';
 
 /**
  * @author Thibeau Fuhrer <thibeau@sr.solutions>

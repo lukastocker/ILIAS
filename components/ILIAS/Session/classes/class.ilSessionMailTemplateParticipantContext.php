@@ -96,7 +96,8 @@ class ilSessionMailTemplateParticipantContext extends ilMailTemplateContext
     public function resolveSpecificPlaceholder(
         string $placeholder_id,
         array $context_parameters,
-        ?ilObjUser $recipient = null
+        ?ilObjUser $recipient = null,
+        bool $html_markup = false
     ): string {
         $ilObjDataCache = $this->obj_data_cache;
         $obj_id = $ilObjDataCache->lookupObjId((int) $context_parameters['ref_id']);

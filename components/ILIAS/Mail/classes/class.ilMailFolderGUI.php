@@ -913,13 +913,14 @@ class ilMailFolderGUI
         $form->addItem($date);
 
         $message = new ilCustomInputGUI($this->lng->txt('message') . ':');
-        $message->setHtml(ilUtil::htmlencodePlainString($mailData['m_message'] ?? '', true));
+        $message->setHtml(html_entity_decode($this->refinery->string()->markdown()->toHTML()->transform($mailData['m_message'])));
         $form->addItem($message);
 
         if ($mailData['attachments']) {
             $att = new ilCustomInputGUI($this->lng->txt('attachments') . ':');
 
             $radiog = new ilRadioGroupInputGUI('', 'filename');
+            $mailData['attachments'] = unserialize($mailData['attachments']);
             foreach ($mailData['attachments'] as $file) {
                 $radiog->addOption(new ilRadioOption($file, md5($file)));
             }

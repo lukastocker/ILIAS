@@ -24,6 +24,8 @@ use ILIAS\Data\DateFormat;
 use ILIAS\UI\Component;
 use ILIAS\UI\Implementation\Component\Input\Field as F;
 use ILIAS\UI\Component\Input\Field as FI;
+use ILIAS\UI\Implementation\DefaultRenderer;
+use ILIAS\UI\Implementation\Component\Signal;
 use ILIAS\UI\Component\Input\Container\Form\FormInput;
 use ILIAS\UI\Implementation\Render\AbstractComponentRenderer;
 use ILIAS\UI\Implementation\Render\ResourceRegistry;
@@ -44,16 +46,16 @@ use ILIAS\UI\Implementation\Component\Input\Container\Filter\ProxyFilterField;
  */
 class Renderer extends AbstractComponentRenderer
 {
-    public const DATETIME_DATEPICKER_MINMAX_FORMAT = 'Y-m-d\Th:m';
-    public const DATE_DATEPICKER_MINMAX_FORMAT = 'Y-m-d';
-    public const TYPE_DATE = 'date';
-    public const TYPE_DATETIME = 'datetime-local';
-    public const TYPE_TIME = 'time';
-    public const HTML5_NATIVE_DATETIME_FORMAT = 'Y-m-d H:i';
-    public const HTML5_NATIVE_DATE_FORMAT = 'Y-m-d';
-    public const HTML5_NATIVE_TIME_FORMAT = 'H:i';
+    public const string DATETIME_DATEPICKER_MINMAX_FORMAT = 'Y-m-d\Th:m';
+    public const string DATE_DATEPICKER_MINMAX_FORMAT = 'Y-m-d';
+    public const string TYPE_DATE = 'date';
+    public const string TYPE_DATETIME = 'datetime-local';
+    public const string TYPE_TIME = 'time';
+    public const string HTML5_NATIVE_DATETIME_FORMAT = 'Y-m-d H:i';
+    public const string HTML5_NATIVE_DATE_FORMAT = 'Y-m-d';
+    public const string HTML5_NATIVE_TIME_FORMAT = 'H:i';
 
-    public const DATEPICKER_FORMAT_MAPPING = [
+    public const array DATEPICKER_FORMAT_MAPPING = [
         'd' => 'DD',
         'jS' => 'Do',
         'l' => 'dddd',
@@ -74,9 +76,9 @@ class Renderer extends AbstractComponentRenderer
      *            fail if the file is exactly as big as this limit or slightly less. 90% turned out to be a
      *            functional fraction for now.
      */
-    protected const FILE_UPLOAD_CHUNK_SIZE_FACTOR = 0.9;
+    protected const float FILE_UPLOAD_CHUNK_SIZE_FACTOR = 0.9;
 
-    private const CENTUM = 100;
+    private const int CENTUM = 100;
 
     /**
      * @inheritdoc
@@ -224,7 +226,7 @@ class Renderer extends AbstractComponentRenderer
         return $name;
     }
 
-    protected function bindJSandApplyId(Component\JavaScriptBindable $component, Template $tpl): string
+    protected function bindJSandApplyId(FormInput $component, Template $tpl): string
     {
         $id = $this->bindJavaScript($component) ?? $this->createId();
         $tpl->setVariable("ID", $id);
@@ -289,7 +291,14 @@ class Renderer extends AbstractComponentRenderer
             $tpl->setVariable("MAX_LENGTH", $component->getMaxLength());
         }
 
-        $this->applyValue($component, $tpl, $this->escapeSpecialChars());
+        $this->applyValue(
+            $component,
+            $tpl,
+            function ($val) {
+                $val = htmlspecialchars((string) $val, ENT_QUOTES);
+                return str_replace('{{', '&lcub;&lcub;', str_replace('}}', '&rcub;&rcub;', $val));
+            }
+        );
 
         $label_id = $this->createId();
         $tpl->setVariable('ID', $label_id);
@@ -343,7 +352,7 @@ class Renderer extends AbstractComponentRenderer
     {
         $value = null;
         if ($component->getValue() !== null) {
-            list($value, ) = $component->getValue();
+            list($value) = $component->getValue();
         }
 
         $input_html = '';
@@ -494,9 +503,8 @@ class Renderer extends AbstractComponentRenderer
         $component = $component->withAdditionalOnLoadCode(
             static function ($id) use ($component): string {
                 return "
-                    const id = document.querySelector('#$id .c-input__field textarea')?.id;
                     il.UI.Input.markdown.init(
-                        id,
+                        '$id',
                         '{$component->getMarkdownRenderer()->getAsyncUrl()}',
                         '{$component->getMarkdownRenderer()->getParameterName()}'
                     );
@@ -504,9 +512,21 @@ class Renderer extends AbstractComponentRenderer
             }
         );
 
-        $textarea_id = $this->createId();
-        $textarea_tpl = $this->getPreparedTextareaTemplate($component);
-        $textarea_tpl->setVariable('ID', $textarea_id);
+        if ($component->isMustachable() && !$component->isDisabled()) {
+            $signal = $component->getInsertSignal();
+            $component = $component->withAdditionalOnLoadCode(
+                function ($id) use ($signal) {
+                    return "
+                    $(document).on('{$signal}', function(event, signalData) {
+                        il.UI.Input.markdown.get('{$id}').insertPlaceholder(signalData.options.text);
+                    });
+                ";
+                }
+            );
+        }
+
+        $textarea_tpl = $this->getPreparedTextareaTemplate($component, $default_renderer);
+        $textarea_id = $this->bindJSandApplyId($component, $textarea_tpl);
 
         $markdown_tpl = $this->getTemplate("tpl.markdown.html", true, true);
         $markdown_tpl->setVariable('TEXTAREA', $textarea_tpl->get());
@@ -561,20 +581,35 @@ class Renderer extends AbstractComponentRenderer
         $component = $component->withAdditionalOnLoadCode(
             static function ($id): string {
                 return "
-                    taId = document.querySelector('#$id .c-input__field textarea')?.id;
-                    il.UI.Input.textarea.init(taId);
+                    il.UI.Input.textarea.init('$id');
                 ";
             }
         );
 
-        $tpl = $this->getPreparedTextareaTemplate($component);
+        if ($component->isMustachable() && !$component->isDisabled()) {
+            $signal = $component->getInsertSignal();
+            $component = $component->withAdditionalOnLoadCode(
+                function ($id) use ($signal) {
+                    return "
+                    $(document).on('{$signal}', function(event, signalData) {
+                        il.UI.Input.textarea.get('{$id}').insertPlaceholder(signalData.options.text);
+                    });
+                ";
+                }
+            );
+        }
 
-        $label_id = $this->createId();
-        $tpl->setVariable('ID', $label_id);
-        return $this->wrapInFormContext($component, $component->getLabel(), $tpl->get(), $label_id);
+        $tpl = $this->getPreparedTextareaTemplate($component, $default_renderer);
+        $id = $this->bindJSandApplyId($component, $tpl);
+
+        if ($component->isLimited()) {
+            $tpl->setVariable("COUNT_ID", $id);
+        }
+
+        return $this->wrapInFormContext($component, $tpl->get(), $id);
     }
 
-    protected function getPreparedTextareaTemplate(F\Textarea $component): Template
+    protected function getPreparedTextareaTemplate(F\Textarea $component, RendererInterface $default_renderer): Template
     {
         $tpl = $this->getTemplate("tpl.textarea.html", true, true);
 
@@ -588,8 +623,58 @@ class Renderer extends AbstractComponentRenderer
             $tpl->setVariable('MIN_LIMIT', $component->getMinLimit());
         }
 
+        if ($component->isMustachable() && count($component->getPlaceholderEntries()) > 0) {
+            if ($component->getPlaceholderAdvice() !== '') {
+                $tpl->setVariable('PLACEHOLDER_ADVICE', $component->getPlaceholderAdvice());
+            }
+
+            $entries = '';
+            foreach ($component->getPlaceholderEntries() as $ph_text => $ph_label) {
+                $signal = $component->getInsertSignal();
+                $signal->addOption('text', $ph_text);
+                $button = $this->getUIFactory()->button()->shy("&lcub;&lcub;" . $ph_text . "&rcub;&rcub;", '')
+                               ->withOnClick($signal);
+                $entry = $this->getTemplate("tpl.textarea_placeholder.html", true, true);
+                $entry->setVariable('PLACEHOLDER_BUTTON', $default_renderer->render($button));
+                $entry->setVariable('PLACEHOLDER_LABEL', $ph_label);
+                $entries .= $entry->get();
+            }
+            if ($entries !== '') {
+                $tpl->setVariable('PLACEHOLDER_ENTRIES', $entries);
+            }
+        }
+
         $this->applyName($component, $tpl);
-        $this->applyValue($component, $tpl, $this->htmlEntities());
+        if ($component->isLimited()) {
+            $this->toJS("ui_chars_remaining");
+            $this->toJS("ui_chars_min");
+            $this->toJS("ui_chars_max");
+
+            $counter_id_prefix = "textarea_feedback_";
+            $min = $component->getMinLimit();
+            $max = $component->getMaxLimit();
+
+            /**
+             * @var $component F\Textarea
+             */
+            $component = $component->withAdditionalOnLoadCode(function ($id) use ($counter_id_prefix, $min, $max) {
+                return "il.UI.textarea.changeCounter('$id','$counter_id_prefix','$min','$max');";
+            });
+            $tpl->setVariable("FEEDBACK_MAX_LIMIT", $max);
+            $this->applyValue($component, $tpl, $this->htmlEntities());
+        } elseif ($component->isMustachable()) {
+            $this->applyValue(
+                $component,
+                $tpl,
+                function ($val) {
+                    $val = htmlentities((string) $val);
+                    return str_replace('{{', '&lcub;&lcub;', str_replace('}}', '&rcub;&rcub;', $val));
+                }
+            );
+        } else {
+            $this->applyValue($component, $tpl, $this->htmlEntities());
+        }
+
         return $tpl;
     }
 

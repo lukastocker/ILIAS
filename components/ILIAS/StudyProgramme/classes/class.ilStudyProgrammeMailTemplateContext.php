@@ -22,23 +22,21 @@ use OrgUnit\PublicApi\OrgUnitUserService;
 
 class ilStudyProgrammeMailTemplateContext extends ilMailTemplateContext
 {
-    public const ID = 'prg_context_manual';
+    public const string TITLE = "study_programme_title";
+    public const string DESCRIPTION = "study_programme_description";
+    public const string TYPE = "study_programme_type";
+    public const string LINK = "study_programme_link";
+    public const string ORG_UNIT = "study_programme_org_units";
+    public const string STATUS = "study_programme_status";
+    public const string COMPLETION_DATE = "study_programme_completion_date";
+    public const string COMPLETED_BY = "study_programme_completion_by";
+    public const string POINTS_REQUIRED = "study_programme_points_required";
+    public const string POINTS_CURRENT = "study_programme_points_current";
+    public const string DEADLINE = "study_programme_deadline";
+    public const string EXPIRE_DATE = "study_programme_expire_date";
+    public const string VALIDITY = "study_programme_validity";
 
-    private const TITLE = "study_programme_title";
-    private const DESCRIPTION = "study_programme_description";
-    private const TYPE = "study_programme_type";
-    private const LINK = "study_programme_link";
-    private const ORG_UNIT = "study_programme_org_units";
-    private const STATUS = "study_programme_status";
-    private const COMPLETION_DATE = "study_programme_completion_date";
-    private const COMPLETED_BY = "study_programme_completion_by";
-    private const POINTS_REQUIRED = "study_programme_points_required";
-    private const POINTS_CURRENT = "study_programme_points_current";
-    private const DEADLINE = "study_programme_deadline";
-    private const EXPIRE_DATE = "study_programme_expire_date";
-    private const VALIDITY = "study_programme_validity";
-
-    private const DATE_FORMAT = 'd.m.Y';
+    private const string DATE_FORMAT = 'd.m.Y';
 
     protected ilLanguage $lng;
 
@@ -152,12 +150,17 @@ class ilStudyProgrammeMailTemplateContext extends ilMailTemplateContext
     }
 
     /**
+     * @param string         $placeholder_id
+     * @param array          $context_parameters
+     * @param ilObjUser|null $recipient
+     * @param bool           $html_markup
      * @inheritdocs
      */
     public function resolveSpecificPlaceholder(
         string $placeholder_id,
         array $context_parameters,
-        ilObjUser $recipient = null
+        ilObjUser $recipient = null,
+        bool $html_markup = false
     ): string {
         if (is_null($recipient)) {
             return '';
@@ -182,7 +185,7 @@ class ilStudyProgrammeMailTemplateContext extends ilMailTemplateContext
         }
 
         /** @var ilObjStudyProgramme $obj */
-        $prg = ilObjectFactory::getInstanceByRefId((int)$context_parameters['ref_id']);
+        $prg = ilObjectFactory::getInstanceByRefId((int) $context_parameters['ref_id']);
         $assignments = $prg->getAssignmentsOfSingleProgramForUser($recipient->getId());
         $latest = $this->getLatestAssignment($assignments);
         $latest_successful = $this->getLatestSuccessfulAssignment($assignments);
@@ -201,7 +204,7 @@ class ilStudyProgrammeMailTemplateContext extends ilMailTemplateContext
                 }
                 break;
             case self::LINK:
-                $string = ilLink::_getLink((int)$context_parameters['ref_id'], 'prg') . ' ';
+                $string = ilLink::_getLink((int) $context_parameters['ref_id'], 'prg') . ' ';
                 break;
             case self::ORG_UNIT:
                 $string = ilObjUser::lookupOrgUnitsRepresentation($recipient->getId());
