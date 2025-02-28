@@ -21,6 +21,7 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use Sabre\DAV\Exception\BadRequest;
 use Sabre\DAV\Exception\NotFound;
+require_once "./Services/WebDAV/test/ilWebDAVTestHelper.php";
 
 /**
  * @runTestsInSeparateProcesses

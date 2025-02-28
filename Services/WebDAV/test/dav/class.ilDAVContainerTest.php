@@ -29,6 +29,9 @@ use Sabre\DAV\INode;
 use Sabre\DAV\Exception\NotFound;
 use Sabre\DAV\Exception\Forbidden;
 
+require_once "./Services/WebDAV/test/webdav_overrides.php";
+require_once "./Services/WebDAV/test/ilWebDAVTestHelper.php";
+
 class ilDAVContainerTest extends TestCase
 {
     use ilWebDAVCheckValidTitleTrait;
