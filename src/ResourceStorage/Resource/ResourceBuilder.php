@@ -728,7 +728,7 @@ class ResourceBuilder
             // cleanup revision and flavours
             $this->storage_handler_factory->getHandlerForRevision($revision)->clearFlavours($revision);
             $revision->getInformation()->setSize(filesize($revision_stream->getMetadata()['uri']));
-            $this->storeRevision($revision, $resource);
+            $this->storeRevision($revision);
 
             return $return;
         } catch (\Throwable $exception) {
