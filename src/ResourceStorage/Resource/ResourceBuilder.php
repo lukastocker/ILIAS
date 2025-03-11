@@ -493,9 +493,9 @@ class ResourceBuilder
     {
         switch (true) {
             case $revision instanceof FileStreamRevision:
-                return $revision->getStream();
+                return Streams::ofReattachableResource($revision->getStream()->detach());
             case $revision instanceof UploadedFileRevision:
-                return Streams::ofResource(fopen($revision->getUpload()->getPath(), 'rb'));
+                return Streams::ofReattachableResource(fopen($revision->getUpload()->getPath(), 'rb'));
             case $revision instanceof CloneRevision:
                 return $revision->getRevisionToClone()->getStream();
             case $revision instanceof FileRevision:
