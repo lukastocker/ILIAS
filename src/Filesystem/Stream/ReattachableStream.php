@@ -29,7 +29,7 @@ class ReattachableStream extends Stream
      * Checks if the stream is attached to the wrapper.
      * If not, the stream is reattached.
      */
-    private function assertStreamAttached(): void
+    protected function assertStreamAttached(): void
     {
         if ($this->stream === null) {
             $this->stream = fopen($this->uri, $this->_mode);
