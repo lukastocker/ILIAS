@@ -2478,7 +2478,7 @@ book#:#book_assign#:#Book
 book#:#book_assign_object#:#Book Items for Participant
 book#:#book_assign_participant#:#Book for Other Participant(s)
 book#:#book_back_to_list#:#Back to List
-book#:#book_bobj#:#Booked Items
+book#:#book_bobj#:#Bookable Item
 book#:#book_book#:#Book
 book#:#book_book_available#:#Book Available Dates
 book#:#book_book_recurrence#:#Book multiple dates
