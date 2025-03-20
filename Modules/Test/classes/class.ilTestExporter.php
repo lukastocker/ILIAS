@@ -66,6 +66,44 @@ class ilTestExporter extends ilXmlExporter
         return ''; // Sagt mjansen
     }
 
+    public function getXmlExportHeadDependencies(string $entity, string $target_release, array $ids): array
+    {
+        if ($entity === 'tst') {
+            $mobs = [];
+            $files = [];
+            foreach ($ids as $id) {
+                $tst = new ilObjTest((int) $id, false);
+                $tst->read();
+                $intro_page_id = $tst->getMainSettings()->getIntroductionSettings()->getIntroductionPageId();
+                if ($intro_page_id !== null) {
+                    $mobs = array_merge($mobs, ilObjMediaObject::_getMobsOfObject('tst:pg', $intro_page_id));
+                    $files = array_merge($files, ilObjFile::_getFilesOfObject('tst:pg', $intro_page_id));
+                }
+
+                $concluding_remarks_page_id = $tst->getMainSettings()->getFinishingSettings()->getConcludingRemarksPageId();
+                if ($concluding_remarks_page_id !== null) {
+                    $mobs = array_merge($mobs, ilObjMediaObject::_getMobsOfObject('tst:pg', $concluding_remarks_page_id));
+                    $files = array_merge($files, ilObjFile::_getFilesOfObject('tst:pg', $concluding_remarks_page_id));
+                }
+            }
+
+            return [
+                [
+                    'component' => 'Services/MediaObjects',
+                    'entity' => 'mob',
+                    'ids' => $mobs
+                ],
+                [
+                    'component' => 'Modules/File',
+                    'entity' => 'file',
+                    'ids' => $files
+                ]
+            ];
+        }
+
+        return parent::getXmlExportTailDependencies($entity, $target_release, $ids);
+    }
+
     /**
      * @param array<int> ids
      * @return array<array> array of array with keys 'component', 'entity', 'ids'
