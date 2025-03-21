@@ -3452,7 +3452,7 @@ class ilObjTest extends ilObject implements ilMarkSchemaAware
         $mobs = $material['mobs'];
         if (str_starts_with($text, '<PageObject>')) {
             $text = $this->replaceMobsInPageImports($text, $mappings['Services/MediaObjects']['mob'] ?? []);
-            $text = $this->replaceFilesInPageImports($text, $mappings['Modules/Files'] ?? []);
+            $text = $this->replaceFilesInPageImports($text, $mappings['Modules/File']['file'] ?? []);
             $page_object = new ilTestPage();
             $page_object->setParentId($this->getId());
             $page_object->setXMLContent($text);
@@ -3478,7 +3478,7 @@ class ilObjTest extends ilObject implements ilMarkSchemaAware
         $mobs = $material['mobs'];
         if (str_starts_with($text, '<PageObject>')) {
             $text = $this->replaceMobsInPageImports($text, $mappings['Services/MediaObjects']['mob'] ?? []);
-            $text = $this->replaceFilesInPageImports($text, $mappings['Modules/Files'] ?? []);
+            $text = $this->replaceFilesInPageImports($text, $mappings['Modules/File']['file'] ?? []);
             $page_object = new ilTestPage();
             $page_object->setParentId($this->getId());
             $page_object->setXMLContent($text);
@@ -3517,12 +3517,11 @@ class ilObjTest extends ilObject implements ilMarkSchemaAware
     private function replaceFilesInPageImports(string $text, $mappings): string
     {
         preg_match_all('/il_(\d+)_file_(\d+)/', $text, $matches);
-        preg_match_all('/il_(\d+)_mob_(\d+)/', $text, $matches);
         foreach ($matches[0] as $index => $match) {
             if (empty($mappings[$matches[2][$index]])) {
                 continue;
             }
-            $text = str_replace($match, "il__mob_{$mappings[$matches[2][$index]]}", $text);
+            $text = str_replace($match, "il__file_{$mappings[$matches[2][$index]]}", $text);
         }
         return $text;
     }
