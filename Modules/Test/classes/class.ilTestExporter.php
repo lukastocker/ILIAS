@@ -32,6 +32,7 @@ class ilTestExporter extends ilXmlExporter
     private ilLanguage $lng;
     private ilLogger $log;
     private ilTree $tree;
+    private ilCtrl $ctrl;
     private ilComponentRepository $component_repository;
     private QuestionInfoService $questioninfo;
 
@@ -41,6 +42,7 @@ class ilTestExporter extends ilXmlExporter
         $this->lng = $DIC['lng'];
         $this->log = $DIC['ilLog'];
         $this->tree = $DIC['tree'];
+        $this->ctrl = $DIC['ilCtrl'];
         $this->component_repository = $DIC['component.repository'];
         $this->questioninfo = $DIC->testQuestionPool()->questionInfo();
 
@@ -58,8 +60,20 @@ class ilTestExporter extends ilXmlExporter
     {
         $tst = new ilObjTest((int) $id, false);
         $tst->read();
-        $test_export_factory = new ilTestExportFactory($tst, $this->lng, $this->log, $this->tree, $this->component_repository, $this->questioninfo);
+        $test_export_factory = new ilTestExportFactory(
+            $tst,
+            $this->lng,
+            $this->log,
+            $this->tree,
+            $this->component_repository,
+            $this->questioninfo
+        );
         $test_export = $test_export_factory->getExporter('xml');
+
+        $parameters = $this->ctrl->getParameterArrayByClass(ilTestExportGUI::class);
+        if (!empty($parameters['export_results'])) {
+            $test_export->setResultExportingEnabledForTestExport(true);
+        }
         $zip = $test_export->buildExportFile();
 
         $this->log->write(__METHOD__ . ': Created zip file ' . $zip);
