@@ -115,6 +115,10 @@ class ilCertificateTemplateImportAction
         );
 
         $unzipped = $unzip->extract();
+
+        // Cleanup memory, otherwise there will be issues with NFS-based file systems after `listContents` has been called
+        unset($unzip);
+
         if (!$unzipped) {
             $clean_up_import_dir();
             return false;
