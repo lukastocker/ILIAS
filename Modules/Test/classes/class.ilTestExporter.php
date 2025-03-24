@@ -73,6 +73,7 @@ class ilTestExporter extends ilXmlExporter
         $parameters = $this->ctrl->getParameterArrayByClass(ilTestExportGUI::class);
         if (!empty($parameters['export_results'])) {
             $test_export->setResultExportingEnabledForTestExport(true);
+            $this->ctrl->clearParameterByClass(ilTestExportGUI::class, 'export_results');
         }
         $zip = $test_export->buildExportFile();
 
