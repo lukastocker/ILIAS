@@ -61,7 +61,7 @@ final class DataSigner
     ) {
         $this->salt_factory = new Factory();
         $compression = new DeflateCompression();
-        $transport = new URLSafeSplitPathTransport();
+        $transport = new URLSafeTransport();
         $algorithm = new SHA1();
 
         $this->signing_serializer = new SigningSerializer(
