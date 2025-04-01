@@ -38,7 +38,7 @@ trait SecureString
 
         // Remove control characters
         $temp_string = preg_replace('#\p{C}+#u', '', $temp_string);
-        if ($string === null) {
+        if ($temp_string === null) {
             return '';
             // we could harden that by throwing an exception
             //            throw new \RuntimeException(
