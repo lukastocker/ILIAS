@@ -224,13 +224,13 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             . "iassme.examiner_id,"
             . "iassme.record,"
             . "iassme.internal_note,"
-            . "iassme.notify,"
+//            . "iassme.notify,"
             . "iassme.notification_ts,"
             . "iassme.learning_progress,"
             . "iassme.finalized,"
             . "iassme.place,"
             . "iassme.event_time,"
-            . "iassme.user_view_file,"
+//            . "iassme.user_view_file,"
             . "iassme.file_name,"
             . "iassme.changer_id,"
             . "iassme.change_time,"
@@ -252,8 +252,8 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
                 . "     ,usr.lastname as " . ilIndividualAssessmentMembers::FIELD_LASTNAME
                 . "     ,usr.login as " . ilIndividualAssessmentMembers::FIELD_LOGIN
                 . "	   ,iassme." . ilIndividualAssessmentMembers::FIELD_FILE_NAME
-                . "     ,iassme.obj_id, iassme.usr_id, iassme.examiner_id, iassme.record, iassme.internal_note, iassme.notify"
-                . "     ,iassme.notification_ts, iassme.learning_progress, iassme.finalized,iassme.place"
+                . "     ,iassme.obj_id, iassme.usr_id, iassme.examiner_id, iassme.record, iassme.internal_note"
+                . "     ,iassme.learning_progress, iassme.finalized,iassme.place"
                 . "     ,iassme.event_time, iassme.changer_id, iassme.change_time\n"
                 . " FROM iass_members iassme"
                 . " JOIN usr_data usr ON iassme.usr_id = usr.usr_id"
