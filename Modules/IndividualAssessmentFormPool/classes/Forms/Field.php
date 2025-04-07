@@ -105,7 +105,7 @@ class Field
         $inputs['type'] = $factory->select(
             $lng->txt('field_type'),
             [$config->getType()->value => $config->getType()->name],
-            $lng->txt('field_type_byline')
+            ''//$lng->txt('field_type_byline')
         )
         ->withValue($config->getType()->value)
         ->withRequired(true);
@@ -130,7 +130,7 @@ class Field
         return $factory->section(
             $inputs,
             $this->getFieldId() === -1 ? $lng->txt('field_section_create') : $lng->txt('field_section_edit'),
-            $lng->txt('field_section_byline')
+            ''//$lng->txt('field_section_byline')
         )
         ->withAdditionalTransformation(
             $refinery->custom()->transformation(

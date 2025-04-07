@@ -35,9 +35,6 @@ use ILIAS\IndividualAssessmentFormPool\Field;
 use ILIAS\IndividualAssessmentFormPool\FieldsDataRetrieval;
 use ILIAS\IndividualAssessmentFormPool\FieldBuilder;
 
-/**
- *
- */
 class IAFPFieldsGUI
 {
     public const CMD_LIST = 'list';
@@ -137,6 +134,7 @@ class IAFPFieldsGUI
                         $used_ids = $this->forms_repo->getMappedFieldIds();
                         $ids = array_filter($ids, static fn(int $id): bool => !in_array($id, $used_ids));
                         $this->forms_repo->deleteFieldsByIds($ids);
+                        $this->tpl->setOnScreenMessage('success', $this->lng->txt('fields_deleted'), true);
                         $this->ctrl->redirect($this, self::CMD_LIST);
 
                         // no break
@@ -260,8 +258,12 @@ class IAFPFieldsGUI
 
     protected function getDeleteConfirmation(array $ids): MessageBox
     {
-        $msg = '';
+        $fields = [];
+        foreach ($this->forms_repo->getFieldsForObjId($this->iafp_obj_id) as $field) {
+            $fields[$field->getFieldId()] = $field;
+        };
 
+        $msg = '';
         $used_ids = $this->forms_repo->getMappedFieldIds();
         $delete_ids = array_filter(
             $ids,
@@ -269,18 +271,24 @@ class IAFPFieldsGUI
         );
         $nodelete_ids = array_diff($ids, $delete_ids);
         if ($nodelete_ids !== []) {
-            $msg .= 'Cannot delete these (used):'
+            $msg .= $this->lng->txt('cannot_delete_because_used')
                 . $this->ui_renderer->render(
                     $this->ui_factory->listing()->unordered(
-                        array_map('strval', $nodelete_ids)
+                        array_map(
+                            fn($field_id) => $fields[$field_id]->getName(),
+                            $nodelete_ids
+                        )
                     )
                 );
         }
 
-        $msg .= '<br>Delete?'
+        $msg .= '<br>' . $this->lng->txt('confirm_delete')
         . $this->ui_renderer->render(
             $this->ui_factory->listing()->unordered(
-                array_map('strval', $delete_ids)
+                array_map(
+                    fn($field_id) => $fields[$field_id]->getName(),
+                    $delete_ids
+                )
             )
         );
 

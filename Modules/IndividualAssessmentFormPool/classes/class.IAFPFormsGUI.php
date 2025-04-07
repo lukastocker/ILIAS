@@ -33,12 +33,6 @@ use ILIAS\IndividualAssessmentFormPool\Form;
 use ILIAS\IndividualAssessmentFormPool\FormsDataRetrieval;
 use ILIAS\IndividualAssessmentFormPool\FieldBuilder;
 
-//use ILIAS\HTTP\Wrapper\RequestWrapper;
-//use ILIAS\UI\Component\Input\Container\Form\Standard as Form;
-
-/**
- *
- */
 class IAFPFormsGUI
 {
     public const CMD_LIST = 'list';
@@ -82,18 +76,8 @@ class IAFPFormsGUI
         $next_class = $this->ctrl->getNextClass($this);
         $cmd = $this->ctrl->getCmd() ?? self::CMD_VIEW;
 
-        //$this->addToNavigationHistory();
-        //$this->prepareOutput();
-
         switch ($next_class) {
-            /*
-            case 'ilinfoscreengui':
-                $this->tabs_gui->activateTab(self::TAB_INFO);
-                $this->ctrl->forwardCommand(new ilInfoScreenGUI($this));
-                break;
-            */
             default:
-
                 if ($this->query->has($this->action_token->getName())) {
                     $cmd = $this->query->retrieve(
                         $this->action_token->getName(),
@@ -111,7 +95,6 @@ class IAFPFormsGUI
 
                 switch ($cmd) {
                     case self::CMD_LIST:
-                        //access $this->object->accessHandler()->simulateMember()
                         $list = $this->listForms();
                         if ($list !== '') {
                             $this->tpl->setContent($list);
@@ -125,10 +108,8 @@ class IAFPFormsGUI
                         break;
 
                     case self::CMD_EDIT:
-                        //access $this->object->accessHandler()->simulateMember()
                         $form_id = array_shift($ids);
                         $ui_form = $this->getEditForm($this->forms_repo->getFormById($form_id));
-
                         $out = $this->getFieldSelection($form_id);
                         $out[] = $ui_form;
 
@@ -139,8 +120,6 @@ class IAFPFormsGUI
                         $form_id = array_shift($ids);
                         $form = $form_id === -1 ?
                             $this->forms_repo->getNewForm($this->iafp_obj_id) : $this->forms_repo->getFormById($form_id);
-
-                        //access $this->object->accessHandler()->simulateMember()
                         $ui_form = $this->getEditForm($form);
                         $this->tpl->setContent($this->ui_renderer->render($this->save($ui_form)));
                         break;
@@ -176,6 +155,7 @@ class IAFPFormsGUI
                         exit();
                     case self::CMD_DELETE_CONFIRMED:
                         $this->forms_repo->deleteFormsByIds($ids);
+                        $this->tpl->setOnScreenMessage('success', $this->lng->txt('forms_deleted'), true);
                         $this->ctrl->redirect($this, self::CMD_LIST);
 
                         // no break
@@ -183,13 +163,13 @@ class IAFPFormsGUI
                         throw new \Exception('no such command: ' . $cmd);
                 }
         }
-        //$this->addHeaderAction();
+
     }
 
     protected function getTableActions(): array
     {
         $f = $this->ui_factory->table()->action();
-        return [
+        $actions = [
             'edit' => $f->single(
                 $this->txt('edit'),
                 $this->url_builder->withParameter($this->action_token, self::CMD_EDIT),
@@ -199,13 +179,16 @@ class IAFPFormsGUI
                 $this->txt('preview'),
                 $this->url_builder->withParameter($this->action_token, self::CMD_PREVIEW),
                 $this->rowid_token
-            )->withAsync(),
-            'delete' => $f->standard(
+            )->withAsync()
+        ];
+        if ($this->iafp_access->mayEdit()) {
+            $actions['delete'] = $f->standard(
                 $this->txt('delete'),
                 $this->url_builder->withParameter($this->action_token, 'delete'),
                 $this->rowid_token
-            )->withAsync(),
-        ];
+            )->withAsync();
+        }
+        return $actions;
     }
 
     protected function getUrlString(string $cmd, int|array $row_ids): string
@@ -220,12 +203,15 @@ class IAFPFormsGUI
 
     protected function listForms(): string
     {
-        $new_entry = $this->ui_factory->button()->primary(
-            $this->txt('new_form'),
-            $this->ctrl->getLinkTarget($this, self::CMD_CREATE)
-        );
+        $out = [];
+        if ($this->iafp_access->mayEdit()) {
+            $out[] = $this->ui_factory->button()->primary(
+                $this->txt('new_form'),
+                $this->ctrl->getLinkTarget($this, self::CMD_CREATE)
+            );
+        }
 
-        $table = $this->ui_factory->table()
+        $out[] = $this->ui_factory->table()
             ->data(
                 $this->txt('iafp_forms'),
                 $this->data_retrieval->getColumns(),
@@ -235,10 +221,7 @@ class IAFPFormsGUI
             ->withActions($this->getTableActions())
             ->withRequest($this->request);
 
-        return $this->ui_renderer->render([
-            $new_entry,
-            $table
-        ]);
+        return $this->ui_renderer->render($out);
     }
 
     protected function getEditForm(Form $form): UIForm
@@ -331,10 +314,18 @@ class IAFPFormsGUI
 
     protected function getDeleteConfirmation(array $ids): MessageBox
     {
-        $msg = 'Delete?'
+        $forms = [];
+        foreach ($this->forms_repo->getFormsForObjId($this->iafp_obj_id) as $frm) {
+            $forms[$frm->getFormId()] = $frm;
+        };
+
+        $msg = $this->lng->txt('confirm_delete')
         . $this->ui_renderer->render(
             $this->ui_factory->listing()->unordered(
-                array_map('strval', $ids)
+                array_map(
+                    fn($form_id) => $forms[$form_id]->getName(),
+                    $ids
+                )
             )
         );
 

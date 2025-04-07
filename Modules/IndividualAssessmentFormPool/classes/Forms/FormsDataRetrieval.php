@@ -33,6 +33,7 @@ use ILIAS\UI\Component\Table\DataRowBuilder;
 class FormsDataRetrieval implements DataRetrieval
 {
     public function __construct(
+        private \IAFPAccessHandler $iafp_access,
         private FormsStorageDB $forms_repo,
         private UIFactory $ui_factory,
         private \ilLanguage $lng,
@@ -60,6 +61,7 @@ class FormsDataRetrieval implements DataRetrieval
         ?array $additional_parameters
     ): \Generator {
         $forms = $this->forms_repo->getFormsForObjId($this->obj_id, $range, $order);
+        $may_edit = $this->iafp_access->mayEdit();
         foreach ($forms as $form) {
             $row_id = (string) $form->getFormId();
             $record = [
@@ -67,7 +69,9 @@ class FormsDataRetrieval implements DataRetrieval
                 'description' => $form->getDescription(),
                 'fields_count' => count($form->getFields()),
             ];
-            yield $row_builder->buildDataRow($row_id, $record);
+            yield $row_builder->buildDataRow($row_id, $record)
+                ->withDisabledAction('edit', !$may_edit)
+                ->withDisabledAction('delete', !$may_edit);
         }
     }
 

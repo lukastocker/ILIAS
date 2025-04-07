@@ -67,6 +67,9 @@ trait ilIndividualAssessmentFormPoolDIC
         $container['urlbuilder'] = static fn($c): URLBuilder => $general_dic['urlbuilder'];
         $container['fieldbuilder'] = static fn($c): FieldBuilder => $general_dic['fieldbuilder'];
 
+        if (! $object->getRefId()) {
+            throw new \LogicException('no ref');
+        }
         $container['gui.forms'] = static fn($c): IAFPFormsGUI =>
             new IAFPFormsGUI(
                 $c['access'],
@@ -113,6 +116,7 @@ trait ilIndividualAssessmentFormPoolDIC
 
         $container['dataretrieval.forms'] = static fn($c): FormsDataRetrieval =>
             new FormsDataRetrieval(
+                $c['access'],
                 $c['repo.forms'],
                 $DIC['ui.factory'],
                 $DIC['lng'],

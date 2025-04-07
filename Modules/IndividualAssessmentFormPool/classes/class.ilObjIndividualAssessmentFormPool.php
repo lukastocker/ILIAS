@@ -29,19 +29,12 @@ class ilObjIndividualAssessmentFormPool extends ilObject
 
     protected string $type;
     protected ?Pimple\Container $dic = null;
-    protected readonly FormsStorageDB $repo;
-    protected readonly IAFPAccessHandler $access;
+    protected ?FormsStorageDB $repo = null;
 
     public function __construct(int $id = 0, bool $call_by_reference = true)
     {
         $this->type = self::OBJ_TYPE;
         parent::__construct($id, $call_by_reference);
-
-        global $DIC;
-        $this->dic = $this->getObjectDIC($this, $DIC);
-        $this->repo = $this->dic['repo.forms'];
-        $this->access = $this->dic['access'];
-
     }
 
     public static function getRepository(): FormsStorageDB
@@ -72,14 +65,15 @@ class ilObjIndividualAssessmentFormPool extends ilObject
      */
     public function delete(): bool
     {
-        $form_ids = $this->repo->getAllFormIdsForObjId($this->getId());
-        $fields = $this->repo->getFieldsForObjId($this->getId());
+        $repo = $this->getRepo();
+        $form_ids = $repo->getAllFormIdsForObjId($this->getId());
+        $fields = $repo->getFieldsForObjId($this->getId());
         $field_ids = array_map(
             static fn(Field $field): int => $field->getFieldId(),
             iterator_to_array($fields)
         );
-        $this->repo->deleteFormsByIds($form_ids);
-        $this->repo->deleteFieldsByIds($field_ids);
+        $repo->deleteFormsByIds($form_ids);
+        $repo->deleteFieldsByIds($field_ids);
         return parent::delete();
     }
 
@@ -97,7 +91,7 @@ class ilObjIndividualAssessmentFormPool extends ilObject
      */
     public function initDefaultRoles(): void
     {
-        //$this->access_handler->initDefaultRolesForObject($this);
+        //there is no default role for the pools
     }
 
     /**
@@ -105,13 +99,14 @@ class ilObjIndividualAssessmentFormPool extends ilObject
      */
     public function cloneObject(int $target_id, int $copy_id = 0, bool $omit_tree = false): ?ilObject
     {
+        $repo = $this->getRepo();
         $new_obj = parent::cloneObject($target_id, $copy_id, $omit_tree);
-        $forms = $this->repo->getFormsForObjId($this->getId());
-        $fields = $this->repo->getFieldsForObjId($this->getId());
+        $forms = $repo->getFormsForObjId($this->getId());
+        $fields = $repo->getFieldsForObjId($this->getId());
 
         $field_mapping = [];
         foreach ($fields as $field) {
-            $nu_field = $this->repo->storeField(
+            $nu_field = $repo->storeField(
                 $field
                     ->asNew()
                     ->withObjId($new_obj->getId())
@@ -129,7 +124,7 @@ class ilObjIndividualAssessmentFormPool extends ilObject
                 $form->getFields()
             );
 
-            $this->repo->storeForm(
+            $repo->storeForm(
                 $form
                     ->asNew()
                     ->withObjId($new_obj->getId())
@@ -140,9 +135,20 @@ class ilObjIndividualAssessmentFormPool extends ilObject
         return $new_obj;
     }
 
+    private function getRepo(): FormsStorageDB
+    {
+        if ($this->repo === null) {
+            $this->repo = $this->getDic()['repo.forms'];
+        }
+        return $this->repo;
+    }
 
     public function getDic(): Pimple\Container
     {
+        if ($this->dic === null) {
+            global $DIC;
+            $this->dic = $this->getObjectDIC($this, $DIC);
+        }
         return $this->dic;
     }
 

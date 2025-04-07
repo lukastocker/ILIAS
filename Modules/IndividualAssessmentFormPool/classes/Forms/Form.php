@@ -138,7 +138,7 @@ class Form
                     )
             ],
             $this->getFormId() === -1 ? $lng->txt('form_section_create') : $lng->txt('form_section_edit'),
-            $lng->txt('form_section_byline')
+            ''//$lng->txt('form_section_byline')
         )
         ->withAdditionalTransformation(
             $refinery->custom()->transformation(

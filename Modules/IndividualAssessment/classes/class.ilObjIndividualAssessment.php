@@ -250,7 +250,10 @@ class ilObjIndividualAssessment extends ilObject
         $new_obj->settings_storage->updateSettings($new_settings);
         $new_obj->settings_storage->updateInfoSettings($new_info_settings);
 
-        (new IAFPCollector())->cloneFields($this->getId(), $new_obj->getId());
+        \ilObjIndividualAssessmentFormPool::getRepository()->cloneFields(
+            $this->getId(),
+            $new_obj->getId()
+        );
         return $new_obj;
     }
 

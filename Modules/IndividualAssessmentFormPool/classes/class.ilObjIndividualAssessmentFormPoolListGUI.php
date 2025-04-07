@@ -22,14 +22,18 @@ class ilObjIndividualAssessmentFormPoolListGUI extends ilObjectListGUI
 {
     public function init(): void
     {
-        $this->static_link_enabled = true;
+        $this->static_link_enabled = false;
         $this->delete_enabled = true;
         $this->cut_enabled = true;
         $this->copy_enabled = true;
-        $this->subscribe_enabled = true;
-        $this->link_enabled = true;
+        $this->subscribe_enabled = false;
+        $this->link_enabled = false;
         $this->info_screen_enabled = true;
-        $this->type = "iass";
+        $this->progress_enabled = false;
+        $this->notice_properties_enabled = false;
+        $this->preconditions_enabled = false;
+        $this->timings_enabled = false;
+        $this->type = "iafp";
         $this->gui_class_name = "ilObjIndividualAssessmentFormPoolGUI";
 
 

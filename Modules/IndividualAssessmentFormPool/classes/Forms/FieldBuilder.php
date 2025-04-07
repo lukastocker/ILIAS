@@ -94,7 +94,7 @@ class FieldBuilder
                     ->withValue($value);
 
             case FieldType::RATING:
-                $value = ($value === null || $value === '') ? null : FiveStarRatingScale::from((int)$value);
+                $value = ($value === null || $value === '') ? null : FiveStarRatingScale::from((int) $value);
                 return $factory->rating($label, $description)
                     ->withAdditionalTransformation(
                         $this->refinery->custom()->transformation(

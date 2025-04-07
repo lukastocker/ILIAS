@@ -18,26 +18,6 @@
 
 declare(strict_types=1);
 
-use ILIAS\UI\Factory as UIFactory;
-use ILIAS\UI\Renderer as UIRenderer;
-use ILIAS\Data\Factory as DataFactory;
-use ILIAS\Refinery\Factory as Refinery;
-use ILIAS\UI\URLBuilder;
-use ILIAS\UI\URLBuilderToken;
-use Psr\Http\Message\ServerRequestInterface;
-use ILIAS\HTTP\Wrapper\ArrayBasedRequestWrapper;
-use ILIAS\UI\Implementation\Component\Input\Container\Form\Standard as UIForm;
-use ILIAS\UI\Implementation\Component\MessageBox\MessageBox;
-use ILIAS\IndividualAssessmentFormPool\FormsStorageDB;
-use ILIAS\IndividualAssessmentFormPool\Form;
-use ILIAS\IndividualAssessmentFormPool\FormsDataRetrieval;
-
-//use ILIAS\HTTP\Wrapper\RequestWrapper;
-//use ILIAS\UI\Component\Input\Container\Form\Standard as Form;
-
-/**
- *
- */
 class IAFPAccessHandler
 {
     public function __construct(
@@ -58,12 +38,18 @@ class IAFPAccessHandler
     {
         return $this->isSystemAdmin() ||
             $this->access->checkAccess('read', '', $this->iafp_ref_id);
-
     }
+
     public function mayEdit(): bool
     {
         return $this->isSystemAdmin() ||
             $this->access->checkAccess('write', '', $this->iafp_ref_id);
+    }
+
+    public function mayEditPermissions(): bool
+    {
+        return $this->isSystemAdmin() ||
+            $this->access->checkAccess('edit_permission', '', $this->iafp_ref_id);
     }
 
     protected function isSystemAdmin(): bool

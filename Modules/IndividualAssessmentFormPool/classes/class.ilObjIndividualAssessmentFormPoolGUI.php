@@ -82,12 +82,6 @@ class ilObjIndividualAssessmentFormPoolGUI extends ilObjectGUI
                 $this->tabs_gui->activateTab(self::TAB_INFO);
                 $this->ctrl->forwardCommand(new ilInfoScreenGUI($this));
                 break;
-            case "ilexportgui":
-                $this->tabs_gui->activateTab(self::TAB_EXPORT);
-                $exp_gui = new ilExportGUI($this); // $this is the ilObj...GUI class of the resource
-                $exp_gui->addFormat("xml");
-                $this->ctrl->forwardCommand($exp_gui);
-                break;
             case 'ilpermissiongui':
                 $this->tabs_gui->activateTab(self::TAB_PERMISSION);
                 $this->ctrl->forwardCommand(new ilPermissionGUI($this));
@@ -100,13 +94,14 @@ class ilObjIndividualAssessmentFormPoolGUI extends ilObjectGUI
                 $cp = new ilObjectCopyGUI($this);
                 $this->ctrl->forwardCommand(new ilObjectCopyGUI($this));
                 break;
-
             case 'iafpformsgui':
+                $this->checkPermission('read');
                 $this->tabs_gui->activateTab(self::TAB_FORMS);
                 $gui = $this->object->getDic()['gui.forms'];
                 $this->ctrl->forwardCommand($gui);
                 break;
             case 'iafpfieldsgui':
+                $this->checkPermission('write');
                 $this->tabs_gui->activateTab(self::TAB_FIELDS);
                 $gui = $this->object->getDic()['gui.fields'];
                 $this->ctrl->forwardCommand($gui);
@@ -215,42 +210,40 @@ class ilObjIndividualAssessmentFormPoolGUI extends ilObjectGUI
 
     protected function getTabs(): void
     {
+        $access = $this->object->getDic()['access'];
         $this->tabs_gui->addTab(
             self::TAB_INFO,
             $this->txt('info_short'),
             $this->ctrl->getLinkTargetByClass('ilinfoscreengui', 'showSummary'),
         );
-
-        if ($this->object->getDic()['access']->mayEdit()) {
+        if ($access->mayEdit()) {
             $this->tabs_gui->addTab(
                 self::TAB_SETTINGS,
                 $this->txt('settings'),
                 $this->ctrl->getLinkTarget($this, self::CMD_EDIT)
             );
+        }
+        if ($access->mayRead()) {
             $this->tabs_gui->addTab(
                 self::TAB_FORMS,
                 $this->txt(self::TAB_FORMS),
                 $this->ctrl->getLinkTargetByClass('iafpformsgui', IAFPFormsGUI::CMD_LIST)
             );
+        }
+        if ($access->mayEdit()) {
             $this->tabs_gui->addTab(
                 self::TAB_FIELDS,
                 $this->txt(self::TAB_FIELDS),
                 $this->ctrl->getLinkTargetByClass('iafpfieldsgui', IAFPFieldsGUI::CMD_LIST)
             );
         }
-
-        /*
-        $this->tabs_gui->addTab(
-            self::TAB_EXPORT,
-            $this->txt('export'),
-            $this->ctrl->getLinkTargetByClass('ilexportgui', ''),
-        );
-        */
-        $this->tabs_gui->addTab(
-            self::TAB_PERMISSION,
-            $this->txt('perm_settings'),
-            $this->ctrl->getLinkTargetByClass('ilpermissiongui', 'perm'),
-        );
+        if ($access->mayEditPermissions()) {
+            $this->tabs_gui->addTab(
+                self::TAB_PERMISSION,
+                $this->txt('perm_settings'),
+                $this->ctrl->getLinkTargetByClass('ilpermissiongui', 'perm'),
+            );
+        }
     }
 
     public function handleAccessViolation(): void

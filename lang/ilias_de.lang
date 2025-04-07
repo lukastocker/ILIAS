@@ -4299,7 +4299,8 @@ common#:#http_not_possible#:#Dieser Server unterstützt keine HTTP-Anfragen.
 common#:#http_path#:#HTTP-Pfad
 common#:#https_not_possible#:#Dieser Server unterstützt keine HTTPS-Verbindungen.
 common#:#i2passwd#:#ILIAS_2-Passwort
-common#:#iafp_new#:#Add Individual Assessment Form Pool
+common#:#iafp_added#:#Formularpool hinzugefügt.
+common#:#iafp_new#:#Formularpool für Individuelle Bewertung hinzufügen
 common#:#iass_import#:#Individuelle Bewertung importieren
 common#:#iass_new#:#Neue Individuelle Bewertung anlegen
 common#:#icon#:#Symbol
@@ -10391,52 +10392,54 @@ help#:#help_tooltips_and_help#:#Tooltips und Handlungsanweisungen
 help#:#help_tooltips_only#:#Nur Tooltips
 help#:#help_topcis#:#Themen
 help#:#help_tt_text#:#Text
-iafp#:#_settings_saved#:#Settings saved.
-iafp#:#add_fields#:#Add Fields to the Form
-iafp#:#available_for_examiners#:#available for examiners
-iafp#:#confirm_cancel#:#Cancel
-iafp#:#confirm_delete#:#Delete
-iafp#:#default_value#:#Default Value
-iafp#:#field_available_for_examiners#:#Available for Examiners
-iafp#:#field_available_for_examiners_byline#:#should the field be available for examiners?
-iafp#:#field_default_value#:#Default Value
-iafp#:#field_default_value_byline#:#default/initial value
-iafp#:#field_description#:#Description
-iafp#:#field_description_byline#:#description of the field
-iafp#:#field_label#:#Label
-iafp#:#field_label_byline#:#label for the field
-iafp#:#field_name_byline#:#name for the field
-iafp#:#field_options#:#Options
-iafp#:#field_options_byline#:#add options the user may choose from
+iafp#:#_settings_saved#:#Einstellugen gespeichert.
+iafp#:#add_fields#:#Felder hinzufügen
+iafp#:#available_for_examiners#:#Verfügbar für Bewertende
+iafp#:#cannot_delete_because_used#:#Folgende Felder können nicht gelöscht werden, das sie in Formularen verwendet werden:
+iafp#:#confirm_cancel#:#Abbrechen
+iafp#:#confirm_delete#:#Löschen
+iafp#:#default_value#:#Voreingestellter Wert
+iafp#:#field_available_for_examiners#:#Verfügbar für Bewertende
+iafp#:#field_available_for_examiners_byline#:#Dieses Feld steht auch für Bewertende zur Verfügung
+iafp#:#field_default_value#:#Voreingestellter Wert
+iafp#:#field_default_value_byline#:#Dieser Wert wird initial angezeigt, solange kein expliziter Wert gesetzt wurde.
+iafp#:#field_description#:#Beschreibung
+iafp#:#field_description_byline#:#Die Beschreibung wird unterhalb des Feldes im Formular angezeigt.
+iafp#:#field_label#:#Beschriftung
+iafp#:#field_label_byline#:#Unter dieser Beschritung wid das Feld im Formular angezeigt.
+iafp#:#field_name_byline#:#Name des Feldes (dient zur Indentifikation)
+iafp#:#field_options#:#Optionen
+iafp#:#field_options_byline#:#Fügen Sie Optionen hinzu, unter denen Benutzerinnen auswählen können.
 iafp#:#field_section_byline#:#configure the field
 iafp#:#field_section_create#:#Edit new Field
 iafp#:#field_section_edit#:#Edit Field
-iafp#:#field_type_byline#:#type of the field
-iafp#:#field_with_notes#:#With Notes
-iafp#:#field_with_notes_byline#:#add a textarea for notes?
-iafp#:#fields#:#Fields in this Form
-iafp#:#fields_added#:#Fields added.
-iafp#:#fields_byline#:#Unselect and save to remove a field
-iafp#:#fields_count#:#amount of fields
-iafp#:#form_description#:#Description
-iafp#:#form_description_byline#:#description of the form
+iafp#:#field_type_byline#:#Wählen Sie den Typen des neuen Feldes
+iafp#:#field_with_notes#:#Mit zusätzlichen Notizen
+iafp#:#field_with_notes_byline#:#Fügt ein Textfeld (zusätzlich zu diesem Feld) hinzu.
+iafp#:#fields#:#Felder im Formular
+iafp#:#fields_added#:#Felder hinzugefügt.
+iafp#:#fields_byline#:#Wählen Sie ein oder mehrerer Felder ab und speichern Sie, um Felder aus dem Formular zu entfernen.
+iafp#:#fields_count#:#Anzahl Felder
+iafp#:#form_description#:#Beschreibung
+iafp#:#form_description_byline#:#weitere Beschreibung des Formulars (wird in der Auswahl bei Anlage einer Individuellen Bewertung angezeigt)
 iafp#:#form_name#:#Name
-iafp#:#form_name_byline#:#name of the form
+iafp#:#form_name_byline#:#Name des Formulars (wird in der Auswahl bei Anlage einer Individuellen Bewertung angezeigt)
 iafp#:#form_section_byline#:#configure the form
-iafp#:#form_section_create#:#Edit new Form
-iafp#:#form_section_edit#:#Edit Form
-iafp#:#iafp_fields#:#Fields
-iafp#:#iafp_forms#:#Forms
-iafp#:#iafp_settings#:#Settings
-iafp#:#iafp_settings_availability#:#Availability
-iafp#:#label#:#label
-iafp#:#new_field#:#Add a new Field
-iafp#:#new_form#:#Add a new Form
-iafp#:#object_saved#:#Saved.
-iafp#:#pick_fields#:#Select Fields
-iafp#:#tab_fields#:#Fields
-iafp#:#tab_forms#:#Forms
-iafp#:#with_notes#:#Notes
+iafp#:#form_section_create#:#Neues Formular anlegen
+iafp#:#form_section_edit#:#Formular bearbeiten
+iafp#:#iafp_add#:#Formularpool hinzufügen
+iafp#:#iafp_fields#:#Felder
+iafp#:#iafp_forms#:#Formulare
+iafp#:#iafp_settings#:#Einstellungen
+iafp#:#iafp_settings_availability#:#Verfügbarkeit
+iafp#:#label#:#Bezeichnung
+iafp#:#new_field#:#Feld hinzufügen
+iafp#:#new_form#:#Formular hinzufügen
+iafp#:#object_saved#:#Gespeichert.
+iafp#:#pick_fields#:#Felder auswählen
+iafp#:#tab_fields#:#Felder
+iafp#:#tab_forms#:#Formulare
+iafp#:#with_notes#:#Notizen
 iass#:#download_assessment_paper#:#Prüfungsblatt herunterladen
 iass#:#general#:#Allgemein
 iass#:#grading_info#:#Bewertungsinformationen
