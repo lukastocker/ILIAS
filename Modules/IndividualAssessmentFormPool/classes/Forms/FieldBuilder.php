@@ -80,7 +80,7 @@ class FieldBuilder
             case FieldType::SINGLESELECT:
                 $options = $config->getOptions() ?? [];
                 $options = array_combine($options, $options);
-                $value = in_array($value, $options) ? $value : null; //better: constraint
+                $value = in_array($value, $options) ? $value : $config->getDefaultValue();
                 return $factory->select($label, $options, $description)
                     ->withValue($value);
 

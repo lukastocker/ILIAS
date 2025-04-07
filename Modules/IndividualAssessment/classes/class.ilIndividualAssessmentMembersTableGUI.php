@@ -246,8 +246,18 @@ class ilIndividualAssessmentMembersTableGUI
                 $record->id(),
                 $record->place(),
                 $record->examinerId()
-            )
+            ),
+            //$this->getCustomInfos($record->getGrading())
         );
+    }
+
+    private function getCustomInfos(ilIndividualAssessmentUserGrading $grading): array
+    {
+        $ret = [];
+        foreach ($grading->getCustomFields() as $cf) {
+            $ret[$cf->getConfig()->getLabel()] = $cf->getValue();
+        }
+        return $ret;
     }
 
     /**

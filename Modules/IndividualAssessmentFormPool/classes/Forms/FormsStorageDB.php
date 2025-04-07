@@ -487,7 +487,7 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
     {
         $query = 'SELECT ref.obj_id, ref.ref_id, od.title FROM object_data od' . PHP_EOL
             . 'JOIN object_reference ref ON od.obj_id = ref.obj_id' . PHP_EOL
-            . 'WHERE ref.deleted IS NULL AND od.type = "iafp"';
+            . 'WHERE ref.deleted IS NULL AND od.type = "iafp" AND od.offline = FALSE';
 
         $ret = [];
         $res = $this->db->query($query);

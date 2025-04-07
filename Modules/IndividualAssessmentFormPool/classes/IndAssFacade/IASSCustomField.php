@@ -79,7 +79,7 @@ class IASSCustomField
     public function toFormInput(
         FieldFactory $factory,
         Refinery $refinery,
-        UploadHandler $upload_handler, //USE IT
+        UploadHandler $upload_handler,
         FieldBuilder $field_builder
     ): FormInput {
         $ui_field = $field_builder->build(

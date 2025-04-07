@@ -155,17 +155,11 @@ class IAFPFormsGUI
                     case self::CMD_PREVIEW:
                         $form_id = array_shift($ids);
                         $form = $this->forms_repo->getFormById($form_id);
-                        /*
-                                                $fields = array_map(
-                                                    fn($f) => $f->build($this->ui_factory->input()->field()),
-                                                    $form->getFields()
-                                                );
-                        */
+
                         $fields = array_map(
-                            fn($f) => $this->field_builder->build($f),
+                            fn($f) => $this->field_builder->build($f->getConfig()),
                             $form->getFields()
                         );
-
 
                         echo $this->ui_renderer->render(
                             $this->ui_factory->input()->field()->section(
