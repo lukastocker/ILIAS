@@ -25,6 +25,7 @@ use ILIAS\UI\Component\Input\Field\Factory as FieldFactory;
 use ILIAS\UI\Component\Input\Field\UploadHandler;
 use ILIAS\Refinery\Factory as Refinery;
 use ILIAS\IndividualAssessmentFormPool\Field;
+use ILIAS\Data\FiveStarRatingScale;
 
 class FieldBuilder
 {
@@ -94,9 +95,14 @@ class FieldBuilder
                     ->withValue($value);
 
             case FieldType::RATING:
-                $options = [1,2,3,4,5];
-                return $factory->select($label, $options, $description)
-                ;//->withValue((string) $config->getDefaultValue());
+                $value = ($value === null || $value === '') ? null : FiveStarRatingScale::from((int) $value);
+                return $factory->rating($label, $description)
+                    ->withAdditionalTransformation(
+                        $this->refinery->custom()->transformation(
+                            fn($v) => (string) $v->value
+                        )
+                    )
+                    ->withValue($value);
         }
     }
 }

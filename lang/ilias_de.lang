@@ -17284,6 +17284,11 @@ trac#:#user_total#:#Anzahl Benutzer
 trac#:#view_mode#:#Anzeigemodus
 tstv#:#tstv_create#:#Testzertifikat erstellen
 tstv#:#tstv_create_info#:#Wählen Sie einen Test, für den Sie ein Zertifikat benötigen.
+ui#:#1stars#:#einer von fünf Sternen
+ui#:#2stars#:#zwei von fünf Sternen
+ui#:#3stars#:#drei von fünf Sternen
+ui#:#4stars#:#vier von fünf Sternen
+ui#:#5stars#:#fünf von fünf Sternen
 ui#:#datatable_multiaction_label#:#Sammelaktionen
 ui#:#datatable_multiactionmodal_actionlabel#:#Aktion für alle Einträge
 ui#:#datatable_multiactionmodal_apply#:#Ausführen
@@ -17309,6 +17314,8 @@ ui#:#order_option_numerical_ascending#:#0 bis 9
 ui#:#order_option_numerical_descending#:#9 bis 0
 ui#:#presentation_table_collapse#:#alle minimieren
 ui#:#presentation_table_expand#:#alle zeigen
+ui#:#rating_average#:#Andere bewerteten mit %s von 5
+ui#:#reset_stars#:#neutral
 ui#:#table_posinput_col_title#:#Position
 ui#:#ui_chars_max#:#Maximum:
 ui#:#ui_chars_min#:#Minimum:
