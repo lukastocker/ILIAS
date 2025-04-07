@@ -245,6 +245,11 @@ class IAFPTablesDBUpdateSteps implements \ilDatabaseUpdateSteps
                     'notnull' => true,
                     'default' => 1,
                 ],
+                'position' => [
+                    'type' => 'integer',
+                    'length' => 4,
+                    'notnull' => true
+                ],
             ]
         );
         $this->db->addPrimaryKey('iass_formfields', ['obj_id', 'field_id']);

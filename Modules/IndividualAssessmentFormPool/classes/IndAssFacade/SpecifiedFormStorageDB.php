@@ -38,7 +38,7 @@ class SpecifiedFormStorageDB implements SpecifiedFormStorage
         int $obj_id,
         int $member_usr_id
     ): array {
-        $query = 'SELECT ff.field_id, type, name, ff.label, description, default_value, with_notes, available_for_examiners' . PHP_EOL
+        $query = 'SELECT ff.field_id, type, name, ff.label, description, default_value, with_notes, available_for_examiners, position' . PHP_EOL
         . ',val.value, notes.value as note' . PHP_EOL
         . ', GROUP_CONCAT(
                 COALESCE(
@@ -61,7 +61,8 @@ class SpecifiedFormStorageDB implements SpecifiedFormStorage
         . 'AND notes.usr_id = ' . $this->db->quote($member_usr_id, 'integer') . PHP_EOL
 
         . 'WHERE ff.obj_id = ' . $this->db->quote($obj_id, 'integer') . PHP_EOL
-        . 'GROUP BY field_id';
+        . 'GROUP BY field_id' . PHP_EOL
+        . 'ORDER BY position';
 
         $ret = [];
         $res = $this->db->query($query);

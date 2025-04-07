@@ -134,7 +134,7 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
             $row['obj_id'],
             $row['name'],
             (bool) $row['with_notes'],
-            (bool) $row['available_for_examiners'],
+            (bool) $row['available_for_examiners']
         );
     }
 
@@ -426,9 +426,11 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
     public function copyFieldsToIASS(int $iafp_form_id, int $iass_obj_id): void
     {
         $fields = $this->getFieldsForFormId($iafp_form_id);
+        $position = 0;
         foreach ($fields as $field) {
             $config = $field->getConfig();
-            $query = 'REPLACE INTO iass_formfields (obj_id, field_id, type, name, label, description, default_value, with_notes, available_for_examiners) VALUES (' . PHP_EOL
+            $position = $position + 10;
+            $query = 'REPLACE INTO iass_formfields (obj_id, field_id, type, name, label, description, default_value, with_notes, available_for_examiners, position) VALUES (' . PHP_EOL
                 . $this->db->quote($iass_obj_id, 'integer') . ','
                 . $this->db->quote($field->getFieldId(), 'integer') . ','
                 . $this->db->quote($config->getType()->value, 'integer') . ','
@@ -437,7 +439,8 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
                 . $this->db->quote($config->getDescription(), 'text') . ','
                 . $this->db->quote($config->getDefaultValue(), 'text') . ','
                 . $this->db->quote($field->hasNotes(), 'integer') . ','
-                . $this->db->quote($field->isAvailableForExaminers(), 'integer') . PHP_EOL
+                . $this->db->quote($field->isAvailableForExaminers(), 'integer') . ','
+                . $this->db->quote($position, 'integer') . PHP_EOL
                 . ')';
             $this->db->manipulate($query);
 

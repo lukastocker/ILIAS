@@ -104,6 +104,10 @@ class IndAssSettingsMigration implements Setup\Migration
 
     public function getRemainingAmountOfSteps(): int
     {
+        if (! $this->db->tableColumnExists('iass_members', 'user_view_file')) {
+            return 0;
+        }
+
         $query = "SELECT COUNT(DISTINCT iass_settings.obj_id) AS amount" . PHP_EOL
             . "FROM iass_settings" . PHP_EOL
             . "INNER JOIN iass_members ON iass_settings.obj_id = iass_members.obj_id" . PHP_EOL

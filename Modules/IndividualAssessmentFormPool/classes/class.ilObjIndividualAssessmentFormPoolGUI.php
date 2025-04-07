@@ -120,6 +120,9 @@ class ilObjIndividualAssessmentFormPoolGUI extends ilObjectGUI
                     case 'cancel':
                         parent::cancelObject();
                         break;
+                    case 'importFile':
+                        $this->tpl->setOnScreenMessage('failure', $this->lng->txt("no_import"), true);
+                        break;
                     case self::CMD_VIEW:
                     case self::CMD_INFO:
                         $this->checkPermission('visible');

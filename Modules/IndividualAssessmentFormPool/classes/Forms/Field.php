@@ -32,7 +32,7 @@ class Field
         protected int $iafp_obj_id,
         protected string $name,
         protected bool $with_notes,
-        protected bool $available_for_examiners,
+        protected bool $available_for_examiners
     ) {
     }
 
@@ -71,8 +71,6 @@ class Field
     {
         return $this->name;
     }
-
-
 
     public function hasNotes(): bool
     {
