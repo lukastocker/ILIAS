@@ -68,11 +68,22 @@ trait ilIndividualAssessmentDIC
                 $dic['ui.renderer'],
                 $dic['ilErr'],
                 $c['ilIndividualAssessmentMemberGUI'],
+                $c['ilIndividualAssessmentMembersTableGUI'],
                 $dic->refinery(),
                 $dic->http()->wrapper(),
-                $c['helper.dateformat']
             );
         };
+
+        $container['ilIndividualAssessmentMembersTableGUI'] = static fn($c): ilIndividualAssessmentMembersTableGUI =>
+            new ilIndividualAssessmentMembersTableGUI(
+                $dic['lng'],
+                $dic['ilCtrl'],
+                $c['iass.accesshandler'],
+                $dic['ui.factory'],
+                $dic['ui.renderer'],
+                $dic['ilUser'],
+                $c['helper.dateformat']
+            );
 
         $container['irss.stakeholder'] = static fn($c): ResourceStakeholder =>
             new ilIndividualAssessmentGradingStakeholder(
@@ -115,6 +126,7 @@ trait ilIndividualAssessmentDIC
                 new \ilUIDemoFileUploadHandlerGUI(),
                 new \ilUIMarkdownPreviewGUI()
             );
+
         $container['ilIndividualAssessmentCommonSettingsGUI'] = function ($c) use ($object, $dic) {
             return new ilIndividualAssessmentCommonSettingsGUI(
                 $object,

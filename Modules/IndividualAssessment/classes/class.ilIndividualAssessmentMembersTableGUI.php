@@ -40,7 +40,7 @@ class ilIndividualAssessmentMembersTableGUI
     protected array $data = [];
 
     public function __construct(
-        ilIndividualAssessmentMembersGUI $parent,
+        //ilIndividualAssessmentMembersGUI $parent,
         ilLanguage $lng,
         ilCtrl $ctrl,
         IndividualAssessmentAccessHandler $iass_access,
@@ -49,7 +49,7 @@ class ilIndividualAssessmentMembersTableGUI
         ilObjUser $current_user,
         ilIndividualAssessmentDateFormatter $date_formatter
     ) {
-        $this->parent = $parent;
+        //$this->parent = $parent;
         $this->lng = $lng;
         $this->ctrl = $ctrl;
         $this->iass_access = $iass_access;
@@ -223,7 +223,8 @@ class ilIndividualAssessmentMembersTableGUI
             $this->getInternalRecordNote($record->internalNote()),
             $this->checkDownloadFile($usr_id, $file_name)
                 ? $this->getFileDownloadLink($usr_id)
-                : []
+                : [],
+            $this->getCustomInfos($record->getGrading())
         );
     }
 
@@ -246,8 +247,7 @@ class ilIndividualAssessmentMembersTableGUI
                 $record->id(),
                 $record->place(),
                 $record->examinerId()
-            ),
-            //$this->getCustomInfos($record->getGrading())
+            )
         );
     }
 
@@ -255,7 +255,7 @@ class ilIndividualAssessmentMembersTableGUI
     {
         $ret = [];
         foreach ($grading->getCustomFields() as $cf) {
-            $ret[$cf->getConfig()->getLabel()] = $cf->getValue();
+            $ret[$cf->getConfig()->getLabel()] = $cf->getDisplayValue();
         }
         return $ret;
     }
@@ -329,7 +329,7 @@ class ilIndividualAssessmentMembersTableGUI
 
     protected function getProfileLink(string $full_name, int $user_id): string
     {
-        $back_url = $this->ctrl->getLinkTarget($this->parent, "view");
+        $back_url = $this->ctrl->getLinkTargetByClass(ilIndividualAssessmentMembersGUI::class, "view");
         $this->ctrl->setParameterByClass('ilpublicuserprofilegui', 'user_id', $user_id);
         $this->ctrl->setParameterByClass('ilpublicuserprofilegui', "back_url", rawurlencode($back_url));
         $link = $this->ctrl->getLinkTargetByClass('ilpublicuserprofilegui', 'getHTML');

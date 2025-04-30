@@ -76,6 +76,13 @@ class IASSCustomField
         return $this->value;
     }
 
+    public function getDisplayValue()
+    {
+        return $this->value . '(readable)';
+    }
+
+
+
     public function toFormInput(
         FieldFactory $factory,
         Refinery $refinery,

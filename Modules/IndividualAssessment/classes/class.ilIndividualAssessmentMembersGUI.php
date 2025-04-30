@@ -57,7 +57,6 @@ class ilIndividualAssessmentMembersGUI
     protected ILIAS\Refinery\Factory $refinery;
     protected ILIAS\HTTP\Wrapper\RequestWrapper $request_wrapper;
     protected ILIAS\HTTP\Wrapper\ArrayBasedRequestWrapper $post_wrapper;
-    protected ilIndividualAssessmentDateFormatter $date_formatter;
 
     public function __construct(
         ilObjIndividualAssessment $object,
@@ -72,9 +71,9 @@ class ilIndividualAssessmentMembersGUI
         UI\Renderer $renderer,
         ilErrorHandling $error_object,
         ilIndividualAssessmentMemberGUI $member_gui,
+        protected ilIndividualAssessmentMembersTableGUI $table,
         ILIAS\Refinery\Factory $refinery,
         ILIAS\HTTP\Wrapper\WrapperFactory $wrapper,
-        ilIndividualAssessmentDateFormatter $date_formatter
     ) {
         $this->object = $object;
         $this->ctrl = $ctrl;
@@ -91,7 +90,6 @@ class ilIndividualAssessmentMembersGUI
         $this->refinery = $refinery;
         $this->request_wrapper = $wrapper->query();
         $this->post_wrapper = $wrapper->post();
-        $this->date_formatter = $date_formatter;
 
         $this->ref_id = $object->getRefId();
     }
@@ -177,7 +175,9 @@ class ilIndividualAssessmentMembersGUI
                 );
             }
         }
-        $table = new ilIndividualAssessmentMembersTableGUI(
+        $table = $this->table;
+        /*
+        new ilIndividualAssessmentMembersTableGUI(
             $this,
             $this->lng,
             $this->ctrl,
@@ -187,6 +187,7 @@ class ilIndividualAssessmentMembersGUI
             $this->user,
             $this->date_formatter
         );
+        */
 
         $filter = $this->getFilterValue();
         $sort = $this->getSortValue();
