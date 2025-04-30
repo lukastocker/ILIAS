@@ -75,13 +75,15 @@ class IASSCustomField
     {
         return $this->value;
     }
+    public function getNote(): ?string
+    {
+        return $this->note;
+    }
 
     public function getDisplayValue()
     {
         return $this->value . '(readable)';
     }
-
-
 
     public function toFormInput(
         FieldFactory $factory,

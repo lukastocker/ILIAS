@@ -82,7 +82,19 @@ trait ilIndividualAssessmentDIC
                 $dic['ui.factory'],
                 $dic['ui.renderer'],
                 $dic['ilUser'],
-                $c['helper.dateformat']
+                $c['helper.dateformat'],
+                $c['iass.valuerenderer']
+            );
+
+        $container['iass.valuerenderer'] = static fn($c): IASSCustomFieldValueRenderer =>
+            new IASSCustomFieldValueRenderer(
+                $dic['ilUser'],
+                $c['helper.dateformat'],
+                $dic['refinery'],
+                $dic->resourceStorage(),
+                $dic['ui.factory'],
+                $dic['ui.renderer'],
+                $dic['ilCtrl'],
             );
 
         $container['irss.stakeholder'] = static fn($c): ResourceStakeholder =>

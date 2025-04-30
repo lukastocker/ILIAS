@@ -28,36 +28,18 @@ use ILIAS\UI\Component\Dropdown\Dropdown;
  */
 class ilIndividualAssessmentMembersTableGUI
 {
-    protected ilIndividualAssessmentMembersGUI $parent;
-    protected ilLanguage $lng;
-    protected ilCtrl $ctrl;
-    protected IndividualAssessmentAccessHandler $iass_access;
-    protected Factory $factory;
-    protected Renderer $renderer;
-    protected int $current_user_id;
-    protected ilObjUser $current_user;
-    protected ilIndividualAssessmentDateFormatter $date_formatter;
     protected array $data = [];
 
     public function __construct(
-        //ilIndividualAssessmentMembersGUI $parent,
-        ilLanguage $lng,
-        ilCtrl $ctrl,
-        IndividualAssessmentAccessHandler $iass_access,
-        Factory $factory,
-        Renderer $renderer,
-        ilObjUser $current_user,
-        ilIndividualAssessmentDateFormatter $date_formatter
+        protected ilLanguage $lng,
+        protected ilCtrl $ctrl,
+        protected IndividualAssessmentAccessHandler $iass_access,
+        protected Factory $factory,
+        protected Renderer $renderer,
+        protected ilObjUser $current_user,
+        protected ilIndividualAssessmentDateFormatter $date_formatter,
+        protected IASSCustomFieldValueRenderer $value_renderer
     ) {
-        //$this->parent = $parent;
-        $this->lng = $lng;
-        $this->ctrl = $ctrl;
-        $this->iass_access = $iass_access;
-        $this->factory = $factory;
-        $this->renderer = $renderer;
-        $this->current_user_id = $current_user->getId();
-        $this->current_user = $current_user;
-        $this->date_formatter = $date_formatter;
     }
 
     /**
@@ -211,7 +193,7 @@ class ilIndividualAssessmentMembersTableGUI
         if (
             !$this->iass_access->mayViewUser($usr_id)
             && !$record->finalized()
-            && $examiner_id !== $this->current_user_id
+            && $examiner_id !== $this->current_user->getId()
         ) {
             return [];
         }
@@ -255,7 +237,7 @@ class ilIndividualAssessmentMembersTableGUI
     {
         $ret = [];
         foreach ($grading->getCustomFields() as $cf) {
-            $ret[$cf->getConfig()->getLabel()] = $cf->getDisplayValue();
+            $ret[$cf->getConfig()->getLabel()] = $this->value_renderer->render($cf);
         }
         return $ret;
     }
@@ -511,7 +493,7 @@ class ilIndividualAssessmentMembersTableGUI
 
     protected function wasEditedByViewer(int $examiner_id = null): bool
     {
-        return $examiner_id === $this->current_user_id || null === $examiner_id;
+        return $examiner_id === $this->current_user->getId() || null === $examiner_id;
     }
 
     protected function txt(string $code): string

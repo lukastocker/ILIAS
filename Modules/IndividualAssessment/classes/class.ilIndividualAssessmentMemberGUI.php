@@ -45,6 +45,8 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
     public const CMD_AMEND = 'amend';
     public const CMD_SAVE_AMEND = "saveAmend";
     public const CMD_DOWNLOAD_FILE = "downloadFile";
+    public const CMD_DOWNLOAD_CUST_FILE = "downCustFile";
+    public const F_CUST_FILE_RID = "crid";
 
     protected ?ilIndividualAssessmentAccessHandler $iass_access = null;
 
@@ -91,6 +93,14 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
             case self::CMD_DOWNLOAD_FILE:
                 $this->$cmd();
                 break;
+            case self::CMD_DOWNLOAD_CUST_FILE:
+                $resource_id = $this->request_wrapper->retrieve(
+                    self::F_CUST_FILE_RID,
+                    $this->refinery->kindlyTo()->string()
+                );
+                $this->downloadCustomFile($resource_id);
+                break;
+
             case AbstractCtrlAwareUploadHandler::CMD_UPLOAD:
             case AbstractCtrlAwareUploadHandler::CMD_REMOVE:
             case AbstractCtrlAwareUploadHandler::CMD_INFO:
@@ -183,6 +193,12 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         if ($resource_id) {
             $this->irss->consume()->download($resource_id)->run();
         }
+    }
+
+    protected function downloadCustomFile(string $resource_id): void
+    {
+        $resource_id = $this->irss->manage()->find($resource_id);
+        $this->irss->consume()->download($resource_id)->run();
     }
 
     protected function saveAmend(): void
