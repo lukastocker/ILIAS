@@ -154,13 +154,19 @@ class ilIndividualAssessmentSettingsGUI
             $this->input_factory->field(),
             $this->refinery
         );
+
+        $report = $settings->reportSettingsToForm(
+            $this->input_factory->field(),
+            $this->lng,
+            $this->refinery
+        );
+
         $availability = $this->input_factory->field()->section(
-            [$online],
+            [
+                'online' => $online,
+                'report' => $report,
+            ],
             $this->lng->txt('iass_settings_availability')
-        )->withAdditionalTransformation(
-            $this->refinery->custom()->transformation(function ($v) {
-                return array_shift($v);
-            })
         );
 
         return $this->input_factory->container()->form()->standard(
@@ -181,13 +187,16 @@ class ilIndividualAssessmentSettingsGUI
         $form = $this->buildForm();
         $form = $form->withRequest($this->http_request);
 
-        $settings = $form->getData();
-
-        if (!is_null($settings)) {
-            $this->object->setSettings($settings[0]);
+        $data = $form->getData();
+        if (!is_null($data)) {
+            $settings = $data[0];
+            $settings = $settings->withReportSettings(
+                ...$data[1]['report']
+            );
+            $this->object->setSettings($settings);
             $this->object->update();
 
-            $this->object->getObjectProperties()->storePropertyIsOnline($settings[1]);
+            $this->object->getObjectProperties()->storePropertyIsOnline($data[1]['online']);
 
             $this->tpl->setOnScreenMessage("success", $this->lng->txt("settings_saved"), true);
             $this->ctrl->redirect($this, "edit");

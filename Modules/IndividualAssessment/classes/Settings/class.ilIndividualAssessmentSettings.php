@@ -36,7 +36,10 @@ class ilIndividualAssessmentSettings
         protected bool $event_time_place_required,
         protected bool $file_required,
         protected bool $file_visible,
-        protected bool $result_visible
+        protected bool $result_visible,
+        protected bool $available_in_report = true,
+        protected ?\DateTimeImmutable $available_in_report_from = null,
+        protected ?\DateTimeImmutable $available_in_report_to = null
     ) {
     }
 
@@ -142,4 +145,54 @@ class ilIndividualAssessmentSettings
             })
         );
     }
+
+    public function withReportSettings(
+        bool $available = true,
+        ?\DateTimeImmutable $from = null,
+        ?\DateTimeImmutable $to = null
+    ): self {
+        $clone = clone $this;
+        $clone->available_in_report = $available;
+        $clone->available_in_report_from = $from;
+        $clone->available_in_report_to = $to;
+        return $clone;
+    }
+
+    public function getReportSettings(): array
+    {
+        return [
+            $this->available_in_report,
+            $this->available_in_report_from,
+            $this->available_in_report_to
+        ];
+    }
+
+    public function reportSettingsToForm(
+        Field\Factory $input,
+        ilLanguage $lng,
+        Refinery $refinery
+    ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
+        $val = [$this->available_in_report_to, $this->available_in_report_from];
+        $period = $input->duration(
+            $lng->txt("setting_report_availability_period_label"),
+            $lng->txt("setting_report_availability_period_byline"),
+        );
+
+        return $input->optionalGroup(
+            [$period],
+            $lng->txt("setting_report_availability_label"),
+            $lng->txt("setting_report_availability_byline")
+        )->withValue(
+            $this->available_in_report ? [$val] : null
+        )
+        ->withAdditionalTransformation(
+            $refinery->custom()->transformation(function ($value) {
+                $available = $value !== null;
+                $to = $value[0]['start'] ?? null;
+                $from = $value[0]['end'] ?? null;
+                return [$available, $to, $from];
+            })
+        );
+    }
+
 }

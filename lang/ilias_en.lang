@@ -10515,6 +10515,10 @@ iass#:#il_iass_member#:#Participant
 iass#:#il_iass_members#:#Participants
 iass#:#lp_inactive#:#Note: the learning progress for this object is inactive. Thus memberships may not be finalised.
 iass#:#save_amend#:#Save Amended Record
+iass#:#setting_report_availability_byline#:#If enabled, this object is included in reports.
+iass#:#setting_report_availability_label#:#Visible in Reports
+iass#:#setting_report_availability_period_byline#:#Visible in Reports for this period of time
+iass#:#setting_report_availability_period_label#:#Period of visibility in reports
 impr#:#impr_page_type_impr#:#Imprint
 init#:#init_error_authentication_fail#:#Authentication failed.
 init#:#init_error_maintenance#:#The server is not available due to maintenance. We apologise for any inconvenience.

@@ -25,6 +25,7 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
 {
     public const IASS_SETTINGS_TABLE = "iass_settings";
     public const IASS_SETTINGS_INFO_TABLE = "iass_info_settings";
+    public const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
 
     protected ilDBInterface $db;
 
@@ -75,6 +76,7 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
 
         $sql =
              "SELECT content, record_template, event_time_place_required, file_required, file_visible, result_visible" . PHP_EOL
+            . ',report, report_from, report_to' . PHP_EOL
             . "FROM " . self::IASS_SETTINGS_TABLE . PHP_EOL
             . "WHERE obj_id = " . $this->db->quote($obj->getId(), 'integer') . PHP_EOL
         ;
@@ -96,7 +98,10 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
             (bool) $row["event_time_place_required"],
             (bool) $row['file_required'],
             (bool) $row["file_visible"],
-            (bool) $row['result_visible']
+            (bool) $row['result_visible'],
+            (bool) $row['report'],
+            $row['report_from'] ? \DateTimeImmutable::createFromFormat(self::DATE_TIME_FORMAT, $row['report_from']) : null,
+            $row['report_to'] ? \DateTimeImmutable::createFromFormat(self::DATE_TIME_FORMAT, $row['report_to']) : null
         );
     }
 
@@ -107,13 +112,17 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
     {
         $where = ["obj_id" => ["integer", $settings->getObjId()]];
 
+        list($report, $report_from, $report_to) = $settings->getReportSettings();
         $values = [
             "content" => ["text", $settings->getContent()],
             "record_template" => ["text", $settings->getRecordTemplate()],
             "event_time_place_required" => ["integer", $settings->isEventTimePlaceRequired()],
             "file_required" => ["integer", $settings->isFileRequired()],
             "file_visible" => ["integer", $settings->isFileVisible()],
-            "result_visible" => ["integer", $settings->isResultVisible()]
+            "result_visible" => ["integer", $settings->isResultVisible()],
+            "report" => ["integer", $report],
+            "report_from" => ["timestamp", $report_from ? $report_from->format(self::DATE_TIME_FORMAT) : null],
+            "report_to" => ["timestamp", $report_to ? $report_to->format(self::DATE_TIME_FORMAT) : null]
         ];
 
         $this->db->update(self::IASS_SETTINGS_TABLE, $values, $where);

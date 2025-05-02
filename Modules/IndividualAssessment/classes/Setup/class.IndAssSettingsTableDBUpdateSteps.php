@@ -60,4 +60,41 @@ class IndAssSettingsTableDBUpdateSteps implements \ilDatabaseUpdateSteps
             );
         }
     }
+
+    public function step_3(): void
+    {
+        if (!$this->db->tableColumnExists(self::TABLE_NAME, 'report')) {
+            $this->db->addTableColumn(
+                self::TABLE_NAME,
+                'report',
+                [
+                    "type" => "integer",
+                    "length" => 1,
+                    "notnull" => true,
+                    "default" => 1
+                ]
+            );
+        }
+        if (!$this->db->tableColumnExists(self::TABLE_NAME, 'report_from')) {
+            $this->db->addTableColumn(
+                self::TABLE_NAME,
+                'report_from',
+                [
+                    "type" => "timestamp",
+                    "notnull" => false
+                ]
+            );
+        }
+        if (!$this->db->tableColumnExists(self::TABLE_NAME, 'report_to')) {
+            $this->db->addTableColumn(
+                self::TABLE_NAME,
+                'report_to',
+                [
+                    "type" => "timestamp",
+                    "notnull" => false
+                ]
+            );
+        }
+    }
+
 }
