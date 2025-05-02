@@ -172,7 +172,7 @@ class ilIndividualAssessmentSettings
         ilLanguage $lng,
         Refinery $refinery
     ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
-        $val = [$this->available_in_report_to, $this->available_in_report_from];
+        $val = [$this->available_in_report_from, $this->available_in_report_to];
         $period = $input->duration(
             $lng->txt("setting_report_availability_period_label"),
             $lng->txt("setting_report_availability_period_byline"),

@@ -59,13 +59,13 @@ class ilIndividualAssessmentMembersTableGUI
     /**
      * Renders the presentation table
      *
-     * @param 	ILIAS\UI\Component\Component[] 	$view_constrols
+     * @param 	ILIAS\UI\Component\Component[] 	$view_controls
      */
-    public function render(array $view_constrols, int $offset = 0, int $limit = null): string
+    public function render(array $view_controls, int $offset = 0, int $limit = null): string
     {
         $ptable = $this->factory->table()->presentation(
             "",
-            $view_constrols,
+            $view_controls,
             function (
                 PresentationRow $row,
                 ilIndividualAssessmentMember $record,

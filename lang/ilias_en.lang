@@ -4300,6 +4300,9 @@ common#:#http_path#:#HTTP Path
 common#:#https_not_possible#:#This server is not supporting HTTPS connections.
 common#:#i2passwd#:#ILIAS 2 password
 common#:#iafp_new#:#Add Individual Assessment Form Pool
+common#:#iarp_add#:#Add Individual Assessment Report
+common#:#iarp_added#:#Individual Assessment Report added.
+common#:#iarp_new#:#Add Individual Assessment Report
 common#:#iass_import#:#Import Individual Assessment
 common#:#iass_new#:#Create Individual Assessment
 common#:#icon#:#Icon
@@ -4930,6 +4933,7 @@ common#:#obj_hlps_desc#:#Settings for the online help
 common#:#obj_htlm#:#Learning Module HTML
 common#:#obj_htlm_duplicate#:#Copy HTML Learning Module
 common#:#obj_iafp#:#Individual Assessment Form Pool
+common#:#obj_iarp#:#Individual Assessment Report
 common#:#obj_iass#:#Individual Assessment
 common#:#obj_iass_duplicate#:#Copy Individual Assessment
 common#:#obj_iass_select#:#-- Please select one individual assessment --
@@ -5139,6 +5143,7 @@ common#:#objs_grp#:#Groups
 common#:#objs_grpr#:#Group Links
 common#:#objs_htlm#:#HTML Learning Modules
 common#:#objs_iafp#:#Individual Assessment Form Pool
+common#:#objs_iarp#:#Individual Assessment Reports
 common#:#objs_iass#:#Individual Assessments
 common#:#objs_itgr#:#Item Groups
 common#:#objs_lm#:#ILIAS Learning Modules
@@ -10437,6 +10442,10 @@ iafp#:#pick_fields#:#Select Fields
 iafp#:#tab_fields#:#Fields
 iafp#:#tab_forms#:#Forms
 iafp#:#with_notes#:#Notes
+iarp#:#iarp_settings#:#Settings
+iarp#:#iarp_settings_availability#:#Availability
+iarp#:#report#:#Report
+iarp#:#view_participant_record#:#View Record
 iass#:#download_assessment_paper#:#Download Record file
 iass#:#general#:#General Information
 iass#:#grading_info#:#Grading info

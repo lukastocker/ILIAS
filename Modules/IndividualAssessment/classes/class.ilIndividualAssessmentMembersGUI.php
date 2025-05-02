@@ -20,6 +20,7 @@ declare(strict_types=1);
 
 use ILIAS\UI;
 use ILIAS\UI\Component\ViewControl;
+use ILIAS\Data\Order;
 
 /**
  * For the purpose of streamlining the grading and learning-process status definition
@@ -34,12 +35,12 @@ class ilIndividualAssessmentMembersGUI
     public const F_STATUS = "status";
     public const F_SORT = "sortation";
 
-    public const S_NAME_ASC = "user_login:asc";
-    public const S_NAME_DESC = "user_login:desc";
-    public const S_EXAMINER_ASC = "examiner_login:asc";
-    public const S_EXAMINER_DESC = "examiner_login:desc";
-    public const S_CHANGETIME_ASC = "change_time:asc";
-    public const S_CHANGETIME_DESC = "change_time:desc";
+    public const S_NAME_ASC = "user_login:" . Order::ASC;
+    public const S_NAME_DESC = "user_login:" . Order::DESC;
+    public const S_EXAMINER_ASC = "examiner_login:" . Order::ASC;
+    public const S_EXAMINER_DESC = "examiner_login:" . Order::DESC;
+    public const S_CHANGETIME_ASC = "change_time:" . Order::ASC;
+    public const S_CHANGETIME_DESC = "change_time:" . Order::DESC;
 
     protected ilCtrl $ctrl;
     protected ilObjIndividualAssessment $object;
@@ -176,19 +177,6 @@ class ilIndividualAssessmentMembersGUI
             }
         }
         $table = $this->table;
-        /*
-        new ilIndividualAssessmentMembersTableGUI(
-            $this,
-            $this->lng,
-            $this->ctrl,
-            $this->iass_access,
-            $this->factory,
-            $this->renderer,
-            $this->user,
-            $this->date_formatter
-        );
-        */
-
         $filter = $this->getFilterValue();
         $sort = $this->getSortValue();
 
@@ -291,33 +279,22 @@ class ilIndividualAssessmentMembersGUI
      */
     protected function getViewControls(): array
     {
-        $ret = array();
-
         $vc_factory = $this->factory->viewControl();
-
-        $sort = $this->getSortationControl($vc_factory);
-        $ret[] = $this->getModeControl($vc_factory);
-        $ret[] = $sort;
-
-        return $ret;
+        return [
+            $this->getModeControl($vc_factory),
+            $this->getSortationControl($vc_factory)
+        ];
     }
 
     protected function getModeControl(ViewControl\Factory $vc_factory): ViewControl\Mode
     {
-        $vc = $vc_factory->mode(
-            $this->getModeOptions(),
-            ""
-        );
+        $mode_options = $this->getModeOptions();
+        $vc = $vc_factory->mode($mode_options, "");
 
         if ($this->request_wrapper->has(self::F_STATUS)) {
-            $vc = $vc->withActive(
-                $this->request_wrapper->retrieve(
-                    self::F_STATUS,
-                    $this->refinery->kindlyTo()->string()
-                )
-            );
+            $index = $this->request_wrapper->retrieve(self::F_STATUS, $this->refinery->kindlyTo()->int()) + 1;
+            $vc = $vc->withActive(array_keys($mode_options)[$index]);
         }
-
         return $vc;
     }
 

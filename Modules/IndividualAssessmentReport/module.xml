@@ -1,0 +1,34 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<module xmlns="http://www.w3.org" version="$Id: modules.xml $"
+	id="iarp">
+	<baseclasses>
+		<baseclass name="ilObjIndividualAssessmentReportGUI" dir="classes" />
+	</baseclasses>
+	<objectgroups>
+		<objectgroup id="iarp" name="IndividualAssessmentReport" default_pres_pos="174"/>
+	</objectgroups>
+	<objects>
+		<object
+			id="iarp"
+			class_name="IndividualAssessmentReport"
+			dir="classes"
+			default_pos="192"
+			default_pres_pos="192"
+			checkbox="1"
+			inherit="1"
+			allow_link="0"
+			allow_copy="1"
+			translate="0"
+			rbac="1"
+			export="0"
+			orgunit_permissions="1"
+			amet="0"
+			offline_handling="0"
+		>
+			<parent id="cat">cat</parent>
+			<parent id="fold">fold</parent>
+			<parent id="root">root</parent>
+			<parent id="grp">grp</parent>
+		</object>
+	</objects>
+</module>

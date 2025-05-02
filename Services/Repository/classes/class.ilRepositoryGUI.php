@@ -42,6 +42,7 @@ use ILIAS\Repository\StandardGUIRequest;
  * @ilCtrl_Calls ilRepositoryGUI: ilObjCmiXapiGUI
  * @ilCtrl_Calls ilRepositoryGUI: ilPermissionGUI
  * @ilCtrl_Calls ilRepositoryGUI: ilObjIndividualAssessmentFormPoolGUI
+ * @ilCtrl_Calls ilRepositoryGUI: ilObjIndividualAssessmentReportGUI
  *
  */
 class ilRepositoryGUI implements ilCtrlBaseClassInterface

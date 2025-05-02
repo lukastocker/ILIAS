@@ -250,7 +250,7 @@ class ilObjRepositorySettings extends ilObject
             "breaker1" => null,
             "content" => ["file", "webr", "feed", "copa", "wiki", "blog", "lm", "htlm", "sahs", 'cmix', 'lti', "lso", "glo", "dcl", "bibl", "mcst", "mep"],
             "breaker2" => null,
-            "assessment" => ["exc", "tst", "qpl", "iass", 'iafp'],
+            "assessment" => ["exc", "tst", "qpl", "iass", 'iafp', 'iarp'],
             "feedback" => ["poll", "svy", "spl"],
             "templates" => ["prtt"]
         ];
