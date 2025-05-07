@@ -21,10 +21,13 @@ declare(strict_types=1);
 class IARPAccessHandler
 {
     public function __construct(
-        private ilAccessHandler $access,
-        private ilRbacReview $review,
-        private int $current_usr_id,
-        private int $iarp_ref_id
+        private readonly ilAccessHandler $access,
+        private readonly ilRbacReview $review,
+        private readonly ilOrgUnitGlobalSettings $orgu_settings,
+        private readonly ilObjectDataCache $data_cache,
+        private readonly ilOrgUnitPositionAccess $orgu_access,
+        private readonly int $current_usr_id,
+        private readonly int $iarp_ref_id
     ) {
     }
 
@@ -57,4 +60,11 @@ class IARPAccessHandler
         return $this->review->isAssigned($this->current_usr_id, SYSTEM_ROLE_ID);
     }
 
+    public function isOrguAccessEnabledGlobally(): bool
+    {
+        return true;
+        $obj_id = $this->data_cache->lookupObjId($this->iarp_ref_id);
+        $type_settings = $this->orgu_settings->getObjectPositionSettingsByType('iarp');
+        return $type_settings->isActive() && $type_settings->isChangeableForObject();
+    }
 }

@@ -87,6 +87,9 @@ trait ilIndividualAssessmentReportDIC
             new IARPAccessHandler(
                 $DIC['ilAccess'],
                 $DIC['rbacreview'],
+                ilOrgUnitGlobalSettings::getInstance(),
+                $DIC['ilObjDataCache'],
+                new ilOrgUnitPositionAccess($DIC['ilAccess']),
                 $DIC['ilUser']->getId(),
                 $object->getRefId()
             );

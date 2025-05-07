@@ -50,7 +50,7 @@ class ilIndividualAssessmentReportSetupAgent implements Setup\Agent
     {
         return new Setup\ObjectiveCollection(
             'Type is registered and database is updated for Module/IndividualAssessmentReport',
-            false,
+            true,
             ...$this->getObjectives()
         );
     }
@@ -62,7 +62,7 @@ class ilIndividualAssessmentReportSetupAgent implements Setup\Agent
     {
         return new Setup\ObjectiveCollection(
             'Type is registered and database is updated for Module/IndividualAssessmentReport',
-            false,
+            true,
             ...$this->getObjectives()
         );
     }
@@ -83,6 +83,9 @@ class ilIndividualAssessmentReportSetupAgent implements Setup\Agent
         return new Setup\ObjectiveCollection(
             'Component IndividualAssessmentReport',
             true,
+            /*
+            ...$this->getObjectives()
+            */
             new ilObjectNewTypeAddedObjective(
                 self::TYPE,
                 self::TYPE_TITLE,
@@ -108,14 +111,31 @@ class ilIndividualAssessmentReportSetupAgent implements Setup\Agent
             ),
             new ilAccessRbacStandardOperationsAddedObjective(self::TYPE),
 
+            new ilOrgUnitOperationContextRegisteredObjective(
+                ilOrgUnitOperationContext::CONTEXT_IARP,
+                ilOrgUnitOperationContext::CONTEXT_OBJECT
+            ),
+
+            new ilOrgUnitOperationRegisteredObjective(
+                ilOrgUnitOperation::OP_IARP_VIEW_GENERAL_STATUS,
+                'View general status of other users',
+                ilOrgUnitOperationContext::CONTEXT_IARP
+            ),
+            new ilOrgUnitOperationRegisteredObjective(
+                ilOrgUnitOperation::OP_IARP_VIEW_RESULTS,
+                'View results of other users',
+                ilOrgUnitOperationContext::CONTEXT_IARP
+            ),
+            new ilOrgUnitOperationRegisteredObjective(
+                ilOrgUnitOperation::OP_IARP_VIEW_FULL_RECORD,
+                'View full record of other users',
+                ilOrgUnitOperationContext::CONTEXT_IARP
+            ),
+
             /*
             new ilDatabaseUpdateStepsExecutedObjective(
                 new IARPTablesDBUpdateSteps()
             ),
-
-            new ilDatabaseUpdateStepsExecutedObjective(
-                new xxxxTableDBUpdateSteps()
-            )
             */
         ];
     }

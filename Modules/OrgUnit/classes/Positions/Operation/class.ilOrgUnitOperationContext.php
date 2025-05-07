@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -32,6 +33,7 @@ class ilOrgUnitOperationContext
     public const CONTEXT_USRF = "usrf";
     public const CONTEXT_PRG = "prg";
     public const CONTEXT_ETAL = "etal";
+    public const CONTEXT_IARP = "iarp";
 
     /**
      * @var array
@@ -47,6 +49,7 @@ class ilOrgUnitOperationContext
         self::CONTEXT_USRF,
         self::CONTEXT_PRG,
         self::CONTEXT_ETAL,
+        self::CONTEXT_IARP,
     ];
 
     protected ?int $id = 0;

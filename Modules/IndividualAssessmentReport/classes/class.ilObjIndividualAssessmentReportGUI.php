@@ -33,19 +33,22 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
     public const CMD_INFO = 'showSummary';
     public const CMD_EDIT = 'edit';
     public const CMD_SAVE = 'save';
+    public const CMD_EDIT_ADD_SETTINGS = 'editAdd';
+    public const CMD_SAVE_ADD_SETTINGS = 'saveAdd';
     public const CMD_REPORT = 'report';
 
     public const TAB_INFO = 'info_short';
     public const TAB_PERMISSION = 'perm_settings';
     public const TAB_SETTINGS = 'settings';
+    public const TAB_ADDITIONAL_SETTINGS = 'addsettings';
     public const TAB_REPORT = 'report';
 
     protected ilNavigationHistory $navigation_history;
     protected ilObjUser $usr;
     protected ilErrorHandling $error_object;
-    protected ilAccessHandler $ilAccess;
     protected ILIAS\Refinery\Factory $refinery;
     protected ILIAS\HTTP\Wrapper\RequestWrapper $request_wrapper;
+    protected ?IARPAccessHandler $permissions = null;
 
     public function __construct($data, int $id = 0, bool $call_by_reference = true, bool $prepare_output = true)
     {
@@ -71,8 +74,11 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
         $next_class = $this->ctrl->getNextClass($this);
         $cmd = $this->ctrl->getCmd(self::CMD_VIEW);
 
-        $this->addToNavigationHistory();
-        $this->prepareOutput();
+        if (!$this->getCreationMode()) {
+            $this->permissions = $this->object->getDic()['access'];
+            $this->prepareOutput();
+            $this->addToNavigationHistory();
+        }
 
         switch ($next_class) {
             case 'ilinfoscreengui':
@@ -109,11 +115,18 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
                     case self::CMD_VIEW:
                     case self::CMD_INFO:
                         $this->checkPermission('visible');
-                        $this->ctrl->redirectByClass('ilinfoscreengui', 'showSummary');
+                        //$this->tabs_gui->activateTab(self::TAB_SETTINGS);
+                        //$this->ctrl->redirectByClass('ilinfoscreengui', 'showSummary');
+                        $info = new ilInfoScreenGUI($this);
+                        $this->fillInfoScreen($info);
+                        $this->ctrl->forwardCommand($info);
+
                         break;
                     case self::CMD_EDIT:
                         $this->checkPermission('write');
+                        $this->getSubTabs(self::TAB_SETTINGS);
                         $this->tabs_gui->activateTab(self::TAB_SETTINGS);
+                        $this->tabs_gui->activateSubTab(self::TAB_SETTINGS);
                         $this->edit();
                         break;
                     case self::CMD_SAVE:
@@ -126,6 +139,21 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
                         $this->checkPermission('write');
                         $this->tabs_gui->activateTab(self::TAB_SETTINGS);
                         $this->save();
+                        break;
+
+                    case self::CMD_EDIT_ADD_SETTINGS:
+                        $this->checkPermission('write');
+                        $this->getSubTabs(self::TAB_SETTINGS);
+                        $this->tabs_gui->activateTab(self::TAB_SETTINGS);
+                        $this->tabs_gui->activateSubTab(self::TAB_ADDITIONAL_SETTINGS);
+                        $this->editAdditional();
+                        break;
+                    case self::CMD_SAVE_ADD_SETTINGS:
+                        $this->checkPermission('write');
+                        $this->tabs_gui->activateTab(self::TAB_SETTINGS);
+                        $this->tabs_gui->activateSubTab(self::TAB_ADDITIONAL_SETTINGS);
+                        $this->saveAdditional();
+
                         break;
                     case self::CMD_REPORT:
 
@@ -157,6 +185,32 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
             $this->tpl->setOnScreenMessage('success', $this->lng->txt("msg_obj_modified"), true);
         }
         $this->tpl->setContent($this->ui_renderer->render($form));
+    }
+
+
+    public function editAdditional(?ilPropertyFormGUI $form = null): void
+    {
+        if ($form === null) {
+            $form = $this->initAdditionalSettingsForm();
+        }
+        $this->tpl->setContent($form->getHTML());
+    }
+
+    public function saveAdditional(): void
+    {
+        $form = $this->initAdditionalSettingsForm();
+        $form->setValuesByPost();
+        if ($form->checkInput()) {
+            ilObjectServiceSettingsGUI::updateServiceSettingsForm(
+                $this->object->getId(),
+                $form,
+                [
+                    ilObjectServiceSettingsGUI::ORGU_POSITION_ACCESS
+                ]
+            );
+            $this->tpl->setOnScreenMessage("success", $this->lng->txt('msg_obj_modified'), true);
+        }
+        $this->editAdditional($form);
     }
 
     protected function initPropertiesForm(): Form
@@ -197,6 +251,24 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
         );
     }
 
+    protected function initAdditionalSettingsForm(): ilPropertyFormGUI
+    {
+        $form = new ilPropertyFormGUI();
+        $form->setFormAction($this->ctrl->getFormAction($this));
+        $form->setTitle($this->txt('obj_features'));
+        $form->addCommandButton(self::CMD_SAVE_ADD_SETTINGS, $this->txt('save'));
+        $form->addCommandButton(self::CMD_EDIT_ADD_SETTINGS, $this->txt('cancel'));
+
+        ilObjectServiceSettingsGUI::initServiceSettingsForm(
+            $this->object->getId(),
+            $form,
+            [
+                ilObjectServiceSettingsGUI::ORGU_POSITION_ACCESS
+            ]
+        );
+        return $form;
+    }
+
     protected function getTabs(): void
     {
         $access = $this->object->getDic()['access'];
@@ -212,6 +284,7 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
                 $this->ctrl->getLinkTarget($this, self::CMD_EDIT)
             );
         }
+
         //        if ($access->mayEdit()) {
         $this->tabs_gui->addTab(
             self::TAB_REPORT,
@@ -228,6 +301,27 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
             );
         }
     }
+
+    protected function getSubTabs(string $parent_tab): void
+    {
+
+        switch ($parent_tab) {
+            case self::TAB_SETTINGS:
+                $this->tabs_gui->addSubTab(
+                    self::TAB_SETTINGS,
+                    $this->lng->txt("settings"),
+                    $this->ctrl->getLinkTarget($this, self::CMD_EDIT)
+                );
+                if ($this->permissions->isOrguAccessEnabledGlobally()) {
+                    $this->tabs_gui->addSubTab(
+                        self::TAB_ADDITIONAL_SETTINGS,
+                        $this->lng->txt("obj_features"),
+                        $this->ctrl->getLinkTarget($this, self::CMD_EDIT_ADD_SETTINGS)
+                    );
+                }
+        }
+    }
+
 
     public function handleAccessViolation(): void
     {
@@ -251,7 +345,7 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
         if (is_object($this->object)) {
             $this->locator->addItem(
                 $this->object->getTitle(),
-                $this->ctrl->getLinkTarget($this, "view"),
+                $this->ctrl->getLinkTarget($this, self::CMD_VIEW),
                 "",
                 $this->object->getRefId()
             );
@@ -281,7 +375,7 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
             return $this->ctrl->getLinkTargetByClass('ilindividualassessmentsettingsgui', 'edit');
         }
         if ($cmd == 'info') {
-            return $this->ctrl->getLinkTarget($this, 'view');
+            return $this->ctrl->getLinkTarget($this, self::CMD_VIEW);
         }
         if ($cmd == 'members') {
             return $this->ctrl->getLinkTargetByClass('ilindividualassessmentmembersgui', 'view');
@@ -289,7 +383,7 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
         return $this->ctrl->getLinkTarget($this, $cmd);
     }
 
-    public function editObject(): void
+    public function XeditObject(): void
     {
         $link = $this->getLinkTarget('settings');
         $this->ctrl->redirectToURL($link);

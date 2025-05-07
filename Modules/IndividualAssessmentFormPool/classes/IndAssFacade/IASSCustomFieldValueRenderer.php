@@ -70,7 +70,12 @@ class IASSCustomFieldValueRenderer
         if (! $v) {
             return '-';
         }
-        $resource_id = $this->irss->manage()->find($v);
+        return $this->getFileLinkById($v);
+    }
+
+    public function getFileLinkById(string $id): string
+    {
+        $resource_id = $this->irss->manage()->find($id);
         $resource = $this->irss->manage()->getResource($resource_id);
         $resource_to_component = new ResourceToComponent($resource);
 

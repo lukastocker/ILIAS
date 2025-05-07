@@ -65,6 +65,7 @@ class ilObjIndividualAssessmentReport extends ilObject
      */
     public function delete(): bool
     {
+        /*
         $repo = $this->getRepo();
         $form_ids = $repo->getAllFormIdsForObjId($this->getId());
         $fields = $repo->getFieldsForObjId($this->getId());
@@ -74,6 +75,7 @@ class ilObjIndividualAssessmentReport extends ilObject
         );
         $repo->deleteFormsByIds($form_ids);
         $repo->deleteFieldsByIds($field_ids);
+        */
         return parent::delete();
     }
 

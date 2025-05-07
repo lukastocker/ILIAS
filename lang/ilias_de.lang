@@ -10446,7 +10446,7 @@ iafp#:#tab_fields#:#Felder
 iafp#:#tab_forms#:#Formulare
 iafp#:#with_notes#:#Notizen
 iarp#:#iarp_settings#:#Einstellungen
-iarp#:#iarp_settings_availability#:#Verfügbrakeit
+iarp#:#iarp_settings_availability#:#Verfügbarkeit
 iarp#:#report#:#Report
 iarp#:#view_participant_record#:#Ergebnis anzeigen
 iass#:#download_assessment_paper#:#Prüfungsblatt herunterladen
@@ -12989,8 +12989,11 @@ orgu#:#org_op_read_learning_progress#:#Lernfortschritt von anderen Benutzern ein
 orgu#:#org_op_score_participants#:#Teilnehmer bewerten
 orgu#:#org_op_view_certificates#:#Zertifikate von anderen Benutzern einsehen
 orgu#:#org_op_view_competences#:#Kompetenzen von anderen Benutzern einsehen
+orgu#:#org_op_view_full_record#:#Gesamtes Ergebnis (anderer Benutzer) einsehen
+orgu#:#org_op_view_general_status#:#Andere Benutzer einsehen
 orgu#:#org_op_view_individual_plan#:#Individuellen Plan einsehen
 orgu#:#org_op_view_members#:#Zuweisungen einsehen
+orgu#:#org_op_view_results#:#Lernfortschritt/Bearbeitungsstatus (anderer Benutzer) einsehen
 orgu#:#org_op_write_learning_progress#:#Lernfortschritt von anderen Benutzern setzen
 orgu#:#org_unit_not_found#:#Die Organisationseinheit wurde nicht gefunden.
 orgu#:#orgu_add#:#Organisationseinheit hinzufügen

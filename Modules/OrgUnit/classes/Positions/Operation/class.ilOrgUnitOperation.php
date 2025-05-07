@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -39,6 +40,9 @@ class ilOrgUnitOperation
     public const OP_READ_EMPLOYEE_TALK = 'read_employee_talk';
     public const OP_CREATE_EMPLOYEE_TALK = 'create_employee_talk';
     public const OP_EDIT_EMPLOYEE_TALK = 'edit_employee_talk';
+    public const OP_IARP_VIEW_GENERAL_STATUS = 'view_general_status';
+    public const OP_IARP_VIEW_RESULTS = 'view_results';
+    public const OP_IARP_VIEW_FULL_RECORD = 'view_full_record';
 
     protected int $operation_id = 0;
     protected string $operation_string = '';
