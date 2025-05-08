@@ -62,8 +62,6 @@ trait ilIndividualAssessmentReportDIC
         $container['parent_ref_id'] = static fn($c): int =>
             (int) $DIC['tree']->getParentNodeData($object->getRefId())['child'];
 
-
-
         $container['repo.results'] = static fn($c): IARPResultsDB =>
             new IARPResultsDB(
                 $DIC['ilDB'],
@@ -95,6 +93,7 @@ trait ilIndividualAssessmentReportDIC
                 ilOrgUnitGlobalSettings::getInstance(),
                 $DIC['ilObjDataCache'],
                 new ilOrgUnitPositionAccess($DIC['ilAccess']),
+                new ilOrgUnitUserAssignmentDBRepository($DIC['ilDB']),
                 $DIC['ilUser']->getId(),
                 $object->getRefId()
             );

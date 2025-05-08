@@ -309,7 +309,6 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
 
     protected function getSubTabs(string $parent_tab): void
     {
-
         switch ($parent_tab) {
             case self::TAB_SETTINGS:
                 $this->tabs_gui->addSubTab(

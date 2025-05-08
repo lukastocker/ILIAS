@@ -35,12 +35,13 @@ class IARPResultsDB
     }
 
     public function getResults(
+        array $usr_ids,
         Order $order,
         int $lp_mode,
         array $filter_data,
         int $contained_in_ref_id
     ): \Iterator {
-        foreach ($this->getRecords($order, $lp_mode, $filter_data, $contained_in_ref_id) as $rec) {
+        foreach ($this->getRecords($usr_ids, $order, $lp_mode, $filter_data, $contained_in_ref_id) as $rec) {
             yield(
                 new IARPResult(
                     $this->getUserInfo($rec),
@@ -118,6 +119,7 @@ class IARPResultsDB
 
 
     protected function getRecords(
+        array $usr_ids,
         Order $order,
         int $lp_mode,
         array $filter_data,
@@ -156,12 +158,13 @@ class IARPResultsDB
             . 'JOIN object_reference ref ON ia.obj_id = ref.obj_id' . PHP_EOL
             . $sqlpart_tree
             . 'WHERE ias.report = 1' . PHP_EOL
-            . 'AND ref.deleted IS NULL' . PHP_EOL
             . 'AND ('
             . '(ias.report_from IS NULL AND ias.report_to IS NULL)'
             . ' OR '
             . '(ias.report_from < NOW() AND ias.report_to > NOW())'
             . ')' . PHP_EOL
+            . 'AND ref.deleted IS NULL' . PHP_EOL
+            . 'AND ' . $this->db->in('ia.usr_id', $usr_ids, false, 'integer')
             . $sqlpart_mode . PHP_EOL
             . $sqlpart_filter . PHP_EOL
             . $sqlpart_order

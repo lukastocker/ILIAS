@@ -114,8 +114,14 @@ class IARPReportGUI
 
     protected function report(Order $order, int $mode, array $filter_data): string
     {
+        $usr_ids = [$this->current_user->getId()];
+        if ($this->iafp_access->mayViewOthers()) {
+            $usr_ids = array_merge($usr_ids, $this->getSusceptibleUserIds());
+        }
+
         $data = iterator_to_array(
             $this->repo->getResults(
+                array_unique($usr_ids),
                 $order,
                 $mode,
                 $filter_data,
@@ -127,6 +133,14 @@ class IARPReportGUI
             $this->getFilters(),
             $this->getTable($mode)->withData($data),
         ]);
+    }
+
+    protected function getSusceptibleUserIds(): array
+    {
+        if ($this->iafp_access->isOrguAccessEnabledAtObject()) {
+            return $this->iafp_access->getUserIdsWhereCurrentUserHasAuthority();
+        }
+        return [];
     }
 
     protected function downloadCustomFile(string $resource_id): void
@@ -155,6 +169,13 @@ class IARPReportGUI
                 UIFactory $ui_factory,
                 $environment
             ) {
+
+                $record = $record->withPermissionFilter(
+                    $environment['current_user']->getId(),
+                    $environment['perm.view_lp'],
+                    $environment['perm.view_full'],
+                );
+
                 return $row
                 ->withHeadline($record->getHeadline())
                 ->withSubheadline($record->getSubHeadline())
@@ -193,6 +214,8 @@ class IARPReportGUI
             'lng' => $this->lng,
             'iass.valuerenderer' => $this->value_renderer,
             'current_user' => $this->current_user,
+            'perm.view_lp' => $this->iafp_access->mayViewOthersLP(),
+            'perm.view_full' => $this->iafp_access->mayViewOthersFull(),
         ]);
     }
 

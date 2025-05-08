@@ -34,11 +34,26 @@ use ILIAS\IARP\GradingInfo;
 
 class IARPResult
 {
+    private bool $perm_view_lp = true;
+    private bool $perm_view_full = true;
+
     public function __construct(
         protected readonly UserInfo $user_info,
         protected readonly IASSInfo $iass_info,
         protected readonly GradingInfo $grading_info,
     ) {
+    }
+
+    public function withPermissionFilter(
+        int $current_user_id,
+        bool $perm_view_lp,
+        bool $perm_view_full,
+    ) {
+        $is_own_record = $this->user_info->getUserId() === $current_user_id;
+        $clone = clone $this;
+        $clone->perm_view_lp = $perm_view_lp || $is_own_record;
+        $clone->perm_view_full = $perm_view_full || $is_own_record;
+        return $clone;
     }
 
     public function getHeadline(): string
@@ -55,12 +70,15 @@ class IARPResult
         ilLanguage $lng,
         \ILIAS\Data\DateFormat\DateFormat $date_format
     ): array {
-        $ret = [
-            $lng->txt('learning_progress') => $this->getTranslatedLPStatus(
+        $ret = [];
+
+        if ($this->perm_view_lp) {
+            $ret[$lng->txt('learning_progress')] = $this->getTranslatedLPStatus(
                 $lng,
                 $this->grading_info->getLPStatus()
-            ),
-        ];
+            );
+        }
+
         $examiner = $this->grading_info->getExaminer();
         if ($examiner !== null) {
             $ret[$lng->txt('iass_graded_by')] = $examiner->getRepresentation();
@@ -79,6 +97,10 @@ class IARPResult
         ilLanguage $lng,
         IASSCustomFieldValueRenderer $value_renderer,
     ): array {
+        if (!$this->perm_view_full) {
+            return [];
+        }
+
         $ret = [
             $lng->txt('iass_record') => $this->grading_info->getRecordNote(),
             $lng->txt('iass_internal_note') => $this->grading_info->getInternalNote(),
