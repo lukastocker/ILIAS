@@ -37,9 +37,10 @@ class IARPResultsDB
     public function getResults(
         Order $order,
         int $lp_mode,
-        array $filter_data
+        array $filter_data,
+        int $contained_in_ref_id
     ): \Iterator {
-        foreach ($this->getRecords($order, $lp_mode, $filter_data) as $rec) {
+        foreach ($this->getRecords($order, $lp_mode, $filter_data, $contained_in_ref_id) as $rec) {
             yield(
                 new IARPResult(
                     $this->getUserInfo($rec),
@@ -119,11 +120,18 @@ class IARPResultsDB
     protected function getRecords(
         Order $order,
         int $lp_mode,
-        array $filter_data
+        array $filter_data,
+        int $contained_in_ref_id
     ): array {
         $sqlpart_order = $order->join('ORDER BY', fn(...$o) => implode(' ', $o));
         $sqlpart_mode = $lp_mode === -1 ? '' : 'AND learning_progress = ' . $this->db->quote($lp_mode, 'integer');
         $sqlpart_filter = '';
+        $sqlpart_tree = '';
+
+        if ($contained_in_ref_id !== -1) {
+            $sqlpart_tree = 'JOIN tree on tree.child = ref.ref_id '
+                . 'AND tree.path LIKE "%.' . (string) $contained_in_ref_id . '.%"' . PHP_EOL;
+        }
 
         if ($filter_data !== []) {
             list($f_usr, $f_ass) = $filter_data;
@@ -145,7 +153,10 @@ class IARPResultsDB
             . 'JOIN usr_data ud ON ia.usr_id = ud.usr_id' . PHP_EOL
             . 'JOIN object_data od ON ia.obj_id = od.obj_id' . PHP_EOL
             . 'JOIN iass_settings ias ON ia.obj_id = ias.obj_id' . PHP_EOL
+            . 'JOIN object_reference ref ON ia.obj_id = ref.obj_id' . PHP_EOL
+            . $sqlpart_tree
             . 'WHERE ias.report = 1' . PHP_EOL
+            . 'AND ref.deleted IS NULL' . PHP_EOL
             . 'AND ('
             . '(ias.report_from IS NULL AND ias.report_to IS NULL)'
             . ' OR '

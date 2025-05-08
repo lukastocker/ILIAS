@@ -56,7 +56,13 @@ trait ilIndividualAssessmentReportDIC
                 $DIC['resource_storage'],
                 $c['iass.valuerenderer'],
                 $DIC['ilUser'],
+                $object->getSettings()->isGlobal() ? -1 : $c['parent_ref_id']
             );
+
+        $container['parent_ref_id'] = static fn($c): int =>
+            (int) $DIC['tree']->getParentNodeData($object->getRefId())['child'];
+
+
 
         $container['repo.results'] = static fn($c): IARPResultsDB =>
             new IARPResultsDB(

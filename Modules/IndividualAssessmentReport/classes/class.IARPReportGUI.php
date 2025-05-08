@@ -55,6 +55,7 @@ class IARPReportGUI
         protected readonly IRSS $irss,
         protected readonly IASSCustomFieldValueRenderer $value_renderer,
         protected readonly ilObjUser $current_user,
+        protected readonly int $contained_in_ref_id, // -1 for 'all/global'
     ) {
         $this->lng->loadLanguageModule('trac');
         $this->lng->loadLanguageModule('iass');
@@ -113,11 +114,15 @@ class IARPReportGUI
 
     protected function report(Order $order, int $mode, array $filter_data): string
     {
-        $data = iterator_to_array($this->repo->getResults(
-            $order,
-            $mode,
-            $filter_data
-        ));
+        $data = iterator_to_array(
+            $this->repo->getResults(
+                $order,
+                $mode,
+                $filter_data,
+                $this->contained_in_ref_id
+            )
+        );
+
         return $this->ui_renderer->render([
             $this->getFilters(),
             $this->getTable($mode)->withData($data),

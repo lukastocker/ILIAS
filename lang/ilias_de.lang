@@ -4301,9 +4301,9 @@ common#:#https_not_possible#:#Dieser Server unterstützt keine HTTPS-Verbindunge
 common#:#i2passwd#:#ILIAS_2-Passwort
 common#:#iafp_added#:#Formularpool hinzugefügt.
 common#:#iafp_new#:#Formularpool für Individuelle Bewertung hinzufügen
-common#:#iarp_add#:#Individual Assessment Report hinzufügen
-common#:#iarp_added#:#Individual Assessment Report hinzugefügt.
-common#:#iarp_new#:#Individual Assessment Report hinzufügen
+common#:#iarp_add#:#Report für Individuelle Bewertungen hinzufügen
+common#:#iarp_added#:#Report für Individuelle Bewertungen hinzugefügt.
+common#:#iarp_new#:#Report für Individuelle Bewertungen hinzufügen
 common#:#iass_import#:#Individuelle Bewertung importieren
 common#:#iass_new#:#Neue Individuelle Bewertung anlegen
 common#:#icon#:#Symbol
@@ -4933,8 +4933,8 @@ common#:#obj_hlps#:#Online-Hilfe
 common#:#obj_hlps_desc#:#Einstellungen der Online-Hilfe
 common#:#obj_htlm#:#Lernmodul HTML
 common#:#obj_htlm_duplicate#:#HTML Lernmodul kopieren
-common#:#obj_iafp#:#Individual Assessment Form Pool
-common#:#obj_iarp#:#Individual Assessment Report
+common#:#obj_iafp#:#Individuelle Bewertung - Form Pool
+common#:#obj_iarp#:#Report für Individuelle Bewertung
 common#:#obj_iass#:#Individuelle Bewertung
 common#:#obj_iass_duplicate#:#Individuelle Bewertung kopieren
 common#:#obj_iass_select#:#-- Wählen Sie eine Individuelle Bewertung aus --
@@ -5143,8 +5143,8 @@ common#:#objs_glo#:#Glossare
 common#:#objs_grp#:#Gruppen
 common#:#objs_grpr#:#Gruppenlinks
 common#:#objs_htlm#:#HTML-Lernmodule
-common#:#objs_iafp#:#Individual Assessment Form Pool
-common#:#objs_iarp#:#Individual Assessment Reports
+common#:#objs_iafp#:#Individuelle Bewertung - Form Pools
+common#:#objs_iarp#:#Reports für Individuelle Bewertungen
 common#:#objs_iass#:#Individuelle Bewertungen
 common#:#objs_itgr#:#Objekteblöcke
 common#:#objs_lm#:#ILIAS-Lernmodule
@@ -10445,6 +10445,8 @@ iafp#:#pick_fields#:#Felder auswählen
 iafp#:#tab_fields#:#Felder
 iafp#:#tab_forms#:#Formulare
 iafp#:#with_notes#:#Notizen
+iarp#:#iarp_local#:#Lokaler Report
+iarp#:#iarp_local_desc#:#Nur Individuelle Bewertungen in und unterhalb des aktuellen Ordners anzeigen.
 iarp#:#iarp_settings#:#Einstellungen
 iarp#:#iarp_settings_availability#:#Verfügbarkeit
 iarp#:#report#:#Report

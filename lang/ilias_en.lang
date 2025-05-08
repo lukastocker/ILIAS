@@ -10442,6 +10442,8 @@ iafp#:#pick_fields#:#Select Fields
 iafp#:#tab_fields#:#Fields
 iafp#:#tab_forms#:#Forms
 iafp#:#with_notes#:#Notes
+iarp#:#iarp_local#:#Local Report
+iarp#:#iarp_local_desc#:#Include Assessments in or below this Folder only.
 iarp#:#iarp_settings#:#Settings
 iarp#:#iarp_settings_availability#:#Availability
 iarp#:#report#:#Report
