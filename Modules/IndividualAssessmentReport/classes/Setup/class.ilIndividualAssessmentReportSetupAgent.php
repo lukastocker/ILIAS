@@ -90,7 +90,7 @@ class ilIndividualAssessmentReportSetupAgent implements Setup\Agent
                 self::TYPE,
                 self::TYPE_TITLE,
             ),
-            //new ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new IARPTablesDBUpdateSteps()),
+            new ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new IARPTablesDBUpdateSteps()),
         );
     }
 
@@ -110,12 +110,10 @@ class ilIndividualAssessmentReportSetupAgent implements Setup\Agent
                 self::TYPE_TITLE,
             ),
             new ilAccessRbacStandardOperationsAddedObjective(self::TYPE),
-
             new ilOrgUnitOperationContextRegisteredObjective(
                 ilOrgUnitOperationContext::CONTEXT_IARP,
                 ilOrgUnitOperationContext::CONTEXT_OBJECT
             ),
-
             new ilOrgUnitOperationRegisteredObjective(
                 ilOrgUnitOperation::OP_IARP_VIEW_GENERAL_STATUS,
                 'View general status of other users',
@@ -131,12 +129,9 @@ class ilIndividualAssessmentReportSetupAgent implements Setup\Agent
                 'View full record of other users',
                 ilOrgUnitOperationContext::CONTEXT_IARP
             ),
-
-            /*
             new ilDatabaseUpdateStepsExecutedObjective(
                 new IARPTablesDBUpdateSteps()
             ),
-            */
         ];
     }
 

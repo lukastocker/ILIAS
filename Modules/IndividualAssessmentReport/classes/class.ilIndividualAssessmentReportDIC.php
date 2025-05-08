@@ -75,11 +75,10 @@ trait ilIndividualAssessmentReportDIC
                 $DIC['ilCtrl'],
             );
 
-        $container['helper.dateformat'] = function ($c) {
-            return new ilIndividualAssessmentDateFormatter(
+        $container['helper.dateformat'] = static fn($c): ilIndividualAssessmentDateFormatter =>
+            new ilIndividualAssessmentDateFormatter(
                 $c['DataFactory']
             );
-        };
 
         $container['DataFactory'] = static fn(): DataFactory => new DataFactory();
 

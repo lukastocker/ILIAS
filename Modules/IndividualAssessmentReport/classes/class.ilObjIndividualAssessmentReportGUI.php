@@ -115,10 +115,8 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
                     case self::CMD_VIEW:
                     case self::CMD_INFO:
                         $this->checkPermission('visible');
-                        //$this->tabs_gui->activateTab(self::TAB_SETTINGS);
-                        //$this->ctrl->redirectByClass('ilinfoscreengui', 'showSummary');
+                        $this->tabs_gui->activateTab(self::TAB_INFO);
                         $info = new ilInfoScreenGUI($this);
-                        $this->fillInfoScreen($info);
                         $this->ctrl->forwardCommand($info);
 
                         break;
@@ -166,27 +164,28 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
 
     public function edit(): void
     {
-        $form = $this->initPropertiesForm();
+        $form = $this->initSettingsForm();
         $this->tpl->setContent($this->ui_renderer->render($form));
     }
 
     public function save(): void
     {
-        $form = $this->initPropertiesForm()->withRequest($this->request);
+        $form = $this->initSettingsForm()->withRequest($this->request);
         $data = $form->getData();
 
         if ($data === null) {
             $this->tpl->setOnScreenMessage('failure', $this->lng->txt("form_input_not_valid"), true);
         } else {
-            list($title_and_desc, $online) = $data;
+            list($settings, $online) = $data;
+            list($title_and_desc, $local) = $settings;
             $this->object->getObjectProperties()->storePropertyTitleAndDescription($title_and_desc);
             $this->object->getObjectProperties()->storePropertyIsOnline($online);
-
+            $this->object = $this->object->withSettings($this->object->getSettings()->withGlobal(!$local));
+            $this->object->update();
             $this->tpl->setOnScreenMessage('success', $this->lng->txt("msg_obj_modified"), true);
         }
         $this->tpl->setContent($this->ui_renderer->render($form));
     }
-
 
     public function editAdditional(?ilPropertyFormGUI $form = null): void
     {
@@ -213,7 +212,7 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
         $this->editAdditional($form);
     }
 
-    protected function initPropertiesForm(): Form
+    protected function initSettingsForm(): Form
     {
         $shift = $this->refinery->custom()->transformation(
             fn($v) => array_shift($v)
@@ -225,24 +224,31 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
             $this->refinery
         );
 
+        $local = $this->ui_factory->input()->field()->checkbox(
+            $this->lng->txt('iarp_local'),
+            $this->lng->txt('iarp_local_desc'),
+        )
+        ->withValue(!$this->object->getSettings()->isGlobal())
+        ->withAdditionalTransformation($this->refinery->kindlyTo()->bool());
+
+        $settings = $this->ui_factory->input()->field()->section(
+            [$title_and_description, $local],
+            $this->lng->txt('iarp_settings')
+        );
+
         $online = $this->object->getObjectProperties()->getPropertyIsOnline()->toForm(
             $this->lng,
             $this->ui_factory->input()->field(),
             $this->refinery
         );
 
-        $settings = $this->ui_factory->input()->field()->section(
-            [$title_and_description],
-            $this->lng->txt('iarp_settings')
-        )->withAdditionalTransformation(
-            $shift
-        );
-
         $availability = $this->ui_factory->input()->field()->section(
             [$online],
             $this->lng->txt('iarp_settings_availability')
         )->withAdditionalTransformation(
-            $shift
+            $this->refinery->custom()->transformation(
+                fn($v) => array_shift($v)
+            )
         );
 
         return $this->ui_factory->input()->container()->form()->standard(
@@ -271,13 +277,12 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
 
     protected function getTabs(): void
     {
-        $access = $this->object->getDic()['access'];
         $this->tabs_gui->addTab(
             self::TAB_INFO,
             $this->txt('info_short'),
             $this->ctrl->getLinkTargetByClass('ilinfoscreengui', 'showSummary'),
         );
-        if ($access->mayEdit()) {
+        if ($this->permissions->mayEdit()) {
             $this->tabs_gui->addTab(
                 self::TAB_SETTINGS,
                 $this->txt('settings'),
@@ -293,7 +298,7 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
         );
         //        }
 
-        if ($access->mayEditPermissions()) {
+        if ($this->permissions->mayEditPermissions()) {
             $this->tabs_gui->addTab(
                 self::TAB_PERMISSION,
                 $this->txt('perm_settings'),
@@ -323,11 +328,6 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
     }
 
 
-    public function handleAccessViolation(): void
-    {
-        $this->error_object->raiseError($this->txt("msg_no_perm_read"), $this->error_object->WARNING);
-    }
-
     public static function _goto(string $a_target, string $a_add = ''): void
     {
         global $DIC;
@@ -338,66 +338,6 @@ class ilObjIndividualAssessmentReportGUI extends ilObjectGUI
         if ($DIC['ilAccess']->checkAccess('read', '', $a_target)) {
             ilObjectGUI::_gotoRepositoryNode($a_target);
         }
-    }
-
-    protected function addLocatorItems(): void
-    {
-        if (is_object($this->object)) {
-            $this->locator->addItem(
-                $this->object->getTitle(),
-                $this->ctrl->getLinkTarget($this, self::CMD_VIEW),
-                "",
-                $this->object->getRefId()
-            );
-        }
-    }
-
-    public function viewObject(): void
-    {
-        $this->tabs_gui->activateTab(self::TAB_INFO);
-        $this->ctrl->setCmd('showSummary');
-        $this->ctrl->setCmdClass('ilinfoscreengui');
-        $info = $this->buildInfoScreen();
-        $this->ctrl->forwardCommand($info);
-        $this->recordIndividualAssessmentRead();
-    }
-
-    public function membersObject(): void
-    {
-        $this->tabs_gui->activateTab(self::TAB_MEMBERS);
-        $gui = $this->object->getMembersGUI();
-        $this->ctrl->forwardCommand($gui);
-    }
-
-    protected function getLinkTarget(string $cmd): string
-    {
-        if ($cmd == 'settings') {
-            return $this->ctrl->getLinkTargetByClass('ilindividualassessmentsettingsgui', 'edit');
-        }
-        if ($cmd == 'info') {
-            return $this->ctrl->getLinkTarget($this, self::CMD_VIEW);
-        }
-        if ($cmd == 'members') {
-            return $this->ctrl->getLinkTargetByClass('ilindividualassessmentmembersgui', 'view');
-        }
-        return $this->ctrl->getLinkTarget($this, $cmd);
-    }
-
-    public function XeditObject(): void
-    {
-        $link = $this->getLinkTarget('settings');
-        $this->ctrl->redirectToURL($link);
-    }
-
-    public function getBaseEditForm(): ilPropertyFormGUI
-    {
-        return $this->initEditForm();
-    }
-
-    protected function afterSave(ilObject $new_object): void
-    {
-        $this->tpl->setOnScreenMessage("success", $this->txt("iarp_added"), true);
-        $this->ctrl->setParameter($this, "ref_id", $new_object->getRefId());
     }
 
     private function addToNavigationHistory(): void

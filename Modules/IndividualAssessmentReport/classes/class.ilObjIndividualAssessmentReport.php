@@ -20,6 +20,7 @@ declare(strict_types=1);
 
 use ILIAS\IndividualAssessmentReport\FormsStorageDB;
 use ILIAS\IndividualAssessmentReport\Field;
+use ILIAS\IARP\Settings;
 
 class ilObjIndividualAssessmentReport extends ilObject
 {
@@ -29,18 +30,15 @@ class ilObjIndividualAssessmentReport extends ilObject
 
     protected string $type;
     protected ?Pimple\Container $dic = null;
-    protected ?FormsStorageDB $repo = null;
+    protected IARPSettingsRepoDB $settings_repo;
+    protected Settings $settings;
 
     public function __construct(int $id = 0, bool $call_by_reference = true)
     {
         $this->type = self::OBJ_TYPE;
         parent::__construct($id, $call_by_reference);
-    }
-
-    public static function getRepository(): FormsStorageDB
-    {
         global $DIC;
-        return self::getGeneralDIC($DIC)['repo.forms'];
+        $this->settings_repo = new IARPSettingsRepoDB($DIC['ilDB']);
     }
 
     /**
@@ -49,6 +47,7 @@ class ilObjIndividualAssessmentReport extends ilObject
     public function create(): int
     {
         $id = parent::create();
+        $this->settings = $this->settings_repo->create($this->getId());
         return $id;
     }
 
@@ -57,6 +56,7 @@ class ilObjIndividualAssessmentReport extends ilObject
      */
     public function read(): void
     {
+        $this->settings = $this->settings_repo->get($this->getId());
         parent::read();
     }
 
@@ -65,17 +65,7 @@ class ilObjIndividualAssessmentReport extends ilObject
      */
     public function delete(): bool
     {
-        /*
-        $repo = $this->getRepo();
-        $form_ids = $repo->getAllFormIdsForObjId($this->getId());
-        $fields = $repo->getFieldsForObjId($this->getId());
-        $field_ids = array_map(
-            static fn(Field $field): int => $field->getFieldId(),
-            iterator_to_array($fields)
-        );
-        $repo->deleteFormsByIds($form_ids);
-        $repo->deleteFieldsByIds($field_ids);
-        */
+        $this->settings_repo->delete($this->getId());
         return parent::delete();
     }
 
@@ -85,6 +75,7 @@ class ilObjIndividualAssessmentReport extends ilObject
     public function update(): bool
     {
         parent::update();
+        $this->settings_repo->update($this->settings);
         return true;
     }
 
@@ -93,7 +84,6 @@ class ilObjIndividualAssessmentReport extends ilObject
      */
     public function initDefaultRoles(): void
     {
-        //there is no default role for the pools
     }
 
     /**
@@ -101,48 +91,22 @@ class ilObjIndividualAssessmentReport extends ilObject
      */
     public function cloneObject(int $target_id, int $copy_id = 0, bool $omit_tree = false): ?ilObject
     {
-        $repo = $this->getRepo();
         $new_obj = parent::cloneObject($target_id, $copy_id, $omit_tree);
-        $forms = $repo->getFormsForObjId($this->getId());
-        $fields = $repo->getFieldsForObjId($this->getId());
-
-        $field_mapping = [];
-        foreach ($fields as $field) {
-            $nu_field = $repo->storeField(
-                $field
-                    ->asNew()
-                    ->withObjId($new_obj->getId())
-            );
-            $field_mapping[$field->getFieldId()] = $nu_field->getFieldId();
-        }
-
-
-        $nu_forms = [];
-        foreach ($forms as $form) {
-            $fields = array_map(
-                static fn(Field $field): Field => $field
-                    ->withFieldId($field_mapping[$field->getFieldId()])
-                    ->withObjId($new_obj->getId()),
-                $form->getFields()
-            );
-
-            $repo->storeForm(
-                $form
-                    ->asNew()
-                    ->withObjId($new_obj->getId())
-                    ->withFields(...$fields)
-            );
-        }
-
+        $new_obj = $new_obj->withSettings($this->getSettings()->withObjId($new_obj->getId()));
+        $new_obj->update();
         return $new_obj;
     }
 
-    private function getRepo(): FormsStorageDB
+    public function getSettings(): Settings
     {
-        if ($this->repo === null) {
-            $this->repo = $this->getDic()['repo.forms'];
-        }
-        return $this->repo;
+        return $this->settings;
+    }
+
+    public function withSettings(Settings $settings): self
+    {
+        $clone = clone $this;
+        $clone->settings = $settings;
+        return $clone;
     }
 
     public function getDic(): Pimple\Container
