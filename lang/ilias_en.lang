@@ -10398,12 +10398,12 @@ help#:#help_topcis#:#Topics
 help#:#help_tt_text#:#Text
 iafp#:#_settings_saved#:#Settings saved.
 iafp#:#add_fields#:#Add Fields to the Form
-iafp#:#available_for_examiners#:#available for examiners
+iafp#:#available_for_examiners#:#Exclusively available for examiners
 iafp#:#confirm_cancel#:#Cancel
 iafp#:#confirm_delete#:#Delete
 iafp#:#default_value#:#Default Value
-iafp#:#field_available_for_examiners#:#Available for Examiners
-iafp#:#field_available_for_examiners_byline#:#should the field be available for examiners?
+iafp#:#field_available_for_examiners#:#Exclusively available for examiners
+iafp#:#field_available_for_examiners_byline#:#mark as internal: this field is available for examiners only
 iafp#:#field_default_value#:#Default Value
 iafp#:#field_default_value_byline#:#default/initial value
 iafp#:#field_description#:#Description
@@ -10443,7 +10443,7 @@ iafp#:#tab_fields#:#Fields
 iafp#:#tab_forms#:#Forms
 iafp#:#with_notes#:#Notes
 iarp#:#iarp_local#:#Local Report
-iarp#:#iarp_local_desc#:#Include Assessments in or below this Folder only.
+iarp#:#iarp_local_desc#:#Include Assessments in or below this folder only.
 iarp#:#iarp_settings#:#Settings
 iarp#:#iarp_settings_availability#:#Availability
 iarp#:#report#:#Report
@@ -10479,7 +10479,7 @@ iass#:#iass_file_required#:#Record file required
 iass#:#iass_file_required_info#:#A record file has to be uploaded to each participant record.
 iass#:#iass_file_visible_examinee#:#File visible for participant
 iass#:#iass_filter_all#:#All
-iass#:#iass_finalize#:#Finalize
+iass#:#iass_finalize#:#Publish and freeze
 iass#:#iass_finalize_info#:#Individual Assessment will be finalized.
 iass#:#iass_finalize_user_qst#:#Should the participant's status really be finalised? No changes possible thereafter.
 iass#:#iass_further_field_headline#:#Detailed Information
@@ -10494,7 +10494,7 @@ iass#:#iass_membership_finalized#:#Record published and frozen
 iass#:#iass_membership_saved#:#Record saved, not yet published
 iass#:#iass_mess_notification_completed#:#You passed the assessment <i>%s</i>. Please check the following grading record for details:
 iass#:#iass_mess_notification_failed#:#You failed the assessment <i>%s</i>. Please check the following grading record for details:
-iass#:#iass_notify#:#Make Result available to Participant
+iass#:#iass_notify#:#Make Records available to Participant
 iass#:#iass_notify_explanation#:#The participant will be notified via e-mail after finalisation and will get access to her or his record on the Info screen.
 iass#:#iass_phone#:#Phone
 iass#:#iass_place#:#Place of assessment
@@ -12983,16 +12983,16 @@ orgu#:#org_op_manage_members#:#Manage Members
 orgu#:#org_op_manage_participants#:#Manage Participants
 orgu#:#org_op_ou_create_records#:#Create Records for Users
 orgu#:#org_op_ou_publish_records#:#Publish and freeze Records
+orgu#:#org_op_ou_view_full_record#:#View whole result of other users
+orgu#:#org_op_ou_view_general_status#:#View other users
+orgu#:#org_op_ou_view_results#:#View learning progress of other users
 orgu#:#org_op_read_employee_talk#:#Read access talk appointments
 orgu#:#org_op_read_learning_progress#:#View learning progress of other users
 orgu#:#org_op_score_participants#:#Score Participants
 orgu#:#org_op_view_certificates#:#View certificates of other users
 orgu#:#org_op_view_competences#:#View competences of other users
-orgu#:#org_op_view_full_record#:#View whole result of other users
-orgu#:#org_op_view_general_status#:#View other users
 orgu#:#org_op_view_individual_plan#:#View Individual Plan
 orgu#:#org_op_view_members#:#View Assignments
-orgu#:#org_op_view_results#:#View learning progress of other users
 orgu#:#org_op_write_learning_progress#:#Set learning progress of other users
 orgu#:#org_unit_not_found#:#Organisational Unit not found.
 orgu#:#orgu_add#:#Add Organisational Unit
@@ -14117,6 +14117,9 @@ rbac#:#iafp_edit_permission#:#Edit permissions of an Individual Assessment Form 
 rbac#:#iafp_read#:#Read content of an Individual Assessment Form Pool
 rbac#:#iafp_visible#:#Individual Assessment Form Pool is visible
 rbac#:#iafp_write#:#Edit an Individual Assessment  Form Pool
+rbac#:#iarp_view_full_record#:#View whole result of other users
+rbac#:#iarp_view_general_status#:#View other users
+rbac#:#iarp_view_results#:#View learning progress of other users
 rbac#:#iass_amend_grading#:#Amend gradings in an Individual Assessment
 rbac#:#iass_copy#:#Copy an Individual Assessment
 rbac#:#iass_delete#:#Delete an Individual Assessment

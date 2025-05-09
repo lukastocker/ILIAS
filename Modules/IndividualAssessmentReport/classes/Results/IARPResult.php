@@ -110,7 +110,9 @@ class IARPResult
         }
 
         foreach ($this->grading_info->getCustomFields() as $cf) {
-            $ret[$cf->getConfig()->getLabel()] = $value_renderer->render($cf);
+            if ($cf->isAvailableForParticipant()) {
+                $ret[$cf->getConfig()->getLabel()] = $value_renderer->render($cf);
+            }
         }
         return $ret;
     }

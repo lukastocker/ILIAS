@@ -191,9 +191,9 @@ class ilIndividualAssessmentUserGrading
             'internal_note' => $internal_note,
             'file' => $file,
             'custom' => $input->group($custom),
-            'learning_progress' => $learning_progress,
             'place' => $place,
             'event_time' => $event_time,
+            'learning_progress' => $learning_progress,
         ];
 
         if (!$amend) {

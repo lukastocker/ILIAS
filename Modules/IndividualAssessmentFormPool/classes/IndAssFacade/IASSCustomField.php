@@ -34,7 +34,7 @@ class IASSCustomField
         protected int $field_id,
         protected int $usr_id,
         protected bool $has_note,
-        protected bool $available_for_examiners,
+        protected bool $for_examiners_only,
         protected mixed $value,
         protected ?string $note
     ) {
@@ -75,14 +75,15 @@ class IASSCustomField
     {
         return $this->value;
     }
+
     public function getNote(): ?string
     {
         return $this->note;
     }
 
-    public function getDisplayValue()
+    public function isAvailableForParticipant(): bool
     {
-        return $this->value . '(readable)';
+        return $this->for_examiners_only === false;
     }
 
     public function toFormInput(

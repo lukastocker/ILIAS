@@ -10399,13 +10399,13 @@ help#:#help_topcis#:#Themen
 help#:#help_tt_text#:#Text
 iafp#:#_settings_saved#:#Einstellugen gespeichert.
 iafp#:#add_fields#:#Felder hinzufügen
-iafp#:#available_for_examiners#:#Verfügbar für Bewertende
+iafp#:#available_for_examiners#:#Intern / Nur für für Bewertende verfügbar
 iafp#:#cannot_delete_because_used#:#Folgende Felder können nicht gelöscht werden, das sie in Formularen verwendet werden:
 iafp#:#confirm_cancel#:#Abbrechen
 iafp#:#confirm_delete#:#Löschen
 iafp#:#default_value#:#Voreingestellter Wert
-iafp#:#field_available_for_examiners#:#Verfügbar für Bewertende
-iafp#:#field_available_for_examiners_byline#:#Dieses Feld steht auch für Bewertende zur Verfügung
+iafp#:#field_available_for_examiners#:#Intern / Nur für für Bewertende verfügbar
+iafp#:#field_available_for_examiners_byline#:#Dieses Feld steht nur für Bewertende zur Verfügung
 iafp#:#field_default_value#:#Voreingestellter Wert
 iafp#:#field_default_value_byline#:#Dieser Wert wird initial angezeigt, solange kein expliziter Wert gesetzt wurde.
 iafp#:#field_description#:#Beschreibung
@@ -12986,16 +12986,16 @@ orgu#:#org_op_manage_members#:#Mitglieder bearbeiten
 orgu#:#org_op_manage_participants#:#Teilnehmer verwalten
 orgu#:#org_op_ou_create_records#:#Bewertungen vornehmen
 orgu#:#org_op_ou_publish_records#:#Bewertungen veröffentlichen und abschließen
+orgu#:#org_op_ou_view_full_record#:#Gesamtes Ergebnis (anderer Benutzer) einsehen
+orgu#:#org_op_ou_view_general_status#:#Andere Benutzer einsehen
+orgu#:#org_op_ou_view_results#:#Lernfortschritt/Bearbeitungsstatus (anderer Benutzer) einsehen
 orgu#:#org_op_read_employee_talk#:#Auf Gespräche lesend zugreifen
 orgu#:#org_op_read_learning_progress#:#Lernfortschritt von anderen Benutzern einsehen
 orgu#:#org_op_score_participants#:#Teilnehmer bewerten
 orgu#:#org_op_view_certificates#:#Zertifikate von anderen Benutzern einsehen
 orgu#:#org_op_view_competences#:#Kompetenzen von anderen Benutzern einsehen
-orgu#:#org_op_view_full_record#:#Gesamtes Ergebnis (anderer Benutzer) einsehen
-orgu#:#org_op_view_general_status#:#Andere Benutzer einsehen
 orgu#:#org_op_view_individual_plan#:#Individuellen Plan einsehen
 orgu#:#org_op_view_members#:#Zuweisungen einsehen
-orgu#:#org_op_view_results#:#Lernfortschritt/Bearbeitungsstatus (anderer Benutzer) einsehen
 orgu#:#org_op_write_learning_progress#:#Lernfortschritt von anderen Benutzern setzen
 orgu#:#org_unit_not_found#:#Die Organisationseinheit wurde nicht gefunden.
 orgu#:#orgu_add#:#Organisationseinheit hinzufügen
@@ -14120,6 +14120,9 @@ rbac#:#iafp_edit_permission#:#Edit permissions of an Individual Assessment Form 
 rbac#:#iafp_read#:#Read content of an Individual Assessment Form Pool
 rbac#:#iafp_visible#:#Individual Assessment Form Pool is visible
 rbac#:#iafp_write#:#Edit an Individual Assessment  Form Pool
+rbac#:#iarp_view_full_record#:#Gesamtes Ergebnis (anderer Benutzer) einsehen
+rbac#:#iarp_view_general_status#:#Andere Benutzer einsehen
+rbac#:#iarp_view_results#:#Lernfortschritt/Bearbeitungsstatus (anderer Benutzer) einsehen
 rbac#:#iass_amend_grading#:#Finalisierte Bewertung der Individuellen Bewertung ändern
 rbac#:#iass_copy#:#Individuelle Bewertung kopieren
 rbac#:#iass_delete#:#Individuelle Bewertung löschen

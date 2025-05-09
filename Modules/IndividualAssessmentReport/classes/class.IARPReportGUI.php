@@ -115,8 +115,14 @@ class IARPReportGUI
     protected function report(Order $order, int $mode, array $filter_data): string
     {
         $usr_ids = [$this->current_user->getId()];
-        if ($this->iafp_access->mayViewOthers()) {
-            $usr_ids = array_merge($usr_ids, $this->getSusceptibleUserIds());
+        if ($this->iafp_access->mayViewOthersByPosition()) {
+            $usr_ids = array_merge(
+                $usr_ids,
+                $this->iafp_access->getUserIdsWhereCurrentUserHasAuthority()
+            );
+        }
+        if ($this->iafp_access->mayViewOthersByRBAC()) {
+            $usr_ids = [];
         }
 
         $data = iterator_to_array(
@@ -133,14 +139,6 @@ class IARPReportGUI
             $this->getFilters(),
             $this->getTable($mode)->withData($data),
         ]);
-    }
-
-    protected function getSusceptibleUserIds(): array
-    {
-        if ($this->iafp_access->isOrguAccessEnabledAtObject()) {
-            return $this->iafp_access->getUserIdsWhereCurrentUserHasAuthority();
-        }
-        return [];
     }
 
     protected function downloadCustomFile(string $resource_id): void

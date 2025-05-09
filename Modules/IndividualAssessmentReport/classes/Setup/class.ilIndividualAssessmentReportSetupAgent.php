@@ -109,30 +109,52 @@ class ilIndividualAssessmentReportSetupAgent implements Setup\Agent
                 self::TYPE,
                 self::TYPE_TITLE,
             ),
+            new ilDatabaseUpdateStepsExecutedObjective(
+                new IARPTablesDBUpdateSteps()
+            ),
             new ilAccessRbacStandardOperationsAddedObjective(self::TYPE),
             new ilOrgUnitOperationContextRegisteredObjective(
                 ilOrgUnitOperationContext::CONTEXT_IARP,
                 ilOrgUnitOperationContext::CONTEXT_OBJECT
             ),
+
+            new ilAccessCustomRBACOperationAddedObjective(
+                IARPAccessHandler::RBAC_VIEW_GENERAL_STATUS,
+                'View general status of other users',
+                "object",
+                9010,
+                ["iarp"]
+            ),
+            new ilAccessCustomRBACOperationAddedObjective(
+                IARPAccessHandler::RBAC_VIEW_RESULTS,
+                'View results of other users',
+                "object",
+                9020,
+                ["iarp"]
+            ),
+            new ilAccessCustomRBACOperationAddedObjective(
+                IARPAccessHandler::RBAC_VIEW_FULL_RECORD,
+                'View full record of other users',
+                "object",
+                9030,
+                ["iarp"]
+            ),
+
             new ilOrgUnitOperationRegisteredObjective(
-                ilOrgUnitOperation::OP_IARP_VIEW_GENERAL_STATUS,
+                IARPAccessHandler::OP_VIEW_GENERAL_STATUS,
                 'View general status of other users',
                 ilOrgUnitOperationContext::CONTEXT_IARP
             ),
             new ilOrgUnitOperationRegisteredObjective(
-                ilOrgUnitOperation::OP_IARP_VIEW_RESULTS,
+                IARPAccessHandler::OP_VIEW_RESULTS,
                 'View results of other users',
                 ilOrgUnitOperationContext::CONTEXT_IARP
             ),
             new ilOrgUnitOperationRegisteredObjective(
-                ilOrgUnitOperation::OP_IARP_VIEW_FULL_RECORD,
+                IARPAccessHandler::OP_VIEW_FULL_RECORD,
                 'View full record of other users',
                 ilOrgUnitOperationContext::CONTEXT_IARP
             ),
-            new ilDatabaseUpdateStepsExecutedObjective(
-                new IARPTablesDBUpdateSteps()
-            ),
         ];
     }
-
 }

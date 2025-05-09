@@ -125,6 +125,7 @@ class IARPResultsDB
         array $filter_data,
         int $contained_in_ref_id
     ): array {
+        $sqlpart_users = $usr_ids === [] ? '' : 'AND ' . $this->db->in('ia.usr_id', $usr_ids, false, 'integer');
         $sqlpart_order = $order->join('ORDER BY', fn(...$o) => implode(' ', $o));
         $sqlpart_mode = $lp_mode === -1 ? '' : 'AND learning_progress = ' . $this->db->quote($lp_mode, 'integer');
         $sqlpart_filter = '';
@@ -164,7 +165,7 @@ class IARPResultsDB
             . '(ias.report_from < NOW() AND ias.report_to > NOW())'
             . ')' . PHP_EOL
             . 'AND ref.deleted IS NULL' . PHP_EOL
-            . 'AND ' . $this->db->in('ia.usr_id', $usr_ids, false, 'integer')
+            . $sqlpart_users . PHP_EOL
             . $sqlpart_mode . PHP_EOL
             . $sqlpart_filter . PHP_EOL
             . $sqlpart_order
