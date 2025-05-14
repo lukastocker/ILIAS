@@ -51,31 +51,31 @@ class ilOrgUnitRemoveDeletedMDSetsMigration implements Migration
 
     public function step(Environment $environment): void
     {
-        $rec_ids = $this->getRemovableEntries();
-        foreach ($rec_ids as $rec_id) {
-            $query = 'DELETE FROM orgu_types_adv_md_rec' . PHP_EOL
-                . 'WHERE rec_id = ' . $this->helper->getDatabase()->quote($rec_id, 'integer');
-            $this->helper->getDatabase()->manipulate($query);
-        }
-    }
-
-    public function getRemainingAmountOfSteps(): int
-    {
-        return count($this->getRemovableEntries());
-    }
-
-    public function getRemovableEntries(): array
-    {
+        $this->helper->getDatabase()->setLimit(1);
         $res = $this->helper->getDatabase()->query(
             'SELECT rec_id FROM orgu_types_adv_md_rec' . PHP_EOL
             . 'WHERE rec_id NOT IN (' . PHP_EOL
             . 'SELECT record_id FROM adv_md_record' . PHP_EOL
             . ')'
         );
-        $return = [];
-        while ($row = $this->helper->getDatabase()->fetchAssoc($res)) {
-            $return[] = $row['rec_id'];
-        }
-        return $return;
+        $row = $this->helper->getDatabase()->fetchAssoc($res);
+        $rec_id = (int) $row['rec_id'];
+
+        $query = 'DELETE FROM orgu_types_adv_md_rec' . PHP_EOL
+            . 'WHERE rec_id = ' . $this->helper->getDatabase()->quote($rec_id, 'integer');
+        $this->helper->getDatabase()->manipulate($query);
+
+    }
+
+    public function getRemainingAmountOfSteps(): int
+    {
+        $res = $this->helper->getDatabase()->query(
+            'SELECT COUNT(rec_id) as amount FROM orgu_types_adv_md_rec' . PHP_EOL
+            . 'WHERE rec_id NOT IN (' . PHP_EOL
+            . 'SELECT record_id FROM adv_md_record' . PHP_EOL
+            . ')'
+        );
+        $row = $this->helper->getDatabase()->fetchObject($res);
+        return (int) ($row->amount ?? 0);
     }
 }
