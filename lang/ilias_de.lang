@@ -4306,6 +4306,8 @@ common#:#iarp_added#:#Report für Individuelle Bewertungen hinzugefügt.
 common#:#iarp_new#:#Report für Individuelle Bewertungen hinzufügen
 common#:#iass_import#:#Individuelle Bewertung importieren
 common#:#iass_new#:#Neue Individuelle Bewertung anlegen
+common#:#iass_no_form_pool#:#Kein Formular aus dem Bewertungspool
+common#:#iass_std_form#:#Standard Formular
 common#:#icon#:#Symbol
 common#:#icon_settings#:#Icon
 common#:#id#:#ID
@@ -10410,14 +10412,14 @@ iafp#:#field_default_value#:#Voreingestellter Wert
 iafp#:#field_default_value_byline#:#Dieser Wert wird initial angezeigt, solange kein expliziter Wert gesetzt wurde.
 iafp#:#field_description#:#Beschreibung
 iafp#:#field_description_byline#:#Die Beschreibung wird unterhalb des Feldes im Formular angezeigt.
-iafp#:#field_label#:#Beschriftung
-iafp#:#field_label_byline#:#Unter dieser Beschritung wid das Feld im Formular angezeigt.
+iafp#:#field_label#:#Bezeichnung
+iafp#:#field_label_byline#:#Unter dieser Bezeichnung wird das Feld im Formular angezeigt.
 iafp#:#field_name_byline#:#Name des Feldes (dient zur Indentifikation)
 iafp#:#field_options#:#Optionen
-iafp#:#field_options_byline#:#Fügen Sie Optionen hinzu, unter denen Benutzerinnen auswählen können.
-iafp#:#field_section_byline#:#configure the field
-iafp#:#field_section_create#:#Edit new Field
-iafp#:#field_section_edit#:#Edit Field
+iafp#:#field_options_byline#:#Fügen Sie Optionen hinzu, unter denen Benutzerinnen auswählen können. Die maximale Anzahl an Zeichen pro Option beträgt 512.
+iafp#:#field_section_byline#:#Feld konfigurieren
+iafp#:#field_section_create#:#Neues Feld bearbeiten
+iafp#:#field_section_edit#:#Feld bearbeiten
 iafp#:#field_type_byline#:#Wählen Sie den Typen des neuen Feldes
 iafp#:#field_with_notes#:#Mit zusätzlichen Notizen
 iafp#:#field_with_notes_byline#:#Fügt ein Textfeld (zusätzlich zu diesem Feld) hinzu.
@@ -10425,6 +10427,7 @@ iafp#:#fields#:#Felder im Formular
 iafp#:#fields_added#:#Felder hinzugefügt.
 iafp#:#fields_byline#:#Wählen Sie ein oder mehrerer Felder ab und speichern Sie, um Felder aus dem Formular zu entfernen.
 iafp#:#fields_count#:#Anzahl Felder
+iafp#:#fields_deleted#:#Feld(er) gelöscht
 iafp#:#form_description#:#Beschreibung
 iafp#:#form_description_byline#:#weitere Beschreibung des Formulars (wird in der Auswahl bei Anlage einer Individuellen Bewertung angezeigt)
 iafp#:#form_name#:#Name
@@ -10432,9 +10435,11 @@ iafp#:#form_name_byline#:#Name des Formulars (wird in der Auswahl bei Anlage ein
 iafp#:#form_section_byline#:#configure the form
 iafp#:#form_section_create#:#Neues Formular anlegen
 iafp#:#form_section_edit#:#Formular bearbeiten
+iafp#:#forms_deleted#:#Formular(e) gelöscht
 iafp#:#iafp_add#:#Formularpool hinzufügen
 iafp#:#iafp_fields#:#Felder
 iafp#:#iafp_forms#:#Formulare
+iafp#:#iafp_import#:#Import Formulare
 iafp#:#iafp_settings#:#Einstellungen
 iafp#:#iafp_settings_availability#:#Verfügbarkeit
 iafp#:#label#:#Bezeichnung
@@ -14114,15 +14119,21 @@ rbac#:#htlm_read#:#HTML-Lernmodul lesen
 rbac#:#htlm_read_learning_progress#:#Benutzer kann Lernfortschritt anderer Benutzer einsehen
 rbac#:#htlm_visible#:#HTML-Lernmodul ist sichtbar
 rbac#:#htlm_write#:#HTML-Lernmodul bearbeiten
-rbac#:#iafp_copy#:#Copy an Individual Assessment Form Pool
-rbac#:#iafp_delete#:#Delete an Individual Assessment Form Pool
-rbac#:#iafp_edit_permission#:#Edit permissions of an Individual Assessment Form Pool
-rbac#:#iafp_read#:#Read content of an Individual Assessment Form Pool
-rbac#:#iafp_visible#:#Individual Assessment Form Pool is visible
-rbac#:#iafp_write#:#Edit an Individual Assessment  Form Pool
-rbac#:#iarp_view_full_record#:#Gesamtes Ergebnis (anderer Benutzer) einsehen
-rbac#:#iarp_view_general_status#:#Andere Benutzer einsehen
-rbac#:#iarp_view_results#:#Lernfortschritt/Bearbeitungsstatus (anderer Benutzer) einsehen
+rbac#:#iafp_copy#:#Kopieren eines individuellen Bewertung Form Pools
+rbac#:#iafp_delete#:#Löschen eines individuellen Bewertung Form Pools
+rbac#:#iafp_edit_permission#:#Rechteeinstellungen eines individuellen Bewertung Form Pools ändern
+rbac#:#iafp_read#:#Lesezugriff auf ein individuellen Bewertung Form Pool
+rbac#:#iafp_visible#:#Individuelle Bewertung Form Pool ist sichtbar
+rbac#:#iafp_write#:#Ändern eines individuellen Bewertung Form Pools
+rbac#:#iarp_copy#:#Report kopieren
+rbac#:#iarp_delete#:#Report löschen
+rbac#:#iarp_edit_permission#:#Rechteeinstellungen ändern
+rbac#:#iarp_iarp_view_full_record#:#Gesamtes Ergebnis (anderer Benutzer) einsehen
+rbac#:#iarp_iarp_view_general_status#:#Status (anderer Benutzer) einsehen
+rbac#:#iarp_iarp_view_results#:#Lernfortschritt/Bearbeitungsstatus (anderer Benutzer) einsehen
+rbac#:#iarp_read#:#Lesezugriff auf Report
+rbac#:#iarp_visible#:#Report ist sichtbar
+rbac#:#iarp_write#:#Einstellungen des Reports bearbeiten
 rbac#:#iass_amend_grading#:#Finalisierte Bewertung der Individuellen Bewertung ändern
 rbac#:#iass_copy#:#Individuelle Bewertung kopieren
 rbac#:#iass_delete#:#Individuelle Bewertung löschen

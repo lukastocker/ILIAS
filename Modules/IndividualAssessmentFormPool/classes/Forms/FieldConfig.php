@@ -85,7 +85,7 @@ class FieldConfig
                 function ($v) {
                     $opts = array_key_exists('opts', $v) ? $v['opts'] : null;
                     $default = array_key_exists('default', $v) ? $v['default'] : null;
-                    if (!in_array($default, $opts)) {
+                    if (!is_null($opts) && !is_null($default) && !in_array($default, $opts)) {
                         $default = null;
                     }
                     return new self(

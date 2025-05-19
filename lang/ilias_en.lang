@@ -4305,6 +4305,8 @@ common#:#iarp_added#:#Individual Assessment Report added.
 common#:#iarp_new#:#Add Individual Assessment Report
 common#:#iass_import#:#Import Individual Assessment
 common#:#iass_new#:#Create Individual Assessment
+common#:#iass_no_form_pool#:#No Assessment Pool Formular
+common#:#iass_std_form#:#Standard Form
 common#:#icon#:#Icon
 common#:#icon_settings#:#Custom Icons
 common#:#id#:#ID
@@ -10412,7 +10414,7 @@ iafp#:#field_label#:#Label
 iafp#:#field_label_byline#:#label for the field
 iafp#:#field_name_byline#:#name for the field
 iafp#:#field_options#:#Options
-iafp#:#field_options_byline#:#add options the user may choose from
+iafp#:#field_options_byline#:#add options the user may choose from. The maximum of allowed characters for each option is 512.
 iafp#:#field_section_byline#:#configure the field
 iafp#:#field_section_create#:#Edit new Field
 iafp#:#field_section_edit#:#Edit Field
@@ -10423,6 +10425,7 @@ iafp#:#fields#:#Fields in this Form
 iafp#:#fields_added#:#Fields added.
 iafp#:#fields_byline#:#Unselect and save to remove a field
 iafp#:#fields_count#:#amount of fields
+iafp#:#fields_deleted#:#Field(s) deleted
 iafp#:#form_description#:#Description
 iafp#:#form_description_byline#:#description of the form
 iafp#:#form_name#:#Name
@@ -10430,8 +10433,10 @@ iafp#:#form_name_byline#:#name of the form
 iafp#:#form_section_byline#:#configure the form
 iafp#:#form_section_create#:#Edit new Form
 iafp#:#form_section_edit#:#Edit Form
+iafp#:#forms_deleted#:#Form(s) deleted
 iafp#:#iafp_fields#:#Fields
 iafp#:#iafp_forms#:#Forms
+iafp#:#iafp_import#:#Import Forms
 iafp#:#iafp_settings#:#Settings
 iafp#:#iafp_settings_availability#:#Availability
 iafp#:#label#:#label
@@ -14117,9 +14122,15 @@ rbac#:#iafp_edit_permission#:#Edit permissions of an Individual Assessment Form 
 rbac#:#iafp_read#:#Read content of an Individual Assessment Form Pool
 rbac#:#iafp_visible#:#Individual Assessment Form Pool is visible
 rbac#:#iafp_write#:#Edit an Individual Assessment  Form Pool
-rbac#:#iarp_view_full_record#:#View whole result of other users
-rbac#:#iarp_view_general_status#:#View other users
-rbac#:#iarp_view_results#:#View learning progress of other users
+rbac#:#iarp_copy#:#Copy an Individual Assessment Report
+rbac#:#iarp_delete#:#Delete an Individual Assessment Report
+rbac#:#iarp_edit_permission#:#Edit permissions of an Individual Assessment Report
+rbac#:#iarp_iarp_view_full_record#:#View whole result of other users
+rbac#:#iarp_iarp_view_general_status#:#View status of other users
+rbac#:#iarp_iarp_view_results#:#View learning progress of other users
+rbac#:#iarp_read#:#Read content of an Individual Assessment Report
+rbac#:#iarp_visible#:#Individual Assessment Report is visible
+rbac#:#iarp_write#:#Edit an Individual Assessment Report
 rbac#:#iass_amend_grading#:#Amend gradings in an Individual Assessment
 rbac#:#iass_copy#:#Copy an Individual Assessment
 rbac#:#iass_delete#:#Delete an Individual Assessment

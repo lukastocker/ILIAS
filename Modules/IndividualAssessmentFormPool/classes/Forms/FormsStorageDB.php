@@ -39,8 +39,10 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
 
     public function __construct(
         private readonly \ilDBInterface $db,
-        private readonly \ilAccess $access
+        private readonly \ilAccess $access,
+        private \ilLanguage $lng
     ) {
+        $this->lng = $lng;
     }
 
     public function getFormsForObjId(
@@ -412,7 +414,7 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
 
     public function getFormsSelection(): array
     {
-        $options = [-1 => ['std.', 'no form pool']]; //add default option ('standard'), form only shows for entries > 1
+        $options = [-1 => [$this->lng->txt('iass_std_form'), $this->lng->txt('iass_no_form_pool')]]; //add default option ('standard'), form only shows for entries > 1
         foreach ($this->getFormPools() as $pool_info) {
             list($ref_id, $obj_id, $title) = $pool_info;
             $forms = $this->getFormsForObjId($obj_id);
