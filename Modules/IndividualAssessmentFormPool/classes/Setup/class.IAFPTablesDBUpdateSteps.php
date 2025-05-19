@@ -166,7 +166,7 @@ class IAFPTablesDBUpdateSteps implements \ilDatabaseUpdateSteps
                 ],
                 'value' => [
                     'type' => 'text',
-                    'length' => 128,
+                    'length' => 512,
                     'notnull' => true
                 ],
             ]
@@ -185,7 +185,7 @@ class IAFPTablesDBUpdateSteps implements \ilDatabaseUpdateSteps
                 ],
                 'value' => [
                     'type' => 'text',
-                    'length' => 128,
+                    'length' => 512,
                     'notnull' => true
                 ]
             ]
@@ -274,7 +274,7 @@ class IAFPTablesDBUpdateSteps implements \ilDatabaseUpdateSteps
                 ],
                 'value' => [
                     'type' => 'text',
-                    'length' => 128,
+                    'length' => 512,
                     'notnull' => true
                 ],
             ]
@@ -298,7 +298,7 @@ class IAFPTablesDBUpdateSteps implements \ilDatabaseUpdateSteps
                 ],
                 'value' => [
                     'type' => 'text',
-                    'length' => 128,
+                    'length' => 512,
                     'notnull' => true
                 ]
             ]
