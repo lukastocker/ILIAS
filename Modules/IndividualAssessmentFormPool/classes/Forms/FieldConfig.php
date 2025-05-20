@@ -85,8 +85,10 @@ class FieldConfig
                 function ($v) {
                     $opts = array_key_exists('opts', $v) ? $v['opts'] : null;
                     $default = array_key_exists('default', $v) ? $v['default'] : null;
-                    if (!is_null($opts) && !is_null($default) && !in_array($default, $opts)) {
-                        $default = null;
+                    if (!is_null($default) && !is_null($opts)) {
+                        if ($default === '' || !in_array($default[0], $opts)) {
+                            $default = null;
+                        }
                     }
                     return new self(
                         $this->getType(),
