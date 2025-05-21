@@ -114,6 +114,7 @@ class FieldConfig
                 return $factory->group([ //group is needed due to exisiting transforms on tag-input
                      $factory->tag($lng->txt('field_options'), [], $lng->txt('field_options_byline'))
                          ->withUserCreatedTagsAllowed(true)
+                         ->withTagMaxLength(512)
                          ->withRequired(true)
                          ->withValue($this->getOptions())
                  ])

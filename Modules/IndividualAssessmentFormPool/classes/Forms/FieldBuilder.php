@@ -89,7 +89,9 @@ class FieldBuilder
 
             case FieldType::TAG:
                 $options = $config->getOptions() ?? [];
-                $value = in_array($value, $options) ? $value : $config->getDefaultValue();
+                if ($value === null || $value === '') {
+                    $value = $config->getDefaultValue();
+                }
                 $value = ($value === null || $value === '') ?
                     null : explode(\SpecifiedFormStorageDB::VALUE_DELIMITER, $value);
                 return $factory->tag($label, $options, $description)

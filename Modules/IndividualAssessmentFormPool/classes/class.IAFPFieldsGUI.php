@@ -100,11 +100,9 @@ class IAFPFieldsGUI
                 switch ($cmd) {
                     case self::CMD_LIST:
                         $list = $this->listFields();
-                        //if ($list !== '') {
                         $this->tpl->setContent($list);
                         break;
-                        //}
-                        //$this->ctrl->redirect($this, self:CMD_EDIT);
+
                     case self::CMD_CREATE:
                         $type = $this->getFieldCreationModal()->withRequest($this->request)->getData();
                         $field_id = $this->forms_repo->createField($type, $this->iafp_obj_id)->getFieldId();
@@ -198,7 +196,6 @@ class IAFPFieldsGUI
         $modal = $this->getFieldCreationModal();
         $new_entry = $this->ui_factory->button()->primary(
             $this->txt('new_field'),
-            //$this->ctrl->getLinkTarget($this, self::CMD_CREATE)
             $modal->getShowSignal()
         );
 

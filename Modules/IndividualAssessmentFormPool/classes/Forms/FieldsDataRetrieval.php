@@ -26,6 +26,7 @@ use ILIAS\Data\Order;
 use ILIAS\UI\URLBuilder;
 use ILIAS\UI\Component\Table\DataRetrieval;
 use ILIAS\UI\Component\Table\DataRowBuilder;
+use Monolog\DateTimeImmutable;
 
 /**
  *
@@ -69,12 +70,16 @@ class FieldsDataRetrieval implements DataRetrieval
         foreach ($fields as $field) {
             $row_id = (string) $field->getFieldId();
             $config = $field->getConfig();
+            $default_value = $config->getDefaultValue();
+            if ($config->getType() === FieldType::DATETIME && !is_null($default_value)) {
+                $default_value = DateTimeImmutable::createFromFormat('U', $config->getDefaultValue())->format('d.m.Y');
+            }
             $record = [
                 'type' => $config->getType()->name,
                 'name' => $field->getName(),
                 'label' => $config->getLabel(),
                 'description' => $config->getDescription(),
-                'default_value' => (string) $config->getDefaultValue(),
+                'default_value' => $default_value,
                 'with_notes' => $field->hasNotes(),
                 'available_for_examiners' => $field->isAvailableForExaminers(),
             ];
