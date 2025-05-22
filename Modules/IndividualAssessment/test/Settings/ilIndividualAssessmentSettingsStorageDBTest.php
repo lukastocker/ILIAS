@@ -88,18 +88,21 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
         $title = 'My iass';
         $description = 'Special iass for members';
         $content = 'Everything you have learned';
-        $record_remplate = 'You should ask these things';
+        $record_template = 'You should ask these things';
         $event_time_place_required = true;
         $file_required = false;
         $file_visible = true;
         $result_visible = true;
+        $report = 1;
+        $report_from = '1747827313';
+        $report_to = '1747913713';
 
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
             $title,
             $description,
             $content,
-            $record_remplate,
+            $record_template,
             $event_time_place_required,
             $file_required,
             $file_visible,
@@ -108,11 +111,14 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
 
         $values = [
             "content" => ["text", $content],
-            "record_template" => ["text", $record_remplate],
+            "record_template" => ["text", $record_template],
             "event_time_place_required" => ["integer", $event_time_place_required],
             "file_required" => ["integer", $file_required],
             "file_visible" => ["integer", $file_visible],
-            "result_visible" => ["integer", $result_visible]
+            "result_visible" => ["integer", $result_visible],
+            "report" => ["integer", $report],
+            "report_from" => ["timestamp", \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $report_from)],
+            "report_to" => ["timestamp", \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $report_to)]
         ];
 
         $where = [
