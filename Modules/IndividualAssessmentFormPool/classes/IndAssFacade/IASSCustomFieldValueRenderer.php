@@ -39,7 +39,6 @@ class IASSCustomFieldValueRenderer
 
     public function render(IASSCustomField $field): string
     {
-        $out = [];
         $renderer = $this->getRenderMethodForType($field->getConfig()->getType());
         $out = $this->$renderer($field);
         if ($field->hasNotes()) {
@@ -60,7 +59,7 @@ class IASSCustomFieldValueRenderer
     protected function renderMarkdown(IASSCustomField $field): string
     {
         return $this->refinery->string()->markdown()->toHTML()->transform(
-            $field->getValue()
+            (string) $field->getValue()
         );
     }
 
@@ -120,14 +119,14 @@ class IASSCustomFieldValueRenderer
         return $this->date_formatter->format($this->current_user, $v);
     }
 
-    protected function renderSingleselect(IASSCustomField $field)
+    protected function renderSingleselect(IASSCustomField $field): string
     {
-        return $field->getValue();
+        return (string) $field->getValue();
     }
 
     protected function renderTag(IASSCustomField $field): string
     {
-        return str_replace(SpecifiedFormStorageDB::VALUE_DELIMITER, ', ', $field->getValue());
+        return str_replace(SpecifiedFormStorageDB::VALUE_DELIMITER, ', ', (string) $field->getValue());
     }
 
     protected function renderRating(IASSCustomField $field): string

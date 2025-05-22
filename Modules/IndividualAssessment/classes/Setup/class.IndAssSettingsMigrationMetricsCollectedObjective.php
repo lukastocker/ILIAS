@@ -52,7 +52,6 @@ class ilIndAssSettingsMigrationMetricsCollectedObjective extends Setup\Metrics\C
             . ' GROUP BY obj_id';
 
         $result = $db->query($query);
-        var_dump($query);
         $collection = [];
         while ($row = $db->fetchAssoc($result)) {
 

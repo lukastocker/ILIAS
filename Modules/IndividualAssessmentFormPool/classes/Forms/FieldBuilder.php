@@ -53,7 +53,6 @@ class FieldBuilder
         switch ($config->getType()) {
             case FieldType::MARKDOWN:
                 $md_renderer = $md_renderer ?? $this->default_mdrenderer;
-                $value = $config->getDefaultValue() ?? $value;
                 return $factory->markdown($md_renderer, $label, $description)
                     ->withValue((string) $value)
                     ->withMaxLimit(512);
@@ -67,7 +66,6 @@ class FieldBuilder
                     ->withValue($value);
 
             case FieldType::DATETIME:
-                $value = $config->getDefaultValue() ?? $value;
                 $value = ($value === null || $value === '') ?
                     null : \DateTimeImmutable::createFromFormat('U', $value);
 
@@ -89,9 +87,6 @@ class FieldBuilder
 
             case FieldType::TAG:
                 $options = $config->getOptions() ?? [];
-                if ($value === null || $value === '') {
-                    $value = $config->getDefaultValue();
-                }
                 $value = ($value === null || $value === '') ?
                     null : explode(\SpecifiedFormStorageDB::VALUE_DELIMITER, $value);
                 return $factory->tag($label, $options, $description)
@@ -99,7 +94,6 @@ class FieldBuilder
                     ->withValue($value);
 
             case FieldType::RATING:
-                $value = $config->getDefaultValue() ?? $value;
                 $value = ($value === null || $value === '') ? null : FiveStarRatingScale::from((int) $value);
                 return $factory->rating($label, $description)
                     ->withAdditionalTransformation(

@@ -3497,6 +3497,7 @@ common#:#ass_log_delete_entries#:#Delete Log Entries
 common#:#ass_log_delete_no_selection#:#Please select at least one test to delete the Log Data
 common#:#ass_log_deleted#:#The Log Data for the selected tests has been deleted
 common#:#ass_log_output#:#Log Data Output
+common#:#assessment#:#Assessment
 common#:#assessment_imap_line_color#:#Image Map Line Color
 common#:#assessment_log#:#Create a Test and Assessment log for a specific time period
 common#:#assessment_log_datetime#:#Date/Time

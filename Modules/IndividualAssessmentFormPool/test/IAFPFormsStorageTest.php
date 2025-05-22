@@ -36,8 +36,7 @@ class IAFPFormsStorageTest extends TestCase
             ->willReturn(-2);
         $this->db = new FormsStorageDB(
             $ildb,
-            $this->createMock(\ilAccess::class),
-            $this->createMock(\ilLanguage::class)
+            $this->createMock(\ilAccess::class)
         );
     }
 

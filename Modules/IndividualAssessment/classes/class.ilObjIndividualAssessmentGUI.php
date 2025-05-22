@@ -429,7 +429,11 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
     protected function addDidacticTemplateOptions(array &$a_options): void
     {
         $collector = \ilObjIndividualAssessmentFormPool::getRepository();
-        $a_options = $collector->getFormsSelection();
+        //add default option ('standard'), form only shows for entries > 1
+        $a_options = array_merge(
+            [-1 => [$this->lng->txt('iass_std_form'), $this->lng->txt('iass_no_form_pool')]],
+            $collector->getFormsSelection()
+        );
     }
 
     protected function afterSave(ilObject $new_object): void

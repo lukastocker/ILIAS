@@ -86,7 +86,7 @@ class SpecifiedFormStorageDB implements SpecifiedFormStorage
                 $member_usr_id,
                 (bool) $row['with_notes'],
                 (bool) $row['available_for_examiners'],
-                (string) $row['value'],
+                $row['value'],
                 (string) $row['note'],
             );
         }

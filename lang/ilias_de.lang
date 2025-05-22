@@ -3497,6 +3497,7 @@ common#:#ass_log_delete_entries#:#Protokolleinträge löschen
 common#:#ass_log_delete_no_selection#:#Bitte wählen Sie mindestens einen Test aus, dessen Protokolleinträge Sie löschen wollen!
 common#:#ass_log_deleted#:#Die Protokolleinträge für die ausgewählten Tests wurden gelöscht!
 common#:#ass_log_output#:#Ausgabe der Protokolldaten
+common#:#assessment#:#Bewertung
 common#:#assessment_imap_line_color#:#Imagemap Linienfarbe
 common#:#assessment_log#:#Test und Assessment-Aktivitäten für eine bestimmte Zeitperiode protokollieren
 common#:#assessment_log_datetime#:#Datum/Uhrzeit

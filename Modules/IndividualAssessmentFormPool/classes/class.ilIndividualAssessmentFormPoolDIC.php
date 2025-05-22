@@ -51,8 +51,7 @@ trait ilIndividualAssessmentFormPoolDIC
         $container['repo.forms'] = static fn(): FormsStorageDB =>
             new FormsStorageDB(
                 $DIC['ilDB'],
-                $DIC['ilAccess'],
-                $DIC['lng']
+                $DIC['ilAccess']
             );
         return $container;
     }

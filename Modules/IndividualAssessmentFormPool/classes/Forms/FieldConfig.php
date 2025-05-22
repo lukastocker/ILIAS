@@ -86,7 +86,7 @@ class FieldConfig
                     $opts = array_key_exists('opts', $v) ? $v['opts'] : null;
                     $default = array_key_exists('default', $v) ? $v['default'] : null;
                     if (!is_null($default) && !is_null($opts)) {
-                        if ($default === '' || !in_array($default[0], $opts)) {
+                        if ($default === '') {
                             $default = null;
                         }
                     }
@@ -114,9 +114,9 @@ class FieldConfig
                 return $factory->group([ //group is needed due to exisiting transforms on tag-input
                      $factory->tag($lng->txt('field_options'), [], $lng->txt('field_options_byline'))
                          ->withUserCreatedTagsAllowed(true)
-                         ->withTagMaxLength(512)
                          ->withRequired(true)
                          ->withValue($this->getOptions())
+                         ->withTagMaxLength(512)
                  ])
                  ->withAdditionalTransformation(
                      $refinery->custom()->transformation(

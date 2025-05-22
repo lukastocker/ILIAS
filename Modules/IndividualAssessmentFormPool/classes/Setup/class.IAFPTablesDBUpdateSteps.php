@@ -230,7 +230,7 @@ class IAFPTablesDBUpdateSteps implements \ilDatabaseUpdateSteps
                 ],
                 'default_value' => [
                     'type' => 'text',
-                    'length' => 255,
+                    'length' => 512,
                     'notnull' => false,
                 ],
                 'with_notes' => [
@@ -359,8 +359,7 @@ class IAFPTablesDBUpdateSteps implements \ilDatabaseUpdateSteps
                     'notnull' => true
                 ],
                 'value' => [
-                    'type' => 'text',
-                    'length' => 512,
+                    'type' => 'clob',
                     'notnull' => true
                 ]
             ]
