@@ -153,7 +153,7 @@ class ilIndividualAssessmentUserGrading
 
         $learning_progress = $input
             ->select($lng->txt('learning_progress'), $grading_options)
-            ->withValue($this->getLearningProgress() ?: ilLPStatus::LP_STATUS_IN_PROGRESS_NUM)
+            ->withValue($this->getLearningProgress() ?: ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM)
             ->withDisabled(!$may_be_edited)
             ->withRequired(true)
         ;

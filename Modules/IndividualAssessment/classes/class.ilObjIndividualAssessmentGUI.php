@@ -413,6 +413,8 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
     protected function getEntryForStatus(int $status): string
     {
         switch ($status) {
+            case ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM:
+                return $this->txt(ilLPStatus::LP_STATUS_NOT_ATTEMPTED);
             case ilLPStatus::LP_STATUS_IN_PROGRESS_NUM:
                 return $this->txt(ilLPStatus::LP_STATUS_IN_PROGRESS);
             case ilLPStatus::LP_STATUS_COMPLETED_NUM:

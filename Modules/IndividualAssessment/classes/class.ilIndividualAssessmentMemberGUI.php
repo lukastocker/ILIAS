@@ -343,6 +343,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
     protected function getPossibleLPStates(): array
     {
         return [
+            ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM => $this->lng->txt(ilLPStatus::LP_STATUS_NOT_ATTEMPTED),
             ilLPStatus::LP_STATUS_IN_PROGRESS_NUM => $this->lng->txt(ilLPStatus::LP_STATUS_IN_PROGRESS),
             ilLPStatus::LP_STATUS_COMPLETED_NUM => $this->lng->txt(ilLPStatus::LP_STATUS_COMPLETED),
             ilLPStatus::LP_STATUS_FAILED_NUM => $this->lng->txt(ilLPStatus::LP_STATUS_FAILED)
