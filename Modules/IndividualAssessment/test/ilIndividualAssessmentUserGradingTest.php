@@ -134,6 +134,7 @@ class ilIndividualAssessmentUserGradingTest extends TestCase
         $place = 'Area 51 Underground';
         $event_time = new DateTimeImmutable();
         $finalized = false;
+        $may_publish = true;
         $grading = new ilIndividualAssessmentUserGrading(
             $name,
             $record,
@@ -160,7 +161,8 @@ class ilIndividualAssessmentUserGradingTest extends TestCase
                 ilLPStatus::LP_STATUS_IN_PROGRESS_NUM,
                 ilLPStatus::LP_STATUS_FAILED_NUM,
                 ilLPStatus::LP_STATUS_COMPLETED_NUM
-            ]
+            ],
+            $may_publish
         );
 
         $this->assertInstanceOf(Section::class, $input);

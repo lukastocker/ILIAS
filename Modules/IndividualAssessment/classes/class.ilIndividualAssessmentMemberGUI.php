@@ -233,6 +233,11 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         bool $may_be_edited,
         bool $amend = false
     ): ILIAS\UI\Component\Input\Container\Form\Form {
+        $may_publish = false;
+        if ($this->userMayPublish()) {
+            $may_publish = true;
+        }
+
         $section = $this->getMember()->getGrading()->toFormInput(
             $this->input_factory->field(),
             $this->data_factory,
@@ -242,6 +247,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
             $this->user->getDateFormat(),
             $this->field_builder,
             $this->getPossibleLPStates(),
+            $may_publish,
             $may_be_edited,
             $this->getObject()->getSettings()->isEventTimePlaceRequired(),
             $this->getObject()->getSettings()->isFileRequired(),
@@ -545,6 +551,13 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
     protected function userMayAmend(): bool
     {
         return $this->getAccessHandler()->mayAmendAllUsers();
+    }
+
+    protected function userMayPublish(): bool
+    {
+        return
+            $this->getAccessHandler()->isSystemAdmin() ||
+            ($this->getAccessHandler()->mayPublishUser($this->getMember()->id()) && ($this->userMayGrade() || $this->userMayView()));
     }
 
     protected function isFinalized(): bool

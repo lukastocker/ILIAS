@@ -196,7 +196,6 @@ class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessH
 
     public function mayGradeAnyUser(): bool
     {
-        //return $this->checkRBACOrPositionAccessToObj('write_learning_progress');
         return $this->handler->checkRbacOrPositionPermissionAccess(
             self::RBAC_OP_CREATE_RECORDS,
             self::ORGU_OP_CREATE_RECORDS,
@@ -245,5 +244,18 @@ class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessH
     public function mayEditLearningProgressSettings(): bool
     {
         return $this->checkRBACAccessToObj('edit_learning_progress');
+    }
+
+    public function mayPublishUser(int $user_id): bool
+    {
+        return
+            (count(
+                $this->handler->filterUserIdsByRbacOrPositionOfCurrentUser(
+                    self::RBAC_OP_PUBLISH_RECORDS,
+                    self::ORGU_OP_PUBLISH_RECORDS,
+                    $this->iass->getRefId(),
+                    [$user_id]
+                )
+            ) > 0);
     }
 }

@@ -726,9 +726,9 @@ assessment#:#filter_show_question_types#:#Zeige folgende Fragetypen
 assessment#:#filter_show_questionpools#:#Zeige folgende Fragenpools
 assessment#:#final_statement#:#Abschließende Bemerkung
 assessment#:#final_statement_show_desc#:#Zeigt die Abschließende Bemerkung nach Abgabe des Tests an.
-assessment#:#finalized_by#:#Bewertung abgeschlossen von
+assessment#:#finalized_by#:#Bewertung veröffentlicht von
 assessment#:#finalized_evaluation#:#Endgültig bewertet
-assessment#:#finalized_on#:#Bewertung abgeschlossen am
+assessment#:#finalized_on#:#Bewertung veröffentlicht am
 assessment#:#finish_all_user_passes#:#Alle Testdurchläufe beenden
 assessment#:#finish_pass_for_all_users#:#Wollen Sie wirklich die Test Durchläufe für alle Benutzer beenden?
 assessment#:#finish_pass_for_all_users_in_processing_time#:#Sie können die Durchläufe aller Benutzer nicht gemeinsam beenden, da für mindestens einen Benutzer die Bearbeitungszeit noch nicht vorbei ist.
@@ -10488,9 +10488,9 @@ iass#:#iass_file_required#:#Pflichtangabe Prüfungsblatt
 iass#:#iass_file_required_info#:#Ein Prüfungsblatt muss hochgeladen werden.
 iass#:#iass_file_visible_examinee#:#Datei für Teilnehmer sichtbar
 iass#:#iass_filter_all#:#Alle
-iass#:#iass_finalize#:#Abschließen
-iass#:#iass_finalize_info#:#Die Individuelle Bewertung wird abgeschlossen.
-iass#:#iass_finalize_user_qst#:#Soll die Bewertung des Teilnehmers wirklich final abgeschlossen werden? Änderungen an der Bewertung sind hinterher nicht mehr möglich.
+iass#:#iass_finalize#:#Veröffentlichen
+iass#:#iass_finalize_info#:#Die Individuelle Bewertung wird veröffentlicht.
+iass#:#iass_finalize_user_qst#:#Soll die Bewertung des Teilnehmers wirklich final veröffentlicht werden? Änderungen an der Bewertung sind hinterher nicht mehr möglich.
 iass#:#iass_further_field_headline#:#Detaillierte Informationen
 iass#:#iass_graded_by#:#Bewertet von
 iass#:#iass_info_emails_expl#:#Sie können mehrere Adressen mit einem Komma getrennt angeben.
@@ -10533,7 +10533,7 @@ iass#:#iass_usr_remove#:#Entfernen
 iass#:#iass_usr_view#:#Prüfungsdaten
 iass#:#il_iass_member#:#Teilnehmer
 iass#:#il_iass_members#:#Teilnehmer
-iass#:#lp_inactive#:#Beachten Sie: die Lernfortschrittsbestimmung für dieses Objekt ist deaktiviert. Daher können Teilnahmen nicht finalisiert werden.
+iass#:#lp_inactive#:#Beachten Sie: die Lernfortschrittsbestimmung für dieses Objekt ist deaktiviert. Daher können Teilnahmen nicht veröffentlicht werden.
 iass#:#save_amend#:#Geänderte Prüfungsdaten speichern
 iass#:#setting_report_availability_byline#:#Wird in Reports gefunden
 iass#:#setting_report_availability_label#:#Sichtbar in Reports
@@ -14135,7 +14135,7 @@ rbac#:#iarp_iarp_view_results#:#Lernfortschritt/Bearbeitungsstatus (anderer Benu
 rbac#:#iarp_read#:#Lesezugriff auf Report
 rbac#:#iarp_visible#:#Report ist sichtbar
 rbac#:#iarp_write#:#Einstellungen des Reports bearbeiten
-rbac#:#iass_amend_grading#:#Finalisierte Bewertung der Individuellen Bewertung ändern
+rbac#:#iass_amend_grading#:#Veröffentlichte Bewertung der Individuellen Bewertung ändern
 rbac#:#iass_copy#:#Individuelle Bewertung kopieren
 rbac#:#iass_delete#:#Individuelle Bewertung löschen
 rbac#:#iass_edit_learning_progress#:#Lernfortschritt in Individuellen Bewertung bearbeiten

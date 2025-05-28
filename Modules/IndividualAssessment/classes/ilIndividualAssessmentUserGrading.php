@@ -121,6 +121,7 @@ class ilIndividualAssessmentUserGrading
         \ILIAS\Data\DateFormat\DateFormat $date_format,
         FieldBuilder $field_builder,
         array $grading_options,
+        bool $may_publish,
         bool $may_be_edited = true,
         bool $place_required = false,
         bool $file_required = false,
@@ -197,10 +198,14 @@ class ilIndividualAssessmentUserGrading
         ];
 
         if (!$amend) {
+            $disabled = !$may_be_edited;
+            if (!$may_publish) {
+                $disabled = true;
+            }
             $finalized = $input
                 ->checkbox($lng->txt('iass_finalize'), $lng->txt('iass_finalize_info'))
                 ->withValue($this->isFinalized())
-                ->withDisabled(!$may_be_edited)
+                ->withDisabled($disabled)
             ;
 
             $fields['finalized'] = $finalized;

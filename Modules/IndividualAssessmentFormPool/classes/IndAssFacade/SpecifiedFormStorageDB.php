@@ -177,7 +177,7 @@ class SpecifiedFormStorageDB implements SpecifiedFormStorage
     protected function deleteFileResources(
         IRSS $irss,
         ilIndividualAssessmentGradingStakeholder $stakeholder,
-        string ...$ids
+        ?string ...$ids
     ): void {
         foreach ($ids as $identifier) {
             $resource_id = $irss->manage()->find($identifier);

@@ -437,12 +437,7 @@ class ilIndividualAssessmentMembersTableGUI
             return false;
         }
 
-        return
-            (
-                $this->iass_access->mayGradeUser($usr_id)
-                &&
-                $this->wasEditedByViewer($examiner_id)
-            );
+        return $this->iass_access->mayGradeUser($usr_id);
     }
 
     /**
@@ -489,11 +484,6 @@ class ilIndividualAssessmentMembersTableGUI
     protected function userMayDownloadAttachment(int $usr_id): bool
     {
         return $this->iass_access->mayViewUser($usr_id) || $this->iass_access->mayGradeUser($usr_id);
-    }
-
-    protected function wasEditedByViewer(int $examiner_id = null): bool
-    {
-        return $examiner_id === $this->current_user->getId() || null === $examiner_id;
     }
 
     protected function txt(string $code): string

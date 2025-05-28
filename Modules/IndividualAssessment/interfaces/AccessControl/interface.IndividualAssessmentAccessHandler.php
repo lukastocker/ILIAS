@@ -51,4 +51,5 @@ interface IndividualAssessmentAccessHandler
     public function mayAmendAllUsers(): bool;
     public function isSystemAdmin(): bool;
     public function mayEditLearningProgressSettings(): bool;
+    public function mayPublishUser(int $user_id): bool;
 }
