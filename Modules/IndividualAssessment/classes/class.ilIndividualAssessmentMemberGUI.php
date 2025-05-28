@@ -73,6 +73,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         protected IRSS $irss,
         protected ilIndividualAssessmentGradingStakeholder $stakeholder,
         protected FieldBuilder $field_builder,
+        protected SpecifiedFormStorage $iass_member_custom_storage,
     ) {
         parent::__construct();
         $this->lng->loadLanguageModule('trac');
@@ -338,6 +339,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
             $member = $member->withExaminerId($this->user->getId());
         }
         $this->getObject()->membersStorage()->updateMember($member);
+        $this->iass_member_custom_storage->storeSpecifiedUserValues(...$member->getGrading()->getCustomFields());
     }
 
     protected function getPossibleLPStates(): array
