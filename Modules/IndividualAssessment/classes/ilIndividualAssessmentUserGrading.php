@@ -186,16 +186,24 @@ class ilIndividualAssessmentUserGrading
             $custom[$cf->getFieldId()] = $cf->toFormInput($input, $refinery, $file_handler, $field_builder);
         }
 
-        $fields = [
-            'name' => $name,
-            'record' => $record,
-            'internal_note' => $internal_note,
-            'file' => $file,
-            'custom' => $input->group($custom),
-            'place' => $place,
-            'event_time' => $event_time,
-            'learning_progress' => $learning_progress,
-        ];
+        if ($custom_fields === []) {
+            $fields = [
+                'name' => $name,
+                'record' => $record,
+                'internal_note' => $internal_note,
+                'file' => $file,
+                'custom' => $input->group($custom),
+                'place' => $place,
+                'event_time' => $event_time,
+                'learning_progress' => $learning_progress,
+            ];
+        } else {
+            $fields = [
+                'name' => $name,
+                'custom' => $input->group($custom),
+                'learning_progress' => $learning_progress,
+            ];
+        }
 
         if (!$amend) {
             $disabled = !$may_be_edited;
@@ -234,17 +242,31 @@ class ilIndividualAssessmentUserGrading
                     $updated_custom[] = $cf->withValue($values['custom'][$cf->getFieldId()]);
                 }
 
+                if ($custom_fields === []) {
+                    return (new ilIndividualAssessmentUserGrading(
+                        $values['name'],
+                        $values['record'],
+                        $values['internal_note'],
+                        $file,
+                        (int) $values['learning_progress'],
+                        $values['place'],
+                        $values['event_time'],
+                        $finalized
+                    ))
+                        ->withCustomFields($updated_custom);
+                }
+
                 return (new ilIndividualAssessmentUserGrading(
                     $values['name'],
-                    $values['record'],
-                    $values['internal_note'],
-                    $file,
+                    '',
+                    '',
+                    null,
                     (int) $values['learning_progress'],
-                    $values['place'],
-                    $values['event_time'],
+                    '',
+                    null,
                     $finalized
                 ))
-                ->withCustomFields($updated_custom);
+                    ->withCustomFields($updated_custom);
             })
         );
     }
