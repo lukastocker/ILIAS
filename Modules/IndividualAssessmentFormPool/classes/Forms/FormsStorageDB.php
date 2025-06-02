@@ -315,9 +315,9 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
         $id = $field->getFieldId();
         $config = $field->getConfig();
 
-        $default_value = $config->getDefaultValue();
+        $default_value = (array) $config->getDefaultValue();
         $options = $config->getOptions();
-        if (is_array($options)) {
+        if (is_array($options) && !is_null($default_value)) {
             $diff = array_diff($default_value, $options);
             $default_value = array_diff($default_value, $diff);
         }
