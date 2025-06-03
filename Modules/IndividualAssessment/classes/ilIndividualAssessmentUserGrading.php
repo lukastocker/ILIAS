@@ -125,7 +125,8 @@ class ilIndividualAssessmentUserGrading
         bool $may_be_edited = true,
         bool $place_required = false,
         bool $file_required = false,
-        bool $amend = false
+        bool $amend = false,
+        bool $manual_grading = false
     ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
 
         $name = $input
@@ -195,14 +196,16 @@ class ilIndividualAssessmentUserGrading
                 'custom' => $input->group($custom),
                 'place' => $place,
                 'event_time' => $event_time,
-                'learning_progress' => $learning_progress,
             ];
         } else {
             $fields = [
                 'name' => $name,
                 'custom' => $input->group($custom),
-                'learning_progress' => $learning_progress,
             ];
+        }
+
+        if ($manual_grading) {
+            $fields['learning_progress'] = $learning_progress;
         }
 
         if (!$amend) {
@@ -223,7 +226,7 @@ class ilIndividualAssessmentUserGrading
             $fields,
             $lng->txt('iass_edit_record')
         )->withAdditionalTransformation(
-            $refinery->custom()->transformation(function ($values) use ($amend, $custom_fields) {
+            $refinery->custom()->transformation(function ($values) use ($amend, $custom_fields, $manual_grading) {
                 $finalized = $this->isFinalized();
                 if (!$amend) {
                     $finalized = $values['finalized'];
@@ -242,13 +245,17 @@ class ilIndividualAssessmentUserGrading
                     $updated_custom[] = $cf->withValue($values['custom'][$cf->getFieldId()]);
                 }
 
+                $learning_progress = 0;
+                if ($manual_grading) {
+                    $learning_progress = (int) $values['learning_progress'];
+                }
                 if ($custom_fields === []) {
                     return (new ilIndividualAssessmentUserGrading(
                         $values['name'],
                         $values['record'],
                         $values['internal_note'],
                         $file,
-                        (int) $values['learning_progress'],
+                        $learning_progress,
                         $values['place'],
                         $values['event_time'],
                         $finalized
@@ -261,7 +268,7 @@ class ilIndividualAssessmentUserGrading
                     '',
                     '',
                     null,
-                    (int) $values['learning_progress'],
+                    $learning_progress,
                     '',
                     null,
                     $finalized

@@ -237,7 +237,10 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         if ($this->userMayPublish()) {
             $may_publish = true;
         }
-
+        $manual_grading = false;
+        if (ilLPObjSettings::_lookupDBMode($this->getObject()->getId()) === ilLPObjSettings::LP_MODE_INDIVIDUAL_ASSESSMENT) {
+            $manual_grading = true;
+        }
         $section = $this->getMember()->getGrading()->toFormInput(
             $this->input_factory->field(),
             $this->data_factory,
@@ -251,7 +254,8 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
             $may_be_edited,
             $this->getObject()->getSettings()->isEventTimePlaceRequired(),
             $this->getObject()->getSettings()->isFileRequired(),
-            $amend
+            $amend,
+            $manual_grading
         );
 
         $form = $this->input_factory->container()->form()->standard($form_action, [$section]);
