@@ -208,4 +208,15 @@ class SpecifiedFormStorageDB implements SpecifiedFormStorage
         return $ret;
     }
 
+    public function checkForAvailableFormFields(int $obj_id): bool
+    {
+        $query = 'SELECT field_id FROM iass_formfields ' . PHP_EOL
+            . ' WHERE obj_id = ' . $this->db->quote($obj_id, 'integer');
+
+        $result = $this->db->query($query);
+        if ($this->db->fetchAssoc($result) != null) {
+            return true;
+        }
+        return false;
+    }
 }

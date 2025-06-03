@@ -60,7 +60,7 @@ class ilIndividualAssessmentSettingsTest extends TestCase
         $this->assertFalse($settings->isResultVisible());
     }
 
-    public function test_to_form_input()
+    public function test_to_standard_form_input()
     {
         $lng = $this->createMock(ilLanguage::class);
         $lng->expects($this->atLeastOnce())
@@ -87,6 +87,7 @@ class ilIndividualAssessmentSettingsTest extends TestCase
         $file_required = false;
         $file_visible = false;
         $result_visible = false;
+        $specified_form_fields = false;
 
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
@@ -103,7 +104,59 @@ class ilIndividualAssessmentSettingsTest extends TestCase
         $input = $settings->toFormInput(
             $f,
             $lng,
-            $refinery
+            $refinery,
+            $specified_form_fields
+        );
+
+        $this->assertInstanceOf(Section::class, $input);
+    }
+
+    public function test_to_custom_form_input()
+    {
+        $lng = $this->createMock(ilLanguage::class);
+        $lng->expects($this->atLeastOnce())
+            ->method('txt')
+            ->willReturn("label")
+        ;
+
+        $df = new ILIAS\Data\Factory();
+        $refinery = new ILIAS\Refinery\Factory($df, $lng);
+        $f = new ILIAS\UI\Implementation\Component\Input\Field\Factory(
+            $this->createMock(\ILIAS\UI\Implementation\Component\Input\UploadLimitResolver::class),
+            new ILIAS\UI\Implementation\Component\SignalGenerator(),
+            $df,
+            $refinery,
+            $lng
+        );
+
+        $obj_id = 11;
+        $title = 'My custom fields IASS';
+        $description = 'Special IASS for members';
+        $content = 'Everything you have learned';
+        $record_remplate = 'You should ask these things';
+        $event_time_place_required = false;
+        $file_required = false;
+        $file_visible = false;
+        $result_visible = false;
+        $specified_form_fields = true;
+
+        $settings = new ilIndividualAssessmentSettings(
+            $obj_id,
+            $title,
+            $description,
+            $content,
+            $record_remplate,
+            $event_time_place_required,
+            $file_required,
+            $file_visible,
+            $result_visible
+        );
+
+        $input = $settings->toFormInput(
+            $f,
+            $lng,
+            $refinery,
+            $specified_form_fields
         );
 
         $this->assertInstanceOf(Section::class, $input);

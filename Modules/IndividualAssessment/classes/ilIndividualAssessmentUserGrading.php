@@ -208,17 +208,12 @@ class ilIndividualAssessmentUserGrading
             $fields['learning_progress'] = $learning_progress;
         }
 
-        if (!$amend) {
-            $disabled = !$may_be_edited;
-            if (!$may_publish) {
-                $disabled = true;
-            }
+        if (!$amend && $may_publish) {
             $finalized = $input
                 ->checkbox($lng->txt('iass_finalize'), $lng->txt('iass_finalize_info'))
                 ->withValue($this->isFinalized())
-                ->withDisabled($disabled)
+                ->withDisabled(!$may_be_edited)
             ;
-
             $fields['finalized'] = $finalized;
         }
 
@@ -226,9 +221,9 @@ class ilIndividualAssessmentUserGrading
             $fields,
             $lng->txt('iass_edit_record')
         )->withAdditionalTransformation(
-            $refinery->custom()->transformation(function ($values) use ($amend, $custom_fields, $manual_grading) {
+            $refinery->custom()->transformation(function ($values) use ($amend, $custom_fields, $manual_grading, $may_publish) {
                 $finalized = $this->isFinalized();
-                if (!$amend) {
+                if (!$amend && $may_publish) {
                     $finalized = $values['finalized'];
                 }
 

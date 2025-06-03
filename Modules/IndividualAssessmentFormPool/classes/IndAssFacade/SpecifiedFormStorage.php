@@ -58,4 +58,6 @@ interface SpecifiedFormStorage
         ilIndividualAssessmentGradingStakeholder $stakeholder,
         int $iass_obj_id
     ): void;
+
+    public function checkForAvailableFormFields(int $obj_id): bool;
 }

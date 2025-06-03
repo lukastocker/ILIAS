@@ -113,34 +113,58 @@ class ilIndividualAssessmentSettings
     public function toFormInput(
         Field\Factory $input,
         ilLanguage $lng,
-        Refinery $refinery
+        Refinery $refinery,
+        bool $specified_form
     ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
+
+        $title = $input->text($lng->txt("title"))
+                       ->withValue($this->getTitle())
+                       ->withRequired(true);
+        $description = $input->textarea($lng->txt("description"))
+                             ->withValue($this->getDescription());
+        $content = $input->textarea($lng->txt("iass_content"), $lng->txt("iass_content_explanation"))
+                         ->withValue($this->getContent());
+        $record_template = $input->textarea($lng->txt("iass_record_template"), $lng->txt("iass_record_template_explanation"))
+                                 ->withValue($this->getRecordTemplate());
+        $time_place_required = $input->checkbox($lng->txt("iass_event_time_place_required"), $lng->txt("iass_event_time_place_required_info"))
+                                     ->withValue($this->isEventTimePlaceRequired());
+        $file_required = $input->checkbox($lng->txt("iass_file_required"), $lng->txt("iass_file_required_info"))
+                               ->withValue($this->isFileRequired());
+        $file_visible = $input->checkbox($lng->txt("iass_file_visible_examinee"), '')
+                              ->withValue($this->isFileVisible());
+        $notification = $input->checkbox($lng->txt("iass_notify"), $lng->txt("iass_notify_explanation"))
+                              ->withValue($this->isResultVisible());
+
+        $fields = [
+            "title" => $title,
+            "description" => $description,
+            "content" => $content
+        ];
+
+        if (!$specified_form) {
+            $fields['record_template'] = $record_template;
+            $fields['event_time_place_required'] = $time_place_required;
+            $fields['file_required'] = $file_required;
+            $fields['file_visible'] = $file_visible;
+        }
+
+        $fields['result_visible'] = $notification;
+
         return $input->section(
-            [
-                $input->text($lng->txt("title"))
-                    ->withValue($this->getTitle())
-                    ->withRequired(true),
-                $input->textarea($lng->txt("description"))
-                    ->withValue($this->getDescription()),
-                $input->textarea($lng->txt("iass_content"), $lng->txt("iass_content_explanation"))
-                    ->withValue($this->getContent()),
-                $input->textarea($lng->txt("iass_record_template"), $lng->txt("iass_record_template_explanation"))
-                    ->withValue($this->getRecordTemplate()),
-                $input->checkbox($lng->txt("iass_event_time_place_required"), $lng->txt("iass_event_time_place_required_info"))
-                    ->withValue($this->isEventTimePlaceRequired()),
-                $input->checkbox($lng->txt("iass_file_required"), $lng->txt("iass_file_required_info"))
-                    ->withValue($this->isFileRequired()),
-                $input->checkbox($lng->txt("iass_file_visible_examinee"), '')
-                    ->withValue($this->isFileVisible()),
-                $input->checkbox($lng->txt("iass_notify"), $lng->txt("iass_notify_explanation"))
-                    ->withValue($this->isResultVisible()),
-            ],
+            $fields,
             $lng->txt("settings")
         )->withAdditionalTransformation(
             $refinery->custom()->transformation(function ($value) {
                 return new ilIndividualAssessmentSettings(
                     $this->getObjId(),
-                    ...$value
+                    $value['title'],
+                    $value['description'],
+                    $value['content'],
+                    $value['record_template'] ?? '',
+                    $value['event_time_place_required'] ?? false,
+                    $value['file_required'] ?? false,
+                    $value['file_visible'] ?? false,
+                    $value['result_visible']
                 );
             })
         );

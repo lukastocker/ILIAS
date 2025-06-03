@@ -50,7 +50,8 @@ trait ilIndividualAssessmentDIC
                 $dic['ui.renderer'],
                 $dic['http']->request(),
                 $dic['ilErr'],
-                $c['ilIndividualAssessmentCommonSettingsGUI']
+                $c['ilIndividualAssessmentCommonSettingsGUI'],
+                $c['iass.member.custom_storage']
             );
         };
 

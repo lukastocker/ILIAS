@@ -50,6 +50,8 @@ class ilIndividualAssessmentSettingsGUI
     protected ilErrorHandling $error_object;
     protected ilIndividualAssessmentCommonSettingsGUI $common_settings_gui;
 
+    protected SpecifiedFormStorage $specified_form_storage;
+
     public function __construct(
         ilObjIndividualAssessment $object,
         ilCtrl $ctrl,
@@ -61,7 +63,8 @@ class ilIndividualAssessmentSettingsGUI
         UI\Renderer $ui_renderer,
         $http_request,
         ilErrorHandling $error_object,
-        ilIndividualAssessmentCommonSettingsGUI $common_settings_gui
+        ilIndividualAssessmentCommonSettingsGUI $common_settings_gui,
+        SpecifiedFormStorage $specified_form_storage
     ) {
         $this->ctrl = $ctrl;
         $this->object = $object;
@@ -77,6 +80,8 @@ class ilIndividualAssessmentSettingsGUI
 
         $this->error_object = $error_object;
         $this->common_settings_gui = $common_settings_gui;
+
+        $this->specified_form_storage = $specified_form_storage;
 
         $this->getSubTabs($this->tabs_gui);
         $this->lng->loadLanguageModule('content');
@@ -145,7 +150,8 @@ class ilIndividualAssessmentSettingsGUI
         $field = $settings->toFormInput(
             $this->input_factory->field(),
             $this->lng,
-            $this->refinery
+            $this->refinery,
+            $this->specified_form_storage->checkForAvailableFormFields($this->object->getId())
         );
 
         // Use centralized on/offline
