@@ -14133,6 +14133,9 @@ rbac#:#iarp_iarp_view_full_record#:#Gesamtes Ergebnis (anderer Benutzer) einsehe
 rbac#:#iarp_iarp_view_general_status#:#Status (anderer Benutzer) einsehen
 rbac#:#iarp_iarp_view_results#:#Lernfortschritt/Bearbeitungsstatus (anderer Benutzer) einsehen
 rbac#:#iarp_read#:#Lesezugriff auf Report
+rbac#:#iarp_view_full_record#:#Gesamtes Ergebnis (anderer Benutzer) einsehen
+rbac#:#iarp_view_general_status#:#Status (anderer Benutzer) einsehen
+rbac#:#iarp_view_results#:#Lernfortschritt/Bearbeitungsstatus (anderer Benutzer) einsehen
 rbac#:#iarp_visible#:#Report ist sichtbar
 rbac#:#iarp_write#:#Einstellungen des Reports bearbeiten
 rbac#:#iass_amend_grading#:#Veröffentlichte Bewertung der Individuellen Bewertung ändern
@@ -14141,6 +14144,7 @@ rbac#:#iass_delete#:#Individuelle Bewertung löschen
 rbac#:#iass_edit_learning_progress#:#Lernfortschritt in Individuellen Bewertung bearbeiten
 rbac#:#iass_edit_members#:#Teilnehmer einer Individuellen Bewertung bearbeiten
 rbac#:#iass_edit_permission#:#Rechteeinstellungen ändern
+rbac#:#iass_publish_records#:#Bewertungen veröffentlichen und abschließen
 rbac#:#iass_read#:#Lesezugriff auf Individuelle Bewertung
 rbac#:#iass_read_learning_progress#:#Lernfortschritt in Individuellen Bewertung einsehen
 rbac#:#iass_visible#:#Individuelle Bewertung ist sichtbar
@@ -14422,6 +14426,7 @@ rbac#:#rbac_create_prgr#:#Link zu Studienprogramm anlegen
 rbac#:#rbac_create_prtt#:#Portfoliovorlage anlegen
 rbac#:#rbac_create_qpl#:#Fragenpool für Tests anlegen
 rbac#:#rbac_create_rcrs#:#ECS-Kurs anlegen
+rbac#:#rbac_create_records#:#Bewertungen vornehmen
 rbac#:#rbac_create_role#:#Rolle anlegen
 rbac#:#rbac_create_rolt#:#Rollenvorlage anlegen
 rbac#:#rbac_create_sahs#:#SCORM-Lernmodul anlegen

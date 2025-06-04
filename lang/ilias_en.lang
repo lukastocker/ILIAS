@@ -14130,6 +14130,9 @@ rbac#:#iarp_iarp_view_full_record#:#View whole result of other users
 rbac#:#iarp_iarp_view_general_status#:#View status of other users
 rbac#:#iarp_iarp_view_results#:#View learning progress of other users
 rbac#:#iarp_read#:#Read content of an Individual Assessment Report
+rbac#:#iarp_view_full_record#:#View whole result of other users
+rbac#:#iarp_view_general_status#:#View status of other users
+rbac#:#iarp_view_results#:#View learning progress of other users
 rbac#:#iarp_visible#:#Individual Assessment Report is visible
 rbac#:#iarp_write#:#Edit an Individual Assessment Report
 rbac#:#iass_amend_grading#:#Amend gradings in an Individual Assessment
@@ -14138,6 +14141,7 @@ rbac#:#iass_delete#:#Delete an Individual Assessment
 rbac#:#iass_edit_learning_progress#:#Edit learning progress information of an Individual Assessment
 rbac#:#iass_edit_members#:#Edit members of an Individual Assessment
 rbac#:#iass_edit_permission#:#Edit permissions of an Individual Assessment
+rbac#:#iass_publish_records#:#Publish and freeze Records
 rbac#:#iass_read#:#Read content of an Individual Assessment
 rbac#:#iass_read_learning_progress#:#View learning progress information of an Individual Assessment
 rbac#:#iass_visible#:#Individual Assessment is visible
@@ -14271,7 +14275,7 @@ rbac#:#nwss_edit_permission#:#User can change permission settings in News and We
 rbac#:#nwss_read#:#User has read access to ews and Web Feeds administration
 rbac#:#nwss_visible#:#News and Web Feeds administration is visible
 rbac#:#nwss_write#:#User can edit settings in News and Web Feeds administration
-rbac#:#obj_records#:#Create Records for Users
+rbac#:#obj_records#:#Bewertungen vornehmen
 rbac#:#obj_skee#:#Competence Tree
 rbac#:#org_op_access_results#:#Access Results of Subordinated Users
 rbac#:#org_op_edit_submissions_grades#:#Edit submissions of other users
@@ -14419,6 +14423,7 @@ rbac#:#rbac_create_prgr#:#Create link to study programme
 rbac#:#rbac_create_prtt#:#Create Portfolio Template
 rbac#:#rbac_create_qpl#:#Create Question Pool Test
 rbac#:#rbac_create_rcrs#:#Create ECS Course
+rbac#:#rbac_create_records#:#Create Records for Users
 rbac#:#rbac_create_role#:#Create new Role
 rbac#:#rbac_create_rolt#:#Create new Role Template
 rbac#:#rbac_create_sahs#:#Create SCORM Learning Module
