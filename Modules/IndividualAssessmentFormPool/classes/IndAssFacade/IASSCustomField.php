@@ -81,6 +81,13 @@ class IASSCustomField
         return $this->note;
     }
 
+    public function withNote(?string $note): self
+    {
+        $clone = clone $this;
+        $clone->note = $note;
+        return $clone;
+    }
+
     public function isAvailableForParticipant(): bool
     {
         return $this->for_examiners_only === false;

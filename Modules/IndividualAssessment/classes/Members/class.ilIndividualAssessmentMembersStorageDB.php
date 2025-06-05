@@ -181,6 +181,7 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
         ];
 
         $this->db->update(self::MEMBERS_TABLE, $values, $where);
+        $this->specified_form_storage->storeSpecifiedUserValues(...$member->getGrading()->getCustomFields());
     }
 
     protected function getActualDateTime(): string

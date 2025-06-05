@@ -100,7 +100,7 @@ class SpecifiedFormStorageDB implements SpecifiedFormStorage
             $value = $field->getValue();
 
             if ($field->hasNotes()) {
-                list($value, $note) = $value;
+                $note = $field->getNote();
                 $query = 'REPLACE INTO iass_cust_notes (obj_id, field_id, usr_id, value)' . PHP_EOL
                     . 'VALUES (' . PHP_EOL
                     . $obj_id . ','
@@ -114,6 +114,7 @@ class SpecifiedFormStorageDB implements SpecifiedFormStorage
             if (is_array($value)) {
                 $value = implode(self::VALUE_DELIMITER, $value);
             }
+
             $query = 'REPLACE INTO iass_cust_values (obj_id, field_id, usr_id, value)' . PHP_EOL
                 . 'VALUES (' . PHP_EOL
                 . $obj_id . ','

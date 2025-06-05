@@ -127,8 +127,7 @@ trait ilIndividualAssessmentDIC
                 $c['helper.dateformat'],
                 $dic['resource_storage'],
                 $stakeholder = $c['irss.stakeholder'],
-                $c['iafp.fieldbuilder'],
-                $c['iass.member.custom_storage']
+                $c['iafp.fieldbuilder']
             );
         };
 

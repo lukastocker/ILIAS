@@ -237,7 +237,12 @@ class ilIndividualAssessmentUserGrading
 
                 $updated_custom = [];
                 foreach ($custom_fields as $cf) {
-                    $updated_custom[] = $cf->withValue($values['custom'][$cf->getFieldId()]);
+                    $value = $values['custom'][$cf->getFieldId()];
+                    if ($cf->hasNotes()) {
+                        list($value, $note) = $value;
+                        $cf = $cf->withNote($note);
+                    }
+                    $updated_custom[] = $cf->withValue($value);
                 }
 
                 $learning_progress = 0;
