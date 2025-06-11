@@ -155,6 +155,18 @@ class ilIndividualAssessmentReportSetupAgent implements Setup\Agent
                 'View full record of other users',
                 ilOrgUnitOperationContext::CONTEXT_IARP
             ),
+            new ilAccessCustomRBACOperationAddedObjective(
+                IARPAccessHandler::RBAC_VIEW_SPECIFIC_RECORDS,
+                'View specific results of other users',
+                "object",
+                9040,
+                ["iarp"]
+            ),
+            new ilOrgUnitOperationRegisteredObjective(
+                IARPAccessHandler::OP_VIEW_SPECIFIC_RECORDS,
+                'View specific records of other users',
+                ilOrgUnitOperationContext::CONTEXT_IARP
+            ),
         ];
     }
 }

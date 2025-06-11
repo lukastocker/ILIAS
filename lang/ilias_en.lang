@@ -12992,6 +12992,7 @@ orgu#:#org_op_ou_publish_records#:#Publish and freeze Records
 orgu#:#org_op_ou_view_full_record#:#View whole result of other users
 orgu#:#org_op_ou_view_general_status#:#View other users
 orgu#:#org_op_ou_view_results#:#View learning progress of other users
+orgu#:#org_op_ou_view_specific_records#:#View specific result of other users
 orgu#:#org_op_read_employee_talk#:#Read access talk appointments
 orgu#:#org_op_read_learning_progress#:#View learning progress of other users
 orgu#:#org_op_score_participants#:#Score Participants
@@ -14129,10 +14130,12 @@ rbac#:#iarp_edit_permission#:#Edit permissions of an Individual Assessment Repor
 rbac#:#iarp_iarp_view_full_record#:#View whole result of other users
 rbac#:#iarp_iarp_view_general_status#:#View status of other users
 rbac#:#iarp_iarp_view_results#:#View learning progress of other users
+rbac#:#iarp_iarp_view_specific_records#:#View specific results of other users
 rbac#:#iarp_read#:#Read content of an Individual Assessment Report
 rbac#:#iarp_view_full_record#:#View whole result of other users
 rbac#:#iarp_view_general_status#:#View status of other users
 rbac#:#iarp_view_results#:#View learning progress of other users
+rbac#:#iarp_view_specific_records#:#View specific results of other users
 rbac#:#iarp_visible#:#Individual Assessment Report is visible
 rbac#:#iarp_write#:#Edit an Individual Assessment Report
 rbac#:#iass_amend_grading#:#Amend gradings in an Individual Assessment

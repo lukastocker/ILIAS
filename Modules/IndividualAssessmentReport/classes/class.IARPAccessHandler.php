@@ -23,9 +23,11 @@ class IARPAccessHandler
     public const RBAC_VIEW_GENERAL_STATUS = 'iarp_view_general_status';
     public const RBAC_VIEW_RESULTS = 'iarp_view_results';
     public const RBAC_VIEW_FULL_RECORD = 'iarp_view_full_record';
+    public const RBAC_VIEW_SPECIFIC_RECORDS = 'iarp_view_specific_records';
     public const OP_VIEW_GENERAL_STATUS = 'ou_view_general_status';
     public const OP_VIEW_RESULTS = 'ou_view_results';
     public const OP_VIEW_FULL_RECORD = 'ou_view_full_record';
+    public const OP_VIEW_SPECIFIC_RECORDS = 'ou_view_specific_records';
 
     public function __construct(
         private readonly ilAccessHandler $access,
@@ -146,4 +148,12 @@ class IARPAccessHandler
         return $ids;
     }
 
+    public function mayViewSpecificRecords(int $user_id): bool
+    {
+        return $this->access->checkRbacOrPositionPermissionAccess(
+            self::RBAC_OP_VIEW_SPECIFIC_RECORDS,
+            self::ORGU_OP_VIEW_SPECIFIC_RECORDS,
+            $this->iarp_ref_id
+        );
+    }
 }
