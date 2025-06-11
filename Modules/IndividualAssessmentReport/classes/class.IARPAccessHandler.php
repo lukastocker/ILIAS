@@ -148,11 +148,11 @@ class IARPAccessHandler
         return $ids;
     }
 
-    public function mayViewSpecificRecords(int $user_id): bool
+    public function mayViewSpecificRecords(): bool
     {
-        return $this->access->checkRbacOrPositionPermissionAccess(
-            self::RBAC_OP_VIEW_SPECIFIC_RECORDS,
-            self::ORGU_OP_VIEW_SPECIFIC_RECORDS,
+        return $this->isSystemAdmin() || $this->access->checkRbacOrPositionPermissionAccess(
+            self::RBAC_VIEW_SPECIFIC_RECORDS,
+            self::OP_VIEW_SPECIFIC_RECORDS,
             $this->iarp_ref_id
         );
     }

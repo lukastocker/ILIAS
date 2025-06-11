@@ -188,6 +188,7 @@ class IARPReportGUI
                         $record->getContent(
                             $environment['lng'],
                             $environment['iass.valuerenderer'],
+                            $this->iafp_access->mayViewSpecificRecords()
                         )
                     )
                 )

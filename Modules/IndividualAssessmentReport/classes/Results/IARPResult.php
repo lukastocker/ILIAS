@@ -96,6 +96,7 @@ class IARPResult
     public function getContent(
         ilLanguage $lng,
         IASSCustomFieldValueRenderer $value_renderer,
+        bool $perm_specific_view
     ): array {
         if (!$this->perm_view_full) {
             return [];
@@ -110,7 +111,9 @@ class IARPResult
         }
 
         foreach ($this->grading_info->getCustomFields() as $cf) {
-            if ($cf->isAvailableForParticipant()) {
+            if ($perm_specific_view) {
+                $ret[$cf->getConfig()->getLabel()] = $value_renderer->render($cf);
+            } elseif ($cf->isAvailableForParticipant()) {
                 $ret[$cf->getConfig()->getLabel()] = $value_renderer->render($cf);
             }
         }
