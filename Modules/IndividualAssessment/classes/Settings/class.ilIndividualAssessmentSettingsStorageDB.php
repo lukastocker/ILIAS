@@ -25,9 +25,7 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
 {
     public const IASS_SETTINGS_TABLE = "iass_settings";
     public const IASS_SETTINGS_INFO_TABLE = "iass_info_settings";
-    // cat-tms-patch start iassfeatures
     public const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
-    // cat-tms-patch end iassfeatures
 
     protected ilDBInterface $db;
 
@@ -41,7 +39,6 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
      */
     public function createSettings(ilIndividualAssessmentSettings $settings): void
     {
-        // cat-tms-patch start iassfeatures
         $values = [
             "obj_id" => ["integer", $settings->getObjId()],
             "content" => ["text", $settings->getContent()],
@@ -51,7 +48,6 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
             "file_visible" => ["integer", $settings->isFileVisible()],
             "result_visible" => ["integer", $settings->isResultVisible()]
         ];
-        // cat-tms-patch end iassfeatures
 
         $this->db->insert(self::IASS_SETTINGS_TABLE, $values);
 
@@ -65,7 +61,6 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
     public function loadSettings(ilObjIndividualAssessment $obj): ilIndividualAssessmentSettings
     {
         if (!ilObjIndividualAssessment::_exists($obj->getId(), false, 'iass')) {
-            // cat-tms-patch start iassfeatures
             return new ilIndividualAssessmentSettings(
                 $obj->getId(),
                 '',
@@ -77,17 +72,14 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
                 false,
                 false
             );
-            // cat-tms-patch end iassfeatures
         }
 
-        // cat-tms-patch start iassfeatures
         $sql =
              "SELECT content, record_template, event_time_place_required, file_required, file_visible, result_visible" . PHP_EOL
             . ',report, report_from, report_to' . PHP_EOL
             . "FROM " . self::IASS_SETTINGS_TABLE . PHP_EOL
             . "WHERE obj_id = " . $this->db->quote($obj->getId(), 'integer') . PHP_EOL
         ;
-        // cat-tms-patch end iassfeatures
 
         $result = $this->db->query($sql);
 
@@ -97,7 +89,6 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
 
         $row = $this->db->fetchAssoc($result);
 
-        // cat-tms-patch start iassfeatures
         return new ilIndividualAssessmentSettings(
             $obj->getId(),
             $obj->getTitle(),
@@ -112,7 +103,6 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
             $row['report_from'] ? \DateTimeImmutable::createFromFormat(self::DATE_TIME_FORMAT, $row['report_from']) : null,
             $row['report_to'] ? \DateTimeImmutable::createFromFormat(self::DATE_TIME_FORMAT, $row['report_to']) : null
         );
-        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -121,7 +111,6 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
     public function updateSettings(ilIndividualAssessmentSettings $settings): void
     {
         $where = ["obj_id" => ["integer", $settings->getObjId()]];
-        // cat-tms-patch start iassfeatures
         list($report, $report_from, $report_to) = $settings->getReportSettings();
         $values = [
             "content" => ["text", $settings->getContent()],
@@ -134,7 +123,6 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
             "report_from" => ["timestamp", $report_from ? $report_from->format(self::DATE_TIME_FORMAT) : null],
             "report_to" => ["timestamp", $report_to ? $report_to->format(self::DATE_TIME_FORMAT) : null]
         ];
-        // cat-tms-patch end iassfeatures
         $this->db->update(self::IASS_SETTINGS_TABLE, $values, $where);
     }
 

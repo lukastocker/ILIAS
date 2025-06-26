@@ -58,34 +58,29 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
     {
         $irss = $this->createMock(IRSS::class);
         $stakeholder = new ilIndividualAssessmentGradingStakeholder();
-        // cat-tms-patch start iassfeatures
         return new ilIndividualAssessmentMembersStorageDBWrapper(
             $db,
             $irss,
             $stakeholder,
             $this->createMock(SpecifiedFormStorage::class)
         );
-        // cat-tms-patch end iassfeatures
     }
 
     public function testCreateObject(): void
     {
         $db = $this->createMock(ilDBInterface::class);
         $irss = $this->createMock(IRSS::class);
-        // cat-tms-patch start iassfeatures
         $obj = new ilIndividualAssessmentMembersStorageDB(
             $db,
             $irss,
             new ilIndividualAssessmentGradingStakeholder(),
             $this->createMock(SpecifiedFormStorage::class)
         );
-        // cat-tms-patch end iassfeatures
         $this->assertInstanceOf(ilIndividualAssessmentMembersStorageDB::class, $obj);
     }
 
     public function test_loadMembers(): void
     {
-        // cat-tms-patch start iassfeatures
         $sql = "SELECT ex.firstname as " . ilIndividualAssessmentMembers::FIELD_EXAMINER_FIRSTNAME
             . "     , ex.lastname as " . ilIndividualAssessmentMembers::FIELD_EXAMINER_LASTNAME
             . "     , ud.firstname as " . ilIndividualAssessmentMembers::FIELD_CHANGER_FIRSTNAME
@@ -102,7 +97,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             . " LEFT JOIN usr_data ex ON iassme.examiner_id = ex.usr_id"
             . " LEFT JOIN usr_data ud ON iassme.changer_id = ud.usr_id"
             . " WHERE obj_id = 22";
-        // cat-tms-patch end iassfeatures
 
         $iass = $this->createMock(ilObjIndividualAssessment::class);
         $iass
@@ -133,14 +127,12 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ->willReturn(null)
         ;
 
-        // cat-tms-patch start iassfeatures
         $obj = new ilIndividualAssessmentMembersStorageDB(
             $db,
             $this->createMock(IRSS::class),
             new ilIndividualAssessmentGradingStakeholder(),
             $this->createMock(SpecifiedFormStorage::class)
         );
-        // cat-tms-patch end iassfeatures
 
         $result = $obj->loadMembers($iass);
         $this->assertInstanceOf(ilIndividualAssessmentMembers::class, $result);
@@ -148,7 +140,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
     public function test_loadMembersAsSingleObjects(): void
     {
-        // cat-tms-patch start iassfeatures
         $sql = "SELECT "
             . "iassme.obj_id,"
             . "iassme.usr_id,"
@@ -170,7 +161,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             . "	LEFT JOIN usr_data ex ON iassme.examiner_id = ex.usr_id\n"
             . "	WHERE obj_id = 22"
         ;
-        // cat-tms-patch end iassfeatures
 
         $iass = $this->createMock(ilObjIndividualAssessment::class);
         $iass
@@ -203,14 +193,12 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
         $irss = $this->createMock(IRSS::class);
         $stakeholder = new ilIndividualAssessmentGradingStakeholder();
-        // cat-tms-patch start iassfeatures
         $obj = new ilIndividualAssessmentMembersStorageDB(
             $db,
             $irss,
             $stakeholder,
             $this->createMock(SpecifiedFormStorage::class)
         );
-        // cat-tms-patch end iassfeatures
         $result = $obj->loadMembersAsSingleObjects($iass);
 
         $this->assertIsArray($result);
@@ -219,7 +207,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
     public function test_loadMember_exception(): void
     {
-        // cat-tms-patch start iassfeatures
         $sql = "SELECT "
             . "iassme.obj_id,"
             . "iassme.usr_id,"
@@ -242,7 +229,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             . "	WHERE obj_id = 22\n"
             . "		AND iassme.usr_id = 33"
         ;
-        // cat-tms-patch end iassfeatures
 
         $iass = $this->createMock(ilObjIndividualAssessment::class);
         $iass
@@ -282,14 +268,12 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
         $irss = $this->createMock(IRSS::class);
         $stakeholder = new ilIndividualAssessmentGradingStakeholder();
-        // cat-tms-patch start iassfeatures
         $obj = new ilIndividualAssessmentMembersStorageDB(
             $db,
             $irss,
             $stakeholder,
             $this->createMock(SpecifiedFormStorage::class)
         );
-        // cat-tms-patch end iassfeatures
 
         $this->expectException(ilIndividualAssessmentException::class);
         $this->expectExceptionMessage("invalid usr-obj combination");
@@ -298,7 +282,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
     public function test_loadMember(): void
     {
-        // cat-tms-patch start iassfeatures
         $sql = "SELECT "
             . "iassme.obj_id,"
             . "iassme.usr_id,"
@@ -321,7 +304,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             . "	WHERE obj_id = 22\n"
             . "		AND iassme.usr_id = 33"
         ;
-        // cat-tms-patch end iassfeatures
 
         $iass = $this->createMock(ilObjIndividualAssessment::class);
         $iass
@@ -361,14 +343,12 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
         $irss = $this->createMock(IRSS::class);
         $stakeholder = new ilIndividualAssessmentGradingStakeholder();
-        // cat-tms-patch start iassfeatures
         $obj = new ilIndividualAssessmentMembersStorageDB(
             $db,
             $irss,
             $stakeholder,
             $this->createMock(SpecifiedFormStorage::class)
         );
-        // cat-tms-patch end iassfeatures
 
         $this->expectException(ilIndividualAssessmentException::class);
         $this->expectExceptionMessage("invalid usr-obj combination");
@@ -387,7 +367,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
         $timestamp = 1638431626;
 
-        // cat-tms-patch start iassfeatures
         $record = [
             ilIndividualAssessmentMembers::FIELD_CHANGER_ID => 11,
             ilIndividualAssessmentMembers::FIELD_CHANGE_TIME => "2021-12-02",
@@ -401,7 +380,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ilIndividualAssessmentMembers::FIELD_PLACE => "place",
             ilIndividualAssessmentMembers::FIELD_FINALIZED => true
         ];
-        // cat-tms-patch end iassfeatures
 
         $db = $this->createMock(ilDBInterface::class);
         $obj = $this->getWrapperObj($db);
@@ -416,10 +394,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
         $this->assertEquals($timestamp, $member->eventTime()->getTimestamp());
         $this->assertEquals("record", $member->record());
         $this->assertEquals("internal_note", $member->internalNote());
-        // cat-tms-patch start iassfeatures
         $this->assertEquals("file_name", $member->fileName());
         $this->assertEquals(33, $member->LPStatus());
-        // cat-tms-patch end iassfeatures
         $this->assertTrue($member->finalized());
     }
 
@@ -464,7 +440,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ->method("internalNote")
             ->willReturn("internalNote")
         ;
-        // cat-tms-patch start iassfeatures
         $member
             ->expects($this->once())
             ->method("place")
@@ -475,13 +450,11 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ->method("finalized")
             ->willReturn(true)
         ;
-        // cat-tms-patch end iassfeatures
         $member
             ->expects($this->once())
             ->method("notificationTS")
             ->willReturn($timestamp)
         ;
-        // cat-tms-patch start iassfeatures
         $member
             ->expects($this->once())
             ->method("fileName")
@@ -492,7 +465,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ->method("changerId")
             ->willReturn(55)
         ;
-        // cat-tms-patch end iassfeatures
 
         $db = $this->createMock(ilDBInterface::class);
         $obj = $this->getWrapperObj($db);
@@ -502,7 +474,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             "usr_id" => ["integer", 22]
         ];
 
-        // cat-tms-patch start iassfeatures
         $values = [
             ilIndividualAssessmentMembers::FIELD_LEARNING_PROGRESS => ["text", 33],
             ilIndividualAssessmentMembers::FIELD_EXAMINER_ID => ["integer", 44],
@@ -516,7 +487,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ilIndividualAssessmentMembers::FIELD_CHANGER_ID => ["integer", 55],
             ilIndividualAssessmentMembers::FIELD_CHANGE_TIME => ["string", $obj->getActualDateTime()]
         ];
-        // cat-tms-patch end iassfeatures
 
         $db
             ->expects($this->once())
@@ -554,14 +524,12 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
         $irss = $this->createMock(IRSS::class);
         $stakeholder = new ilIndividualAssessmentGradingStakeholder();
-        // cat-tms-patch start iassfeatures
         $obj = new ilIndividualAssessmentMembersStorageDB(
             $db,
             $irss,
             $stakeholder,
             $this->createMock(SpecifiedFormStorage::class)
         );
-        // cat-tms-patch end iassfeatures
         $obj->deleteMembers($iass);
     }
 
@@ -579,7 +547,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
         $db = $this->createMock(ilDBInterface::class);
         $obj = $this->getWrapperObj($db);
 
-        // cat-tms-patch start iassfeatures
         $record = [
             ilIndividualAssessmentMembers::FIELD_USR_ID => 22,
             ilIndividualAssessmentMembers::FIELD_LEARNING_PROGRESS => 33,
@@ -610,7 +577,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ilIndividualAssessmentMembers::FIELD_CHANGER_ID => ["integer", 55],
             ilIndividualAssessmentMembers::FIELD_CHANGE_TIME => ["text", $obj->getActualDateTime()]
         ];
-        // cat-tms-patch end iassfeatures
 
         $db
             ->expects($this->once())
@@ -639,14 +605,12 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
         ;
 
         $db = $this->createMock(ilDBInterface::class);
-        // cat-tms-patch start iassfeatures
         $db
             ->expects($this->exactly(2))
             ->method("quote")
             ->withConsecutive([11, "integer"], [22, "integer"])
             ->willReturnOnConsecutiveCalls("11", "22")
         ;
-        // cat-tms-patch end iassfeatures
         $db
             ->expects($this->once())
             ->method("manipulate")
@@ -655,20 +619,17 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
 
         $irss = $this->createMock(IRSS::class);
         $stakeholder = new ilIndividualAssessmentGradingStakeholder();
-        // cat-tms-patch start iassfeatures
         $obj = new ilIndividualAssessmentMembersStorageDB(
             $db,
             $irss,
             $stakeholder,
             $this->createMock(SpecifiedFormStorage::class)
         );
-        // cat-tms-patch end iassfeatures
         $obj->removeMembersRecord($iass, $record);
     }
 
     public function dataFor_getWhereFromFilter(): array
     {
-        // cat-tms-patch start iassfeatures
         return [
             [
                 ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM,
@@ -691,7 +652,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
                 ""
             ]
         ];
-        // cat-tms-patch end iassfeatures
     }
 
     /**

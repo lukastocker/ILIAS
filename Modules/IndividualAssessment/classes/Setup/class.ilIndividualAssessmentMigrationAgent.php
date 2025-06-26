@@ -58,18 +58,14 @@ class ilIndividualAssessmentMigrationAgent implements Setup\Agent
 
     public function getStatusObjective(Setup\Metrics\Storage $storage): Setup\Objective
     {
-        // cat-tms-patch start iassfeatures
         return new ilIndAssSettingsMigrationMetricsCollectedObjective($storage);
-        // cat-tms-patch end iassfeatures
     }
 
     public function getMigrations(): array
     {
-        // cat-tms-patch start iassfeatures
         return [
             new IndAssStorageMigration(),
             new IndAssSettingsMigration(),
         ];
-        // cat-tms-patch end iassfeatures
     }
 }

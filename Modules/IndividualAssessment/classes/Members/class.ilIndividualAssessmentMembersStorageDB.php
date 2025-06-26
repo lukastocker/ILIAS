@@ -26,8 +26,6 @@ use ILIAS\ResourceStorage\Services as IRSS;
 class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMembersStorage
 {
     public const MEMBERS_TABLE = "iass_members";
-
-    // cat-tms-patch start iassfeatures
     public function __construct(
         protected ilDBInterface $db,
         protected IRSS $irss,
@@ -35,7 +33,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
         protected SpecifiedFormStorage $specified_form_storage
     ) {
     }
-    // cat-tms-patch end iassfeatures
 
     /**
      * @inheritdoc
@@ -116,7 +113,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
         if (!is_null($examiner_id)) {
             $examiner_id = (int) $examiner_id;
         }
-        // cat-tms-patch start iassfeatures
         $custom_fields = $this->specified_form_storage->getSpecifiedFormFields($obj->getId(), $usr->getId());
 
         return new ilIndividualAssessmentMember(
@@ -129,7 +125,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             $changer_id,
             $change_time
         );
-        // cat-tms-patch end iassfeatures
     }
 
     protected function createGrading(array $record, string $user_fullname): ilIndividualAssessmentUserGrading
@@ -140,7 +135,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             $event_time = new DateTimeImmutable();
             $event_time = $event_time->setTimestamp((int) $event_time_db);
         }
-        // cat-tms-patch start iassfeatures
         return new ilIndividualAssessmentUserGrading(
             $user_fullname,
             (string) $record[ilIndividualAssessmentMembers::FIELD_RECORD],
@@ -151,7 +145,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             (int) $record[ilIndividualAssessmentMembers::FIELD_LEARNING_PROGRESS],
             (bool) $record[ilIndividualAssessmentMembers::FIELD_FINALIZED]
         );
-        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -168,7 +161,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
         if (!is_null($event_time)) {
             $event_time = $event_time->getTimestamp();
         }
-        // cat-tms-patch start iassfeatures
         $values = [
             ilIndividualAssessmentMembers::FIELD_LEARNING_PROGRESS => ["text", $member->LPStatus()],
             ilIndividualAssessmentMembers::FIELD_EXAMINER_ID => ["integer", $member->examinerId() ?? "NULL"],
@@ -185,7 +177,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
 
         $this->db->update(self::MEMBERS_TABLE, $values, $where);
         $this->specified_form_storage->storeSpecifiedUserValues(...$member->getGrading()->getCustomFields());
-        // cat-tms-patch end iassfeatures
     }
 
     protected function getActualDateTime(): string
@@ -198,7 +189,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
      */
     public function deleteMembers(ilObjIndividualAssessment $obj): void
     {
-        // cat-tms-patch start iassfeatures
         foreach ($this->loadMembers($obj) as $member) {
             if ($identifier = $member[ilIndividualAssessmentMembers::FIELD_FILE_NAME]) {
                 $resource_id = $this->irss->manage()->find($identifier);
@@ -207,12 +197,10 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
                 }
             }
         }
-        // cat-tms-patch end iassfeatures
         $sql = "DELETE FROM " . self::MEMBERS_TABLE . " WHERE obj_id = " . $this->db->quote($obj->getId(), 'integer');
         $this->db->manipulate($sql);
     }
 
-    // cat-tms-patch start iassfeatures
     public function deleteCustomFieldsForObj(ilObjIndividualAssessment $obj): void
     {
         $this->specified_form_storage->deleteAllUserValuesAndFields(
@@ -230,13 +218,11 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             . "iassme.examiner_id,"
             . "iassme.record,"
             . "iassme.internal_note,"
-//            . "iassme.notify,"
             . "iassme.notification_ts,"
             . "iassme.learning_progress,"
             . "iassme.finalized,"
             . "iassme.place,"
             . "iassme.event_time,"
-//            . "iassme.user_view_file,"
             . "iassme.file_name,"
             . "iassme.changer_id,"
             . "iassme.change_time,"
@@ -247,10 +233,8 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             . "	LEFT JOIN usr_data ex ON iassme.examiner_id = ex.usr_id\n"
         ;
     }
-    // cat-tms-patch end iassfeatures
     protected function loadMembersQuery(int $obj_id): string
     {
-        // cat-tms-patch start iassfeatures
         return "SELECT ex.firstname as " . ilIndividualAssessmentMembers::FIELD_EXAMINER_FIRSTNAME
                 . "     , ex.lastname as " . ilIndividualAssessmentMembers::FIELD_EXAMINER_LASTNAME
                 . "     , ud.firstname as " . ilIndividualAssessmentMembers::FIELD_CHANGER_FIRSTNAME
@@ -267,7 +251,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
                 . " LEFT JOIN usr_data ex ON iassme.examiner_id = ex.usr_id"
                 . " LEFT JOIN usr_data ud ON iassme.changer_id = ud.usr_id"
                 . " WHERE obj_id = " . $this->db->quote($obj_id, 'integer');
-        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -275,7 +258,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
      */
     public function insertMembersRecord(ilObjIndividualAssessment $iass, array $record): void
     {
-        // cat-tms-patch start iassfeatures
         $values = [
             "obj_id" => [
                 "integer",
@@ -341,7 +323,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
                     $record[ilIndividualAssessmentMembers::FIELD_FILE_NAME]
                 ];
         }
-        // cat-tms-patch end iassfeatures
         if (isset($record[ilIndividualAssessmentMembers::FIELD_CHANGER_ID])) {
             $values[ilIndividualAssessmentMembers::FIELD_CHANGER_ID] =
                 [
@@ -378,14 +359,12 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
         ;
 
         $this->db->manipulate($sql);
-        // cat-tms-patch start iassfeatures
         $this->specified_form_storage->deleteSpecifiedUserValues(
             $this->irss,
             $this->stakeholder,
             $iass->getId(),
             $record[ilIndividualAssessmentMembers::FIELD_USR_ID]
         );
-        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -393,7 +372,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
      */
     protected function getWhereFromFilter($filter): string
     {
-        // cat-tms-patch start iassfeatures
         switch ($filter) {
             case ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM:
                 return "      AND finalized = 0 AND examiner_id IS NULL\n";
@@ -406,7 +384,6 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             default:
                 return "";
         }
-        // cat-tms-patch end iassfeatures
     }
 
     protected function getOrderByFromSort(string $sort): string

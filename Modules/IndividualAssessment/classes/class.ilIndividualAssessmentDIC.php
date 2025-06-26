@@ -38,7 +38,6 @@ trait ilIndividualAssessmentDIC
             return new ilIndividualAssessmentPrimitiveInternalNotificator();
         };
 
-        // cat-tms-patch start iassfeatures
         $container['ilIndividualAssessmentSettingsGUI'] = function ($c) use ($object, $dic) {
             return new ilIndividualAssessmentSettingsGUI(
                 $object,
@@ -55,7 +54,6 @@ trait ilIndividualAssessmentDIC
                 $c['iass.member.custom_storage']->checkForAvailableFormFields($object->getId())
             );
         };
-        // cat-tms-patch end iassfeatures
 
         $container['ilIndividualAssessmentMembersGUI'] = function ($c) use ($object, $dic) {
             return new ilIndividualAssessmentMembersGUI(
@@ -77,7 +75,6 @@ trait ilIndividualAssessmentDIC
             );
         };
 
-        // cat-tms-patch start iassfeatures
         $container['ilIndividualAssessmentMembersTableGUI'] = static fn($c): ilIndividualAssessmentMembersTableGUI =>
             new ilIndividualAssessmentMembersTableGUI(
                 $dic['lng'],
@@ -100,7 +97,6 @@ trait ilIndividualAssessmentDIC
                 $dic['ui.renderer'],
                 $dic['ilCtrl'],
             );
-        // cat-tms-patch end iassfeatures
 
         $container['irss.stakeholder'] = static fn($c): ResourceStakeholder =>
             new ilIndividualAssessmentGradingStakeholder(
@@ -135,7 +131,6 @@ trait ilIndividualAssessmentDIC
             );
         };
 
-        // cat-tms-patch start iassfeatures
         $container['iafp.fieldbuilder'] = static fn(): ILIAS\IndividualAssessmentFormPool\FieldBuilder =>
             new ILIAS\IndividualAssessmentFormPool\FieldBuilder(
                 $dic['ui.factory']->input()->field(),
@@ -144,7 +139,6 @@ trait ilIndividualAssessmentDIC
                 new \ilUIDemoFileUploadHandlerGUI(),
                 new \ilUIMarkdownPreviewGUI()
             );
-        // cat-tms-patch end iassfeatures
 
         $container['ilIndividualAssessmentCommonSettingsGUI'] = function ($c) use ($object, $dic) {
             return new ilIndividualAssessmentCommonSettingsGUI(
@@ -162,7 +156,6 @@ trait ilIndividualAssessmentDIC
             );
         };
 
-        // cat-tms-patch start iassfeatures
         $container['iass.member.storage'] = static fn($c): ilIndividualAssessmentMembersStorageDB =>
             new ilIndividualAssessmentMembersStorageDB(
                 $dic['ilDB'],
@@ -173,7 +166,6 @@ trait ilIndividualAssessmentDIC
 
         $container['iass.member.custom_storage'] = static fn($c): SpecifiedFormStorage =>
             new SpecifiedFormStorageDB($dic['ilDB']);
-        // cat-tms-patch end iassfeatures
 
         $container['iass.accesshandler'] = static fn($c): ilIndividualAssessmentAccessHandler =>
             new ilIndividualAssessmentAccessHandler(

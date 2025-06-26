@@ -250,9 +250,7 @@ class ilObjRepositorySettings extends ilObject
             "breaker1" => null,
             "content" => ["file", "webr", "feed", "copa", "wiki", "blog", "lm", "htlm", "sahs", 'cmix', 'lti', "lso", "glo", "dcl", "bibl", "mcst", "mep"],
             "breaker2" => null,
-            // cat-tms-patch start iassfeatures
             "assessment" => ["exc", "tst", "qpl", "iass", 'iafp', 'iarp'],
-            // cat-tms-patch end iassfeatures
             "feedback" => ["poll", "svy", "spl"],
             "templates" => ["prtt"]
         ];

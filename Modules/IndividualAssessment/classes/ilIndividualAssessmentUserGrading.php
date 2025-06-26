@@ -22,14 +22,10 @@ use ILIAS\UI\Component\Input\Field;
 use ILIAS\Refinery\Factory as Refinery;
 use ILIAS\Data\Factory as DataFactory;
 use ILIAS\FileUpload\Handler\AbstractCtrlAwareUploadHandler;
-// cat-tms-patch start iassfeatures
 use ILIAS\IndividualAssessmentFormPool\FieldBuilder;
-
-// cat-tms-patch end iassfeatures
 
 class ilIndividualAssessmentUserGrading
 {
-    // cat-tms-patch start iassfeatures
     protected array $custom_fields = [];
 
     public function __construct(
@@ -43,9 +39,7 @@ class ilIndividualAssessmentUserGrading
         protected bool $finalized = false
     ) {
     }
-    // cat-tms-patch end iassfeatures
 
-    // cat-tms-patch start iassfeatures
     public function getName(): ?string
     {
         return $this->name;
@@ -60,14 +54,12 @@ class ilIndividualAssessmentUserGrading
     {
         return $this->internal_note;
     }
-    // cat-tms-patch end iassfeatures
 
     public function getFile(): ?string
     {
         return $this->file;
     }
 
-    // cat-tms-patch start iassfeatures
     public function hasFile(): bool
     {
         return !empty($this->file);
@@ -93,7 +85,6 @@ class ilIndividualAssessmentUserGrading
     {
         return $this->finalized;
     }
-    // cat-tms-patch end iassfeatures
 
     public function withFinalized(bool $finalize): ilIndividualAssessmentUserGrading
     {
@@ -109,7 +100,6 @@ class ilIndividualAssessmentUserGrading
         return $clone;
     }
 
-    // cat-tms-patch start iassfeatures
     public function getCustomFields(): array
     {
         return $this->custom_fields;
@@ -121,9 +111,7 @@ class ilIndividualAssessmentUserGrading
         $clone->custom_fields = $custom_fields;
         return $clone;
     }
-    // cat-tms-patch end iassfeatures
 
-    // cat-tms-patch start iassfeatures
     public function toFormInput(
         Field\Factory $input,
         DataFactory $data_factory,
@@ -140,7 +128,6 @@ class ilIndividualAssessmentUserGrading
         bool $amend = false,
         bool $manual_grading = false
     ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
-        // cat-tms-patch end iassfeatures
         $name = $input
             ->text($lng->txt('name'), '')
             ->withDisabled(true)
@@ -165,14 +152,12 @@ class ilIndividualAssessmentUserGrading
             ->withRequired($file_required)
         ;
 
-        // cat-tms-patch start iassfeatures
         $learning_progress = $input
             ->select($lng->txt('learning_progress'), $grading_options)
             ->withValue($this->getLearningProgress() ?: ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM)
             ->withDisabled(!$may_be_edited)
             ->withRequired(true)
         ;
-        // cat-tms-patch end iassfeatures
 
         $place = $input
             ->text($lng->txt('iass_place'))
@@ -189,13 +174,11 @@ class ilIndividualAssessmentUserGrading
             ->withDisabled(!$may_be_edited)
         ;
 
-        // cat-tms-patch start iassfeatures
         $finalized = $input
             ->checkbox($lng->txt('iass_finalize'), $lng->txt('iass_finalize_info'))
             ->withValue($this->isFinalized())
             ->withDisabled(!$may_be_edited)
         ;
-        // cat-tms-patch end iassfeatures
 
         if (!is_null($this->getEventTime())) {
             $event_time = $event_time->withValue(
@@ -203,7 +186,6 @@ class ilIndividualAssessmentUserGrading
             );
         }
 
-        // cat-tms-patch start iassfeatures
         $custom = [];
         $custom_fields = $this->custom_fields;
         foreach ($custom_fields as $cf) {
@@ -246,7 +228,6 @@ class ilIndividualAssessmentUserGrading
         }
 
         if (!$amend && $may_publish) {
-            // cat-tms-patch end iassfeatures
             $fields['finalized'] = $finalized;
         }
 
@@ -254,7 +235,6 @@ class ilIndividualAssessmentUserGrading
             $fields,
             $lng->txt('iass_edit_record')
         )->withAdditionalTransformation(
-            // cat-tms-patch start iassfeatures
             $refinery->custom()->transformation(function ($values) {
                 $vals = [$values[0]];
 
@@ -273,7 +253,6 @@ class ilIndividualAssessmentUserGrading
                 $result = new ilIndividualAssessmentUserGrading(...array_values($vals));
                 return array_key_exists('custom', $values) ? $result->withCustomFields($values['custom']) : $result;
             })
-            // cat-tms-patch end iassfeatures
         );
     }
 }

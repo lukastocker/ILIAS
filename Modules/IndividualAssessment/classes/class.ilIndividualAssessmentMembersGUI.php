@@ -34,14 +34,12 @@ class ilIndividualAssessmentMembersGUI
 {
     public const F_STATUS = "status";
     public const F_SORT = "sortation";
-    // cat-tms-patch start iassfeatures
     public const S_NAME_ASC = "user_login:" . Order::ASC;
     public const S_NAME_DESC = "user_login:" . Order::DESC;
     public const S_EXAMINER_ASC = "examiner_login:" . Order::ASC;
     public const S_EXAMINER_DESC = "examiner_login:" . Order::DESC;
     public const S_CHANGETIME_ASC = "change_time:" . Order::ASC;
     public const S_CHANGETIME_DESC = "change_time:" . Order::DESC;
-    // cat-tms-patch end iassfeatures
 
     protected ilCtrl $ctrl;
     protected ilObjIndividualAssessment $object;
@@ -73,11 +71,9 @@ class ilIndividualAssessmentMembersGUI
         UI\Renderer $renderer,
         ilErrorHandling $error_object,
         ilIndividualAssessmentMemberGUI $member_gui,
-        // cat-tms-patch start iassfeatures
         protected ilIndividualAssessmentMembersTableGUI $table,
         ILIAS\Refinery\Factory $refinery,
         ILIAS\HTTP\Wrapper\WrapperFactory $wrapper,
-        // cat-tms-patch end iassfeatures
     ) {
         $this->object = $object;
         $this->ctrl = $ctrl;
@@ -93,9 +89,7 @@ class ilIndividualAssessmentMembersGUI
         $this->member_gui = $member_gui;
         $this->refinery = $refinery;
         $this->request_wrapper = $wrapper->query();
-        // cat-tms-patch start iassfeatures
         $this->post_wrapper = $wrapper->post();
-        // cat-tms-patch end iassfeatures
         $this->ref_id = $object->getRefId();
     }
 
@@ -180,9 +174,7 @@ class ilIndividualAssessmentMembersGUI
                 );
             }
         }
-        // cat-tms-patch start iassfeatures
         $table = $this->table;
-        // cat-tms-patch end iassfeatures
         $filter = $this->getFilterValue();
         $sort = $this->getSortValue();
 
@@ -285,18 +277,15 @@ class ilIndividualAssessmentMembersGUI
      */
     protected function getViewControls(): array
     {
-        // cat-tms-patch start iassfeatures
         $vc_factory = $this->factory->viewControl();
         return [
             $this->getModeControl($vc_factory),
             $this->getSortationControl($vc_factory)
         ];
-        // cat-tms-patch end iassfeatures
     }
 
     protected function getModeControl(ViewControl\Factory $vc_factory): ViewControl\Mode
     {
-        // cat-tms-patch start iassfeatures
         $mode_options = $this->getModeOptions();
         $vc = $vc_factory->mode($mode_options, "");
 
@@ -305,7 +294,6 @@ class ilIndividualAssessmentMembersGUI
             $vc = $vc->withActive(array_keys($mode_options)[$index]);
         }
         return $vc;
-        // cat-tms-patch end iassfeatures
     }
 
     protected function getSortationControl(ViewControl\Factory $vc_factory): ViewControl\Sortation
@@ -328,7 +316,6 @@ class ilIndividualAssessmentMembersGUI
         $ret[$this->txt("iass_filter_all")] = $this->getLinkForStatusFilter(null);
 
         if ($this->iass_access->mayViewAnyUser()) {
-            // cat-tms-patch start iassfeatures
             $ret[$this->txt(ilLPStatus::LP_STATUS_NOT_ATTEMPTED)] =
                 $this->getLinkForStatusFilter(ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM);
             $ret[$this->txt(ilLPStatus::LP_STATUS_IN_PROGRESS)] =
@@ -337,7 +324,6 @@ class ilIndividualAssessmentMembersGUI
                 $this->getLinkForStatusFilter(ilLPStatus::LP_STATUS_COMPLETED_NUM);
             $ret[$this->txt(ilLPStatus::LP_STATUS_FAILED)] =
                 $this->getLinkForStatusFilter(ilLPStatus::LP_STATUS_FAILED_NUM);
-            // cat-tms-patch end iassfeatures
         }
         return $ret;
     }
@@ -348,7 +334,6 @@ class ilIndividualAssessmentMembersGUI
     protected function getActiveLabelForModeByFilter($filter): string
     {
         switch ($filter) {
-            // cat-tms-patch start iassfeatures
             case ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM:
                 return $this->txt(ilLPStatus::LP_STATUS_NOT_ATTEMPTED);
             case ilLPStatus::LP_STATUS_IN_PROGRESS_NUM:
@@ -357,7 +342,6 @@ class ilIndividualAssessmentMembersGUI
                 return $this->txt(ilLPStatus::LP_STATUS_COMPLETED);
             case ilLPStatus::LP_STATUS_FAILED_NUM:
                 return $this->txt(ilLPStatus::LP_STATUS_FAILED);
-                // cat-tms-patch end iassfeatures
             default:
                 return $this->txt("iass_filter_all");
         }
@@ -380,7 +364,6 @@ class ilIndividualAssessmentMembersGUI
 
     protected function getFilterValue(): ?string
     {
-        // cat-tms-patch start iassfeatures
         if (
             $this->request_wrapper->has(self::F_STATUS) &&
             $this->request_wrapper->retrieve(self::F_STATUS, $this->refinery->kindlyTo()->string()) != "" &&
@@ -396,7 +379,6 @@ class ilIndividualAssessmentMembersGUI
         ) {
             return $this->request_wrapper->retrieve(self::F_STATUS, $this->refinery->kindlyTo()->string());
         }
-        // cat-tms-patch end iassfeatures
         return null;
     }
 

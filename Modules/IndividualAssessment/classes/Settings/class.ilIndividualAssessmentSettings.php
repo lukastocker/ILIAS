@@ -27,7 +27,6 @@ use ILIAS\Refinery\Factory as Refinery;
  */
 class ilIndividualAssessmentSettings
 {
-    // cat-tms-patch start iassfeatures
     public function __construct(
         protected int $obj_id,
         protected string $title,
@@ -43,7 +42,6 @@ class ilIndividualAssessmentSettings
         protected ?\DateTimeImmutable $available_in_report_to = null
     ) {
     }
-    // cat-tms-patch end iassfeatures
 
     /**
      * Get the id of corresponding iass-object
@@ -102,7 +100,6 @@ class ilIndividualAssessmentSettings
         return $this->file_required;
     }
 
-    // cat-tms-patch start iassfeatures
     public function isFileVisible(): bool
     {
         return $this->file_visible;
@@ -250,5 +247,4 @@ class ilIndividualAssessmentSettings
             })
         );
     }
-    // cat-tms-patch end iassfeatures
 }

@@ -49,9 +49,7 @@ class ilIndividualAssessmentSettingsGUI
     protected $http_request;
     protected ilErrorHandling $error_object;
     protected ilIndividualAssessmentCommonSettingsGUI $common_settings_gui;
-    // cat-tms-patch start iassfeatures
     protected bool $form_fields_available;
-    // cat-tms-patch end iassfeatures
 
     public function __construct(
         ilObjIndividualAssessment $object,
@@ -64,10 +62,8 @@ class ilIndividualAssessmentSettingsGUI
         UI\Renderer $ui_renderer,
         $http_request,
         ilErrorHandling $error_object,
-        // cat-tms-patch start iassfeatures
         ilIndividualAssessmentCommonSettingsGUI $common_settings_gui,
         bool $form_fields_available
-        // cat-tms-patch end iassfeatures
     ) {
         $this->ctrl = $ctrl;
         $this->object = $object;
@@ -84,9 +80,7 @@ class ilIndividualAssessmentSettingsGUI
         $this->error_object = $error_object;
         $this->common_settings_gui = $common_settings_gui;
 
-        // cat-tms-patch start iassfeatures
         $this->form_fields_available = $form_fields_available;
-        // cat-tms-patch end iassfeatures
 
         $this->getSubTabs($this->tabs_gui);
         $this->lng->loadLanguageModule('content');
@@ -152,14 +146,12 @@ class ilIndividualAssessmentSettingsGUI
     protected function buildForm(): Form\Form
     {
         $settings = $this->object->getSettings();
-        // cat-tms-patch start iassfeatures
         $field = $settings->toFormInput(
             $this->input_factory->field(),
             $this->lng,
             $this->refinery,
             $this->form_fields_available
         );
-        // cat-tms-patch end iassfeatures
 
         // Use centralized on/offline
         $online = $this->object->getObjectProperties()->getPropertyIsOnline()->toForm(
@@ -168,7 +160,6 @@ class ilIndividualAssessmentSettingsGUI
             $this->refinery
         );
 
-        // cat-tms-patch start iassfeatures
         $user = $settings->userAvailabilitySettingsToForm(
             $this->input_factory->field(),
             $this->lng,
@@ -189,7 +180,6 @@ class ilIndividualAssessmentSettingsGUI
             ],
             $this->lng->txt('iass_settings_availability')
         );
-        // cat-tms-patch end iassfeatures
 
         return $this->input_factory->container()->form()->standard(
             $this->ctrl->getFormAction($this, "update"),
@@ -209,7 +199,6 @@ class ilIndividualAssessmentSettingsGUI
         $form = $this->buildForm();
         $form = $form->withRequest($this->http_request);
 
-        // cat-tms-patch start iassfeatures
         $data = $form->getData();
         if (!is_null($data)) {
             $settings = $data[0];
@@ -224,7 +213,6 @@ class ilIndividualAssessmentSettingsGUI
             $this->object->update();
 
             $this->object->getObjectProperties()->storePropertyIsOnline($data[1]['online']);
-            // cat-tms-patch end iassfeatures
             $this->tpl->setOnScreenMessage("success", $this->lng->txt("settings_saved"), true);
             $this->ctrl->redirect($this, "edit");
         } else {

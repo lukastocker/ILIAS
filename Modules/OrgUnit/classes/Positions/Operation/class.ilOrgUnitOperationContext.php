@@ -33,9 +33,7 @@ class ilOrgUnitOperationContext
     public const CONTEXT_USRF = "usrf";
     public const CONTEXT_PRG = "prg";
     public const CONTEXT_ETAL = "etal";
-    // cat-tms-patch start iassfeatures
     public const CONTEXT_IARP = "iarp";
-    // cat-tms-patch end iassfeatures
 
     /**
      * @var array
@@ -51,9 +49,7 @@ class ilOrgUnitOperationContext
         self::CONTEXT_USRF,
         self::CONTEXT_PRG,
         self::CONTEXT_ETAL,
-        // cat-tms-patch start iassfeatures
         self::CONTEXT_IARP,
-        // cat-tms-patch end iassfeatures
     ];
 
     protected ?int $id = 0;

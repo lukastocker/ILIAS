@@ -54,7 +54,6 @@ class ilIndividualAssessmentSetupAgent implements Setup\Agent
      */
     public function getUpdateObjective(Setup\Config $config = null): Setup\Objective
     {
-        // cat-tms-patch start iassfeatures
         return new Setup\ObjectiveCollection(
             'Individual Assessment',
             true,
@@ -70,7 +69,6 @@ class ilIndividualAssessmentSetupAgent implements Setup\Agent
             ),
             ...$this->getPermissionObjectives()
         );
-        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -86,14 +84,12 @@ class ilIndividualAssessmentSetupAgent implements Setup\Agent
      */
     public function getStatusObjective(Setup\Metrics\Storage $storage): Setup\Objective
     {
-        // cat-tms-patch start iassfeatures
         return new Setup\ObjectiveCollection(
             'Component Individual Assessment ',
             true,
             new ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new ilIndividualAssessmentRectifyMembersTableDBUpdateSteps()),
             new ilDatabaseUpdateStepsMetricsCollectedObjective($storage, new IndAssSettingsTableDBUpdateSteps())
         );
-        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -104,7 +100,6 @@ class ilIndividualAssessmentSetupAgent implements Setup\Agent
         return [];
     }
 
-    // cat-tms-patch start iassfeatures
     protected function getPermissionObjectives(): array
     {
         return [
@@ -134,5 +129,14 @@ class ilIndividualAssessmentSetupAgent implements Setup\Agent
             )
         ];
     }
-    // cat-tms-patch end iassfeatures
+
+    public function getNamedObjectives(?Setup\Config $config = null): array
+    {
+        return [
+            'addPermissionsToIASSRoles' => new Setup\ObjectiveConstructor(
+                'add new permissions create_records and publish_records to IASS roles if role has writing permission',
+                static fn(): Setup\Objective => new ilIASSAddRolePermissions()
+            )
+        ];
+    }
 }

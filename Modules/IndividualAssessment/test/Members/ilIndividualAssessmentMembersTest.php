@@ -307,10 +307,8 @@ class ilIndividualAssessmentMembersTest extends TestCase
         $record = $records[23];
 
         $this->assertEquals(23, $record[ilIndividualAssessmentMembers::FIELD_USR_ID]);
-        // cat-tms-patch start iassfeatures
         $this->assertEquals("", $record[ilIndividualAssessmentMembers::FIELD_RECORD]);
         $this->assertEquals("Firstname", $record[ilIndividualAssessmentMembers::FIELD_FIRSTNAME]);
-        // cat-tms-patch end iassfeatures
         $this->assertEquals("Lastname", $record[ilIndividualAssessmentMembers::FIELD_LASTNAME]);
         $this->assertEquals("Firstname Lastname", $record[ilIndividualAssessmentMembers::FIELD_LOGIN]);
         $this->assertEquals(0, $record[ilIndividualAssessmentMembers::FIELD_LEARNING_PROGRESS]);
@@ -318,10 +316,8 @@ class ilIndividualAssessmentMembersTest extends TestCase
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_EXAMINER_FIRSTNAME]);
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_EXAMINER_LASTNAME]);
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_INTERNAL_NOTE]);
-        // cat-tms-patch start iassfeatures
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_FILE_NAME]);
         $this->assertEquals(0, $record[ilIndividualAssessmentMembers::FIELD_FINALIZED]);
-        // cat-tms-patch end iassfeatures
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_CHANGER_ID]);
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_CHANGER_FIRSTNAME]);
         $this->assertNull($record[ilIndividualAssessmentMembers::FIELD_CHANGER_LASTNAME]);

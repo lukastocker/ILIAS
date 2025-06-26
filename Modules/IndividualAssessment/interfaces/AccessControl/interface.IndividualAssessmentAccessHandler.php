@@ -51,7 +51,5 @@ interface IndividualAssessmentAccessHandler
     public function mayAmendAllUsers(): bool;
     public function isSystemAdmin(): bool;
     public function mayEditLearningProgressSettings(): bool;
-    // cat-tms-patch start iassfeatures
     public function mayPublishUser(int $user_id): bool;
-    // cat-tms-patch end iassfeatures
 }

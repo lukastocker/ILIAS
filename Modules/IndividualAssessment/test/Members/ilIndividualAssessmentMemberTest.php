@@ -169,18 +169,14 @@ class ilIndividualAssessmentMemberTest extends TestCase
         $this->assertEquals('2021-11-25', $obj->changeTime()->format('Y-m-d'));
     }
 
-    // cat-tms-patch end iassfeatures: test_notify removed
-    // cat-tms-patch start iassfeatures
     public function test_maybeSendNotification_not_finalized(): void
     {
         $notificator = $this->createMock(ilIndividualAssessmentNotificator::class);
-        // cat-tms-patch start iassfeatures
         $this->grading
             ->expects($this->once())
             ->method("isFinalized")
             ->willReturn(false)
         ;
-        // cat-tms-patch end iassfeatures
 
         $obj = new ilIndividualAssessmentMember(
             $this->iass_object,
@@ -324,12 +320,10 @@ class ilIndividualAssessmentMemberTest extends TestCase
 
     public function positiveLPStatusDataProvider(): array
     {
-        // cat-tms-patch start iassfeatures
         return [
             [ilLPStatus::LP_STATUS_COMPLETED_NUM],
             [ilLPStatus::LP_STATUS_FAILED_NUM]
         ];
-        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -386,13 +380,11 @@ class ilIndividualAssessmentMemberTest extends TestCase
             ->willReturn($settings)
         ;
 
-        // cat-tms-patch start iassfeatures
         $this->grading
             ->expects($this->once())
             ->method("getLearningProgress")
             ->willReturn(ilLPStatus::LP_STATUS_COMPLETED_NUM)
         ;
-        // cat-tms-patch end iassfeatures
 
         $this->grading
             ->expects($this->once())
@@ -412,12 +404,10 @@ class ilIndividualAssessmentMemberTest extends TestCase
 
     public function negativeLPStatusDataProvider(): array
     {
-        // cat-tms-patch start iassfeatures
         return [
             [ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM],
             [ilLPStatus::LP_STATUS_IN_PROGRESS_NUM]
         ];
-        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -438,13 +428,11 @@ class ilIndividualAssessmentMemberTest extends TestCase
             ->willReturn($settings)
         ;
 
-        // cat-tms-patch start iassfeatures
         $this->grading
             ->expects($this->once())
             ->method("getLearningProgress")
             ->willReturn($lp_status)
         ;
-        // cat-tms-patch end iassfeatures
 
         $obj = new ilIndividualAssessmentMember(
             $this->iass_object,
@@ -587,9 +575,7 @@ class ilIndividualAssessmentMemberTest extends TestCase
             $this->grading,
             22222
         );
-        // cat-tms-patch start iassfeatures
         $this->assertEquals(ilLPStatus::LP_STATUS_COMPLETED_NUM, $obj->LPStatus());
-        // cat-tms-patch end iassfeatures
     }
 
     public function test_notificationTS(): void
@@ -657,9 +643,6 @@ class ilIndividualAssessmentMemberTest extends TestCase
 
         $this->assertEquals("file_name", $obj->fileName());
     }
-
-    // cat-tms-patch start iassfeatures: test_viewFile removed
-    // cat-tms-patch start iassfeatures
 
     public function test_getGrading(): void
     {

@@ -50,9 +50,7 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
     protected ILIAS\Refinery\Factory $refinery;
     protected ILIAS\HTTP\Wrapper\RequestWrapper $request_wrapper;
     protected ILIAS\ResourceStorage\Services $irss;
-    // cat-tms-patch start iassfeatures
     protected SpecifiedFormStorageDB $specified_form_storage;
-    // cat-tms-patch end iassfeatures
 
     public function __construct($data, int $id = 0, bool $call_by_reference = true, bool $prepare_output = true)
     {
@@ -69,9 +67,7 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
         $this->refinery = $DIC->refinery();
         $this->request_wrapper = $DIC->http()->wrapper()->query();
         $this->irss = $DIC['resource_storage'];
-        // cat-tms-patch start iassfeatures
         $this->specified_form_storage = new SpecifiedFormStorageDB($DIC['ilDB']);
-        // cat-tms-patch end iassfeatures
 
         parent::__construct($data, $id, $call_by_reference, $prepare_output);
     }
@@ -138,13 +134,11 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
                 $this->ctrl->forwardCommand($gui);
                 break;
             case "ilexportgui":
-                // cat-tms-patch start iassfeatures
                 $custom_fields_available = $this->specified_form_storage->checkForAvailableFormFields($this->object->getId());
                 if ($custom_fields_available === true) {
                     $this->tpl->setOnScreenMessage('failure', $this->lng->txt("no_export_for_custom_forms"), true);
                     $this->ctrl->redirect($this);
                 }
-                // cat-tms-patch end iassfeatures
                 $this->tabs_gui->activateTab(self::TAB_EXPORT);
                 $exp_gui = new ilExportGUI($this); // $this is the ilObj...GUI class of the resource
                 $exp_gui->addFormat("xml");
@@ -219,7 +213,6 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
     protected function addMemberDataToInfo(ilInfoScreenGUI $info): ilInfoScreenGUI
     {
         $member = $this->object->membersStorage()->loadMember($this->object, $this->usr);
-        // cat-tms-patch start iassfeatures
         $settings = $this->object->getSettings();
         $finalized = $member->getGrading()->isFinalized();
         $info->addSection($this->txt('grading_info'));
@@ -229,7 +222,6 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
         if ($settings->isResultVisible() && $finalized) {
             $info->addProperty($this->txt('grading_record'), nl2br($member->record()));
             if (($settings->isFileVisible()) && $member->fileName() && $member->fileName() != "") {
-                // cat-tms-patch end iassfeatures
                 $tpl = new ilTemplate("tpl.iass_user_file_download.html", true, true, "Modules/IndividualAssessment");
                 $tpl->setVariable("FILE_NAME", $member->fileName());
                 $tpl->setVariable("HREF", $this->ctrl->getLinkTarget($this, "downloadFile"));
@@ -243,7 +235,6 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
     protected function downloadFileObject(): void
     {
         $member = $this->object->membersStorage()->loadMember($this->object, $this->usr);
-        // cat-tms-patch start iassfeatures
         $settings = $this->object->getSettings();
         if (
             $member
@@ -253,7 +244,6 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
             && $member->fileName()
             && $member->fileName() != ""
         ) {
-            // cat-tms-patch end iassfeatures
             $identifier = $member->getGrading()->getFile();
             $resource_id = $this->irss->manage()->find($identifier);
             if ($resource_id) {
@@ -429,7 +419,6 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
     protected function getEntryForStatus(int $status): string
     {
         switch ($status) {
-            // cat-tms-patch start iassfeatures
             case ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM:
                 return $this->txt(ilLPStatus::LP_STATUS_NOT_ATTEMPTED);
             case ilLPStatus::LP_STATUS_IN_PROGRESS_NUM:
@@ -438,13 +427,11 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
                 return $this->txt(ilLPStatus::LP_STATUS_COMPLETED);
             case ilLPStatus::LP_STATUS_FAILED_NUM:
                 return $this->txt(ilLPStatus::LP_STATUS_FAILED);
-                // cat-tms-patch end iassfeatures
             default:
                 throw new ilIndividualAssessmentException("Status for id $status not found!");
         }
     }
 
-    // cat-tms-patch start iassfeatures
     protected function addDidacticTemplateOptions(array &$a_options): void
     {
         $collector = \ilObjIndividualAssessmentFormPool::getRepository();
@@ -454,16 +441,13 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
             $collector->getFormsSelection()
         );
     }
-    // cat-tms-patch end iassfeatures
 
     protected function afterSave(ilObject $new_object): void
     {
-        // cat-tms-patch start iassfeatures
         if ($form_id = $this->getDidacticTemplateVar("iass")) {
             $collector = \ilObjIndividualAssessmentFormPool::getRepository();
             $collector->copyFieldsToIASS($form_id, $new_object->getId());
         }
-        // cat-tms-patch end iassfeatures
 
         $this->tpl->setOnScreenMessage("success", $this->txt("iass_added"), true);
         $this->ctrl->setParameter($this, "ref_id", $new_object->getRefId());

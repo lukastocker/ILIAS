@@ -30,7 +30,6 @@ class ilIndividualAssessmentMembersTableGUI
 {
     protected array $data = [];
 
-    // cat-tms-patch start iassfeatures
     public function __construct(
         protected ilLanguage $lng,
         protected ilCtrl $ctrl,
@@ -42,7 +41,6 @@ class ilIndividualAssessmentMembersTableGUI
         protected IASSCustomFieldValueRenderer $value_renderer
     ) {
     }
-    // cat-tms-patch end iassfeatures
 
     /**
      * Set data to show in table
@@ -58,7 +56,6 @@ class ilIndividualAssessmentMembersTableGUI
         );
     }
 
-    // cat-tms-patch start iassfeatures
     /**
      * Renders the presentation table
      *
@@ -85,7 +82,6 @@ class ilIndividualAssessmentMembersTableGUI
                     ->withAction($this->getAction($record, $ui));
             }
         );
-        // cat-tms-patch end iassfeatures
         $data = array_slice($this->data, $offset, $limit);
         return $this->renderer->render($ptable->withData($data));
     }
@@ -108,9 +104,7 @@ class ilIndividualAssessmentMembersTableGUI
         }
 
         $examiner_id = $record->examinerId();
-        // cat-tms-patch start iassfeatures
         return $this->txt("learning_progress") . ": " . $this->getEntryForStatus($record->LPStatus());
-        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -195,7 +189,6 @@ class ilIndividualAssessmentMembersTableGUI
 
         $usr_id = $record->id();
 
-        // cat-tms-patch start iassfeatures
         if (
             !$this->iass_access->mayViewUser($usr_id)
             && !$record->finalized()
@@ -203,11 +196,9 @@ class ilIndividualAssessmentMembersTableGUI
         ) {
             return [];
         }
-        // cat-tms-patch end iassfeatures
 
         $file_name = $record->fileName();
 
-        // cat-tms-patch start iassfeatures
         return array_merge(
             $this->getRecordNote($record->record()),
             $this->getInternalRecordNote($record->internalNote()),
@@ -216,7 +207,6 @@ class ilIndividualAssessmentMembersTableGUI
                 : [],
             $this->getCustomInfos($record->getGrading())
         );
-        // cat-tms-patch end iassfeatures
     }
 
     /**
@@ -230,7 +220,6 @@ class ilIndividualAssessmentMembersTableGUI
             return [];
         }
 
-        // cat-tms-patch start iassfeatures
         return array_merge(
             $record->LPStatus() ? [$this->txt("learning_progress") . ":" => $this->getEntryForStatus($record->LPStatus())] : [],
             $this->getImportantInfos($record, false),
@@ -241,10 +230,8 @@ class ilIndividualAssessmentMembersTableGUI
                 $record->examinerId()
             )
         );
-        // cat-tms-patch end iassfeatures
     }
 
-    // cat-tms-patch start iassfeatures
     private function getCustomInfos(ilIndividualAssessmentUserGrading $grading): array
     {
         $ret = [];
@@ -253,7 +240,6 @@ class ilIndividualAssessmentMembersTableGUI
         }
         return $ret;
     }
-    // cat-tms-patch end iassfeatures
 
     /**
      * Return the ui control with executable actions
@@ -324,9 +310,7 @@ class ilIndividualAssessmentMembersTableGUI
 
     protected function getProfileLink(string $full_name, int $user_id): string
     {
-        // cat-tms-patch start iassfeatures
         $back_url = $this->ctrl->getLinkTargetByClass(ilIndividualAssessmentMembersGUI::class, "view");
-        // cat-tms-patch end iassfeatures
         $this->ctrl->setParameterByClass('ilpublicuserprofilegui', 'user_id', $user_id);
         $this->ctrl->setParameterByClass('ilpublicuserprofilegui', "back_url", rawurlencode($back_url));
         $link = $this->ctrl->getLinkTargetByClass('ilpublicuserprofilegui', 'getHTML');
@@ -418,7 +402,6 @@ class ilIndividualAssessmentMembersTableGUI
     protected function getEntryForStatus(int $a_status): string
     {
         switch ($a_status) {
-            // cat-tms-patch start iassfeatures
             case ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM:
                 return $this->txt(ilLPStatus::LP_STATUS_NOT_ATTEMPTED);
             case ilLPStatus::LP_STATUS_IN_PROGRESS_NUM:
@@ -427,7 +410,6 @@ class ilIndividualAssessmentMembersTableGUI
                 return $this->txt(ilLPStatus::LP_STATUS_COMPLETED);
             case ilLPStatus::LP_STATUS_FAILED_NUM:
                 return $this->txt(ilLPStatus::LP_STATUS_FAILED);
-                // cat-tms-patch end iassfeatures
             default:
                 throw new ilIndividualAssessmentException("Invalid status: " . $a_status);
         }
@@ -454,9 +436,7 @@ class ilIndividualAssessmentMembersTableGUI
             return false;
         }
 
-        // cat-tms-patch start iassfeatures
         return $this->iass_access->mayGradeUser($usr_id);
-        // cat-tms-patch end iassfeatures
     }
 
     /**

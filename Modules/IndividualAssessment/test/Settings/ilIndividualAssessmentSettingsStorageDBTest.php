@@ -39,12 +39,9 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
         $record_remplate = 'You should ask these things';
         $event_time_place_required = true;
         $file_required = false;
-        // cat-tms-patch start iassfeatures
         $file_visible = false;
         $result_visible = false;
-        // cat-tms-patch end iassfeatures
 
-        // cat-tms-patch start iassfeatures
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
             $title,
@@ -56,18 +53,15 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
             $file_visible,
             $result_visible
         );
-        // cat-tms-patch end iassfeatures
 
         $values1 = [
             "obj_id" => ["integer", $obj_id],
             "content" => ["text", $content],
             "record_template" => ["text", $record_remplate],
             "event_time_place_required" => ["integer", $event_time_place_required],
-            // cat-tms-patch start iassfeatures
             "file_required" => ["integer", $file_required],
             "file_visible" => ["integer", $file_visible],
             "result_visible" => ["integer", $result_visible]
-            // cat-tms-patch end iassfeatures
         ];
 
         $values2 = [
@@ -94,20 +88,15 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
         $title = 'My iass';
         $description = 'Special iass for members';
         $content = 'Everything you have learned';
-        // cat-tms-patch start iassfeatures
         $record_template = 'You should ask these things';
-        // cat-tms-patch end iassfeatures
         $event_time_place_required = true;
         $file_required = false;
-        // cat-tms-patch start iassfeatures
         $file_visible = true;
         $result_visible = true;
         $report = 1;
         $report_from = '1747827313';
         $report_to = '1747913713';
-        // cat-tms-patch end iassfeatures
 
-        // cat-tms-patch start iassfeatures
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
             $title,
@@ -119,9 +108,7 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
             $file_visible,
             $result_visible
         );
-        // cat-tms-patch end iassfeatures
 
-        // cat-tms-patch start iassfeatures
         $values = [
             "content" => ["text", $content],
             "record_template" => ["text", $record_template],
@@ -133,7 +120,6 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
             "report_from" => ["timestamp", \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $report_from)],
             "report_to" => ["timestamp", \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $report_to)]
         ];
-        // cat-tms-patch end iassfeatures
 
         $where = [
             "obj_id" => ["integer", $obj_id]

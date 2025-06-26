@@ -67,7 +67,6 @@ class ilObjIndividualAssessment extends ilObject
         $id = parent::create();
         $this->createMetaData();
 
-        // cat-tms-patch start iassfeatures
         $this->settings = new ilIndividualAssessmentSettings(
             $this->getId(),
             '',
@@ -80,7 +79,6 @@ class ilObjIndividualAssessment extends ilObject
             false,
             false
         );
-        // cat-tms-patch end iassfeatures
         $this->settings_storage->createSettings($this->settings);
         return $id;
     }
@@ -227,7 +225,6 @@ class ilObjIndividualAssessment extends ilObject
         $new_obj = parent::cloneObject($target_id, $copy_id, $omit_tree);
         $settings = $this->getSettings();
         $info_settings = $this->getInfoSettings();
-        // cat-tms-patch start iassfeatures
         $new_settings = new ilIndividualAssessmentSettings(
             $new_obj->getId(),
             $new_obj->getTitle(),
@@ -239,7 +236,6 @@ class ilObjIndividualAssessment extends ilObject
             $settings->isFileVisible(),
             $settings->isResultVisible(),
         );
-        // cat-tms-patch end iassfeatures
         $new_obj->settings = $new_settings;
 
         $new_info_settings = new ilIndividualAssessmentInfoSettings(
@@ -255,12 +251,10 @@ class ilObjIndividualAssessment extends ilObject
         $new_obj->settings_storage->updateSettings($new_settings);
         $new_obj->settings_storage->updateInfoSettings($new_info_settings);
 
-        // cat-tms-patch start iassfeatures
         \ilObjIndividualAssessmentFormPool::getRepository()->cloneFields(
             $this->getId(),
             $new_obj->getId()
         );
-        // cat-tms-patch end iassfeatures
         return $new_obj;
     }
 

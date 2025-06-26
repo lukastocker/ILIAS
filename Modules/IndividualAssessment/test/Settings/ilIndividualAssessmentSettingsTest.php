@@ -35,10 +35,8 @@ class ilIndividualAssessmentSettingsTest extends TestCase
         $record_remplate = 'You should ask these things';
         $event_time_place_required = true;
         $file_required = false;
-        // cat-tms-patch start iassfeatures
         $file_visible = false;
         $result_visible = false;
-        // cat-tms-patch end iassfeatures
 
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
@@ -47,11 +45,9 @@ class ilIndividualAssessmentSettingsTest extends TestCase
             $content,
             $record_remplate,
             $event_time_place_required,
-            // cat-tms-patch start iassfeatures
             $file_required,
             $file_visible,
             $result_visible
-            // cat-tms-patch end iassfeatures
         );
         $this->assertEquals($obj_id, $settings->getObjId());
         $this->assertEquals($title, $settings->getTitle());
@@ -60,16 +56,12 @@ class ilIndividualAssessmentSettingsTest extends TestCase
         $this->assertEquals($record_remplate, $settings->getRecordTemplate());
         $this->assertTrue($settings->isEventTimePlaceRequired());
         $this->assertFalse($settings->isFileRequired());
-        // cat-tms-patch start iassfeatures
         $this->assertFalse($settings->isFileVisible());
         $this->assertFalse($settings->isResultVisible());
-        // cat-tms-patch end iassfeatures
     }
 
-    // cat-tms-patch start iassfeatures
     public function test_to_standard_form_input()
     {
-        // cat-tms-patch end iassfeatures
         $lng = $this->createMock(ilLanguage::class);
         $lng->expects($this->atLeastOnce())
             ->method('txt')
@@ -93,7 +85,6 @@ class ilIndividualAssessmentSettingsTest extends TestCase
         $record_remplate = 'You should ask these things';
         $event_time_place_required = true;
         $file_required = false;
-        // cat-tms-patch start iassfeatures
         $file_visible = false;
         $result_visible = false;
         $specified_form_fields = false;
@@ -118,10 +109,8 @@ class ilIndividualAssessmentSettingsTest extends TestCase
         );
 
         $this->assertInstanceOf(Section::class, $input);
-        // cat-tms-patch end iassfeatures
     }
 
-    // cat-tms-patch start iassfeatures
     public function test_to_custom_form_input()
     {
         $lng = $this->createMock(ilLanguage::class);
@@ -172,5 +161,4 @@ class ilIndividualAssessmentSettingsTest extends TestCase
 
         $this->assertInstanceOf(Section::class, $input);
     }
-    // cat-tms-patch end iassfeatures
 }

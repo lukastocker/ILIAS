@@ -55,9 +55,7 @@ class ilIndividualAssessmentMember
         if (!$this->finalized()) {
             throw new ilIndividualAssessmentException('must finalize before notification');
         }
-        // cat-tms-patch start iassfeatures
         if ($this->iass->getSettings()->isResultVisible()) {
-            // cat-tms-patch end iassfeatures
             $notificator = (string) $this->LPStatus() === (string) ilIndividualAssessmentMembers::LP_COMPLETED ?
                 $notificator->withOccasionCompleted() :
                 $notificator->withOccasionFailed();
@@ -72,7 +70,6 @@ class ilIndividualAssessmentMember
         if ($this->iass->getSettings()->isFileRequired() && (string) $this->fileName() === '') {
             return false;
         }
-        // cat-tms-patch start iassfeatures
         return in_array(
             $this->LPStatus(),
             [
@@ -81,7 +78,6 @@ class ilIndividualAssessmentMember
                 ]
         ) &&
             !$this->finalized();
-        // cat-tms-patch end iassfeatures
     }
 
     public function notificationTS(): int
@@ -157,20 +153,17 @@ class ilIndividualAssessmentMember
         throw new \Exception('viewFile from Member/Grading');
         return $this->grading->isFileVisible();
     }
-    // cat-tms-patch start iassfeatures
     public function notify(): bool
     {
         throw new \Exception('notify from Member/Grading');
         return $this->grading->isNotify();
     }
-    // cat-tms-patch end iassfeatures
 
     public function LPStatus(): int
     {
         return $this->grading->getLearningProgress();
     }
 
-    // cat-tms-patch start iassfeatures
     public function place(): ?string
     {
         return $this->grading->getPlace();
@@ -185,7 +178,6 @@ class ilIndividualAssessmentMember
     {
         return $this->grading->isFinalized();
     }
-    // cat-tms-patch end iassfeatures
 
     public function assessment(): ilObjIndividualAssessment
     {

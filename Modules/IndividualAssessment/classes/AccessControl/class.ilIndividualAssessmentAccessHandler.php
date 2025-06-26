@@ -24,12 +24,10 @@ declare(strict_types=1);
 class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessHandler
 {
     public const DEFAULT_ROLE = 'il_iass_member';
-    // cat-tms-patch start iassfeatures
     public const RBAC_OP_CREATE_RECORDS = 'create_records';
     public const ORGU_OP_CREATE_RECORDS = 'ou_create_records';
     public const RBAC_OP_PUBLISH_RECORDS = 'publish_records';
     public const ORGU_OP_PUBLISH_RECORDS = 'ou_publish_records';
-    // cat-tms-patch end iassfeatures
 
     protected ilObjIndividualAssessment $iass;
     protected ilAccessHandler $handler;
@@ -197,14 +195,11 @@ class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessH
 
     public function mayGradeAnyUser(): bool
     {
-        // cat-tms-patch start iassfeatures
         return $this->handler->checkRbacOrPositionPermissionAccess(
             self::RBAC_OP_CREATE_RECORDS,
             self::ORGU_OP_CREATE_RECORDS,
             $this->iass->getRefId()
         );
-        // cat-tms-patch end iassfeatures
-
     }
 
     public function mayGradeUser(int $user_id): bool
@@ -249,7 +244,6 @@ class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessH
         return $this->checkRBACAccessToObj('edit_learning_progress');
     }
 
-    // cat-tms-patch start iassfeatures
     public function mayPublishUser(int $user_id): bool
     {
         return $this->handler->checkRbacOrPositionPermissionAccess(
@@ -258,5 +252,4 @@ class ilIndividualAssessmentAccessHandler implements IndividualAssessmentAccessH
             $this->iass->getRefId()
         );
     }
-    // cat-tms-patch end iassfeatures
 }
