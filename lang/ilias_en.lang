@@ -10471,7 +10471,7 @@ iass#:#general#:#General Information
 iass#:#grading_info#:#Grading info
 iass#:#grading_record#:#Grading record
 iass#:#iass_add#:#Create Individual Assessment
-iass#:#iass_add_user_failure#:#One or more user could not be added.
+iass#:#iass_add_user_failure#:#One or more user could not be added or already were added.
 iass#:#iass_add_user_success#:#User added as participant.
 iass#:#iass_added#:#Individual Assessment added
 iass#:#iass_amend_saved#:#Amended record has been saved.
@@ -10514,6 +10514,8 @@ iass#:#iass_mess_notification_completed#:#You passed the assessment <i>%s</i>. P
 iass#:#iass_mess_notification_failed#:#You failed the assessment <i>%s</i>. Please check the following grading record for details:
 iass#:#iass_notify#:#Make Records available to Participant
 iass#:#iass_notify_explanation#:#The participant will be notified via e-mail after finalisation and will get access to her or his record on the Info screen.
+iass#:#iass_participant_roles#:#Participant Roles
+iass#:#iass_participant_roles_byline#:#Participants will be added automatically by choosing roles.
 iass#:#iass_phone#:#Phone
 iass#:#iass_place#:#Place of assessment
 iass#:#iass_record#:#Record note

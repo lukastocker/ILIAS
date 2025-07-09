@@ -10474,7 +10474,7 @@ iass#:#general#:#Allgemein
 iass#:#grading_info#:#Bewertungsinformationen
 iass#:#grading_record#:#Bewertungszusammenfassung
 iass#:#iass_add#:#Individuelle Bewertung anlegen
-iass#:#iass_add_user_failure#:#Einer oder mehrere Benutzer konnten nicht hinzugefügt werden.
+iass#:#iass_add_user_failure#:#Einer oder mehrere Benutzer konnten nicht hinzugefügt werden oder wurden bereits hinzugefügt.
 iass#:#iass_add_user_success#:#Benutzer als Teilnehmer hinzugefügt.
 iass#:#iass_added#:#Individuelle Bewertung hinzugefügt
 iass#:#iass_amend_saved#:#Geänderte Prüfungsdaten wurden gespeichert.
@@ -10517,6 +10517,8 @@ iass#:#iass_mess_notification_completed#:#Sie haben die Prüfung „%s“ bestan
 iass#:#iass_mess_notification_failed#:#Sie haben die Prüfung „%s“ leider nicht bestanden. Beachten Sie bitte auch die folgende Notiz zur Prüfung.
 iass#:#iass_notify#:#Ergebnis dem Teilnehmer zugänglich machen
 iass#:#iass_notify_explanation#:#Der Teilnehmer wird nach Abschluss der Bewertung per E-Mail benachrichtigt und kann die Prüfungsnotiz auf dem Reiter „Info“ einsehen.
+iass#:#iass_participant_roles#:#Teilnehmer Rollen
+iass#:#iass_participant_roles_byline#:#Teilnehmer können anhand von Rollen automatisch hinzugefügt werden.
 iass#:#iass_phone#:#Telefon
 iass#:#iass_place#:#Ort der Prüfung
 iass#:#iass_record#:#Prüfungsnotiz

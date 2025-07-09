@@ -113,6 +113,16 @@ class ilObjIndividualAssessment extends ilObject
         $this->setDescription($settings->getDescription());
     }
 
+    public function setParticipantsByRoles(array $role_ids): void
+    {
+        $user_ids = [];
+        foreach ($role_ids as $role_id) {
+            $user_ids = array_merge($user_ids, $this->rbac_review->assignedUsers($role_id));
+        }
+
+        $this->getMembersGUI()->addUsers($user_ids);
+    }
+
     public function getInfoSettings(): ilIndividualAssessmentInfoSettings
     {
         if (!$this->info_settings) {

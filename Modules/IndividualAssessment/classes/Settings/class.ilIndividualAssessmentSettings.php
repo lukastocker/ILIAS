@@ -39,7 +39,8 @@ class ilIndividualAssessmentSettings
         protected bool $result_visible = false,
         protected bool $available_in_report = true,
         protected ?\DateTimeImmutable $available_in_report_from = null,
-        protected ?\DateTimeImmutable $available_in_report_to = null
+        protected ?\DateTimeImmutable $available_in_report_to = null,
+        protected ?array $participant_roles = null,
     ) {
     }
 
@@ -246,5 +247,48 @@ class ilIndividualAssessmentSettings
                 return [$available, $to, $from];
             })
         );
+    }
+
+    public function participantRolesSettingsToForm(
+        Field\Factory $input,
+        ilLanguage $lng,
+        Refinery $refinery,
+        int $ref_id,
+        ilRbacReview $rbac_review
+    ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
+        $roles_options = [];
+        $global_roles = $rbac_review->getGlobalRolesArray();
+        foreach ($global_roles as $global) {
+            $roles_options[] = ilObject::_lookupTitle($global['obj_id']);
+        }
+
+        $selected_roles = null;
+        if ($this->getParticipantRoles() !== null && $this->getParticipantRoles() !== []) {
+            foreach (unserialize($this->getParticipantRoles()[0]) as $role) {
+                $selected_roles[] = $title = ilObject::_lookupTitle($role);
+            }
+        }
+
+        return $input->group([
+            $input->tag(
+                $lng->txt("iass_participant_roles"),
+                $roles_options,
+                $lng->txt("iass_participant_roles_byline")
+            )
+            ->withUserCreatedTagsAllowed(false)
+            ->withValue($selected_roles)
+        ]);
+    }
+
+    public function withParticipantRolesSettings(?array $participant_roles): self
+    {
+        $clone = clone $this;
+        $clone->participant_roles = $participant_roles;
+        return $clone;
+    }
+
+    public function getParticipantRoles(): ?array
+    {
+        return $this->participant_roles;
     }
 }
