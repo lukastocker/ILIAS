@@ -39,6 +39,10 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
      */
     public function createSettings(ilIndividualAssessmentSettings $settings): void
     {
+        $participant_roles = $settings->getParticipantRoles();
+        if ($participant_roles !== null) {
+            $participant_roles = serialize($participant_roles);
+        }
         $values = [
             "obj_id" => ["integer", $settings->getObjId()],
             "content" => ["text", $settings->getContent()],
@@ -76,7 +80,7 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
 
         $sql =
              "SELECT content, record_template, event_time_place_required, file_required, file_visible, result_visible" . PHP_EOL
-            . ',report, report_from, report_to' . PHP_EOL
+            . ',report, report_from, report_to, participant_roles' . PHP_EOL
             . "FROM " . self::IASS_SETTINGS_TABLE . PHP_EOL
             . "WHERE obj_id = " . $this->db->quote($obj->getId(), 'integer') . PHP_EOL
         ;
@@ -101,7 +105,8 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
             (bool) $row['result_visible'],
             (bool) $row['report'],
             $row['report_from'] ? \DateTimeImmutable::createFromFormat(self::DATE_TIME_FORMAT, $row['report_from']) : null,
-            $row['report_to'] ? \DateTimeImmutable::createFromFormat(self::DATE_TIME_FORMAT, $row['report_to']) : null
+            $row['report_to'] ? \DateTimeImmutable::createFromFormat(self::DATE_TIME_FORMAT, $row['report_to']) : null,
+            (array) $row['participant_roles'] ?? null
         );
     }
 
@@ -112,6 +117,10 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
     {
         $where = ["obj_id" => ["integer", $settings->getObjId()]];
         list($report, $report_from, $report_to) = $settings->getReportSettings();
+        $participant_roles = $settings->getParticipantRoles();
+        if ($settings->getParticipantRoles() !== null) {
+            $participant_roles = serialize($participant_roles);
+        }
         $values = [
             "content" => ["text", $settings->getContent()],
             "record_template" => ["text", $settings->getRecordTemplate()],
@@ -121,7 +130,8 @@ class ilIndividualAssessmentSettingsStorageDB implements ilIndividualAssessmentS
             "result_visible" => ["integer", $settings->isResultVisible()],
             "report" => ["integer", $report],
             "report_from" => ["timestamp", $report_from ? $report_from->format(self::DATE_TIME_FORMAT) : null],
-            "report_to" => ["timestamp", $report_to ? $report_to->format(self::DATE_TIME_FORMAT) : null]
+            "report_to" => ["timestamp", $report_to ? $report_to->format(self::DATE_TIME_FORMAT) : null],
+            "participant_roles" => ["text", $participant_roles]
         ];
         $this->db->update(self::IASS_SETTINGS_TABLE, $values, $where);
     }

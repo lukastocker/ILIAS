@@ -226,7 +226,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         }
     }
 
-    protected function buildForm(
+    public function buildForm(
         string $form_action,
         bool $may_be_edited,
         bool $amend = false
@@ -342,7 +342,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         $this->getObject()->membersStorage()->updateMember($member);
     }
 
-    protected function getPossibleLPStates(): array
+    public function getPossibleLPStates(): array
     {
         return [
             ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM => $this->lng->txt(ilLPStatus::LP_STATUS_NOT_ATTEMPTED),
@@ -485,15 +485,16 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
 
     protected function getExaminee(): ilObjUser
     {
+        if (!$this->request_wrapper->has('usr_id')) {
+            $parameter = $this->ctrl->getParameterArray($this);
+            return new ilObjUser((int) $parameter['usr_id']);
+        }
         return new ilObjUser($this->request_wrapper->retrieve('usr_id', $this->refinery->kindlyTo()->int()));
     }
 
-    protected function getMember(): ilIndividualAssessmentMember
+    public function getMember(): ilIndividualAssessmentMember
     {
-        return $this->getObject()->membersStorage()->loadMember(
-            $this->getObject(),
-            $this->getExaminee()
-        );
+        return $this->getObject()->membersStorage()->loadMember($this->getObject(), $this->getExaminee());
     }
 
     protected function setToolbar(): void
@@ -547,7 +548,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         return $this->getAccessHandler()->mayAmendAllUsers();
     }
 
-    protected function userMayPublish(): bool
+    public function userMayPublish(): bool
     {
         return
             $this->getAccessHandler()->isSystemAdmin() ||

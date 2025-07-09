@@ -45,7 +45,10 @@ interface ilIndividualAssessmentMembersStorage
      * Get ilIndividualAssessmentMember-object containing member info
      * associated with $obj and $usr.
      */
-    public function loadMember(ilObjIndividualAssessment $obj, ilObjUser $usr): ilIndividualAssessmentMember;
+    public function loadMember(
+        ilObjIndividualAssessment $obj,
+        ilObjUser $usr
+    ): ilIndividualAssessmentMember;
 
     /**
      * Create a new storage entry for member-object.
@@ -71,4 +74,21 @@ interface ilIndividualAssessmentMembersStorage
      * @param	string[]|int[]	$record
      */
     public function removeMembersRecord(ilObjIndividualAssessment $iass, array $record): void;
+
+    public function getRecords(
+        ilObjIndividualAssessment $object,
+        ?\ILIAS\Data\Range $range = null,
+        ?\ILIAS\Data\Order $order = null
+    ): array;
+
+    public function getRecordsCountForObjId(int $obj_id): ?int;
+
+    public function loadMembersAddedByRoleAndWithoutRecord(
+        ilObjIndividualAssessment $obj,
+        array $roles,
+        ?string $filter = null,
+        ?string $sort = null
+    ): array;
+
+    public function getIdsForMembersWithRecords(ilObjIndividualAssessment $object): array;
 }

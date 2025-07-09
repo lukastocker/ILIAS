@@ -97,4 +97,18 @@ class IndAssSettingsTableDBUpdateSteps implements \ilDatabaseUpdateSteps
         }
     }
 
+    public function step_4(): void
+    {
+        if (!$this->db->tableColumnExists(self::TABLE_NAME, 'participant_roles')) {
+            $this->db->addTableColumn(
+                self::TABLE_NAME,
+                'participant_roles',
+                [
+                    "type" => "clob",
+                    "notnull" => false,
+                    "default" => null
+                ]
+            );
+        }
+    }
 }

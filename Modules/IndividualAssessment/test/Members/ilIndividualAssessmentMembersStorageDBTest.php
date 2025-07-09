@@ -62,7 +62,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             $db,
             $irss,
             $stakeholder,
-            $this->createMock(SpecifiedFormStorage::class)
+            $this->createMock(SpecifiedFormStorage::class),
+            $this->createMock(ilRbacReview::class)
         );
     }
 
@@ -74,7 +75,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             $db,
             $irss,
             new ilIndividualAssessmentGradingStakeholder(),
-            $this->createMock(SpecifiedFormStorage::class)
+            $this->createMock(SpecifiedFormStorage::class),
+            $this->createMock(ilRbacReview::class)
         );
         $this->assertInstanceOf(ilIndividualAssessmentMembersStorageDB::class, $obj);
     }
@@ -131,7 +133,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             $db,
             $this->createMock(IRSS::class),
             new ilIndividualAssessmentGradingStakeholder(),
-            $this->createMock(SpecifiedFormStorage::class)
+            $this->createMock(SpecifiedFormStorage::class),
+            $this->createMock(ilRbacReview::class)
         );
 
         $result = $obj->loadMembers($iass);
@@ -197,7 +200,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             $db,
             $irss,
             $stakeholder,
-            $this->createMock(SpecifiedFormStorage::class)
+            $this->createMock(SpecifiedFormStorage::class),
+            $this->createMock(ilRbacReview::class)
         );
         $result = $obj->loadMembersAsSingleObjects($iass);
 
@@ -272,7 +276,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             $db,
             $irss,
             $stakeholder,
-            $this->createMock(SpecifiedFormStorage::class)
+            $this->createMock(SpecifiedFormStorage::class),
+            $this->createMock(ilRbacReview::class)
         );
 
         $this->expectException(ilIndividualAssessmentException::class);
@@ -347,7 +352,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             $db,
             $irss,
             $stakeholder,
-            $this->createMock(SpecifiedFormStorage::class)
+            $this->createMock(SpecifiedFormStorage::class),
+            $this->createMock(ilRbacReview::class)
         );
 
         $this->expectException(ilIndividualAssessmentException::class);
@@ -403,6 +409,55 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
     {
         $timestamp = 1638431626;
         $date = (new DateTimeImmutable())->setTimestamp($timestamp);
+        $db = $this->createMock(ilDBInterface::class);
+        $obj = $this->getWrapperObj($db);
+
+        $sql = "REPLACE INTO iass_members" . PHP_EOL
+            . "(obj_id, usr_id, examiner_id, record, internal_note, notification_ts, learning_progress, " . PHP_EOL
+            . "finalized, place, event_time, file_name, changer_id, change_time)" . PHP_EOL
+            . "VALUES (" . PHP_EOL
+            . "11, 22, 44, record, internalNote, 1638431626, 33, true, place, 1638431626, fileName, 55, 2021-12-02 12:55:33)";
+
+        $db
+            ->expects($this->exactly(13))
+            ->method("quote")
+            ->withConsecutive(
+                [11, "integer"],
+                [22, "integer"],
+                [44, "integer"],
+                ["record", "text"],
+                ["internalNote", "text"],
+                ["1638431626", "integer"],
+                [33, "integer"],
+                [true, "integer"],
+                ["place", "text"],
+                ["1638431626", "integer"],
+                ["fileName", "text"],
+                [55, "integer"],
+                ["2021-12-02 12:55:33", "string"],
+            )
+            ->willReturnOnConsecutiveCalls(
+                "11",
+                "22",
+                "44",
+                "record",
+                "internalNote",
+                "1638431626",
+                "33",
+                "true",
+                "place",
+                "1638431626",
+                "fileName",
+                "55",
+                "2021-12-02 12:55:33"
+            )
+        ;
+
+        $db
+            ->expects($this->once())
+            ->method("manipulate")
+            ->with($sql)
+        ;
 
         $member = $this->createMock(ilIndividualAssessmentMember::class);
         $member
@@ -466,35 +521,6 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             ->willReturn(55)
         ;
 
-        $db = $this->createMock(ilDBInterface::class);
-        $obj = $this->getWrapperObj($db);
-
-        $where = [
-            "obj_id" => ["integer", 11],
-            "usr_id" => ["integer", 22]
-        ];
-
-        $values = [
-            ilIndividualAssessmentMembers::FIELD_LEARNING_PROGRESS => ["text", 33],
-            ilIndividualAssessmentMembers::FIELD_EXAMINER_ID => ["integer", 44],
-            ilIndividualAssessmentMembers::FIELD_RECORD => ["text", "record"],
-            ilIndividualAssessmentMembers::FIELD_INTERNAL_NOTE => ["text", "internalNote"],
-            ilIndividualAssessmentMembers::FIELD_PLACE => ["text", "place"],
-            ilIndividualAssessmentMembers::FIELD_EVENTTIME => ["integer", $timestamp],
-            ilIndividualAssessmentMembers::FIELD_FINALIZED => ["integer", true],
-            ilIndividualAssessmentMembers::FIELD_NOTIFICATION_TS => ["integer", $timestamp],
-            ilIndividualAssessmentMembers::FIELD_FILE_NAME => ["text", "fileName"],
-            ilIndividualAssessmentMembers::FIELD_CHANGER_ID => ["integer", 55],
-            ilIndividualAssessmentMembers::FIELD_CHANGE_TIME => ["string", $obj->getActualDateTime()]
-        ];
-
-        $db
-            ->expects($this->once())
-            ->method("update")
-            ->with("iass_members", $values, $where)
-        ;
-
-
         $obj->updateMember($member);
     }
 
@@ -528,7 +554,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             $db,
             $irss,
             $stakeholder,
-            $this->createMock(SpecifiedFormStorage::class)
+            $this->createMock(SpecifiedFormStorage::class),
+            $this->createMock(ilRbacReview::class)
         );
         $obj->deleteMembers($iass);
     }
@@ -623,7 +650,8 @@ class ilIndividualAssessmentMembersStorageDBTest extends TestCase
             $db,
             $irss,
             $stakeholder,
-            $this->createMock(SpecifiedFormStorage::class)
+            $this->createMock(SpecifiedFormStorage::class),
+            $this->createMock(ilRbacReview::class)
         );
         $obj->removeMembersRecord($iass, $record);
     }

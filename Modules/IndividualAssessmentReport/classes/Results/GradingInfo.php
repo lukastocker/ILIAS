@@ -25,7 +25,7 @@ class GradingInfo
     public function __construct(
         protected bool $finalized,
         protected int $lp_status,
-        protected string $record_note,
+        protected ?string $record_note,
         protected string $internal_note,
         protected string $location,
         protected ?\DateTimeImmutable $event_time,
@@ -47,7 +47,7 @@ class GradingInfo
         return $this->lp_status;
     }
 
-    public function getRecordNote(): string
+    public function getRecordNote(): ?string
     {
         return $this->record_note;
     }

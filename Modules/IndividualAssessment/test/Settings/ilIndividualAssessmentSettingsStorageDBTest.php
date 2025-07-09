@@ -41,6 +41,7 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
         $file_required = false;
         $file_visible = false;
         $result_visible = false;
+        $participant_roles = null;
 
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
@@ -96,6 +97,7 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
         $report = 1;
         $report_from = '1747827313';
         $report_to = '1747913713';
+        $participant_roles = null;
 
         $settings = new ilIndividualAssessmentSettings(
             $obj_id,
@@ -106,7 +108,7 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
             $event_time_place_required,
             $file_required,
             $file_visible,
-            $result_visible
+            $result_visible,
         );
 
         $values = [
@@ -118,7 +120,8 @@ class ilIndividualAssessmentSettingsStorageDBTest extends TestCase
             "result_visible" => ["integer", $result_visible],
             "report" => ["integer", $report],
             "report_from" => ["timestamp", \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $report_from)],
-            "report_to" => ["timestamp", \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $report_to)]
+            "report_to" => ["timestamp", \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $report_to)],
+            "participant_roles" => ["text", $participant_roles]
         ];
 
         $where = [

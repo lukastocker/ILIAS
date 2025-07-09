@@ -39,7 +39,8 @@ class ilIndividualAssessmentSettings
         protected bool $result_visible = false,
         protected bool $available_in_report = true,
         protected ?\DateTimeImmutable $available_in_report_from = null,
-        protected ?\DateTimeImmutable $available_in_report_to = null
+        protected ?\DateTimeImmutable $available_in_report_to = null,
+        protected ?array $participant_roles = null,
     ) {
     }
 
@@ -246,5 +247,50 @@ class ilIndividualAssessmentSettings
                 return [$available, $to, $from];
             })
         );
+    }
+
+    public function participantRolesSettingsToForm(
+        Field\Factory $input,
+        ilLanguage $lng,
+        Refinery $refinery,
+        int $ref_id,
+        ilRbacReview $rbac_review
+    ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
+        $roles_options = [];
+        $local_roles = $rbac_review->getParentRoleIds($ref_id);
+        foreach ($local_roles as $role) {
+            $roles_options[] = ilObjRole::_getTranslation($role['title']);
+        }
+
+        $selected_roles = null;
+        if ($this->getParticipantRoles() !== null && $this->getParticipantRoles() !== []) {
+            foreach (unserialize($this->getParticipantRoles()[0]) as $role) {
+                $test = $rbac_review->getRolesForIDs([$role], false);
+                $role_Obj = ilObjectFactory::getInstanceByObjId($role);
+                $selected_roles[] = ilObjRole::_getTranslation($role_Obj->getTitle());
+            }
+        }
+
+        return $input->group([
+            $input->tag(
+                $lng->txt("iass_participant_roles"),
+                $roles_options,
+                $lng->txt("iass_participant_roles_byline")
+            )
+            ->withUserCreatedTagsAllowed(false)
+            ->withValue($selected_roles)
+        ]);
+    }
+
+    public function withParticipantRolesSettings(?array $participant_roles): self
+    {
+        $clone = clone $this;
+        $clone->participant_roles = $participant_roles;
+        return $clone;
+    }
+
+    public function getParticipantRoles(): ?array
+    {
+        return $this->participant_roles;
     }
 }

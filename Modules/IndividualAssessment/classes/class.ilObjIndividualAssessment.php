@@ -113,6 +113,16 @@ class ilObjIndividualAssessment extends ilObject
         $this->setDescription($settings->getDescription());
     }
 
+    public function setParticipantsByRoles(array $role_ids): void
+    {
+        $user_ids = [];
+        foreach ($role_ids as $role_id) {
+            $user_ids = array_merge($user_ids, $this->rbac_review->assignedUsers($role_id));
+        }
+
+        $this->getMembersGUI()->addUsers($user_ids);
+    }
+
     public function getInfoSettings(): ilIndividualAssessmentInfoSettings
     {
         if (!$this->info_settings) {
@@ -145,6 +155,21 @@ class ilObjIndividualAssessment extends ilObject
     public function loadMembersAsSingleObjects(string $filter = null, string $sort = null): array
     {
         return $this->members_storage->loadMembersAsSingleObjects($this, $filter, $sort);
+    }
+
+    public function getRecords(\ILIAS\Data\Range $range = null, \ILIAS\Data\Order $order = null): array
+    {
+        return $this->members_storage->getRecords($this, $range, $order);
+    }
+
+    public function getIdsForMembersWithRecords(ilObjIndividualAssessment $object): array
+    {
+        return $this->members_storage->getIdsForMembersWithRecords($object);
+    }
+
+    public function getRecordsCountForObjId(int $obj_id, ilObjIndividualAssessment $object): ?int
+    {
+        return $this->members_storage->getRecordsCountForObjId($obj_id, $object);
     }
 
     /**
@@ -311,6 +336,11 @@ class ilObjIndividualAssessment extends ilObject
     public function getMembersGUI(): ilIndividualAssessmentMembersGUI
     {
         return $this->getDic()['ilIndividualAssessmentMembersGUI'];
+    }
+
+    public function getMemberGUI(): ilIndividualAssessmentMemberGUI
+    {
+        return $this->getDic()['ilIndividualAssessmentMemberGUI'];
     }
 
     public function getSettingsGUI(): ilIndividualAssessmentSettingsGUI

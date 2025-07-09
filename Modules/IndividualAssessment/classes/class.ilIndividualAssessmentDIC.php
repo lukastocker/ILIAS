@@ -51,7 +51,32 @@ trait ilIndividualAssessmentDIC
                 $dic['http']->request(),
                 $dic['ilErr'],
                 $c['ilIndividualAssessmentCommonSettingsGUI'],
-                $c['iass.member.custom_storage']->checkForAvailableFormFields($object->getId())
+                $c['iass.member.custom_storage']->checkForAvailableFormFields($object->getId()),
+                $dic['rbacreview']
+            );
+        };
+        $container['ilIndividualAssessmentMembersDataTableGUI'] = function ($c) use ($object, $dic) {
+            return new ilIndividualAssessmentMembersDataTableGUI(
+                $object,
+                $dic['ilCtrl'],
+                $object->accessHandler(),
+                $dic['ilDB'],
+                $dic['ilUser'],
+                $dic['lng'],
+                $dic['ui.factory'],
+                $dic['ui.renderer'],
+                $dic['http']->request(),
+                $dic->refinery(),
+                $dic->http()->wrapper()->query(),
+                $c['DataFactory'],
+                $dic['tpl'],
+                $c['helper.dateformat'],
+                $c['iass.member.custom_storage']->checkForAvailableFormFields($object->getId()),
+                $dic['rbacreview'],
+                $c['ilIndividualAssessmentMemberGUI'],
+                $dic['ilTabs'],
+                $dic['ilToolbar'],
+                $c['iafp.fieldbuilder']
             );
         };
 
@@ -72,6 +97,7 @@ trait ilIndividualAssessmentDIC
                 $c['ilIndividualAssessmentMembersTableGUI'],
                 $dic->refinery(),
                 $dic->http()->wrapper(),
+                $c['ilIndividualAssessmentMembersDataTableGUI']
             );
         };
 
@@ -162,6 +188,7 @@ trait ilIndividualAssessmentDIC
                 $dic['resource_storage'],
                 $stakeholder = $c['irss.stakeholder'],
                 $c['iass.member.custom_storage'],
+                $dic['rbacreview']
             );
 
         $container['iass.member.custom_storage'] = static fn($c): SpecifiedFormStorage =>

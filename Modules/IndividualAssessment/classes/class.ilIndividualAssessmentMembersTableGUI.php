@@ -260,7 +260,7 @@ class ilIndividualAssessmentMembersTableGUI
             $items[] = $ui_factory->button()->shy($this->txt('iass_usr_edit'), $target);
         }
 
-        if ($this->checkUserRemoveable($finalized)) {
+        if ($this->checkUserRemoveable($finalized) && !is_null($record->getGrading()->getRecord())) {
             $this->ctrl->setParameterByClass('ilIndividualAssessmentMembersGUI', 'usr_id', $usr_id);
             $target = $this->ctrl->getLinkTargetByClass('ilIndividualAssessmentMembersGUI', 'removeUserConfirmation');
             $items[] = $ui_factory->button()->shy($this->txt('iass_usr_remove'), $target);
@@ -355,7 +355,7 @@ class ilIndividualAssessmentMembersTableGUI
      *
      * @return string[]
      */
-    protected function getRecordNote(string $record_note): array
+    protected function getRecordNote(?string $record_note = null): array
     {
         if (is_null($record_note)) {
             return [];

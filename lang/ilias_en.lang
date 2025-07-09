@@ -4589,6 +4589,7 @@ common#:#mails_pl#:#Mail(s)
 common#:#main_menu#:#Main Menu
 common#:#mainbar_aria_label#:#Mainbar
 common#:#mainbar_more_label#:#More
+common#:#manage#:#Manage
 common#:#manage_members#:#Manage Members
 common#:#markdown#:#Markdown
 common#:#marked_entries#:#Marked Entries
@@ -10420,7 +10421,7 @@ iafp#:#default_value#:#Default Value
 iafp#:#field_available_for_examiners#:#Exclusively available for examiners
 iafp#:#field_available_for_examiners_byline#:#mark as internal: this field is available for examiners only
 iafp#:#field_default_value#:#Default Value
-iafp#:#field_default_value_byline#:#default/initial value
+iafp#:#field_default_value_byline#:#This field will be activated as soon as required options were saved. After activation the value of this field will be displayed initially until a specific value is set.
 iafp#:#field_description#:#Description
 iafp#:#field_description_byline#:#description of the field
 iafp#:#field_label#:#Label
@@ -10467,16 +10468,18 @@ iarp#:#iarp_settings_availability#:#Availability
 iarp#:#report#:#Report
 iarp#:#view_participant_record#:#View Record
 iass#:#download_assessment_paper#:#Download Record file
+iass#:#finalized#:#Finalized
 iass#:#general#:#General Information
 iass#:#grading_info#:#Grading info
 iass#:#grading_record#:#Grading record
 iass#:#iass_add#:#Create Individual Assessment
-iass#:#iass_add_user_failure#:#One or more user could not be added.
+iass#:#iass_add_user_failure#:#One or more user could not be added or already were added.
 iass#:#iass_add_user_success#:#User added as participant.
 iass#:#iass_added#:#Individual Assessment added
 iass#:#iass_amend_saved#:#Amended record has been saved.
 iass#:#iass_cancel#:#Cancel
-iass#:#iass_changed_by#:#Changed after finalization
+iass#:#iass_changed#:#Changed
+iass#:#iass_changed_by#:#Changed by
 iass#:#iass_confirm_finalize#:#Publish and freeze
 iass#:#iass_consultation_hours#:#Consultation hours
 iass#:#iass_contact#:#Name
@@ -10484,6 +10487,8 @@ iass#:#iass_contact_info#:#Contact information
 iass#:#iass_content#:#Assessment content description
 iass#:#iass_content_explanation#:#Contents of the assessment, e.g., relevant topics.
 iass#:#iass_copy#:#Copy Individual Assessment
+iass#:#iass_datetime#:#Assessment date and time
+iass#:#iass_detailed_record#:#Detailed View
 iass#:#iass_download#:#Download
 iass#:#iass_edit#:#Settings
 iass#:#iass_edit_info#:#Info Settings
@@ -10514,6 +10519,8 @@ iass#:#iass_mess_notification_completed#:#You passed the assessment <i>%s</i>. P
 iass#:#iass_mess_notification_failed#:#You failed the assessment <i>%s</i>. Please check the following grading record for details:
 iass#:#iass_notify#:#Make Records available to Participant
 iass#:#iass_notify_explanation#:#The participant will be notified via e-mail after finalisation and will get access to her or his record on the Info screen.
+iass#:#iass_participant_roles#:#Participant Roles
+iass#:#iass_participant_roles_byline#:#Participants will be added automatically by choosing roles in the current context.
 iass#:#iass_phone#:#Phone
 iass#:#iass_place#:#Place of assessment
 iass#:#iass_record#:#Record note
@@ -10525,6 +10532,7 @@ iass#:#iass_responsibility#:#Responsibility
 iass#:#iass_save_amend#:#Save Amended Record
 iass#:#iass_settings_availability#:#Availability
 iass#:#iass_settings_saved#:#Settings saved.
+iass#:#iass_singleselect#:#Single Selection
 iass#:#iass_sort_changetime_asc#:#Last Change ascending
 iass#:#iass_sort_changetime_desc#:#Last Change descending
 iass#:#iass_sort_examiner_login_asc#:#Examiner ascending
@@ -10543,11 +10551,13 @@ iass#:#iass_usr_view#:#Participant Record
 iass#:#il_iass_member#:#Participant
 iass#:#il_iass_members#:#Participants
 iass#:#lp_inactive#:#Note: the learning progress for this object is inactive. Thus memberships may not be published.
+iass#:#not_finalized#:#Not finalized
 iass#:#save_amend#:#Save Amended Record
 iass#:#setting_report_availability_byline#:#If enabled, this object is included in reports.
 iass#:#setting_report_availability_label#:#Visible in Reports
 iass#:#setting_report_availability_period_byline#:#Visible in Reports for this period of time
 iass#:#setting_report_availability_period_label#:#Period of visibility in reports
+iass#:#view_details#:#Detailed View
 impr#:#impr_page_type_impr#:#Imprint
 init#:#init_error_authentication_fail#:#Authentication failed.
 init#:#init_error_maintenance#:#The server is not available due to maintenance. We apologise for any inconvenience.

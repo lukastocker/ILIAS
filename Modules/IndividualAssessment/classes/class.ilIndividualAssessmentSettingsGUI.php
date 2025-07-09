@@ -50,6 +50,7 @@ class ilIndividualAssessmentSettingsGUI
     protected ilErrorHandling $error_object;
     protected ilIndividualAssessmentCommonSettingsGUI $common_settings_gui;
     protected bool $form_fields_available;
+    protected ilRbacReview $rbac_review;
 
     public function __construct(
         ilObjIndividualAssessment $object,
@@ -63,7 +64,8 @@ class ilIndividualAssessmentSettingsGUI
         $http_request,
         ilErrorHandling $error_object,
         ilIndividualAssessmentCommonSettingsGUI $common_settings_gui,
-        bool $form_fields_available
+        bool $form_fields_available,
+        ilRbacReview $rbac_review
     ) {
         $this->ctrl = $ctrl;
         $this->object = $object;
@@ -81,6 +83,7 @@ class ilIndividualAssessmentSettingsGUI
         $this->common_settings_gui = $common_settings_gui;
 
         $this->form_fields_available = $form_fields_available;
+        $this->rbac_review = $rbac_review;
 
         $this->getSubTabs($this->tabs_gui);
         $this->lng->loadLanguageModule('content');
@@ -172,11 +175,20 @@ class ilIndividualAssessmentSettingsGUI
             $this->refinery
         );
 
+        $participant_roles = $settings->participantRolesSettingsToForm(
+            $this->input_factory->field(),
+            $this->lng,
+            $this->refinery,
+            $this->object->getRefId(),
+            $this->rbac_review
+        );
+
         $availability = $this->input_factory->field()->section(
             [
                 'online' => $online,
                 'user' => $user,
                 'report' => $report,
+                'participant_roles' => $participant_roles
             ],
             $this->lng->txt('iass_settings_availability')
         );
@@ -201,6 +213,7 @@ class ilIndividualAssessmentSettingsGUI
 
         $data = $form->getData();
         if (!is_null($data)) {
+            $participant_roles = $this->getParticipantRoleIdsFromData($data[1]['participant_roles']);
             $settings = $data[0];
             $settings = $settings
                 ->withUserAvailabilitySettings(
@@ -208,9 +221,16 @@ class ilIndividualAssessmentSettingsGUI
                 )
                 ->withReportSettings(
                     ...$data[1]['report']
-                );
+                )
+                ->withParticipantRolesSettings(
+                    $participant_roles
+                )
+            ;
             $this->object->setSettings($settings);
             $this->object->update();
+            /*if ($participant_roles !== null) {
+                $this->object->setParticipantsByRoles($participant_roles);
+            }*/
 
             $this->object->getObjectProperties()->storePropertyIsOnline($data[1]['online']);
             $this->tpl->setOnScreenMessage("success", $this->lng->txt("settings_saved"), true);
@@ -265,5 +285,17 @@ class ilIndividualAssessmentSettingsGUI
     public function handleAccessViolation(): void
     {
         $this->error_object->raiseError($this->lng->txt("msg_no_perm_read"), $this->error_object->WARNING);
+    }
+
+    protected function getParticipantRoleIdsFromData(array $data): ?array
+    {
+        $roles = null;
+        foreach ($this->rbac_review->getParentRoleIds($this->object->getRefId()) as $role) {
+            if (in_array($role['title'], $data[0])) {
+                $roles[] = $role['rol_id'];
+            }
+        }
+
+        return $roles;
     }
 }
