@@ -157,6 +157,16 @@ class ilObjIndividualAssessment extends ilObject
         return $this->members_storage->loadMembersAsSingleObjects($this, $filter, $sort);
     }
 
+    public function getRecords(\ILIAS\Data\Range $range = null, \ILIAS\Data\Order $order = null): array
+    {
+        return $this->members_storage->getRecords($this, $range, $order);
+    }
+
+    public function getRecordsCountForObjId(int $obj_id): ?int
+    {
+        return $this->members_storage->getRecordsCountForObjId($obj_id);
+    }
+
     /**
      * Get the members object associated with this and visible by the current user.
      */

@@ -55,6 +55,25 @@ trait ilIndividualAssessmentDIC
                 $dic['rbacreview']
             );
         };
+        $container['ilIndividualAssessmentMembersDataTableGUI'] = function ($c) use ($object, $dic) {
+            return new ilIndividualAssessmentMembersDataTableGUI(
+                $object,
+                $dic['ilCtrl'],
+                $object->accessHandler(),
+                $dic['ilDB'],
+                $dic['ilUser'],
+                $dic['lng'],
+                $dic['ui.factory'],
+                $dic['ui.renderer'],
+                $dic['http']->request(),
+                $dic->refinery(),
+                $dic->http()->wrapper()->query(),
+                $c['DataFactory'],
+                $dic['tpl'],
+                $c['helper.dateformat'],
+                $c['iass.member.custom_storage']->checkForAvailableFormFields($object->getId())
+            );
+        };
 
         $container['ilIndividualAssessmentMembersGUI'] = function ($c) use ($object, $dic) {
             return new ilIndividualAssessmentMembersGUI(
@@ -73,6 +92,7 @@ trait ilIndividualAssessmentDIC
                 $c['ilIndividualAssessmentMembersTableGUI'],
                 $dic->refinery(),
                 $dic->http()->wrapper(),
+                $c['ilIndividualAssessmentMembersDataTableGUI']
             );
         };
 

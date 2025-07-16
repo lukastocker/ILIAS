@@ -29,6 +29,7 @@ use ILIAS\Data\Order;
  *
  * @ilCtrl_Calls ilIndividualAssessmentMembersGUI: ilRepositorySearchGUI
  * @ilCtrl_Calls ilIndividualAssessmentMembersGUI: ilIndividualAssessmentMemberGUI
+ * @ilCtrl_Calls ilIndividualAssessmentMembersGUI: ilIndividualAssessmentMembersDataTableGUI
  */
 class ilIndividualAssessmentMembersGUI
 {
@@ -40,6 +41,9 @@ class ilIndividualAssessmentMembersGUI
     public const S_EXAMINER_DESC = "examiner_login:" . Order::DESC;
     public const S_CHANGETIME_ASC = "change_time:" . Order::ASC;
     public const S_CHANGETIME_DESC = "change_time:" . Order::DESC;
+
+    public const CMD_MANAGE = "manage";
+    public const CMD_VIEW = "view";
 
     protected ilCtrl $ctrl;
     protected ilObjIndividualAssessment $object;
@@ -57,6 +61,7 @@ class ilIndividualAssessmentMembersGUI
     protected ILIAS\Refinery\Factory $refinery;
     protected ILIAS\HTTP\Wrapper\RequestWrapper $request_wrapper;
     protected ILIAS\HTTP\Wrapper\ArrayBasedRequestWrapper $post_wrapper;
+    protected ilIndividualAssessmentMembersDataTableGUI $member_data_gui;
 
     public function __construct(
         ilObjIndividualAssessment $object,
@@ -74,6 +79,7 @@ class ilIndividualAssessmentMembersGUI
         protected ilIndividualAssessmentMembersTableGUI $table,
         ILIAS\Refinery\Factory $refinery,
         ILIAS\HTTP\Wrapper\WrapperFactory $wrapper,
+        ilIndividualAssessmentMembersDataTableGUI $member_data_gui
     ) {
         $this->object = $object;
         $this->ctrl = $ctrl;
@@ -91,6 +97,8 @@ class ilIndividualAssessmentMembersGUI
         $this->request_wrapper = $wrapper->query();
         $this->post_wrapper = $wrapper->post();
         $this->ref_id = $object->getRefId();
+        $this->member_data_gui = $member_data_gui;
+        $this->getSubTabs($this->tabs);
     }
 
     public function executeCommand(): void
@@ -126,9 +134,23 @@ class ilIndividualAssessmentMembersGUI
                 );
                 $this->ctrl->forwardCommand($this->member_gui);
                 break;
+            case "ilindividualassessmentmembersdatatablegui":
+                if ($this->iass_access->mayEditLearningProgressSettings()) {
+                    $this->tabs->activateSubTab(self::CMD_MANAGE);
+                    $this->ctrl->forwardCommand($this->member_data_gui);
+                } else {
+                    $this->ctrl->setCmd(self::CMD_VIEW);
+                }
+                break;
             default:
                 if (!$cmd) {
-                    $cmd = 'view';
+                    if ($this->iass_access->mayEditLearningProgressSettings()) {
+                        $this->tabs->activateSubTab(self::CMD_MANAGE);
+                        $cmd = self::CMD_MANAGE;
+                    } else {
+                        $this->tabs->activateSubTab(self::CMD_VIEW);
+                        $cmd = self::CMD_VIEW;
+                    }
                 }
                 $this->$cmd();
                 break;
@@ -144,6 +166,13 @@ class ilIndividualAssessmentMembersGUI
             $this->tpl->setOnScreenMessage("success", $this->txt('iass_add_user_success'));
         }
         $this->view();
+    }
+
+    protected function manage(): void
+    {
+        if ($this->iass_access->mayEditMembers()) {
+            $this->ctrl->redirectByClass(self::class, 'manage');
+        }
     }
 
     protected function view(): void
@@ -425,5 +454,26 @@ class ilIndividualAssessmentMembersGUI
     protected function txt(string $code): string
     {
         return $this->lng->txt($code);
+    }
+
+    protected function getSubTabs(ilTabsGUI $tabs): void
+    {
+        $tabs->addSubTab(
+            self::CMD_MANAGE,
+            $this->lng->txt("manage"),
+            $this->ctrl->getLinkTargetByClass(
+                [
+                    self::class,
+                    ilIndividualAssessmentMembersDataTableGUI::class,
+                ],
+                ilIndividualAssessmentMembersDataTableGUI::CMD_VIEW
+            ),
+        );
+
+        $tabs->addSubTab(
+            self::CMD_VIEW,
+            $this->lng->txt("show"),
+            $this->ctrl->getLinkTarget($this, "view")
+        );
     }
 }

@@ -71,4 +71,12 @@ interface ilIndividualAssessmentMembersStorage
      * @param	string[]|int[]	$record
      */
     public function removeMembersRecord(ilObjIndividualAssessment $iass, array $record): void;
+
+    public function getRecords(
+        ilObjIndividualAssessment $object,
+        ?\ILIAS\Data\Range $range = null,
+        ?\ILIAS\Data\Order $order = null
+    ): array;
+
+    public function getRecordsCountForObjId(int $obj_id): ?int;
 }

@@ -391,4 +391,37 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
         $vals = explode(":", $sort);
         return " ORDER BY " . $vals[0] . " " . $vals[1];
     }
+
+    public function getRecords(
+        ilObjIndividualAssessment $object,
+        ?\ILIAS\Data\Range $range = null,
+        ?\ILIAS\Data\Order $order = null
+    ): array {
+        $records = [];
+        $sql = $this->loadMemberQuery();
+        $sql .= "	WHERE obj_id = " . $this->db->quote($object->getId(), 'integer');
+
+        if ($order !== null) {
+            $sql .= $order->join(' ORDER BY', fn(...$o) => implode(' ', $o));
+        }
+        if ($range !== null) {
+            $sql .= sprintf(' LIMIT %2$s OFFSET %1$s', ...$range->unpack());
+        }
+
+        $res = $this->db->query($sql);
+        while ($row = $this->db->fetchAssoc($res)) {
+            $user = new ilObjUser((int) $row["usr_id"]);
+            $records[] = $this->createAssessmentMember($object, $user, $row);
+        }
+        return $records;
+    }
+
+    public function getRecordsCountForObjId(int $obj_id): ?int
+    {
+        $query = "SELECT count(*) as cnt" . PHP_EOL
+            . "FROM " . self::MEMBERS_TABLE . " iassme" . PHP_EOL
+            . "WHERE obj_id = " . $this->db->quote($obj_id, 'integer');
+        $res = $this->db->query($query);
+        return (int) $this->db->fetchAssoc($res)['cnt'];
+    }
 }
