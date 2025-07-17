@@ -74,7 +74,7 @@ class IAFPFieldsGUI
     public function executeCommand(): void
     {
         $next_class = $this->ctrl->getNextClass($this);
-        $cmd = $this->ctrl->getCmd() ?? self::CMD_VIEW;
+        $cmd = $this->ctrl->getCmd() ?? self::CMD_LIST;
 
         switch ($next_class) {
             default:
@@ -103,17 +103,28 @@ class IAFPFieldsGUI
                     case self::CMD_CREATE:
                         $field_creation = $this->getFieldCreationModal()->withRequest($this->request);
                         $data = $field_creation->getData();
-                        if ($data === null) {
-                            $signal = $field_creation->getShowSignal();
-                            $field_creation = $field_creation->withAdditionalOnLoadCode(
-                                fn($id) => "il.UI.modal.showModal('{$id}', {}, {});"
-                            );
-                            $this->tpl->setContent($this->ui_renderer->render($field_creation) . $this->listFields());
-                            break;
+                        $fields = $this->forms_repo->getFieldsForObjId($this->iafp_obj_id);
+                        $name = [];
+                        foreach ($fields as $field) {
+                            $name[] = $field->getName();
                         }
-                        $field_id = $this->forms_repo->createField($this->iafp_obj_id, ...$data)->getFieldId();
-                        $url = $this->getUrlString(self::CMD_EDIT, $field_id);
-                        $this->ctrl->redirectToURL($url);
+                        if (!in_array($data[0], $name)) {
+                            if ($data === null) {
+                                $signal = $field_creation->getShowSignal();
+                                $field_creation = $field_creation->withAdditionalOnLoadCode(
+                                    fn($id) => "il.UI.modal.showModal('{$id}', {}, {});"
+                                );
+                                $this->tpl->setContent($this->ui_renderer->render($field_creation) . $this->listFields());
+                                break;
+                            }
+                            $field_id = $this->forms_repo->createField($this->iafp_obj_id, ...$data)->getFieldId();
+                            $url = $this->getUrlString(self::CMD_EDIT, $field_id);
+                            $this->ctrl->redirectToURL($url);
+
+                        } else {
+                            $this->tpl->setOnScreenMessage('failure', $this->txt('name_already_exists'), true);
+                            $this->ctrl->redirectByClass('iafpfieldsgui', self::CMD_LIST);
+                        }
                         break;
 
                     case self::CMD_EDIT:
@@ -192,7 +203,8 @@ class IAFPFieldsGUI
             null,
             [
                 $this->ui_factory->input()->field()->text(
-                    $this->lng->txt('title')
+                    $this->lng->txt('name'),
+                    $this->lng->txt('unique_name')
                 )->withRequired(true),
                 $this->ui_factory->input()->field()->select(
                     $this->lng->txt('field_type'),

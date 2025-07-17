@@ -10457,12 +10457,14 @@ iafp#:#iafp_import#:#Import Formulare
 iafp#:#iafp_settings#:#Einstellungen
 iafp#:#iafp_settings_availability#:#Verfügbarkeit
 iafp#:#label#:#Bezeichnung
+iafp#:#name_already_exists#:#Der eingebebene Feldname existiert bereits. Bitte führen Sie den Anlageprozess erneut mit einem noch nicht bestehenden Feldname durch.
 iafp#:#new_field#:#Feld hinzufügen
 iafp#:#new_form#:#Formular hinzufügen
 iafp#:#object_saved#:#Gespeichert.
 iafp#:#pick_fields#:#Felder auswählen
 iafp#:#tab_fields#:#Felder
 iafp#:#tab_forms#:#Formulare
+iafp#:#unique_name#:#Bitte geben Sie einen nocht nicht bestehenden Namen ein.
 iafp#:#with_notes#:#Notizen
 iarp#:#iarp_global#:#Globaler Report
 iarp#:#iarp_global_desc#:#Ist dies deaktiviert werden nur Individuelle Bewertungen in und unterhalb des aktuellen Ordners angezeigt.
