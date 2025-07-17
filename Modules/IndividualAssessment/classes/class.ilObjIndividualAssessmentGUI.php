@@ -442,6 +442,76 @@ class ilObjIndividualAssessmentGUI extends ilObjectGUI
         );
     }
 
+    protected function initDidacticTemplate(ilPropertyFormGUI $form): ilPropertyFormGUI
+    {
+        $this->lng->loadLanguageModule('didactic');
+        $existing_exclusive = false;
+        $options = [];
+        $options['dtpl_0'] = [
+            $this->lng->txt('didactic_default_type'),
+            sprintf(
+                $this->lng->txt('didactic_default_type_info'),
+                $this->lng->txt('objs_' . $this->type)
+            )
+        ];
+
+        $templates = ilDidacticTemplateSettings::getInstanceByObjectType($this->type)->getTemplates();
+        if ($templates) {
+            foreach ($templates as $template) {
+                if ($template->isEffective((int) $this->requested_ref_id)) {
+                    $options["dtpl_" . $template->getId()] = [
+                        $template->getPresentationTitle(),
+                        $template->getPresentationDescription()
+                    ];
+
+                    if ($template->isExclusive()) {
+                        $existing_exclusive = true;
+                    }
+                }
+            }
+        }
+
+        $this->addDidacticTemplateOptions($options);
+
+
+        if (sizeof($options) > 1) {
+            $type = new ilSelectInputGUI(
+                $this->lng->txt('type'),
+                'didactic_type'
+            );
+            // workaround for containers in edit mode
+            if (!$this->getCreationMode()) {
+                $value = 'dtpl_' . ilDidacticTemplateObjSettings::lookupTemplateId($this->object->getRefId());
+
+                $type->setValue($value);
+
+                if (!in_array($value, array_keys($options)) || ($existing_exclusive && $value == "dtpl_0")) {
+                    //add or rename actual value to not available
+                    $options[$value] = [$this->lng->txt('not_available')];
+                }
+            } elseif ($existing_exclusive) {
+                //if an exclusive template exists use the second template as default value
+                $keys = array_keys($options);
+                $type->setValue($keys[1]);
+            } else {
+                $type->setValue('dtpl_0');
+            }
+            $form->addItem($type);
+
+            foreach ($options as $id => $data) {
+                $title = $data[0] ?? '';
+                $byline = '';
+                if ($data[1] !== '') {
+                    $byline = ' (' . $data[1] . ')';
+                }
+                $options[$id] = $title . $byline;
+            }
+            $type->setOptions($options);
+        }
+
+        return $form;
+    }
+
     protected function afterSave(ilObject $new_object): void
     {
         if ($form_id = $this->getDidacticTemplateVar("iass")) {
