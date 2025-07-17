@@ -119,6 +119,13 @@ class ilObjIndividualAssessmentFormPoolGUI extends ilObjectGUI
                         $this->tpl->setOnScreenMessage('failure', $this->lng->txt("no_import"), true);
                         break;
                     case self::CMD_VIEW:
+                        $access = $this->object->getDic()['access'];
+                        if ($access->mayEdit()) {
+                            $this->ctrl->redirectByClass(self::class, self::CMD_EDIT);
+                        } else {
+                            $this->ctrl->redirectByClass('iafpformsgui', 'list');
+                        }
+                        break;
                     case self::CMD_INFO:
                         $this->checkPermission('visible');
                         $this->ctrl->redirectByClass('ilinfoscreengui', 'showSummary');

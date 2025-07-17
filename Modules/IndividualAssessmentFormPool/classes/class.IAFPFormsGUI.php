@@ -74,7 +74,7 @@ class IAFPFormsGUI
     public function executeCommand(): void
     {
         $next_class = $this->ctrl->getNextClass($this);
-        $cmd = $this->ctrl->getCmd() ?? self::CMD_VIEW;
+        $cmd = $this->ctrl->getCmd() ?? self::CMD_LIST;
 
         switch ($next_class) {
             default:
