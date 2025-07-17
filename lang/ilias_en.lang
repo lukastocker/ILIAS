@@ -10454,12 +10454,14 @@ iafp#:#iafp_import#:#Import Forms
 iafp#:#iafp_settings#:#Settings
 iafp#:#iafp_settings_availability#:#Availability
 iafp#:#label#:#label
+iafp#:#name_already_exists#:#The inserted field name already exists. Please restart the creation process and choose a unique field name.
 iafp#:#new_field#:#Add a new Field
 iafp#:#new_form#:#Add a new Form
 iafp#:#object_saved#:#Saved.
 iafp#:#pick_fields#:#Select Fields
 iafp#:#tab_fields#:#Fields
 iafp#:#tab_forms#:#Forms
+iafp#:#unique_name#:#Please insert a unique field name.
 iafp#:#with_notes#:#Notes
 iarp#:#iarp_global#:#Global Report
 iarp#:#iarp_global_desc#:#If this is disabled assessments in or below this folder are included only.

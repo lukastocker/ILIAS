@@ -86,6 +86,7 @@ trait ilIndividualAssessmentFormPoolDIC
                 $c['urlbuilder'],
                 $c['fieldbuilder'],
                 $object->getId(),
+                $DIC['ilTabs']
             );
 
         $container['gui.fields'] = static fn($c): IAFPFieldsGUI =>
@@ -104,6 +105,7 @@ trait ilIndividualAssessmentFormPoolDIC
                 $c['urlbuilder'],
                 $c['fieldbuilder'],
                 $object->getId(),
+                $DIC['ilTabs']
             );
 
         $container['access'] = static fn(): IAFPAccessHandler =>
