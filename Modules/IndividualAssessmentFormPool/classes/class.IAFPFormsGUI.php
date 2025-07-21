@@ -62,6 +62,7 @@ class IAFPFormsGUI
         protected URLBuilder $url_builder,
         protected FieldBuilder $field_builder,
         protected readonly int $iafp_obj_id,
+        protected readonly ilTabsGUI $tabs_gui
     ) {
         $namespace = ['iafpf', (string) $iafp_obj_id];
         list(
@@ -102,11 +103,21 @@ class IAFPFormsGUI
                         }
                         // no break
                     case self::CMD_CREATE:
+                        $this->tabs_gui->clearTargets();
+                        $this->tabs_gui->setBackTarget(
+                            $this->lng->txt('btn_back'),
+                            $this->ctrl->getLinkTarget($this, self::CMD_LIST)
+                        );
                         $frm = $this->getEditForm($this->forms_repo->getNewForm($this->iafp_obj_id));
                         $this->tpl->setContent($this->ui_renderer->render($frm));
                         break;
 
                     case self::CMD_EDIT:
+                        $this->tabs_gui->clearTargets();
+                        $this->tabs_gui->setBackTarget(
+                            $this->lng->txt('btn_back'),
+                            $this->ctrl->getLinkTarget($this, self::CMD_LIST)
+                        );
                         $form_id = array_shift($ids);
                         $ui_form = $this->getEditForm($this->forms_repo->getFormById($form_id));
                         $out = $this->getFieldSelection($form_id);
