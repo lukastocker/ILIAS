@@ -10423,7 +10423,7 @@ iafp#:#default_value#:#Voreingestellter Wert
 iafp#:#field_available_for_examiners#:#Intern / Nur für für Bewertende verfügbar
 iafp#:#field_available_for_examiners_byline#:#Dieses Feld steht nur für Bewertende zur Verfügung
 iafp#:#field_default_value#:#Voreingestellter Wert
-iafp#:#field_default_value_byline#:#Dieser Wert wird initial angezeigt, solange kein expliziter Wert gesetzt wurde.
+iafp#:#field_default_value_byline#:#Dieses Feld wird aktiviert sobald Optionen eingetragen und gespeichert wurden. Nach Aktivierung wird der in diesem Feld eingetragene Wert initial angezeigt, solange kein expliziter Wert gesetzt wurde.
 iafp#:#field_description#:#Beschreibung
 iafp#:#field_description_byline#:#Die Beschreibung wird unterhalb des Feldes im Formular angezeigt.
 iafp#:#field_label#:#Bezeichnung

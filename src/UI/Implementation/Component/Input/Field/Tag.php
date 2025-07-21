@@ -282,8 +282,10 @@ class Tag extends FormInput implements C\Input\Field\Tag
         //We assign null. Note that unset checkboxes are not contained in POST.
         if (!$this->isDisabled()) {
             $value = $input->getOr($this->getName(), null);
-            $clone->content = $this->applyOperationsTo($value);
+        } else {
+            $value = $this->getValue();
         }
+        $clone->content = $this->applyOperationsTo($value);
 
         if ($clone->content->isError()) {
             return $clone->withError("" . $clone->content->error());

@@ -137,10 +137,15 @@ class FieldConfig
         switch ($this->type) {
             case FieldType::FILE:
                 return null;
-            default:
+            case FieldType::RATING:
                 return $field_builder->build($this)
                     ->withLabel($lng->txt('field_default_value'))
                     ->withByLine($lng->txt('field_default_value_byline'));
+            default:
+                return $field_builder->build($this)
+                    ->withLabel($lng->txt('field_default_value'))
+                    ->withByLine($lng->txt('field_default_value_byline'))
+                    ->withDisabled($this->getOptions() === null);
         }
     }
 

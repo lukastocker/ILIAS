@@ -10421,7 +10421,7 @@ iafp#:#default_value#:#Default Value
 iafp#:#field_available_for_examiners#:#Exclusively available for examiners
 iafp#:#field_available_for_examiners_byline#:#mark as internal: this field is available for examiners only
 iafp#:#field_default_value#:#Default Value
-iafp#:#field_default_value_byline#:#default/initial value
+iafp#:#field_default_value_byline#:This field will be activated as soon as required options were saved. After activation the value of this field will be displayed initially until a specific value is set.
 iafp#:#field_description#:#Description
 iafp#:#field_description_byline#:#description of the field
 iafp#:#field_label#:#Label
