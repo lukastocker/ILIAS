@@ -75,6 +75,9 @@ class IASSCustomFieldValueRenderer
     public function getFileLinkById(string $id): string
     {
         $resource_id = $this->irss->manage()->find($id);
+        if ($resource_id === null) {
+            return '';
+        }
         $resource = $this->irss->manage()->getResource($resource_id);
         $resource_to_component = new ResourceToComponent($resource);
 
