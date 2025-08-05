@@ -81,15 +81,25 @@ class FieldBuilder
 
             case FieldType::SINGLESELECT:
                 $options = $config->getOptions() ?? [];
-                $options = array_combine($options, $options);
+                $options = array_combine(
+                    array_map(fn($o) => rawurlencode($o), $options),
+                    $options
+                );
                 $value = in_array($value, $options) ? $value : $config->getDefaultValue();
                 return $factory->select($label, $options, $description)
-                    ->withValue($value);
+                    ->withValue(rawurlencode((string) $value))
+                    ->withAdditionalTransformation(
+                        $this->refinery->custom()->transformation(
+                            fn($v) => rawurldecode($v)
+                        )
+                    );
 
             case FieldType::TAG:
                 $options = $config->getOptions() ?? [];
+                $options = array_map(fn($o) => rawurldecode($o), $options);
                 $value = ($value === null || $value === '') ?
                     null : explode(\SpecifiedFormStorageDB::VALUE_DELIMITER, $value);
+
                 return $factory->tag($label, $options, $description)
                     ->withUserCreatedTagsAllowed(false)
                     ->withValue($value);

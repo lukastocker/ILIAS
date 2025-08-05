@@ -129,7 +129,11 @@ class IASSCustomFieldValueRenderer
 
     protected function renderTag(IASSCustomField $field): string
     {
-        return str_replace(SpecifiedFormStorageDB::VALUE_DELIMITER, ', ', (string) $field->getValue());
+        $v = explode(
+            SpecifiedFormStorageDB::VALUE_DELIMITER,
+            (string) $field->getValue()
+        );
+        return implode(', ', $v);
     }
 
     protected function renderRating(IASSCustomField $field): string

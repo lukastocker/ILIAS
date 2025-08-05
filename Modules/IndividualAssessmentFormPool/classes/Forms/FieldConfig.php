@@ -112,17 +112,19 @@ class FieldConfig
             case FieldType::SINGLESELECT:
             case FieldType::TAG:
                 return $factory->group([ //group is needed due to existing transforms on tag-input
-                     $factory->tag($lng->txt('field_options'), [], $lng->txt('field_options_byline'))
-                         ->withUserCreatedTagsAllowed(true)
-                         ->withRequired(true)
-                         ->withValue($this->getOptions())
-                         ->withTagMaxLength(512)
-                 ])
-                 ->withAdditionalTransformation(
-                     $refinery->custom()->transformation(
-                         fn($v) => array_shift($v)
-                     )
-                 );
+                    $factory->tag($lng->txt('field_options'), [], $lng->txt('field_options_byline'))
+                        ->withUserCreatedTagsAllowed(true)
+                        ->withRequired(true)
+                        ->withValue(
+                            $this->getOptions() ?? []
+                        )
+                        ->withTagMaxLength(512)
+                ])
+                ->withAdditionalTransformation(
+                    $refinery->custom()->transformation(
+                        fn($v) => array_shift($v)
+                    )
+                );
                 break;
             default:
                 return null;

@@ -71,6 +71,7 @@ class FieldBuilderTest extends TestCase
             [new FieldConfig(FieldType::DATETIME),null,Field\DateTime::class,''],
             [new FieldConfig(FieldType::SINGLESELECT),null,Field\Select::class,''],
             [new FieldConfig(FieldType::TAG),null,Field\Tag::class,null],
+            [new FieldConfig(FieldType::TAG),'[++3]#:#-2#:#somthing with space',Field\Tag::class,['[++3]', '-2', 'somthing with space']],
 
         ];
     }

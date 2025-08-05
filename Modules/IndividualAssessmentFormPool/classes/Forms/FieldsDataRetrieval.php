@@ -72,9 +72,18 @@ class FieldsDataRetrieval implements DataRetrieval
             $row_id = (string) $field->getFieldId();
             $config = $field->getConfig();
             $default_value = (string) $config->getDefaultValue();
+
             if ($config->getType() === FieldType::DATETIME && $default_value != '') {
                 $default_value = DateTimeImmutable::createFromFormat('U', $config->getDefaultValue())->format('d.m.Y H:m');
             }
+            if ($config->getType() === FieldType::TAG) {
+                $default_value = explode(
+                    \SpecifiedFormStorageDB::VALUE_DELIMITER,
+                    (string) $default_value
+                );
+                $default_value = implode(', ', $default_value);
+            }
+
             $record = [
                 'name' => $field->getName(),
                 'label' => $config->getLabel(),
