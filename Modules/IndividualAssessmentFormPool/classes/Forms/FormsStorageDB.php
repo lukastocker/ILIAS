@@ -146,7 +146,7 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
             $iafp_obj_id,
             $title,
             true,
-            true
+            false
         );
         return $this->storeField($field);
     }
