@@ -501,4 +501,17 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
         }
         return $ret;
     }
+
+    public function getCurrentFieldNamesForObjId(int $obj_id): array
+    {
+        $query = "SELECT name FROM iafp_fields WHERE obj_id = "
+            . $this->db->quote($obj_id, \ilDBConstants::T_INTEGER);
+
+        $res = $this->db->query($query);
+        $ret = [];
+        while ($row = $res->fetchAssoc()) {
+            $ret[] = $row['name'];
+        }
+        return $ret;
+    }
 }

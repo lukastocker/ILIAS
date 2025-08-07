@@ -4074,6 +4074,7 @@ common#:#fax#:#Fax
 common#:#feed#:#Webfeed
 common#:#feedback#:#Feedback
 common#:#field_name#:#Feldname
+common#:#field_name_used#:#Der Feldname wird in diesem Formularpool bereits verwendet. Bitte nutzen Sie einen anderen.
 common#:#field_type#:#Feldtyp
 common#:#file#:#Datei
 common#:#file_add#:#Datei hochladen

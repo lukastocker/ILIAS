@@ -204,14 +204,19 @@ class IAFPFieldsGUI
             $fieldtype[$key] = $this->txt(strtolower($type));
         }
 
+        $current_field_names = $this->forms_repo->getCurrentFieldNamesForObjId($this->iafp_obj_id);
         return $this->ui_factory->modal()->roundtrip(
             $this->txt('new_field'),
             null,
             [
                 $this->ui_factory->input()->field()->text(
-                    $this->lng->txt('name'),
-                    $this->lng->txt('unique_name')
-                )->withRequired(true),
+                    $this->lng->txt('field_name')
+                )->withRequired(true)->withAdditionalTransformation(
+                    $this->refinery->custom()->constraint(
+                        fn($val) => !in_array($val, $current_field_names),
+                        $this->lng->txt("field_name_used")
+                    )
+                ),
                 $this->ui_factory->input()->field()->select(
                     $this->lng->txt('field_type'),
                     $fieldtype,
@@ -265,7 +270,8 @@ class IAFPFieldsGUI
                     $this->lng,
                     $this->refinery,
                     $this->iafp_obj_id,
-                    $this->field_builder
+                    $this->field_builder,
+                    $this->forms_repo->getCurrentFieldNamesForObjId($this->iafp_obj_id)
                 )
             ]
         )

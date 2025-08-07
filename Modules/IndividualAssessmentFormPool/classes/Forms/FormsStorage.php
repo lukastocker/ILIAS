@@ -58,4 +58,5 @@ interface FormsStorage
     public function getFieldsCountForObjId(int $iafp_obj_id): int;
     public function getFieldsForFormId(int $form_id): array;
     public function getMappedFieldIds(): array;
+    public function getCurrentFieldNamesForObjId(int $obj_id): array;
 }

@@ -92,9 +92,9 @@ class Field
         \ilLanguage $lng,
         Refinery $refinery,
         int $iafp_obj_id,
-        FieldBuilder $field_builder
+        FieldBuilder $field_builder,
+        array $current_field_names
     ): FormInput {
-
         $config = $this->getConfig();
 
         $inputs = [];
@@ -112,7 +112,13 @@ class Field
 
         $inputs['name'] = $factory->text($lng->txt('field_name'), $lng->txt('field_name_byline'))
             ->withRequired(true)
-            ->withValue($this->getName());
+            ->withValue($this->getName())
+        ->withAdditionalTransformation(
+            $refinery->custom()->constraint(
+                fn($val) => !in_array($val, $current_field_names),
+                $lng->txt("field_name_used")
+            )
+        );
 
         $inputs['type_config'] = $config->toFormInput(
             $factory,

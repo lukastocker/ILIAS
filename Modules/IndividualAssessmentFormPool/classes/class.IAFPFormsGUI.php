@@ -260,6 +260,7 @@ class IAFPFormsGUI
     protected function getFieldSelection(int $form_id): array
     {
         $options = [];
+        /** @var \ILIAS\IndividualAssessmentFormPool\Field[] $available_fields */
         $available_fields = $this->forms_repo->getFieldsForObjId($this->iafp_obj_id);
         foreach ($available_fields as $field) {
             $options[$field->getFieldId()] = $field->getName();
@@ -269,7 +270,7 @@ class IAFPFormsGUI
             $this->lng->txt('add_fields'),
             null,
             [
-                $this->ui_factory->input()->field()->multiselect(
+                $this->ui_factory->input()->field()->multiSelect(
                     $this->lng->txt('pick_fields'),
                     $options
                 )
