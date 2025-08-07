@@ -145,8 +145,8 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
             -1,
             $iafp_obj_id,
             $title,
-            $with_notes = false,
-            $available_for_examiners = true
+            true,
+            true
         );
         return $this->storeField($field);
     }
