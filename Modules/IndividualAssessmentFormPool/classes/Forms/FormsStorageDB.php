@@ -20,6 +20,7 @@ declare(strict_types=1);
 
 namespace ILIAS\IndividualAssessmentFormPool;
 
+use ilDBConstants;
 use ILIAS\Data\Range;
 use ILIAS\Data\Order;
 use ILIAS\UI\Component\Input\Field\Factory as FieldFactory;
@@ -112,28 +113,65 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
         return [$opts, $joins];
     }
 
-    private function getFieldFromRow(array $row): Field
+    private function getFieldsFromResult(\ilDBStatement $result): array
     {
-        $field_id = $row['field_id'];
-        $type = FieldType::from($row['type']);
-        $options = ($row['options'] !== null) ? explode(',', $row['options']) : null;
-        $default_value = $row['default_value'];
+        $ret = [];
+        $options = [];
+        $field_values = [];
+        $field_id = -1;
+        while ($row = $this->db->fetchAssoc($result)) {
+            if ($field_id !== $row['field_id']) {
+                if ($field_id !== -1) {
+                    $ret[] = $this->getFieldFrom($field_id, $field_values, $options);
+                }
+                $field_id = $row['field_id'];
+                $options = [];
+                $field_values = $this->getFieldValuesFromRow($row);
+            }
 
-        $config = new FieldConfig(
-            $type,
+            if (!is_null($row['option'])) {
+                $options[] = $row['option'];
+            }
+        }
+        if ($field_id !== -1) {
+            $ret[] = $this->getFieldFrom($field_id, $field_values, $options);
+        }
+
+        return $ret;
+    }
+
+    protected function getFieldValuesFromRow(array $row): array
+    {
+        return [
+            FieldType::from($row['type']),
             $row['label'],
             $row['description'],
             $row['default_value'],
-            $options,
-        );
-
-        return new Field(
-            $config,
-            $field_id,
             $row['obj_id'],
             $row['name'],
             (bool) $row['with_notes'],
             (bool) $row['available_for_examiners']
+        ];
+    }
+
+    protected function getFieldFrom(int $field_id, array $field_values, array $options): Field
+    {
+        list($type, $label, $description, $default_value, $obj_id, $name, $with_notes, $available_for_examiners)
+            = $field_values;
+        $config = new FieldConfig(
+            $type,
+            $label,
+            $description,
+            $default_value,
+            $options
+        );
+        return new Field(
+            $config,
+            $field_id,
+            $obj_id,
+            $name,
+            $with_notes,
+            $available_for_examiners,
         );
     }
 
@@ -155,20 +193,62 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
     {
         list($opts, $joins) = $this->getSQLPartsFieldConfig();
         $query = 'SELECT iafp_fields.field_id, obj_id, type, name, label, description, default_value, with_notes, available_for_examiners' . PHP_EOL
-            . ', GROUP_CONCAT(COALESCE(' . implode(',', $opts) . ')) AS options' . PHP_EOL
+            . ', COALESCE(' . implode(',', $opts) . ') AS option' . PHP_EOL
             . 'FROM iafp_fields' . PHP_EOL
             . 'INNER JOIN iafp_fieldmap ON iafp_fields.field_id = iafp_fieldmap.field_id '
             . 'AND iafp_fieldmap.form_id = ' . $this->db->quote($form_id, 'integer') . PHP_EOL
             . implode(' ', $joins) . PHP_EOL
-            . 'GROUP BY iafp_fields.field_id '
-            . 'ORDER BY iafp_fieldmap.position ASC';
+            . 'ORDER BY iafp_fieldmap.position, iafp_fields.field_id ASC';
 
-        $ret = [];
         $res = $this->db->query($query);
-        while ($row = $this->db->fetchAssoc($res)) {
-            $ret[] = $this->getFieldFromRow($row);
+        return $this->getFieldsFromResult($res);
+    }
+
+    public function getFieldsForOverviewTable(
+        int $iafp_obj_id,
+        ?Range $range = null,
+        ?Order $order = null
+    ): array {
+        $query_order = '';
+        $query_range = '';
+        if ($order !== null) {
+            $query_order = $order->join('ORDER BY', fn(...$o) => implode(' ', $o));
+        }
+        if ($range !== null) {
+            $query_range = sprintf('LIMIT %2$s OFFSET %1$s', ...$range->unpack());
         }
 
+        $query = 'SELECT iafp_fields.field_id, obj_id, type, name, label, description, default_value, with_notes, available_for_examiners' . PHP_EOL
+            . 'FROM iafp_fields' . PHP_EOL
+            . 'WHERE obj_id = ' . $this->db->quote($iafp_obj_id, 'integer') . PHP_EOL
+            . $query_order . PHP_EOL
+            . $query_range;
+
+        $res = $this->db->query($query);
+        if ($res->numRows() == 0) {
+            return [];
+        }
+
+        $ret = [];
+        while ($row = $res->fetchAssoc()) {
+            list($type, $label, $description, $default_value, $obj_id, $name, $with_notes, $available_for_examiners)
+                = $this->getFieldValuesFromRow($row);
+            $config = new FieldConfig(
+                $type,
+                $label,
+                $description,
+                $default_value,
+                []
+            );
+            $ret[] = new Field(
+                $config,
+                $row["field_id"],
+                $obj_id,
+                $name,
+                $with_notes,
+                $available_for_examiners
+            );
+        }
         return $ret;
     }
 
@@ -176,7 +256,7 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
         int $iafp_obj_id,
         ?Range $range = null,
         ?Order $order = null
-    ): \Generator {
+    ): array {
         $query_order = '';
         $query_range = '';
         if ($order !== null) {
@@ -188,35 +268,31 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
 
         list($opts, $joins) = $this->getSQLPartsFieldConfig();
         $query = 'SELECT iafp_fields.field_id, obj_id, type, name, label, description, default_value, with_notes, available_for_examiners' . PHP_EOL
-            . ', GROUP_CONCAT(COALESCE(' . implode(',', $opts) . ')) AS options' . PHP_EOL
+            . ', COALESCE(' . implode(',', $opts) . ') AS option' . PHP_EOL
             . 'FROM iafp_fields' . PHP_EOL
             . implode(' ', $joins) . PHP_EOL
             . 'WHERE obj_id = ' . $this->db->quote($iafp_obj_id, 'integer') . PHP_EOL
-            . 'GROUP BY iafp_fields.field_id' . PHP_EOL
             . $query_order . PHP_EOL
             . $query_range;
 
         $res = $this->db->query($query);
-        while ($row = $this->db->fetchAssoc($res)) {
-            yield $this->getFieldFromRow($row);
-        }
+        return $this->getFieldsFromResult($res);
     }
 
     public function getFieldById(int $field_id): ?Field
     {
         list($opts, $joins) = $this->getSQLPartsFieldConfig();
         $query = 'SELECT iafp_fields.field_id, obj_id, type, name, label, description, default_value, with_notes, available_for_examiners' . PHP_EOL
-            . ', GROUP_CONCAT(COALESCE(' . implode(',', $opts) . ')) AS options' . PHP_EOL
+            . ', COALESCE(' . implode(',', $opts) . ') AS option' . PHP_EOL
             . 'FROM iafp_fields' . PHP_EOL
             . implode(' ', $joins) . PHP_EOL
             . 'WHERE iafp_fields.field_id = ' . $this->db->quote($field_id, 'integer');
 
-
         $res = $this->db->query($query);
-        if ($this->db->numRows($res) === 0) {
+        if ($res->numRows() === 0) {
             return null;
         }
-        return $this->getFieldFromRow($this->db->fetchAssoc($res));
+        return current($this->getFieldsFromResult($res));
     }
 
 
@@ -246,9 +322,8 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
         return new Form(
             -1,
             $iafp_obj_id,
-            $name = '',
-            $description = '',
-            $fields = []
+            '',
+            ''
         );
     }
 
@@ -276,10 +351,10 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
         foreach ($form->getFields() as $field) {
             $position += 10;
             $query = 'INSERT INTO iafp_fieldmap (form_id, field_id, position) VALUES (' . PHP_EOL
-            . $this->db->quote($id, 'integer') . ','
-            . $this->db->quote($field->getFieldId(), 'integer') . ','
-            . $this->db->quote($position, 'integer')
-            . ')';
+                . $this->db->quote($id, 'integer') . ','
+                . $this->db->quote($field->getFieldId(), 'integer') . ','
+                . $this->db->quote($position, 'integer')
+                . ')';
 
             $this->db->manipulate($query);
         }
@@ -345,7 +420,6 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
     {
         $query = 'SELECT field_id FROM iafp_fields' . PHP_EOL
             . 'WHERE obj_id = ' . $this->db->quote($iafp_obj_id, 'integer');
-        $res = $this->db->query($query);
         return array_map(
             fn($row) => $row['field_id'],
             $this->db->fetchAll($this->db->query($query))
@@ -372,7 +446,6 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
     public function getMappedFieldIds(): array
     {
         $query = 'SELECT DISTINCT field_id FROM iafp_fieldmap';
-        $res = $this->db->query($query);
         return array_map(
             fn($row) => $row['field_id'],
             $this->db->fetchAll($this->db->query($query))
@@ -395,12 +468,23 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
             $options = [];
             foreach ($config->getOptions() as $opt) {
                 $options[] = '('
-                    . implode(',', [$this->db->quote($field_id, 'integer'), $this->db->quote($opt, 'text')])
+                    . implode(
+                        ',',
+                        [
+                            $this->db->quote($field_id, 'integer'),
+                            $this->db->quote($opt, 'text')
+                        ]
+                    )
                     . ')' . PHP_EOL;
+
+                //$options[] = (19, "option, meine");
+                //$options[] = (19, "option2");
+                //$options[] = (19, "option3");
             }
             $insert = 'INSERT INTO ' . $table . ' (field_id, value) VALUES' . PHP_EOL
-            . implode(', ', $options);
+                . implode(', ', $options);
 
+            //$insert = INSERT INTO iafp_cfg_singleselect (field_id, value) VALUES (19, "option, meine"), (19, "option2"), (19, "option3")'
             $this->db->manipulate($insert);
         }
     }
@@ -410,6 +494,7 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
 
     public function getFormsSelection(): array
     {
+        $options = [];
         foreach ($this->getFormPools() as $pool_info) {
             list($ref_id, $obj_id, $title) = $pool_info;
             $forms = $this->getFormsForObjId($obj_id);
@@ -497,21 +582,35 @@ class FormsStorageDB implements FormsStorage, \IAFPCollector
                     $obj_id,
                     $row['title']
                 ];
-            };
+            }
         }
         return $ret;
     }
 
     public function getCurrentFieldNamesForObjId(int $obj_id): array
     {
-        $query = "SELECT name FROM iafp_fields WHERE obj_id = "
+        $query = "SELECT field_id, name FROM iafp_fields WHERE obj_id = "
             . $this->db->quote($obj_id, \ilDBConstants::T_INTEGER);
 
         $res = $this->db->query($query);
         $ret = [];
         while ($row = $res->fetchAssoc()) {
-            $ret[] = $row['name'];
+            $ret[$row["field_id"]] = $row['name'];
         }
         return $ret;
+    }
+
+    public function getFieldByNameForObjId(int $obj_id, string $field_name): Field
+    {
+        list($opts, $joins) = $this->getSQLPartsFieldConfig();
+        $query = 'SELECT iafp_fields.field_id, obj_id, type, name, label, description, default_value, with_notes, available_for_examiners' . PHP_EOL
+            . ', COALESCE(' . implode(',', $opts) . ') AS option' . PHP_EOL
+            . 'FROM iafp_fields' . PHP_EOL
+            . implode(' ', $joins) . PHP_EOL
+            . 'WHERE iafp_fields.name = ' . $this->db->quote($field_name, \ilDBConstants::T_TEXT) . PHP_EOL
+            . 'AND iafp_fields.obj_id = ' . $this->db->quote($obj_id, \ilDBConstants::T_INTEGER);
+        ;
+        $res = $this->db->query($query);
+        return current($this->getFieldsFromResult($res));
     }
 }

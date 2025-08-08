@@ -75,7 +75,7 @@ class IAFPFormsGUI
     public function executeCommand(): void
     {
         $next_class = $this->ctrl->getNextClass($this);
-        $cmd = $this->ctrl->getCmd() ?? self::CMD_LIST;
+        $cmd = $this->ctrl->getCmd();
 
         switch ($next_class) {
             default:
@@ -263,14 +263,14 @@ class IAFPFormsGUI
         /** @var \ILIAS\IndividualAssessmentFormPool\Field[] $available_fields */
         $available_fields = $this->forms_repo->getFieldsForObjId($this->iafp_obj_id);
         foreach ($available_fields as $field) {
-            $options[$field->getFieldId()] = $field->getName();
+            $options[] = $field->getName();
         }
 
         $modal = $this->ui_factory->modal()->roundtrip(
             $this->lng->txt('add_fields'),
             null,
             [
-                $this->ui_factory->input()->field()->multiSelect(
+                $this->ui_factory->input()->field()->tag(
                     $this->lng->txt('pick_fields'),
                     $options
                 )
@@ -297,13 +297,10 @@ class IAFPFormsGUI
         $data = $modal->withRequest($this->request)->getData();
         if ($data !== null) {
             $form = $this->forms_repo->getFormById($form_id);
-            $fields = $form->getFields();
-            $field_ids = array_map(fn($f) => $f->getFieldId(), $fields);
-            foreach ($data as $field_id) {
-                if (! in_array((int) $field_id, $field_ids)) {
-                    $fields[] = $this->forms_repo->getFieldById((int) $field_id);
-                }
-            }
+            $fields = array_map(
+                fn($field_name) => $this->forms_repo->getFieldByNameForObjId($this->iafp_obj_id, $field_name),
+                $data
+            );
             $this->forms_repo->storeForm($form->withFields(...$fields));
             $this->tpl->setOnScreenMessage('success', $this->lng->txt('fields_added'), true);
         }

@@ -115,7 +115,18 @@ class Field
             ->withValue($this->getName())
         ->withAdditionalTransformation(
             $refinery->custom()->constraint(
-                fn($val) => !in_array($val, $current_field_names),
+                function ($val) use ($current_field_names) {
+                    if ($this->field_id === -1 && !in_array($val, $current_field_names)) {
+                        return true;
+                    }
+                    if (
+                        array_key_exists($this->field_id, $current_field_names) &&
+                        $val == $current_field_names[$this->field_id]
+                    ) {
+                        return true;
+                    }
+                    return false;
+                },
                 $lng->txt("field_name_used")
             )
         );

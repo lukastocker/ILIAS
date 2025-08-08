@@ -54,7 +54,7 @@ interface FormsStorage
         int $iafp_obj_id,
         ?Range $range = null,
         ?Order $order = null
-    ): \Generator;
+    ): array;
     public function getFieldsCountForObjId(int $iafp_obj_id): int;
     public function getFieldsForFormId(int $form_id): array;
     public function getMappedFieldIds(): array;
