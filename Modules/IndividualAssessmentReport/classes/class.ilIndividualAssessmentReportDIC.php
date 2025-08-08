@@ -22,10 +22,7 @@ declare(strict_types=1);
 use Pimple\Container;
 use ILIAS\Data\Factory as DataFactory;
 use ILIAS\UI\URLBuilder;
-use ILIAS\IndividualAssessmentReport\FormsStorageDB;
-use ILIAS\IndividualAssessmentReport\FormsDataRetrieval;
-use ILIAS\IndividualAssessmentReport\FieldsDataRetrieval;
-use ILIAS\IndividualAssessmentReport\FieldBuilder;
+use ILIAS\ResourceStorage\Stakeholder\ResourceStakeholder;
 
 trait ilIndividualAssessmentReportDIC
 {
@@ -38,6 +35,77 @@ trait ilIndividualAssessmentReportDIC
         if (! $object->getRefId()) {
             throw new \LogicException('no ref');
         }
+
+        $container['iass.member.custom_storage'] = static fn($c): SpecifiedFormStorage =>
+        new SpecifiedFormStorageDB($DIC['ilDB']);
+
+        $container['ilIndividualAssessmentPrimitiveInternalNotificator'] = function () {
+            return new ilIndividualAssessmentPrimitiveInternalNotificator();
+        };
+
+        $container['irss.stakeholder'] = static fn($c): ResourceStakeholder =>
+        new ilIndividualAssessmentGradingStakeholder(
+            $object->getId(),
+            $DIC['ilUser']->getId()
+        );
+
+        $container['ilIndividualAssessmentMemberGUI'] = function ($c) use ($object, $DIC) {
+            return new ilIndividualAssessmentMemberGUI(
+                $DIC['ilCtrl'],
+                $DIC['lng'],
+                $DIC['tpl'],
+                $DIC['ilUser'],
+                $DIC['ui.factory']->input(),
+                $DIC['ui.factory']->messageBox(),
+                $DIC['ui.factory']->button(),
+                $DIC['ui.factory']->link(),
+                $DIC['refinery'],
+                $c['DataFactory'],
+                $DIC['ui.renderer'],
+                $DIC['http']->request(),
+                $c['ilIndividualAssessmentPrimitiveInternalNotificator'],
+                $DIC["ilToolbar"],
+                new ilObjIndividualAssessment(),
+                $DIC['ilErr'],
+                $DIC->refinery(),
+                $DIC->http()->wrapper()->query(),
+                $c['helper.dateformat'],
+                $DIC['resource_storage'],
+                $stakeholder = $c['irss.stakeholder'],
+                $c['iafp.fieldbuilder']
+            );
+        };
+
+        $container['iafp.fieldbuilder'] = static fn(): ILIAS\IndividualAssessmentFormPool\FieldBuilder =>
+        new ILIAS\IndividualAssessmentFormPool\FieldBuilder(
+            $DIC['ui.factory']->input()->field(),
+            $DIC['refinery'],
+            $DIC['lng'],
+            new \ilUIDemoFileUploadHandlerGUI(),
+            new \ilUIMarkdownPreviewGUI()
+        );
+
+        $container['gui.datatable.report'] = static fn($c): IARPReportDataTableGUI =>
+        new IARPReportDataTableGUI(
+            $DIC['ilCtrl'],
+            $c['repo.results'],
+            $DIC['ui.factory'],
+            $DIC['ui.renderer'],
+            $DIC['http']->request(),
+            $DIC['refinery'],
+            $DIC['http']->wrapper()->query(),
+            $c['DataFactory'],
+            $DIC['tpl'],
+            $c['access'],
+            $c['iass.valuerenderer'],
+            $DIC['ilTabs'],
+            $DIC['ilUser'],
+            $DIC['lng'],
+            $c['helper.dateformat'],
+            $c['ilIndividualAssessmentMemberGUI'],
+            $object->getSettings()->isGlobal() ? -1 : $c['parent_ref_id'],
+            $c['iass.member.custom_storage']->checkForAvailableFormFields($object->getId())
+        );
 
         $container['gui.report'] = static fn($c): IARPReportGUI =>
             new IARPReportGUI(
@@ -56,7 +124,9 @@ trait ilIndividualAssessmentReportDIC
                 $DIC['resource_storage'],
                 $c['iass.valuerenderer'],
                 $DIC['ilUser'],
-                $object->getSettings()->isGlobal() ? -1 : $c['parent_ref_id']
+                $object->getSettings()->isGlobal() ? -1 : $c['parent_ref_id'],
+                $DIC['ilTabs'],
+                $c['gui.datatable.report']
             );
 
         $container['parent_ref_id'] = static fn($c): int =>

@@ -33,11 +33,12 @@ use ILIAS\Data\Range;
 use ILIAS\UI\Implementation\Component\ViewControl\Pagination;
 
 /**
- * @ilCtrl_Calls IARPReportGUI: ilIndividualAssessmentMemberGUI
+ * @ilCtrl_Calls IARPReportGUI: ilIndividualAssessmentMemberGUI, IARPReportDataTableGUI
  */
 class IARPReportGUI
 {
     public const CMD_VIEW = 'view';
+    public const CMD_VIEW_DT = 'view_datatable';
     protected const F_SORT = 'sort';
     protected const F_MODE = 'mode';
     protected const F_PAGE = 'page';
@@ -59,15 +60,18 @@ class IARPReportGUI
         protected readonly IASSCustomFieldValueRenderer $value_renderer,
         protected readonly ilObjUser $current_user,
         protected readonly int $contained_in_ref_id, // -1 for 'all/global'
+        protected readonly ilTabsGUI $tab_gui,
+        protected readonly IARPReportDataTableGUI $report_data_table_gui
     ) {
         $this->lng->loadLanguageModule('trac');
         $this->lng->loadLanguageModule('iass');
+        $this->getSubTabs($this->tab_gui);
     }
 
     public function executeCommand(): void
     {
         $next_class = $this->ctrl->getNextClass($this);
-        $cmd = $this->ctrl->getCmd() ?? self::CMD_VIEW;
+        $cmd = $this->ctrl->getCmd();
 
         switch ($next_class) {
             default:
@@ -109,10 +113,10 @@ class IARPReportGUI
                         $page_size = $this->getUsersHitsPerPage();
                         $total_entries = $this->repo->countResults(
                             array_unique($usr_ids),
-                            $order,
                             $mode,
                             $filter_data,
-                            $this->contained_in_ref_id
+                            $this->contained_in_ref_id,
+                            $order
                         );
 
                         if ($total_entries > $page_size) {
@@ -129,8 +133,17 @@ class IARPReportGUI
                         $this->ctrl->setParameter($this, self::F_PAGE, $page);
 
                         $this->tpl->setContent(
-                            $this->report($order, $mode, $filter_data, $usr_ids, $total_entries, $range)
+                            $this->report($mode, $filter_data, $usr_ids, $total_entries, $order, $range)
                         );
+                        break;
+
+                    case 'view_dt':
+                        if (!$this->iafp_access->mayView()) {
+                            $this->tpl->setOnScreenMessage('failure', $this->lng->txt('permission_denied'), true);
+                            $this->ctrl->redirectByClass(ilObjIndividualAssessmentReportGUI::class, ilObjIndividualAssessmentReportGUI::CMD_VIEW);
+                        }
+                        $this->tab_gui->activateSubTab(self::CMD_VIEW_DT);
+                        $this->ctrl->forwardCommand($this->report_data_table_gui);
                         break;
 
                     case ilIndividualAssessmentMemberGUI::CMD_DOWNLOAD_CUST_FILE:
@@ -148,20 +161,20 @@ class IARPReportGUI
     }
 
     protected function report(
-        Order $order,
         int $mode,
         array $filter_data,
         array $usr_ids,
         int $total_entries,
+        ?Order $order = null,
         ?Range $range = null
     ): string {
         $data = iterator_to_array(
             $this->repo->getResults(
                 array_unique($usr_ids),
-                $order,
                 $mode,
                 $filter_data,
                 $this->contained_in_ref_id,
+                $order,
                 $range
             )
         );
@@ -313,5 +326,25 @@ class IARPReportGUI
     protected function getUsersHitsPerPage(): int
     {
         return (int) $this->current_user->getPref("hits_per_page");
+    }
+
+    protected function getSubTabs(ilTabsGUI $tabs_gui): void
+    {
+        $tabs_gui->addSubTab(
+            self::CMD_VIEW,
+            $this->lng->txt('presentation_table'),
+            $this->ctrl->getLinkTarget($this, self::CMD_VIEW)
+        );
+        $tabs_gui->addSubTab(
+            self::CMD_VIEW_DT,
+            $this->lng->txt('data_table'),
+            $this->ctrl->getLinkTargetByClass(
+                [
+                    self::class,
+                    IARPReportDataTableGUI::class
+                ],
+                IARPReportDataTableGUI::CMD_VIEW
+            ),
+        );
     }
 }

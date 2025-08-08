@@ -37,13 +37,13 @@ class IARPResultsDB
 
     public function getResults(
         array $usr_ids,
-        Order $order,
         int $lp_mode,
         array $filter_data,
         int $contained_in_ref_id,
+        ?Order $order = null,
         ?Range $range = null
     ): \Iterator {
-        foreach ($this->getRecords($usr_ids, $order, $lp_mode, $filter_data, $contained_in_ref_id, $range) as $rec) {
+        foreach ($this->getRecords($usr_ids, $lp_mode, $filter_data, $contained_in_ref_id, $order, $range) as $rec) {
             yield(
                 new IARPResult(
                     $this->getUserInfo($rec),
@@ -121,42 +121,45 @@ class IARPResultsDB
 
     protected function getRecords(
         array $usr_ids,
-        Order $order,
         int $lp_mode,
         array $filter_data,
         int $contained_in_ref_id,
+        ?Order $order = null,
         ?Range $range = null
     ): array {
-        $res = $this->buildQuery($usr_ids, $order, $lp_mode, $filter_data, $contained_in_ref_id, $range);
+        $res = $this->buildQuery($usr_ids, $lp_mode, $filter_data, $contained_in_ref_id, $order, $range);
         return $this->db->fetchAll($res);
     }
 
     public function countResults(
         array $usr_ids,
-        Order $order,
         int $lp_mode,
         array $filter_data,
-        int $contained_in_ref_id
+        int $contained_in_ref_id,
+        ?Order $order = null
     ): int {
-        $res = $this->buildQuery($usr_ids, $order, $lp_mode, $filter_data, $contained_in_ref_id);
+        $res = $this->buildQuery($usr_ids, $lp_mode, $filter_data, $contained_in_ref_id, $order);
         return $this->db->numRows($res);
     }
 
     protected function buildQuery(
         array $usr_ids,
-        Order $order,
         int $lp_mode,
         array $filter_data,
         int $contained_in_ref_id,
+        ?Order $order = null,
         ?Range $range = null
     ): ilDBStatement {
         $sqlpart_users = $usr_ids === [] ? '' : 'AND ' . $this->db->in('ia.usr_id', $usr_ids, false, 'integer');
-        $sqlpart_order = $order->join('ORDER BY', fn(...$o) => implode(' ', $o));
         $sqlpart_mode = $lp_mode === -1 ? '' : 'AND learning_progress = ' . $this->db->quote($lp_mode, 'integer');
         $sqlpart_filter = '';
         $sqlpart_tree = '';
         $sqlpart_range = '';
+        $sqlpart_order = '';
 
+        if ($order !== null) {
+            $sqlpart_order = $order->join('ORDER BY', fn(...$o) => implode(' ', $o));
+        }
         if ($range !== null) {
             $sqlpart_range = sprintf('LIMIT %2$s OFFSET %1$s', ...$range->unpack());
         }

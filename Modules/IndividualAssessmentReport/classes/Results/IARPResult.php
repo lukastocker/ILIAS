@@ -145,4 +145,23 @@ class IARPResult
                 return $lng->txt(ilLPStatus::LP_STATUS_FAILED);
         }
     }
+
+    public function getIds(): array
+    {
+        $user_info = [];
+        foreach ($this->grading_info->getCustomFields() as $info) {
+            $user_info[] = $info->getIds();
+        }
+        return $user_info;
+    }
+
+    public function getIASSInfos(): GradingInfo
+    {
+        return $this->grading_info;
+    }
+
+    public function getUsrInfo(): UserInfo
+    {
+        return $this->user_info;
+    }
 }
