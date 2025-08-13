@@ -41,6 +41,7 @@ class ilIndividualAssessmentSettings
         protected ?\DateTimeImmutable $available_in_report_from = null,
         protected ?\DateTimeImmutable $available_in_report_to = null,
         protected ?array $participant_roles = null,
+        protected ?array $user_mail_roles = null
     ) {
     }
 
@@ -173,20 +174,6 @@ class ilIndividualAssessmentSettings
         );
     }
 
-    public function userAvailabilitySettingsToForm(
-        Field\Factory $input,
-        ilLanguage $lng,
-        Refinery $refinery
-    ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
-        return $input->group([
-            $input->checkbox(
-                $lng->txt("iass_notify"),
-                $lng->txt("iass_notify_explanation")
-            )
-            ->withValue($this->isResultVisible())
-        ]);
-    }
-
     public function withUserAvailabilitySettings(bool $result_visible): self
     {
         $clone = clone $this;
@@ -226,12 +213,6 @@ class ilIndividualAssessmentSettings
             $lng->txt("setting_report_availability_period_byline"),
         );
 
-        $notification = $input->checkbox(
-            $lng->txt("iass_notify"),
-            $lng->txt("iass_notify_explanation")
-        )
-        ->withValue($this->isResultVisible());
-
         return $input->optionalGroup(
             [$period],
             $lng->txt("setting_report_availability_label"),
@@ -265,7 +246,6 @@ class ilIndividualAssessmentSettings
         $selected_roles = null;
         if ($this->getParticipantRoles() !== null && $this->getParticipantRoles() !== []) {
             foreach (unserialize($this->getParticipantRoles()[0]) as $role) {
-                $test = $rbac_review->getRolesForIDs([$role], false);
                 $role_Obj = ilObjectFactory::getInstanceByObjId($role);
                 $selected_roles[] = ilObjRole::_getTranslation($role_Obj->getTitle());
             }
@@ -292,5 +272,49 @@ class ilIndividualAssessmentSettings
     public function getParticipantRoles(): ?array
     {
         return $this->participant_roles;
+    }
+
+    public function userRolesForMailToForm(
+        Field\Factory $input,
+        ilLanguage $lng,
+        Refinery $refinery,
+        int $ref_id,
+        ilRbacReview $rbac_review
+    ): \ILIAS\UI\Component\Input\Container\Form\FormInput {
+        $roles_options = [];
+        $local_roles = $rbac_review->getParentRoleIds($ref_id);
+        foreach ($local_roles as $role) {
+            $roles_options[] = ilObjRole::_getTranslation($role['title']);
+        }
+
+        $selected_roles = null;
+        if ($this->getUserMailRoles() !== null && $this->getUserMailRoles() !== []) {
+            foreach (unserialize($this->getUserMailRoles()[0]) as $role) {
+                $role_Obj = ilObjectFactory::getInstanceByObjId($role);
+                $selected_roles[] = ilObjRole::_getTranslation($role_Obj->getTitle());
+            }
+        }
+
+        return $input->group([
+            $input->tag(
+                $lng->txt("iass_user_mail_roles"),
+                $roles_options,
+                ""
+            )
+                  ->withUserCreatedTagsAllowed(false)
+                  ->withValue($selected_roles)
+        ]);
+    }
+
+    public function withUserMailRoles(?array $user_mail_roles): self
+    {
+        $clone = clone $this;
+        $clone->user_mail_roles = $user_mail_roles;
+        return $clone;
+    }
+
+    public function getUserMailRoles(): ?array
+    {
+        return $this->user_mail_roles;
     }
 }

@@ -174,7 +174,8 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
                         'changer_id' => null,
                         'change_time' => null,
                         'user_login' => $participant->login(),
-                        'examiner_login' => null
+                        'examiner_login' => null,
+                        'notify' => 0
                     ];
                     return $this->createAssessmentMember($obj, new ilObjUser($participant->id()), $rec);
                 }
@@ -230,7 +231,8 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             (string) $record[ilIndividualAssessmentMembers::FIELD_PLACE],
             $event_time,
             (int) $record[ilIndividualAssessmentMembers::FIELD_LEARNING_PROGRESS],
-            (bool) $record[ilIndividualAssessmentMembers::FIELD_FINALIZED]
+            (bool) $record[ilIndividualAssessmentMembers::FIELD_FINALIZED],
+            (bool) $record[ilIndividualAssessmentMembers::FIELD_NOTIFICATION_ACTIVE]
         );
     }
 
@@ -251,7 +253,7 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
 
         $query = 'REPLACE INTO ' . self::MEMBERS_TABLE . PHP_EOL
             . '(obj_id, usr_id, examiner_id, record, internal_note, notification_ts, learning_progress, ' . PHP_EOL
-            . 'finalized, place, event_time, file_name, changer_id, change_time)' . PHP_EOL
+            . 'finalized, place, event_time, file_name, changer_id, change_time, notify)' . PHP_EOL
             . 'VALUES (' . PHP_EOL
             . $this->db->quote($member->assessmentId(), "integer") . ', '
             . $this->db->quote($member->id(), "integer") . ', '
@@ -265,7 +267,8 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             . $this->db->quote($event_time, "integer") . ', '
             . $this->db->quote($member->fileName() ?? null, "text") . ', '
             . $this->db->quote($changer_id, "integer") . ', '
-            . $this->db->quote($this->getActualDateTime(), "string")
+            . $this->db->quote($this->getActualDateTime(), "string") . ', '
+            . $this->db->quote($member->notify(), "integer")
             . ')';
 
 
@@ -320,6 +323,7 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             . "iassme.file_name,"
             . "iassme.changer_id,"
             . "iassme.change_time,"
+            . "iassme.notify,"
             . "usr.login AS user_login,"
             . "ex.login AS examiner_login,"
             . "ch.login AS changer_login,"
@@ -343,7 +347,8 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
                 . "	   ,iassme." . ilIndividualAssessmentMembers::FIELD_FILE_NAME
                 . "     ,iassme.obj_id, iassme.usr_id, iassme.examiner_id, iassme.record, iassme.internal_note"
                 . "     ,iassme.learning_progress, iassme.finalized,iassme.place"
-                . "     ,iassme.event_time, iassme.changer_id, iassme.change_time\n"
+                . "     ,iassme.event_time, iassme.changer_id, iassme.change_time"
+                . "     ,iassme.notify\n"
                 . " FROM iass_members iassme"
                 . " JOIN usr_data usr ON iassme.usr_id = usr.usr_id"
                 . " LEFT JOIN usr_data ex ON iassme.examiner_id = ex.usr_id"
@@ -376,6 +381,10 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             ilIndividualAssessmentMembers::FIELD_NOTIFICATION_TS => [
                 "integer",
                 -1
+            ],
+            ilIndividualAssessmentMembers::FIELD_NOTIFICATION_ACTIVE => [
+                "integer",
+                0
             ]
         ];
 
@@ -570,6 +579,7 @@ class ilIndividualAssessmentMembersStorageDB implements ilIndividualAssessmentMe
             . "null,"
             . "null,"
             . "login AS user_login,"
+            . "null,"
             . "null,"
             . "firstname AS user_firstname"
             . " FROM usr_data " . PHP_EOL

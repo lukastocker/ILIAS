@@ -10536,6 +10536,7 @@ iass#:#iass_record_template_explanation#:#Hier eingegebener Text dient als Vorla
 iass#:#iass_remove_user_qst#:#Soll der Teilnehmer wirklich entfernt werden?
 iass#:#iass_responsibility#:#Zuständigkeit
 iass#:#iass_save_amend#:#Geänderte Prüfungsdaten speichern
+iass#:#iass_send_mail#:#Per Mail informieren
 iass#:#iass_settings_availability#:#Verfügbarkeit
 iass#:#iass_settings_saved#:#Einstellungen gespeichert.
 iass#:#iass_singleselect#:#Einzelauswahl
@@ -10548,6 +10549,7 @@ iass#:#iass_sort_name_desc#:#Anmeldename → absteigend###Modified as part of ge
 iass#:#iass_subj_notification_completed#:#%s: Individuelle Bewertung wurde erfolgreich abgeschlossen.
 iass#:#iass_subj_notification_failed#:#%s: Individuelle Bewertung wurde nicht erfolgreich abgeschlossen.
 iass#:#iass_upload_file#:#Prüfungsblatt
+iass#:#iass_user_mail_roles#:#Standard Info Mail Empfänger
 iass#:#iass_user_removed#:#Benutzer wurde erfolgreich entfernt.
 iass#:#iass_usr_amend#:#Prüfungsdaten nachträglich ändern
 iass#:#iass_usr_download_attachment#:#Datei herunterladen

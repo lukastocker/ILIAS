@@ -36,7 +36,8 @@ class ilIndividualAssessmentUserGrading
         protected ?string $place = null,
         protected ?DateTimeImmutable $event_time = null,
         protected int $learning_progress = 0,
-        protected bool $finalized = false
+        protected bool $finalized = false,
+        protected bool $send_notification = false
     ) {
     }
 
@@ -80,7 +81,6 @@ class ilIndividualAssessmentUserGrading
         return $this->event_time;
     }
 
-
     public function isFinalized(): bool
     {
         return $this->finalized;
@@ -109,6 +109,18 @@ class ilIndividualAssessmentUserGrading
     {
         $clone = clone $this;
         $clone->custom_fields = $custom_fields;
+        return $clone;
+    }
+
+    public function sendNotification(): bool
+    {
+        return $this->send_notification;
+    }
+
+    public function withSendNotification(bool $send_notification): self
+    {
+        $clone = clone $this;
+        $clone->send_notification = $send_notification;
         return $clone;
     }
 
@@ -175,10 +187,16 @@ class ilIndividualAssessmentUserGrading
         ;
 
         $finalized = $input
-            ->checkbox($lng->txt('iass_finalize'), $lng->txt('iass_finalize_info'))
-            ->withValue($this->isFinalized())
-            ->withDisabled(!$may_be_edited)
-        ;
+            ->optionalGroup(
+                [
+                    $input
+                        ->checkbox($lng->txt('iass_send_mail'))
+                ],
+                $lng->txt('iass_finalize'),
+                $lng->txt('iass_finalize_info'),
+            )->withValue(
+                $this->isFinalized() ? [$this->sendNotification()] : null
+            );
 
         if (!is_null($this->getEventTime())) {
             $event_time = $event_time->withValue(
@@ -231,6 +249,12 @@ class ilIndividualAssessmentUserGrading
             $fields['finalized'] = $finalized;
         }
 
+        if ($amend) {
+            $fields['notify'] = $input->checkbox($lng->txt('iass_send_mail'))
+            ->withValue($this->sendNotification());
+            ;
+        }
+
         return $input->section(
             $fields,
             $lng->txt('iass_edit_record')
@@ -249,6 +273,18 @@ class ilIndividualAssessmentUserGrading
                 array_key_exists('finalized', $values)
                     ? array_push($vals, (bool) $values['finalized'])
                     : array_push($vals, $this->isFinalized());
+
+                if (array_key_exists('finalized', $values) && isset($values['finalized'][0])) {
+                    array_push($vals, (bool) $values['finalized'][0])
+                    ?? array_push($vals, $this->sendNotification());
+                }
+
+                array_key_exists('notify', $values)
+                    ?? array_push($vals, $this->isFinalized());
+
+                array_key_exists('notify', $values)
+                    ? array_push($vals, (bool) $values['notify'])
+                    : array_push($vals, $this->sendNotification());
 
                 $result = new ilIndividualAssessmentUserGrading(...array_values($vals));
                 return array_key_exists('custom', $values) ? $result->withCustomFields($values['custom']) : $result;

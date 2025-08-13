@@ -111,4 +111,19 @@ class IndAssSettingsTableDBUpdateSteps implements \ilDatabaseUpdateSteps
             );
         }
     }
+
+    public function step_5(): void
+    {
+        if (!$this->db->tableColumnExists(self::TABLE_NAME, 'mail_user_roles')) {
+            $this->db->addTableColumn(
+                self::TABLE_NAME,
+                'mail_user_roles',
+                [
+                    "type" => "clob",
+                    "notnull" => false,
+                    "default" => null
+                ]
+            );
+        }
+    }
 }

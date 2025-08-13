@@ -73,6 +73,7 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
         protected IRSS $irss,
         protected ilIndividualAssessmentGradingStakeholder $stakeholder,
         protected FieldBuilder $field_builder,
+        protected ilRbacReview $rbac_review,
     ) {
         parent::__construct();
         $this->lng->loadLanguageModule('trac');
@@ -150,6 +151,9 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
             $not_finalized_grading = $grading->withFinalized(false);
             $this->saveMember($not_finalized_grading);
             $this->finalizeConfirmation();
+            if ($grading->sendNotification()) {
+                $this->sendMailToUser($grading);
+            }
             return;
         }
 
@@ -161,6 +165,43 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
 
         $this->tpl->setOnScreenMessage("success", $this->lng->txt('iass_membership_saved'), true);
         $this->ctrl->redirectByClass(ilIndividualAssessmentMembersGUI::class, 'view');
+    }
+
+    protected function sendMailToUser(): void
+    {
+        $member_login = [$this->getMember()->login()];
+        $member_id = $this->getMember()->id();
+        $user_mail_roles = $this->object->getSettings()->getUserMailRoles();
+        if ($user_mail_roles !== null && $user_mail_roles !== []) {
+            $assigned_users = [];
+            foreach (unserialize($user_mail_roles[0]) as $role) {
+                $assigned_users = array_merge($assigned_users, $this->rbac_review->assignedUsers($role));
+            }
+            foreach ($assigned_users as $user) {
+                $additional_user_logins[] = ilObjUser::_lookupLogin($user);
+            }
+            $member_login = array_unique(array_merge($member_login, $additional_user_logins));
+        }
+
+        ilMailFormCall::setRecipients($member_login);
+        $this->ctrl->setParameter($this, 'usr_id', $member_id);
+        ilUtil::redirect(
+            ilMailFormCall::getRedirectTarget(
+                $this,
+                'view',
+                [],
+                [
+                    'type' => 'new',
+                    'rpc_to' => implode(',', $member_login),
+                    'sig' => null
+                ],
+                [
+                    ilMailFormCall::CONTEXT_KEY => ilIndividualAssessmentMailTemplateContext::ID,
+                    'ref_id' => $this->object->getRefId(),
+                    'ts' => time()
+                ]
+            )
+        );
     }
 
     protected function amend(): void
@@ -216,7 +257,9 @@ class ilIndividualAssessmentMemberGUI extends AbstractCtrlAwareUploadHandler
 
         if (!is_null($grading)) {
             $this->saveMember($grading, true, true);
-
+            if ($grading->sendNotification()) {
+                $this->sendMailToUser($grading);
+            }
             if ($this->getObject()->isActiveLP()) {
                 ilIndividualAssessmentLPInterface::updateLPStatusOfMember($this->getMember());
             }

@@ -10532,6 +10532,7 @@ iass#:#iass_record_template_explanation#:#Template for participant grading recor
 iass#:#iass_remove_user_qst#:#Should the participant really be removed?
 iass#:#iass_responsibility#:#Responsibility
 iass#:#iass_save_amend#:#Save Amended Record
+iass#:#iass_send_mail#:#Inform per Mail
 iass#:#iass_settings_availability#:#Availability
 iass#:#iass_settings_saved#:#Settings saved.
 iass#:#iass_singleselect#:#Single Selection
@@ -10544,6 +10545,7 @@ iass#:#iass_sort_name_desc#:#Username descending
 iass#:#iass_subj_notification_completed#:#%s: Individual Assessment is completed.
 iass#:#iass_subj_notification_failed#:#%s: Individual Assessment is failed.
 iass#:#iass_upload_file#:#Record file
+iass#:#iass_user_mail_roles#:#Standard Info Mail Receiver
 iass#:#iass_user_removed#:#Participant has successfully been removed.
 iass#:#iass_usr_amend#:#Amend Grading
 iass#:#iass_usr_download_attachment#:#Download Attachment

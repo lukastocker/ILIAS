@@ -39,6 +39,7 @@ class ilIndividualAssessmentMembers implements Iterator, Countable
     public const FIELD_RECORD = 'record';
     public const FIELD_INTERNAL_NOTE = 'internal_note';
     public const FIELD_FINALIZED = 'finalized';
+    public const FIELD_NOTIFICATION_ACTIVE = 'notify';
     public const FIELD_NOTIFICATION_TS = 'notification_ts';
     public const FIELD_PLACE = "place";
     public const FIELD_EVENTTIME = "event_time";
@@ -202,7 +203,8 @@ class ilIndividualAssessmentMembers implements Iterator, Countable
             self::FIELD_FINALIZED => 0,
             self::FIELD_CHANGER_ID => null,
             self::FIELD_CHANGER_FIRSTNAME => null,
-            self::FIELD_CHANGER_LASTNAME => null
+            self::FIELD_CHANGER_LASTNAME => null,
+            self::FIELD_NOTIFICATION_ACTIVE => 0
         ];
     }
 

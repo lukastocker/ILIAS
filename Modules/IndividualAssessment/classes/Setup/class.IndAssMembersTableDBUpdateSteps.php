@@ -42,4 +42,20 @@ class IndAssMembersTableDBUpdateSteps implements \ilDatabaseUpdateSteps
             $this->db->dropTableColumn(self::TABLE_NAME, 'notify');
         }
     }
+
+    public function step_3(): void
+    {
+        if (!$this->db->tableColumnExists(self::TABLE_NAME, 'notify')) {
+            $this->db->addTableColumn(
+                self::TABLE_NAME,
+                'notify',
+                [
+                    'type' => 'integer',
+                    'length' => '1',
+                    'notnull' => '1',
+                    'default' => 0,
+                ]
+            );
+        }
+    }
 }

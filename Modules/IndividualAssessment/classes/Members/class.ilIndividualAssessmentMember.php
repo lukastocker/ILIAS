@@ -155,8 +155,7 @@ class ilIndividualAssessmentMember
     }
     public function notify(): bool
     {
-        throw new \Exception('notify from Member/Grading');
-        return $this->grading->isNotify();
+        return $this->grading->sendNotification();
     }
 
     public function LPStatus(): int
