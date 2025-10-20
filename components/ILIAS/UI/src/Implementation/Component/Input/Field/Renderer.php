@@ -427,8 +427,9 @@ class Renderer extends AbstractComponentRenderer
     {
         $tpl = $this->getTemplate("tpl.password.html", true, true);
         $this->applyName($component, $tpl);
-
+        $label_id = $this->createId();
         if ($component->getRevelation()) {
+            $f = $this->getUIFactory();
             $component = $component->withResetSignals();
             $sig_reveal = $component->getRevealSignal();
             $sig_mask = $component->getMaskSignal();
@@ -446,19 +447,14 @@ class Renderer extends AbstractComponentRenderer
                     });";
             });
 
-            $f = $this->getUIFactory();
-            $glyph_reveal = $f->symbol()->glyph()->eyeopen("#")
-                              ->withOnClick($sig_reveal);
-            $glyph_mask = $f->symbol()->glyph()->eyeclosed("#")
-                            ->withOnClick($sig_mask);
+            $glyph_reveal = $f->button()->shy('', $sig_reveal)->withSymbol($f->symbol()->glyph()->eyeopen());
+            $glyph_mask = $f->button()->shy('', $sig_mask)->withSymbol($f->symbol()->glyph()->eyeclosed());
 
             $tpl->setVariable('PASSWORD_REVEAL', $default_renderer->render($glyph_reveal));
             $tpl->setVariable('PASSWORD_MASK', $default_renderer->render($glyph_mask));
         }
 
         $this->applyValue($component, $tpl, $this->escapeSpecialChars());
-
-        $label_id = $this->createId();
         $tpl->setVariable('ID', $label_id);
         return $this->wrapInFormContext($component, $component->getLabel(), $tpl->get(), $label_id);
     }
