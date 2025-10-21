@@ -910,10 +910,22 @@ class Renderer extends AbstractComponentRenderer
         ?FileInfoResult $file_info,
         Template $template
     ): Template {
+        $closing_glyph = $this->getUIFactory()->symbol()->glyph()->close();
+        $close_button = $this->getUIFactory()->button()->shy('', '#')->withSymbol($closing_glyph);
+
         $template->setCurrentBlock('block_file_preview');
-        $template->setVariable('REMOVAL_GLYPH', $default_renderer->render(
-            $this->getUIFactory()->symbol()->glyph()->close()->withAction("#")
-        ));
+        // only render expansion toggles if the input
+        // contains actual (unhidden) inputs.
+        if ($file_input->hasMetadataInputs()) {
+            $expand_glyph = $this->getUIFactory()->symbol()->glyph()->expand();
+            $collapse_glyph = $this->getUIFactory()->symbol()->glyph()->collapse();
+            $template->setVariable('EXPAND_GLYPH', $default_renderer->render(
+                $this->getUIFactory()->button()->shy('', '#')->withSymbol($expand_glyph)
+            ));
+            $template->setVariable('COLLAPSE_GLYPH', $default_renderer->render(
+                $this->getUIFactory()->button()->shy('', '#')->withSymbol($collapse_glyph)
+            ));
+        }
 
         if (null !== $file_info) {
             $template->setVariable('FILE_NAME', $file_info->getName());
@@ -923,19 +935,8 @@ class Renderer extends AbstractComponentRenderer
             );
         }
 
-        // only render expansion toggles if the input
-        // contains actual (unhidden) inputs.
-        if ($file_input->hasMetadataInputs()) {
-            $template->setVariable('EXPAND_GLYPH', $default_renderer->render(
-                $this->getUIFactory()->symbol()->glyph()->expand()->withAction("#")
-            ));
-            $template->setVariable('COLLAPSE_GLYPH', $default_renderer->render(
-                $this->getUIFactory()->symbol()->glyph()->collapse()->withAction("#")
-            ));
-        }
-
+        $template->setVariable('REMOVAL_GLYPH', $default_renderer->render($close_button));
         $template->setVariable('METADATA_INPUTS', $default_renderer->render($metadata_input));
-
         $template->parseCurrentBlock();
 
         return $template;
