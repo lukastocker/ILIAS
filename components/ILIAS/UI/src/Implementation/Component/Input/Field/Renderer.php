@@ -201,6 +201,16 @@ class Renderer extends AbstractComponentRenderer
             $tpl->touchBlock('tabindex');
         }
 
+        if ($component instanceof F\Section) {
+            $tpl->setCurrentBlock('nesting_level');
+            $nesting_level = $component->getNestingLevel() + 2;
+            if ($nesting_level > 6) {
+                $nesting_level = 6;
+            };
+            $tpl->setVariable("LEVEL", $nesting_level);
+            $tpl->parseCurrentBlock();
+        }
+
         $byline = $component->getByline();
         if ($byline) {
             $tpl->setVariable("BYLINE", $byline);
@@ -845,11 +855,6 @@ class Renderer extends AbstractComponentRenderer
         $headline_tpl = $this->getTemplate("tpl.headlines.html", true, true);
         $headline_tpl->setVariable("HEADLINE", $section->getLabel());
         $nesting_level = $section->getNestingLevel() + 2;
-        if ($nesting_level > 6) {
-            $nesting_level = 6;
-        };
-        $headline_tpl->setVariable("LEVEL", $nesting_level);
-
         $headline_html = $headline_tpl->get();
 
         return $this->wrapInFormContext($section, $headline_html, $inputs_html);

@@ -19,8 +19,6 @@
 
 declare(strict_types=1);
 
-declare(strict_types=1);
-
 namespace ILIAS\UI\Implementation\Component\Input\Field;
 
 use ILIAS\Data\Factory as DataFactory;
